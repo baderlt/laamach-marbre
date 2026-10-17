@@ -102,7 +102,7 @@ class CatalogueTest extends TestCase
         $product = $this->product();
         $this->assertMatchesRegularExpression('/^LM-[A-Z0-9]{12}$/', $product->reference);
         $detail = $this->getJson('/api/v1/products/'.$product->slug.'?locale=ar')->assertOk()->assertJsonPath('data.name', 'اختبار Temporary product')->assertJsonPath('data.sizes.0.measurement_unit', 'cm')->assertJsonPath('data.sizes.0.width', '7.0000')->assertJsonPath('data.quantity_units', ['m2']);
-        foreach (['price', 'stock', 'lead_time', 'projects', 'viewer', 'whatsapp'] as $forbidden) {
+        foreach (['price', 'stock', 'lead_time', 'viewer', 'whatsapp'] as $forbidden) {
             $this->assertArrayNotHasKey($forbidden, $detail->json('data'));
         }
         $saved = app(CatalogueWriter::class)->product($product, $this->data(['translations' => Fixtures::copy('Renamed'), 'sizes' => []]), $this->admin);

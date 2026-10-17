@@ -30,6 +30,7 @@ return [
         'product_gallery' => ['target' => 'product', 'profiles' => ['thumb', 'gallery']],
         'project_cover' => ['target' => 'project', 'profiles' => ['thumb', 'card']],
         'project_gallery' => ['target' => 'project', 'profiles' => ['thumb', 'gallery']],
+        'project_video' => ['target' => 'project', 'profiles' => []],
         'social_preview' => ['target' => 'brand', 'profiles' => ['social']],
     ],
 ];

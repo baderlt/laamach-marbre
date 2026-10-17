@@ -138,6 +138,9 @@ class CatalogueWriter
         DB::transaction(function () use ($record) {
             ProductCategory::orderBy('id')->lockForUpdate()->get();
             $record = $record->newQuery()->whereKey($record->id)->lockForUpdate()->firstOrFail();
+            if ($record instanceof Product && $record->projects()->exists()) {
+                throw ValidationException::withMessages(['record' => 'Product is referenced by a project. Remove the confirmed project assignment first.']);
+            }
             if (($record instanceof ProductCategory && ($record->children()->exists() || $record->products()->exists())) || ($record instanceof Finish && $record->products()->exists())) {
                 throw ValidationException::withMessages(['record' => 'This record is still referenced.']);
             }

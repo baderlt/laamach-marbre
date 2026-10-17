@@ -8,6 +8,7 @@ use App\Models\Finish;
 use App\Models\MediaAsset;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Projects\PublicProjects;
 use Illuminate\Database\Eloquent\Builder;
 
 class PublicCatalogue
@@ -108,6 +109,7 @@ class PublicCatalogue
         }
 
         return [...$base, ...$copy,
+            'projects' => app(PublicProjects::class)->forProduct($product, $locale),
             'gallery' => $product->mediaReferences->filter(fn ($ref) => str_starts_with($ref->slot, 'gallery:'))->sortBy(fn ($ref) => (int) substr($ref->slot, 8))->map(fn ($ref) => $this->image($ref->asset, $locale))->filter()->values()->all(),
             'sizes' => $product->sizes->map(fn ($size) => ['id' => $size->id, ...$this->copy($size, $locale), 'width' => $size->width, 'length' => $size->length, 'height' => $size->height, 'thickness' => $size->thickness, 'measurement_unit' => $size->measurement_unit, 'cover' => $this->image($size->cover, $locale)])->all(),
             'custom_size_allowed' => $product->custom_size_allowed,

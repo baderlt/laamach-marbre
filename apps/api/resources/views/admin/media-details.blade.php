@@ -4,7 +4,7 @@
     <p>Imported: {{ $record->imported_at }}. Approved: {{ $record->approved_at ?? 'Pending' }}.</p>
     <p>Checksum: {{ $record->checksum }}</p>
     <p>Active revision: {{ $record->active_revision ?? 'Private' }}</p>
-    @if ($record->variants->isNotEmpty())
+    @if ($record->type === 'image' && $record->variants->isNotEmpty())
         <img src="{{ route('media.preview', $record) }}" alt="" width="160" loading="lazy">
     @endif
     <a href="{{ route('media.original', $record) }}">Download private original (authorized administrators only)</a>

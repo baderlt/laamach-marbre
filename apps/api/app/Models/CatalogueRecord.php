@@ -24,10 +24,10 @@ abstract class CatalogueRecord extends Model
     public function translations()
     {
         $foreign = match ($this->getTable()) {
-            'product_categories' => 'product_category_id', 'products' => 'product_id', 'product_sizes' => 'product_size_id', 'finishes' => 'finish_id',
+            'product_categories' => 'product_category_id', 'products' => 'product_id', 'product_sizes' => 'product_size_id', 'finishes' => 'finish_id', 'projects' => 'project_id', 'project_categories' => 'project_category_id',
         };
         $related = (new CatalogueTranslation)->setTable(match ($this->getTable()) {
-            'product_categories' => 'product_category_translations', 'products' => 'product_translations', 'product_sizes' => 'product_size_translations', 'finishes' => 'finish_translations',
+            'product_categories' => 'product_category_translations', 'products' => 'product_translations', 'product_sizes' => 'product_size_translations', 'finishes' => 'finish_translations', 'projects' => 'project_translations', 'project_categories' => 'project_category_translations',
         });
 
         return $this->newHasMany($related->newQuery(), $this, $related->qualifyColumn($foreign), $this->getKeyName());

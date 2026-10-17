@@ -7,6 +7,8 @@ use App\Models\Finish;
 use App\Models\MediaAsset;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Project;
+use App\Models\ProjectCategory;
 use App\Models\User;
 use App\Policies\CataloguePolicy;
 use App\Policies\MediaAssetPolicy;
@@ -26,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->setFallbackLocale(config('localization.fallback'));
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(MediaAsset::class, MediaAssetPolicy::class);
-        foreach ([ProductCategory::class, Product::class, Finish::class] as $model) {
+        foreach ([ProductCategory::class, Product::class, Finish::class, Project::class, ProjectCategory::class] as $model) {
             Gate::policy($model, CataloguePolicy::class);
         }
     }

@@ -38,6 +38,11 @@ class Product extends CatalogueRecord
         return $this->hasMany(ProductUnit::class)->orderBy('unit');
     }
 
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_products')->withPivot('sort_order');
+    }
+
     public function finishes()
     {
         return $this->belongsToMany(Finish::class, 'product_finishes')->withPivot(['active', 'is_default', 'sort_order'])->orderByPivot('sort_order')->orderBy('finishes.id');

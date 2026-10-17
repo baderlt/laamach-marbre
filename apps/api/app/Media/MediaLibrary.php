@@ -17,6 +17,9 @@ class MediaLibrary
 
     public function ingest(string $path, string $source, bool $clientSupplied = false): MediaAsset
     {
+        if (is_file($path) && (new \finfo(FILEINFO_MIME_TYPE))->file($path) === 'video/mp4') {
+            return app(VideoLibrary::class)->ingest($path, $source, $clientSupplied);
+        }
         MediaPath::relative($source);
         $info = $this->images->inspect($path);
 
@@ -44,6 +47,14 @@ class MediaLibrary
 
     public function process(MediaAsset $asset, array $profiles = ['thumb', 'card']): string
     {
+        if ($asset->type === 'video') {
+            try {
+                return app(VideoLibrary::class)->process($asset);
+            } catch (\Throwable $error) {
+                MediaAsset::whereKey($asset->id)->update(['processing_state' => 'failed']);
+                throw $error;
+            }
+        }
         $profiles = array_values(array_unique($profiles));
         sort($profiles);
         if (! $profiles || array_diff($profiles, array_keys(config('media.profiles')))) {
@@ -98,15 +109,19 @@ class MediaLibrary
             $asset = MediaAsset::whereKey($asset->id)->lockForUpdate()->firstOrFail();
             $variants = $asset->variants()->where('revision', $revision)->get();
             if ($asset->approval_state !== 'approved' || ! $asset->client_supplied || $asset->processing_state !== 'ready' || $variants->isEmpty()) {
-                throw ValidationException::withMessages(['media' => 'Publication requires approved client provenance and a ready image revision.']);
+                throw ValidationException::withMessages(['media' => 'Publication requires approved client provenance and a ready media revision.']);
             }
             foreach ($variants as $variant) {
                 if ($variant->state === 'published') {
                     continue;
                 }
-                $bytes = $this->storage->variantBytes($variant);
                 $disk = config('media.published_disk');
-                $this->storage->putImmutable($disk, $variant->object_key, $bytes, 'image/'.$variant->format);
+                if ($variant->format === 'mp4') {
+                    $this->storage->publishVideo($variant, $disk);
+                } else {
+                    $bytes = $this->storage->variantBytes($variant);
+                    $this->storage->putImmutable($disk, $variant->object_key, $bytes, 'image/'.$variant->format);
+                }
                 $variant->forceFill(['disk' => $disk, 'state' => 'published', 'publication_revision' => $revision, 'published_at' => now()])->save();
                 // Private working copies are intentionally retained for retries/recovery.
             }

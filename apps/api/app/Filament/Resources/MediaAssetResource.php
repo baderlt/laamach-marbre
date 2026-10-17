@@ -4,9 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MediaAssetResource\ManageMediaAssets;
 use App\Media\MediaLibrary;
+use App\Media\VideoLibrary;
 use App\Models\MediaAsset;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -15,8 +17,10 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\ValidationException;
 
 class MediaAssetResource extends Resource
 {
@@ -34,7 +38,8 @@ class MediaAssetResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            ImageColumn::make('preview')->state(fn (MediaAsset $record) => $record->variants_count ? route('media.preview', $record) : null)->size(56),
+            ImageColumn::make('preview')->state(fn (MediaAsset $record) => $record->type === 'image' && $record->variants_count ? route('media.preview', $record) : null)->size(56),
+            TextColumn::make('type'),
             TextColumn::make('original_filename')->searchable()->wrap(),
             TextColumn::make('mime'),
             TextColumn::make('width')->label('Dimensions')->formatStateUsing(fn ($state, MediaAsset $record) => $state.' × '.$record->height),
@@ -44,6 +49,19 @@ class MediaAssetResource extends Resource
             TextColumn::make('approval_state')->badge(),
             TextColumn::make('active_revision')->label('Publication')->formatStateUsing(fn ($state) => $state ? substr($state, 0, 12) : 'Private')->placeholder('Private'),
             TextColumn::make('references_count')->label('References'),
+        ])->headerActions([
+            Action::make('uploadVideo')->label('Upload project video')->schema([
+                FileUpload::make('video')->required()->storeFiles(false)->acceptedFileTypes(['video/mp4'])->maxSize((int) (config('video.max_bytes') / 1024)),
+                Checkbox::make('client_supplied')->label('Client supplied (usage approval is separate)')->default(false),
+            ])->action(function (array $data, MediaLibrary $library) {
+                Gate::authorize('uploadVideo', MediaAsset::class);
+                $file = $data['video'];
+                if (! $file instanceof UploadedFile) {
+                    throw ValidationException::withMessages(['video' => 'A real temporary upload is required.']);
+                }
+                $asset = app(VideoLibrary::class)->ingest($file->getRealPath(), 'projects/uploads/'.$file->getClientOriginalName(), (bool) $data['client_supplied']);
+                $library->process($asset);
+            }),
         ])->recordActions([
             Action::make('inspect')->label('Inspect')->modalContent(fn (MediaAsset $record) => view('admin.media-details', ['record' => $record->load(['variants', 'translations', 'imports', 'references'])]))->modalSubmitAction(false)->modalCancelActionLabel('Close'),
             Action::make('metadata')->label('Edit text')->schema(function (MediaAsset $record) {

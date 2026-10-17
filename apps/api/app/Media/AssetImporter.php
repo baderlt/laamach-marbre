@@ -49,13 +49,17 @@ class AssetImporter
                 try {
                     $path = $this->safeFile($root, $source);
                     $checksum = hash_file('sha256', $path);
-                    $info = $this->images->inspect($path);
+                    $isVideo = (new \finfo(FILEINFO_MIME_TYPE))->file($path) === 'video/mp4';
+                    $info = $isVideo ? app(VideoProcessor::class)->inspect($path) : $this->images->inspect($path);
                     if (! isset($manifest[$source])) {
                         $rows[] = ['source' => $source, 'checksum' => $checksum, 'status' => 'skipped', 'reason' => 'Ambiguous: explicit manifest mapping required.'];
 
                         continue;
                     }
                     $mapping = $manifest[$source];
+                    if ($isVideo !== ($mapping['role'] === 'project_video')) {
+                        throw ValidationException::withMessages(['source' => 'Video assets require the explicit project_video mapping role.']);
+                    }
                     $previous = MediaImport::where('root_hash', $rootHash)->where('source', $source)->first();
                     if ($previous) {
                         if ($previous->checksum !== $checksum) {
