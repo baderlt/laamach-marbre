@@ -1,4 +1,4 @@
-# Local setup (M1 + M2)
+# Local setup (M1 + M2 + M3)
 
 ## Install
 
@@ -44,7 +44,7 @@ php artisan migrate --env=testing
 php artisan laamach:admin owner@example.invalid --name="Local owner"
 ```
 
-The administrator command asks for a strong password and confirmation without printing either. It creates a new active super-administrator; it does not overwrite an existing user. There is no public registration or seeded account. M2 adds the Media resource at `/admin/media-assets`; intake is the audited CLI importer. See [media setup](media-foundation.md). No catalogue/business resources exist.
+The administrator command asks for a strong password and confirmation without printing either. It creates a new active super-administrator; it does not overwrite an existing user. There is no public registration or seeded account. Media is at `/admin/media-assets`; intake is the audited CLI importer. M3 adds `/admin/product-categories`, `/admin/products` and `/admin/finishes`. See [media setup](media-foundation.md) and [catalogue workflows](catalogue.md).
 
 ## Local ports and environments
 
@@ -117,7 +117,7 @@ $env:LARAVEL_API_URL='http://127.0.0.1:8101'
 npm run start --workspace @laamach-marbre/web -- --port 3101
 ```
 
-Then run `npm run test:browser` from the root. Backend feature tests refresh the test database, so do not use it for valuable content or concurrent manual QA. No browser test submits business data.
+Then run `npm run test:browser` from the root. Backend feature tests refresh the test database, so do not use it for valuable content or concurrent manual QA. The M3 browser scenarios require the synthetic, test-only catalogue fixtures described in [M3 verification](m3-verification.md); they do not create production business data.
 
 Production builds use `.next`; development uses `.next-dev`. Set `NEXT_DIST_DIR=.next-qa` for an additional build if concurrent production-build isolation is needed. Do not run two builds against the same output directory.
 

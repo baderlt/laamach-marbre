@@ -2,7 +2,10 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Resources\FinishResource;
 use App\Filament\Resources\MediaAssetResource;
+use App\Filament\Resources\ProductCategoryResource;
+use App\Filament\Resources\ProductResource;
 use App\Http\Middleware\PreventRequestForgery;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Http\Middleware\Authenticate;
@@ -28,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('LAAMACH MARBRE')
             ->font('Inter', provider: LocalFontProvider::class)
             ->databaseTransactions()
-            ->resources([MediaAssetResource::class])
+            ->resources([MediaAssetResource::class, ProductCategoryResource::class, ProductResource::class, FinishResource::class])
             ->pages([Dashboard::class])->widgets([AccountWidget::class])
             ->middleware([
                 EncryptCookies::class, AddQueuedCookiesToResponse::class, StartSession::class,

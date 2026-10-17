@@ -13,7 +13,9 @@ class PublishedMedia
             return [];
         }
 
-        return $asset->variants()->where('state', 'published')->where('publication_revision', $asset->active_revision)->get()->map(fn ($variant) => $this->variant($variant))->all();
+        $variants = $asset->relationLoaded('variants') ? $asset->variants : $asset->variants()->where('state', 'published')->where('publication_revision', $asset->active_revision)->get();
+
+        return $variants->where('state', 'published')->where('publication_revision', $asset->active_revision)->map(fn ($variant) => $this->variant($variant))->values()->all();
     }
 
     public function variant(MediaVariant $variant): array

@@ -33,7 +33,9 @@ class FoundationTest extends TestCase
     {
         $tables = array_column(DB::select('SHOW TABLES'), 'Tables_in_laamach_marbre_test');
         sort($tables);
-        $this->assertSame(['cache', 'cache_locks', 'media_assets', 'media_imports', 'media_references', 'media_translations', 'media_variants', 'migrations', 'sessions', 'users'], $tables);
+        $expected = ['cache', 'cache_locks', 'media_assets', 'media_imports', 'media_references', 'media_translations', 'media_variants', 'migrations', 'sessions', 'users', 'product_categories', 'product_category_translations', 'products', 'product_translations', 'product_sizes', 'product_size_translations', 'product_units', 'finishes', 'finish_translations', 'product_finishes'];
+        sort($expected);
+        $this->assertSame($expected, $tables);
     }
 
     public function test_admin_is_private_and_login_is_available_without_registration(): void

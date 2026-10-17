@@ -9,6 +9,11 @@ class MediaReference extends Model
 {
     protected $guarded = ['*'];
 
+    public function asset()
+    {
+        return $this->belongsTo(MediaAsset::class, 'media_asset_id');
+    }
+
     protected static function booted(): void
     {
         static::saving(function (self $reference) {
