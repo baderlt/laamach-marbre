@@ -33,7 +33,7 @@ class FoundationTest extends TestCase
     {
         $tables = array_column(DB::select('SHOW TABLES'), 'Tables_in_laamach_marbre_test');
         sort($tables);
-        $this->assertSame(['cache', 'cache_locks', 'migrations', 'sessions', 'users'], $tables);
+        $this->assertSame(['cache', 'cache_locks', 'media_assets', 'media_imports', 'media_references', 'media_translations', 'media_variants', 'migrations', 'sessions', 'users'], $tables);
     }
 
     public function test_admin_is_private_and_login_is_available_without_registration(): void
@@ -77,7 +77,7 @@ class FoundationTest extends TestCase
         $this->assertFalse(Gate::forUser($admin)->allows('delete', $admin));
     }
 
-    public function test_storage_is_private_local_and_r2_is_configuration_only(): void
+    public function test_storage_is_private_local_and_r2_is_optional_locally(): void
     {
         $this->assertSame('local', config('filesystems.default'));
         $this->assertFalse(config('filesystems.disks.local.serve'));

@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->redirectGuestsTo('/admin/login');
         $middleware->web(replace: [Illuminate\Foundation\Http\Middleware\PreventRequestForgery::class => PreventRequestForgery::class]);
         $middleware->append(SecurityHeaders::class);
     })

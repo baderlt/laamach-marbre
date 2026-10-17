@@ -1,4 +1,4 @@
-# M1 local setup
+# Local setup (M1 + M2)
 
 ## Install
 
@@ -44,7 +44,7 @@ php artisan migrate --env=testing
 php artisan laamach:admin owner@example.invalid --name="Local owner"
 ```
 
-The administrator command asks for a strong password and confirmation without printing either. It creates a new active super-administrator; it does not overwrite an existing user. There is no public registration or seeded account. Content-manager role support and a user policy exist, but no business/admin CRUD resources are included in M1.
+The administrator command asks for a strong password and confirmation without printing either. It creates a new active super-administrator; it does not overwrite an existing user. There is no public registration or seeded account. M2 adds the Media resource at `/admin/media-assets`; intake is the audited CLI importer. See [media setup](media-foundation.md). No catalogue/business resources exist.
 
 ## Local ports and environments
 

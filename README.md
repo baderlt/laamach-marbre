@@ -1,13 +1,14 @@
-# LAAMACH MARBRE — M1
+# LAAMACH MARBRE — M2
 
-Independent Next.js and Laravel/Filament foundation. Only French and Arabic shell routes, backend readiness, administrator authentication and infrastructure configuration are implemented. No catalogue, projects, media pipeline, 3D, WhatsApp or final page design exists.
+Independent Next.js and Laravel/Filament foundation with configurable locale shells (initially French and Arabic), backend readiness, administrator authentication and a private/immutable published media pipeline. No catalogue, projects, 3D, WhatsApp or final page design exists.
 
 See [local setup](docs/local-setup.md) for installation, database provisioning, runtime commands, locales and verification. [M1 verification](docs/m1-verification.md) records actual results and limitations.
+See [M2 media foundation](docs/media-foundation.md) for imports, approval, profiles and R2 setup; [M2 verification](docs/m2-verification.md) records the M2 acceptance evidence.
 
 ## Requirements
 
 - Node.js 24 and npm; exact dependencies are locked.
-- PHP 8.3+ with Composer, PDO MySQL, mbstring, intl, XML/DOM, fileinfo, ctype, curl, OpenSSL and ZIP.
+- PHP 8.3+ with Composer, PDO MySQL, mbstring, intl, XML/DOM, fileinfo, ctype, curl, OpenSSL, ZIP and GD with working WebP encoding. Use a 512 MB media worker PHP limit; the image pipeline separately enforces its configured memory budget.
 - MySQL 8 running locally for development and tests. SQLite is not a fallback.
 
 ## Start

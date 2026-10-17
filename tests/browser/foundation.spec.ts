@@ -54,3 +54,14 @@ test('web form-token validation stays enabled and no shared SPA cookie is issued
   const rejected = await request.post(`${api}/`, { data: {} });
   expect(rejected.status()).toBe(419);
 });
+
+test('M2 media boundaries reject anonymous admin access and arbitrary object paths', async ({ request }) => {
+  const id = '00000000-0000-4000-8000-000000000001';
+  const media = await request.get(`${api}/admin/media-assets`);
+  expect(media.url()).toContain('/admin/login');
+  const preview = await request.get(`${api}/admin/media-preview/${id}`, { headers: { Accept: 'application/json' } });
+  expect(preview.status()).toBe(401);
+  expect((await request.get(`${api}/media/originals/${id}/original.png`)).status()).toBe(404);
+  expect((await request.get(`${api}/storage/originals/${id}/original.png`)).status()).toBe(404);
+  expect((await request.get(`${api}/media/images/${id}/thumb-v1/${'a'.repeat(64)}.webp`)).status()).toBe(404);
+});
