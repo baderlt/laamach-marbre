@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Catalogue\PublicCatalogue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class CatalogueController
@@ -24,8 +25,14 @@ class CatalogueController
     public function index(Request $request, PublicCatalogue $catalogue)
     {
         $locale = $this->locale($request);
-        $filters = $request->validate(['parent' => 'sometimes|string|max:120|regex:/^[a-z0-9-]+$/D', 'category' => 'sometimes|string|max:120|regex:/^[a-z0-9-]+$/D', 'finish' => 'sometimes|string|max:120|regex:/^[a-z0-9-]+$/D', 'page' => 'sometimes|integer|between:1,10000', 'per_page' => 'sometimes|integer|between:1,'.config('catalogue.max_per_page')]);
+        $filters = $request->validate(['parent' => 'sometimes|string|max:120|regex:/^[a-z0-9-]+$/D', 'category' => 'sometimes|string|max:120|regex:/^[a-z0-9-]+$/D', 'finish' => 'sometimes|string|max:120|regex:/^[a-z0-9-]+$/D', 'q' => 'sometimes|string|max:120', 'sort' => ['sometimes', Rule::in(['name'])], 'page' => 'sometimes|integer|between:1,10000', 'per_page' => 'sometimes|integer|between:1,'.config('catalogue.max_per_page')]);
         $query = $catalogue->products($locale);
+        if (isset($filters['q'])) {
+            $query->whereHas('translations', fn ($copy) => $copy->where('locale', $locale)->where('name', 'like', '%'.addcslashes($filters['q'], '%_\\').'%'));
+        }
+        if (($filters['sort'] ?? null) === 'name') {
+            $query->reorder()->orderBy(DB::table('product_translations')->select('name')->whereColumn('product_id', 'products.id')->where('locale', $locale)->limit(1))->orderBy('products.id');
+        }
         if (isset($filters['parent'])) {
             $query->whereHas('category.parent', fn ($q) => $q->where('slug', $filters['parent']));
         }

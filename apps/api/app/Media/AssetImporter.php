@@ -4,6 +4,7 @@ namespace App\Media;
 
 use App\Models\MediaAsset;
 use App\Models\MediaImport;
+use App\Models\ProductSize;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -57,6 +58,9 @@ class AssetImporter
                         continue;
                     }
                     $mapping = $manifest[$source];
+                    if (isset($mapping['sha256']) && $mapping['sha256'] !== $checksum) {
+                        throw ValidationException::withMessages(['source' => 'Source differs from its reviewed manifest checksum.']);
+                    }
                     if ($isVideo !== ($mapping['role'] === 'project_video')) {
                         throw ValidationException::withMessages(['source' => 'Video assets require the explicit project_video mapping role.']);
                     }
@@ -120,12 +124,15 @@ class AssetImporter
         $result = [];
         foreach ($entries as $entry) {
             Validator::make(['entry' => $entry], [
-                'entry' => 'required|array:source,target_type,target_key,role,order,translations,focal,crop',
+                'entry' => 'required|array:source,target_type,target_key,role,order,translations,focal,crop,sha256,client_supplied,size_id',
                 'entry.source' => 'required|string|max:512',
                 'entry.target_type' => ['required', Rule::in(['brand', 'category', 'product', 'project'])],
                 'entry.target_key' => 'required|string|max:120|regex:/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/D',
                 'entry.role' => ['required', Rule::in(array_keys(config('media.roles')))],
                 'entry.order' => 'required|integer|min:0|max:10000',
+                'entry.sha256' => 'sometimes|string|regex:/^[a-f0-9]{64}$/D',
+                'entry.client_supplied' => 'sometimes|accepted',
+                'entry.size_id' => 'sometimes|uuid|exists:product_sizes,id',
                 'entry.translations' => ['sometimes', 'array:'.implode(',', array_column(config('localization.locales'), 'code'))],
                 'entry.translations.*' => 'array:alt,caption,credit',
                 'entry.translations.*.alt' => 'nullable|string|max:500',
@@ -137,6 +144,12 @@ class AssetImporter
                 'entry.crop' => ['sometimes', Rule::in(['contain', 'cover'])],
             ])->validate();
             $source = MediaPath::relative($entry['source']);
+            if (($entry['role'] === 'product_size') !== isset($entry['size_id'])) {
+                throw ValidationException::withMessages(['manifest' => 'A size image requires an explicit existing size ID and product_size role.']);
+            }
+            if (isset($entry['size_id']) && ! ProductSize::whereKey($entry['size_id'])->whereHas('product', fn ($product) => $product->where('slug', $entry['target_key']))->exists()) {
+                throw ValidationException::withMessages(['manifest' => 'Size does not belong to the explicitly mapped product.']);
+            }
             $prefix = match ($entry['target_type']) {
                 'brand' => 'brand/', 'category' => 'categories/', 'product' => 'products/', 'project' => 'projects/'
             };

@@ -28,6 +28,7 @@ return [
         'category_cover' => ['target' => 'category', 'profiles' => ['thumb', 'card']],
         'product_cover' => ['target' => 'product', 'profiles' => ['thumb', 'card']],
         'product_gallery' => ['target' => 'product', 'profiles' => ['thumb', 'gallery']],
+        'product_size' => ['target' => 'product', 'profiles' => ['thumb', 'card']],
         'project_cover' => ['target' => 'project', 'profiles' => ['thumb', 'card']],
         'project_gallery' => ['target' => 'project', 'profiles' => ['thumb', 'gallery']],
         'project_video' => ['target' => 'project', 'profiles' => []],

@@ -67,7 +67,7 @@ class PublicProjects
         return [...$this->card($project, $locale), ...$this->copy($project, $locale), 'location' => $project->location, 'year' => $project->year, 'area' => $project->area, 'area_unit' => $project->area_unit,
             'gallery' => $project->gallery->map(function ($item) use ($locale, $catalogue) {
                 return ['type' => $item->type, 'media' => $item->type === 'image' ? $catalogue->image($item->asset, $locale) : ['id' => $item->asset->id, 'duration' => $item->asset->duration, 'variants' => app(PublishedMedia::class)->forAsset($item->asset)], 'caption' => $item->captions[$locale] ?? null, 'poster' => $catalogue->image($item->poster, $locale)];
-            })->all(), 'products' => $products->map(fn ($product) => $catalogue->productDto($product, $locale))->all()];
+            })->all(), 'products' => $products->map(fn ($product) => $catalogue->productDto($product, $locale))->all(), 'related_projects' => $this->projects($locale)->where('projects.id', '<>', $project->id)->whereHas('categories', fn ($categories) => $categories->whereIn('project_categories.id', $project->categories->pluck('id')))->limit(4)->get()->map(fn ($related) => $this->card($related, $locale))->all()];
     }
 
     public function forProduct(Product $product, string $locale): array

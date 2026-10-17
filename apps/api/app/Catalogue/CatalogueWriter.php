@@ -19,6 +19,43 @@ use Illuminate\Validation\ValidationException;
 
 class CatalogueWriter
 {
+    public function stageClientDraft(string $slug, string $name, ?string $coverId, array $galleryIds): array
+    {
+        // Trusted operator CLI only; never an alternate public/admin mutation endpoint.
+        abort_unless(app()->runningInConsole(), 403);
+        Validator::make(compact('slug', 'name', 'coverId', 'galleryIds'), ['slug' => 'required|string|max:120|regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', 'name' => 'required|string|max:160', 'coverId' => 'nullable|uuid', 'galleryIds' => 'array|max:12', 'galleryIds.*' => 'required|uuid|distinct'])->validate();
+
+        return DB::transaction(function () use ($slug, $name, $coverId, $galleryIds) {
+            if ($existing = Product::where('slug', $slug)->lockForUpdate()->first()) {
+                return ['slug' => $slug, 'result' => 'preserved-existing', 'id' => $existing->id];
+            }
+            $record = new Product;
+            $record->forceFill(['slug' => $slug, 'reference' => 'LM-'.strtoupper(Str::random(12)), 'status' => 'draft', 'category_id' => null, 'cover_media_id' => $coverId])->save();
+            $this->translations($record, [config('localization.fallback') => ['name' => $name]]);
+            $this->media($record, $galleryIds);
+
+            return ['slug' => $slug, 'result' => 'created-draft', 'id' => $record->id];
+        }, 3);
+    }
+
+    public function stageConfirmedSizeImage(string $slug, string $sizeId, string $assetId): string
+    {
+        abort_unless(app()->runningInConsole(), 403);
+
+        return DB::transaction(function () use ($slug, $sizeId, $assetId) {
+            $product = Product::where('slug', $slug)->lockForUpdate()->firstOrFail();
+            $size = $product->sizes()->whereKey($sizeId)->lockForUpdate()->firstOrFail();
+            if ($product->status !== 'draft' || $size->cover_media_id) {
+                return 'preserved-existing';
+            }
+            $size->forceFill(['cover_media_id' => $assetId]);
+            $this->media($size, []); // Size media retains M3 approved/published eligibility.
+            $size->save();
+
+            return 'assigned-confirmed-size';
+        }, 3);
+    }
+
     public function category(?ProductCategory $record, array $input, User $user): ProductCategory
     {
         $this->authorize($record, ProductCategory::class, $user);
@@ -68,9 +105,10 @@ class CatalogueWriter
             if ($record) {
                 $record = Product::whereKey($record->id)->lockForUpdate()->firstOrFail();
             }
-            $data = $this->validate($input + ['status' => 'draft', 'featured' => false, 'sort_order' => 0, 'cover_media_id' => null, 'custom_size_allowed' => false, 'custom_measurement_unit' => null, 'min_width' => null, 'max_width' => null, 'min_length' => null, 'max_length' => null, 'sizes' => [], 'finishes' => [], 'gallery' => []], [
+            $published = ($input['status'] ?? 'draft') === 'published';
+            $data = $this->validate($input + ['category_id' => null, 'units' => [], 'status' => 'draft', 'featured' => false, 'sort_order' => 0, 'cover_media_id' => null, 'custom_size_allowed' => false, 'custom_measurement_unit' => null, 'min_width' => null, 'max_width' => null, 'min_length' => null, 'max_length' => null, 'sizes' => [], 'finishes' => [], 'gallery' => []], [
                 'slug' => ['required', 'string', 'max:120', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/D', Rule::unique('products')->ignore($record?->id)],
-                'category_id' => 'required|uuid|exists:product_categories,id',
+                'category_id' => ($published ? 'required' : 'nullable').'|uuid|exists:product_categories,id',
                 'status' => ['required', Rule::in(['draft', 'published'])],
                 'featured' => 'required|boolean', 'sort_order' => 'required|integer|min:0|max:100000',
                 'cover_media_id' => 'nullable|uuid|exists:media_assets,id',
@@ -78,7 +116,7 @@ class CatalogueWriter
                 'custom_measurement_unit' => ['nullable', Rule::in(config('catalogue.measurement_units'))],
                 'min_width' => 'nullable|numeric|between:0.0001,1000000', 'max_width' => 'nullable|numeric|between:0.0001,1000000',
                 'min_length' => 'nullable|numeric|between:0.0001,1000000', 'max_length' => 'nullable|numeric|between:0.0001,1000000',
-                'units' => 'required|array|min:1|max:4', 'units.*' => ['required', 'distinct', Rule::in(config('catalogue.quantity_units'))],
+                'units' => ($published ? 'required|array|min:1' : 'array').'|max:4', 'units.*' => ['required', 'distinct', Rule::in(config('catalogue.quantity_units'))],
                 'sizes' => 'array|max:40', 'sizes.*' => 'array:id,width,length,height,thickness,measurement_unit,active,sort_order,cover_media_id,translations',
                 'sizes.*.id' => 'nullable|uuid|distinct',
                 'sizes.*.width' => 'required|numeric|between:0.0001,1000000', 'sizes.*.length' => 'required|numeric|between:0.0001,1000000',
@@ -185,12 +223,16 @@ class CatalogueWriter
     {
         $ids = array_values(array_unique(array_filter([$record->cover_media_id, ...$gallery])));
         $query = MediaAsset::whereIn('id', $ids);
-        app(PublicCatalogue::class)->eligibleMedia($query);
+        if ($record instanceof Product && $record->status === 'draft') {
+            $query->where('type', 'image')->where('client_supplied', true)->where('processing_state', 'ready');
+        } else {
+            app(PublicCatalogue::class)->eligibleMedia($query);
+        }
         $assets = $query->orderBy('id')->lockForUpdate()->get()->keyBy('id');
         foreach ($ids as $id) {
             $asset = $assets->get($id);
             if (! $asset) {
-                throw ValidationException::withMessages(['cover_media_id' => 'Assign only approved, actively published M2 images.']);
+                throw ValidationException::withMessages(['cover_media_id' => 'Assign eligible M2 images; private ready client images are permitted only on drafts.']);
             }
         }
         $record->mediaReferences()->delete();

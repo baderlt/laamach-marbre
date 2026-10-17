@@ -21,12 +21,12 @@ for (const locale of ['fr', 'ar']) {
     expect(new URL(page.url()).searchParams.getAll('categories[]')).toHaveLength(2);
     await page.goto(`/${locale}/projects/synthetic-project`);
     await expect(page.locator('h1')).toContainText('Synthetic project');
-    await expect(page.locator('.project-gallery img')).toBeVisible();
+    await expect(page.locator('.project-gallery .product-image img')).toBeVisible();
     await expect(page.locator('video')).toHaveCount(0);
     await expect(page.getByRole('heading', { name: locale === 'fr' ? 'Matériaux utilisés dans ce projet' : 'المواد المستخدمة في هذا المشروع' })).toBeVisible();
-    await expect(page.locator('.product-grid article')).toHaveCount(1);
+    await expect(page.locator('[data-materials-used] .product-grid article')).toHaveCount(1);
     await page.getByRole('button', { name: locale === 'fr' ? 'Photo 1' : 'صورة 1', exact: true }).click();
-    await expect.poll(() => page.locator('.project-gallery img').evaluate(node => (node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    await expect.poll(() => page.locator('.project-gallery .product-image img').evaluate(node => (node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     expect(videos).toEqual([]);
     for (const width of [390, 1280]) {
       await page.setViewportSize({ width, height: 844 });
@@ -62,7 +62,7 @@ for (const locale of ['fr', 'ar']) {
 
   test(`${locale}: neutral cover and optional poster, draft exclusion`, async ({ page }) => {
     await page.goto(`/${locale}/projects/synthetic-no-cover`);
-    await expect(page.locator('[data-image-placeholder]')).toBeVisible();
+    await expect(page.locator('.project-gallery .product-image [data-image-placeholder]')).toBeVisible();
     await page.getByRole('button', { name: locale === 'fr' ? 'Vidéo 1' : 'فيديو 1', exact: true }).click();
     await expect(page.locator('video')).not.toHaveAttribute('poster');
     expect((await page.goto(`/${locale}/projects/synthetic-draft`))?.status()).toBe(404);

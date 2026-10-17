@@ -1,0 +1,65 @@
+[
+  {
+    "source": "products/hajar-jbal-taza/gallery/01.jpeg",
+    "target_type": "product",
+    "target_key": "hajar-jbal-taza",
+    "role": "product_gallery",
+    "order": 1,
+    "client_supplied": true,
+    "sha256": "f8e80beabc04c68364887c05cf1e0292efe2140c54fcc647e3e02f7275eb07af"
+  },
+  {
+    "source": "products/hajar-jbal-taza/cover.jpeg",
+    "target_type": "product",
+    "target_key": "hajar-jbal-taza",
+    "role": "product_cover",
+    "order": 0,
+    "client_supplied": true,
+    "sha256": "464a10612a35262c4433552d96583f1b1e2d8cf7b5e16f9790488a569bfd2fa0"
+  },
+  {
+    "source": "products/noir-azilal/cover.jpeg",
+    "target_type": "product",
+    "target_key": "noir-azilal",
+    "role": "product_cover",
+    "order": 0,
+    "client_supplied": true,
+    "sha256": "d8f33a95a583cfaaca21ecf5f348fbc0524a45cab053ec2c4b6e0e6dc959833c"
+  },
+  {
+    "source": "products/noir-azilal/gallery/01.jpeg",
+    "target_type": "product",
+    "target_key": "noir-azilal",
+    "role": "product_gallery",
+    "order": 1,
+    "client_supplied": true,
+    "sha256": "a4ed3ede5cbe49b2a9a4b0b16b9e03ffd6eb23a529bf1a387c68a3c856f83115"
+  },
+  {
+    "source": "products/taza-grey/gallery/01.jpeg",
+    "target_type": "product",
+    "target_key": "taza-grey",
+    "role": "product_gallery",
+    "order": 1,
+    "client_supplied": true,
+    "sha256": "072449004e51b8a6be8226a488bb0c0ac1199ec72633b30b5ec1761e7e4870f8"
+  },
+  {
+    "source": "products/taza-grey/cover.jpeg",
+    "target_type": "product",
+    "target_key": "taza-grey",
+    "role": "product_cover",
+    "order": 0,
+    "client_supplied": true,
+    "sha256": "aa16a885dddf8c9918dcb772444b2ba3d36940cfa2c4ea060cff08e7c47d3117"
+  },
+  {
+    "source": "products/taza-grey/gallery/02.jpeg",
+    "target_type": "product",
+    "target_key": "taza-grey",
+    "role": "product_gallery",
+    "order": 2,
+    "client_supplied": true,
+    "sha256": "5f78ef29704987156e626a728b9b0ad4defbfc93dffa82e1c8c8f09eac96d975"
+  }
+]

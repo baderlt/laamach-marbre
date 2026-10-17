@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { findLocale, localeConfiguration } from '@/lib/locales';
 import './globals.css';
+import { serverEnvironment } from '@/lib/environment';
 
-export const metadata: Metadata = { title: 'LAAMACH MARBRE', robots: { index: false, follow: false } };
+export const metadata: Metadata = { metadataBase: new URL(serverEnvironment(process.env).site), title: 'LAAMACH MARBRE', robots: { index: false, follow: false } };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const code = (await headers()).get('x-laamach-locale') || localeConfiguration.default;

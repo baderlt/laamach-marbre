@@ -8,12 +8,14 @@ for (const locale of ['fr', 'ar']) {
     await page.goto(`/${locale}/products`);
     await expect(page.locator('html')).toHaveAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr');
     await expect(page.locator('.product-grid article')).toHaveCount(2);
+    await page.locator('.mobile-filter-toggle').click();
     await page.locator('select[name=parent]').selectOption('temporary-parent');
-    await page.locator('form button').click();
+    await page.locator('.catalogue-filters button[type=submit]').click();
     await expect(page).toHaveURL(/parent=temporary-parent/);
+    await page.locator('.mobile-filter-toggle').click();
     await page.locator('select[name=category]').selectOption('temporary-child');
     await page.locator('select[name=finish]').selectOption('temporary-finish');
-    await page.locator('form button').click();
+    await page.locator('.catalogue-filters button[type=submit]').click();
     await expect(page).toHaveURL(/category=temporary-child/);
     await page.goto(`/${locale}/products/temporary-product`);
     const image = page.locator('[data-product-image] img');

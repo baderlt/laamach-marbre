@@ -14,7 +14,7 @@ class Product extends CatalogueRecord
     protected static function booted(): void
     {
         static::saving(function (self $product) {
-            if (! ProductCategory::whereKey($product->category_id)->whereNotNull('parent_id')->exists()) {
+            if (($product->category_id || $product->status === 'published') && ! ProductCategory::whereKey($product->category_id)->whereNotNull('parent_id')->exists()) {
                 throw ValidationException::withMessages(['category_id' => 'Products require a child category.']);
             }
             if ($product->exists && ($product->isDirty('reference') || ($product->getOriginal('published_at') && $product->isDirty('slug')))) {

@@ -1,0 +1,73 @@
+{
+  "held_mappings": [
+    {
+      "source": "categoris-hjar/grey-bnikhiran/cover.jpeg",
+      "sha256": "26d0d807c1606e214e5737037f596b1a2bbd4a7a3f466199df3b6cbd55d7210c",
+      "proposed_product_slug": "grey-bnikhiran",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    },
+    {
+      "source": "categoris-hjar/noir-bnikhiran/gallery/02.jpeg",
+      "sha256": "271ded6b9b55c4cadebcdf3659067a0e9d334efd2acdaf5882b79bfb51a1cdb2",
+      "proposed_product_slug": "noir-bnikhiran",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    },
+    {
+      "source": "categoris-hjar/noir-bnikhiran/cover.jpeg",
+      "sha256": "6f17bfb043c24950f7a24330d98b4ba9d80d34afcac2069db79248e34aad4504",
+      "proposed_product_slug": "noir-bnikhiran",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    },
+    {
+      "source": "categoris-hjar/noir-bnikhiran/gallery/01.jpeg",
+      "sha256": "ce39a823421f7b7979cef43420a3dc728f4e3cfc2a10596a03714721e7fb7e0e",
+      "proposed_product_slug": "noir-bnikhiran",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    },
+    {
+      "source": "categoris-hjar/noir-khnifra/gallery/01.jpeg",
+      "sha256": "ccfdd9a5815821161dbcf26f3ce21438d3276a331b408719e8bfc43628060865",
+      "proposed_product_slug": "noir-khnifra",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    },
+    {
+      "source": "categoris-hjar/noir-khnifra/cover.jpeg",
+      "sha256": "5ad44051020f7d18db8d9d21ab7bacfd3d332af34db6d152d468453ac0c7ea43",
+      "proposed_product_slug": "noir-khnifra",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    },
+    {
+      "source": "categoris-hjar/taza-beige/gallery/01.jpeg",
+      "sha256": "4f35354ff91d9273c079f4671aefc59bd93898dc15f4950859f6498ca99a59c5",
+      "proposed_product_slug": "taza-beige",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    },
+    {
+      "source": "categoris-hjar/taza-beige/cover.jpeg",
+      "sha256": "e529287483c7aba97335127845d94816876e0a09ac76da3e4ecd26904bc12e12",
+      "proposed_product_slug": "taza-beige",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    },
+    {
+      "source": "categoris-hjar/taza-beige/gallery/03.jpeg",
+      "sha256": "05517a65a1c609c326f4c6ef8ef9afc19042f179904745945889e196e299b126",
+      "proposed_product_slug": "taza-beige",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    },
+    {
+      "source": "categoris-hjar/taza-beige/gallery/02.jpeg",
+      "sha256": "4a5780f4385e6674db9a6b315de3e9d722cee2b379cb7b1654fc814afd8f3810",
+      "proposed_product_slug": "taza-beige",
+      "reason": "User requested holding uncertain commercial spelling or Taza beige grouping; not staged/imported."
+    }
+  ],
+  "size_mappings": [],
+  "quarry_images": "Excluded: user chose neutral placeholders; supplied PNGs contain generation-related markers.",
+  "review_files": [
+    "_review/hajar-jbal-taza/IMG_3852.JPG.jpeg",
+    "_review/taza-beige/IMG_3074.PNG",
+    "_review/taza-beige/IMG_3403.PNG",
+    "_review/taza-grey/IMG_3402.PNG",
+    "_review/non-image/categoris hjar - Shortcut.lnk"
+  ]
+}

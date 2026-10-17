@@ -30,12 +30,12 @@ class CatalogueForms
             $fields[] = Select::make('parent_id')->label('Parent (empty = root)')->options(fn () => ProductCategory::whereNull('parent_id')->orderBy('slug')->pluck('slug', 'id'))->searchable();
         }
         if ($kind === 'product') {
-            $fields = [...$fields, Select::make('category_id')->label('Child category')->options(fn () => ProductCategory::whereNotNull('parent_id')->orderBy('slug')->pluck('slug', 'id'))->required()->searchable(), Select::make('status')->options(['draft' => 'Draft', 'published' => 'Published (super-admin)'])->default('draft')->required(), Toggle::make('featured')->default(false)];
+            $fields = [...$fields, Select::make('category_id')->label('Child category')->options(fn () => ProductCategory::whereNotNull('parent_id')->orderBy('slug')->pluck('slug', 'id'))->required(fn (Get $get) => $get('status') === 'published')->searchable(), Select::make('status')->options(['draft' => 'Draft', 'published' => 'Published (super-admin)'])->default('draft')->required()->live(), Toggle::make('featured')->default(false)];
         }
         $fields[] = self::image('cover_media_id', 'Approved published cover');
         $fields = [...$fields, ...self::translations($kind)];
         if ($kind === 'product') {
-            $fields[] = Select::make('units')->label('Permitted quotation quantity units')->multiple()->options(array_combine(config('catalogue.quantity_units'), config('catalogue.quantity_units')))->required();
+            $fields[] = Select::make('units')->label('Permitted quotation quantity units')->multiple()->options(array_combine(config('catalogue.quantity_units'), config('catalogue.quantity_units')))->required(fn (Get $get) => $get('status') === 'published');
             $fields[] = Toggle::make('custom_size_allowed')->label('Custom dimensions on request')->default(false)->live()->afterStateUpdated(function ($state, Set $set) {
                 if (! $state) {
                     foreach (['custom_measurement_unit', 'min_width', 'max_width', 'min_length', 'max_length'] as $key) {
@@ -85,7 +85,7 @@ class CatalogueForms
         return $fields;
     }
 
-    private static function image(string $key, string $label): Select
+    public static function image(string $key, string $label): Select
     {
         return Select::make($key)->label($label)->searchable()->getSearchResultsUsing(function (string $search) {
             $query = MediaAsset::query();

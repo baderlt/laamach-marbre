@@ -9,9 +9,11 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Project;
 use App\Models\ProjectCategory;
+use App\Models\SiteContent;
 use App\Models\User;
 use App\Policies\CataloguePolicy;
 use App\Policies\MediaAssetPolicy;
+use App\Policies\SiteContentPolicy;
 use App\Policies\UserPolicy;
 use App\Support\FoundationConfiguration;
 use Illuminate\Support\Facades\Gate;
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->setFallbackLocale(config('localization.fallback'));
         Gate::policy(User::class, UserPolicy::class);
         Gate::policy(MediaAsset::class, MediaAssetPolicy::class);
+        Gate::policy(SiteContent::class, SiteContentPolicy::class);
         foreach ([ProductCategory::class, Product::class, Finish::class, Project::class, ProjectCategory::class] as $model) {
             Gate::policy($model, CataloguePolicy::class);
         }

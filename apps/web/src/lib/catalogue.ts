@@ -3,7 +3,7 @@ import type { ProjectCard } from './projects.ts';
 
 export type Variant = { url: string; width: number; height: number; format: string; profile: string; revision: string; hash: string };
 export type Media = { id: string; alt: string; variants: Variant[] };
-export type Category = { id: string; slug: string; name: string; description?: string; children?: Category[] };
+export type Category = { id: string; slug: string; name: string; description?: string; cover?: Media | null; children?: Category[] };
 export type Finish = { id: string; slug: string; name: string; is_default?: boolean };
 export type ProductCard = { reference: string; slug: string; name: string; featured: boolean; parent_category: Category; category: Category; cover: Media | null };
 export type Size = { id: string; label: string; width: string; length: string; height: string | null; thickness: string | null; measurement_unit: string; cover: Media | null };
@@ -32,5 +32,7 @@ export function catalogueFilters(input: Record<string, string | string[] | undef
     if (typeof value === 'string' && /^[a-z0-9-]{1,120}$/.test(value)) result.set(key, value);
   }
   if (typeof input.page === 'string' && /^[1-9][0-9]{0,3}$|^10000$/.test(input.page)) result.set('page', input.page);
+  if (typeof input.q === 'string' && input.q.trim().length > 0 && input.q.trim().length <= 120) result.set('q', input.q.trim());
+  if (input.sort === 'name') result.set('sort', 'name');
   return result;
 }
