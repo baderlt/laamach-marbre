@@ -1,0 +1,8 @@
+{
+  "default": "fr",
+  "fallback": "fr",
+  "locales": [
+    { "code": "fr", "name": "Français", "direction": "ltr" },
+    { "code": "ar", "name": "العربية", "direction": "rtl" }
+  ]
+}

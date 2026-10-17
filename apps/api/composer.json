@@ -1,0 +1,41 @@
+{
+    "name": "laamach-marbre/api",
+    "type": "project",
+    "description": "LAAMACH MARBRE independent application foundation",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.3",
+        "filament/filament": "5.10.1",
+        "laravel/framework": "13.35.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "1.24.1",
+        "laravel/pint": "1.32.1",
+        "mockery/mockery": "1.6.15",
+        "nunomaduro/collision": "8.9.5",
+        "phpunit/phpunit": "12.5.39"
+    },
+    "autoload": {
+        "psr-4": { "App\\": "app/", "Database\\Factories\\": "database/factories/" }
+    },
+    "autoload-dev": { "psr-4": { "Tests\\": "tests/" } },
+    "scripts": {
+        "dev": "@php artisan serve --host=127.0.0.1 --port=8100",
+        "test": "@php artisan test",
+        "lint": "@php vendor/bin/pint --test",
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-install-cmd": ["@php artisan filament:assets --ansi"],
+        "post-update-cmd": ["@php artisan filament:assets --ansi"]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": { "php-http/discovery": true }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

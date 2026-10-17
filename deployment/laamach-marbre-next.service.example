@@ -1,0 +1,21 @@
+# M1 identity/layout template only. Not installed or production-validated.
+[Unit]
+Description=LAAMACH MARBRE Next.js
+After=network.target
+
+[Service]
+Type=simple
+User=laamach-marbre
+Group=laamach-marbre
+WorkingDirectory=/var/www/laamach-marbre/current/apps/web
+Environment=NODE_ENV=production
+EnvironmentFile=/var/www/laamach-marbre/shared/web.env
+ExecStart=/usr/bin/node /var/www/laamach-marbre/current/node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3100
+Restart=on-failure
+RestartSec=5
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

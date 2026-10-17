@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+:root { color-scheme: light; }
+body { margin: 0; background: #fafafa; color: #202020; font-family: Arial, sans-serif; line-height: 1.7; }
+main { width: min(48rem, calc(100% - 2rem)); margin: 4rem auto; }
+nav { display: flex; flex-wrap: wrap; gap: 1rem; margin-block: 1.5rem; }
+a { color: inherit; text-underline-offset: .2em; }
+a[aria-current="page"] { font-weight: bold; }
+:focus-visible { outline: 3px solid #265d83; outline-offset: 4px; }
+button { font: inherit; padding: .5rem 1rem; cursor: pointer; }
