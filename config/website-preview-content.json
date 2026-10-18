@@ -1,0 +1,116 @@
+{
+  "site": {
+    "fr": { "tagline": "Pierre & marbre · Aperçu provisoire", "footer_text": "Des matières naturelles, des nuances singulières et des idées pour donner du caractère à vos espaces. Aperçu de démonstration : textes proposés, produits à confirmer et projets illustratifs. Coordonnées réelles à ajouter avant publication." },
+    "ar": { "tagline": "الحجر والرخام · معاينة مؤقتة", "footer_text": "مواد طبيعية وتدرجات مميزة وأفكار تمنح مساحاتك طابعًا خاصًا. هذه معاينة تجريبية: النصوص مقترحة والمنتجات في انتظار التأكيد والمشاريع أمثلة توضيحية. تضاف معلومات الاتصال الحقيقية قبل النشر." }
+  },
+  "home": {
+    "hero": "hajar-jbal-taza", "secondary": "taza-beige",
+    "fr": {
+      "eyebrow": "LAAMACH MARBRE · Pierre & architecture", "title": "La matière donne le ton.",
+      "body": "Du détail d’un parement à l’atmosphère d’un espace, la pierre invite à composer avec la lumière, la texture et les nuances. Découvrez les photographies de notre sélection et imaginez votre prochain projet.",
+      "seo_title": "LAAMACH MARBRE — Pierre, marbre et inspirations", "seo_description": "Explorez les matières et les photographies produits LAAMACH MARBRE. Une sélection pour imaginer vos espaces et préparer votre projet.",
+      "cta_title": "Votre projet commence par une matière.", "cta_body": "Une référence, une ambiance, une question de format : réunissez vos idées et préparons la prochaine conversation.",
+      "sections": [
+        { "group": "activities", "title": "Découvrir les matières", "body": "Observez les nuances, comparez les vues et repérez les références qui vous inspirent. Les photographies client sont le point de départ de cette sélection provisoire.", "icon": "stone", "link": "products", "image": "noir-azilal" },
+        { "group": "activities", "title": "Imaginer les espaces", "body": "Façade, intérieur ou détail architectural : explorez des exemples de présentation pour réfléchir à la place de la matière dans votre projet.", "icon": "building", "link": "projects", "image": "taza-beige" },
+        { "group": "trust", "title": "Le caractère naturel", "body": "Les variations de teinte et de texture font partie de la lecture d’une pierre. Une photographie reste un repère, jamais un échantillon contractuel.", "icon": "leaf" },
+        { "group": "trust", "title": "Le sens du détail", "body": "Format, épaisseur, finition et contexte de pose sont à préciser pour chaque demande.", "icon": "ruler" },
+        { "group": "trust", "title": "Un choix éclairé", "body": "Comparez les vues disponibles et confirmez les caractéristiques utiles avant de retenir une référence.", "icon": "check" },
+        { "group": "trust", "title": "Un projet à votre image", "body": "Partagez vos inspirations et les contraintes de votre espace pour préparer un échange concret.", "icon": "craft" }
+      ]
+    },
+    "ar": {
+      "eyebrow": "LAAMACH MARBRE · الحجر والعمارة", "title": "المادة تصنع طابع المكان.",
+      "body": "من تفاصيل الكسوة إلى أجواء المساحة، يفتح الحجر مجالًا للتعبير بالضوء والملمس وتدرجات اللون. اكتشف صور المجموعة وتخيّل مشروعك المقبل.",
+      "seo_title": "LAAMACH MARBRE — الحجر والرخام والإلهام", "seo_description": "اكتشف مواد وصور منتجات LAAMACH MARBRE واستلهم أفكارًا لمساحاتك وحضّر تفاصيل مشروعك.",
+      "cta_title": "مشروعك يبدأ باختيار المادة.", "cta_body": "مرجع أعجبك أو أجواء تتخيلها أو سؤال عن المقاس: اجمع أفكارك لنحضّر النقاش المقبل.",
+      "sections": [
+        { "group": "activities", "title": "اكتشف المواد", "body": "تأمل التدرجات وقارن الصور واختر المراجع التي تلهمك. صور العميل هي نقطة الانطلاق لهذه المجموعة المؤقتة.", "icon": "stone", "link": "products", "image": "noir-azilal" },
+        { "group": "activities", "title": "تخيّل المساحات", "body": "واجهة أو مساحة داخلية أو تفصيل معماري: اكتشف أمثلة توضيحية للتفكير في حضور المادة داخل مشروعك.", "icon": "building", "link": "projects", "image": "taza-beige" },
+        { "group": "trust", "title": "طابع طبيعي", "body": "اختلافات اللون والملمس جزء من قراءة الحجر. تبقى الصورة مرجعًا بصريًا وليست عينة تعاقدية.", "icon": "leaf" },
+        { "group": "trust", "title": "اهتمام بالتفاصيل", "body": "يحدد المقاس والسماكة والتشطيب وظروف التركيب لكل طلب على حدة.", "icon": "ruler" },
+        { "group": "trust", "title": "اختيار أوضح", "body": "قارن الصور المتاحة وأكد الخصائص اللازمة قبل اعتماد المرجع المناسب.", "icon": "check" },
+        { "group": "trust", "title": "مشروع بطابعك", "body": "شارك أفكارك ومتطلبات مساحتك للتحضير لنقاش واضح حول المشروع.", "icon": "craft" }
+      ]
+    }
+  },
+  "products": {
+    "hero": "taza-grey",
+    "fr": { "eyebrow": "Les matières", "title": "Des nuances à explorer.", "body": "Sept références issues des dossiers photo fournis, avec leurs vues de détail. Les noms et regroupements sont conservés à titre provisoire. Dimensions, finitions, usages et unité commerciale sont à confirmer avant toute commande.", "seo_title": "Les matières — LAAMACH MARBRE", "seo_description": "Découvrez les photographies réelles des sept références fournies. Comparez les vues et préparez votre sélection provisoire." },
+    "ar": { "eyebrow": "المواد", "title": "تدرجات تستحق الاكتشاف.", "body": "سبعة مراجع من ملفات الصور المقدمة مع صورها التفصيلية. الأسماء وتجميع الصور مؤقتة كما وردت. تؤكد المقاسات والتشطيبات والاستخدامات ووحدة البيع قبل أي طلب.", "seo_title": "المواد — LAAMACH MARBRE", "seo_description": "اكتشف الصور الحقيقية للمراجع السبعة المقدمة وقارن اللقطات لتحضير اختيارك الأولي." }
+  },
+  "projects": {
+    "hero": "noir-bnikhiran",
+    "fr": { "eyebrow": "Ambiances & usages", "title": "Imaginer la pierre dans l’espace.", "body": "Ces exemples de présentation explorent la façade, l’intérieur et le détail architectural. Ils illustrent le futur portfolio et ne représentent pas des réalisations client. Les photographies de chantiers seront ajoutées après validation.", "seo_title": "Inspirations & projets — LAAMACH MARBRE", "seo_description": "Explorez des exemples d’ambiances et préparez vos inspirations pour un futur projet en pierre ou marbre." },
+    "ar": { "eyebrow": "أجواء واستخدامات", "title": "تخيّل حضور الحجر في المكان.", "body": "تستكشف هذه الأمثلة التوضيحية الواجهات والمساحات الداخلية والتفاصيل المعمارية. هي عرض لفكرة ملف المشاريع وليست أعمالًا منفذة لعملاء. تضاف صور المشاريع الحقيقية بعد اعتمادها.", "seo_title": "إلهام ومشاريع — LAAMACH MARBRE", "seo_description": "اكتشف أمثلة للأجواء المعمارية وحضّر أفكارك لمشروع مقبل بالحجر أو الرخام." }
+  },
+  "services": {
+    "hero": "taza-beige", "secondary": "hajar-jbal-taza",
+    "fr": {
+      "eyebrow": "Préparer votre projet", "title": "De l’inspiration aux bons détails.", "body": "Choisir une matière, c’est aussi penser à son contexte. Cette présentation propose les sujets à aborder pour passer d’une idée à une demande précise. Les prestations et modalités définitives restent à confirmer avec LAAMACH MARBRE.", "seo_title": "Préparer votre projet — LAAMACH MARBRE", "seo_description": "Matières, formats, finitions et inspirations : les points à réunir pour préparer votre projet avec LAAMACH MARBRE.",
+      "sections": [
+        { "group": "services", "title": "Repérer une matière", "body": "Explorez les références et comparez leurs photographies pour construire une première sélection.", "icon": "stone", "link": "products", "image": "taza-grey" },
+        { "group": "services", "title": "Préciser les formats", "body": "Préparez les dimensions souhaitées et leur unité. Aucune taille n’est déduite d’une photographie.", "icon": "ruler", "link": "contact", "image": "hajar-jbal-taza" },
+        { "group": "services", "title": "Penser aux usages", "body": "Décrivez le contexte intérieur ou extérieur pour faire confirmer les contraintes de votre projet.", "icon": "building", "link": "projects", "image": "noir-azilal" },
+        { "group": "services", "title": "Explorer les finitions", "body": "Partagez l’effet recherché. L’aspect, la finition et leur disponibilité devront être vérifiés.", "icon": "spark", "link": "products", "image": "taza-beige" },
+        { "group": "services", "title": "Réunir les inspirations", "body": "Plans, croquis, références et détails de votre espace rendent la discussion plus concrète.", "icon": "craft", "link": "contact", "image": "grey-bnikhiran" },
+        { "group": "services", "title": "Confirmer avant de choisir", "body": "Caractéristiques, faisabilité, conditions et prochaines étapes sont à valider avant tout engagement.", "icon": "check", "link": "contact", "image": "noir-khnifra" },
+        { "group": "process", "title": "Votre idée", "body": "Décrivez l’ambiance et l’espace que vous souhaitez créer.", "icon": "building" },
+        { "group": "process", "title": "Vos matières", "body": "Repérez les références qui correspondent à votre intention.", "icon": "stone" },
+        { "group": "process", "title": "Vos dimensions", "body": "Rassemblez les mesures et les contraintes connues.", "icon": "ruler" },
+        { "group": "process", "title": "Les confirmations", "body": "Faites préciser les caractéristiques et la faisabilité.", "icon": "check" },
+        { "group": "process", "title": "La prochaine étape", "body": "Convenez de la suite après validation des informations.", "icon": "craft" }
+      ]
+    },
+    "ar": {
+      "eyebrow": "حضّر مشروعك", "title": "من الإلهام إلى التفاصيل المناسبة.", "body": "اختيار المادة يبدأ أيضًا بفهم مكان استخدامها. يقترح هذا العرض نقاطًا تساعد على تحويل الفكرة إلى طلب واضح. تؤكد الخدمات والشروط النهائية مع LAAMACH MARBRE.", "seo_title": "حضّر مشروعك — LAAMACH MARBRE", "seo_description": "المواد والمقاسات والتشطيبات والأفكار: نقاط تساعدك على تحضير مشروعك مع LAAMACH MARBRE.",
+      "sections": [
+        { "group": "services", "title": "اختيار أولي للمادة", "body": "اكتشف المراجع وقارن صورها لتكوين مجموعة أولية تناسب فكرتك.", "icon": "stone", "link": "products", "image": "taza-grey" },
+        { "group": "services", "title": "تحديد المقاسات", "body": "حضّر الأبعاد المطلوبة ووحدة قياسها. لا نستنتج المقاسات من الصور.", "icon": "ruler", "link": "contact", "image": "hajar-jbal-taza" },
+        { "group": "services", "title": "التفكير في الاستخدام", "body": "صف الاستخدام الداخلي أو الخارجي لتأكيد متطلبات مشروعك.", "icon": "building", "link": "projects", "image": "noir-azilal" },
+        { "group": "services", "title": "استكشاف التشطيبات", "body": "شارك الأثر البصري الذي تبحث عنه. يؤكد المظهر والتشطيب وتوفرهما لاحقًا.", "icon": "spark", "link": "products", "image": "taza-beige" },
+        { "group": "services", "title": "جمع مصادر الإلهام", "body": "الرسومات والمخططات والمراجع وتفاصيل المساحة تجعل النقاش أوضح.", "icon": "craft", "link": "contact", "image": "grey-bnikhiran" },
+        { "group": "services", "title": "التأكيد قبل الاختيار", "body": "تراجع الخصائص وإمكانية التنفيذ والشروط والخطوات المقبلة قبل أي التزام.", "icon": "check", "link": "contact", "image": "noir-khnifra" },
+        { "group": "process", "title": "فكرتك", "body": "صف الأجواء والمساحة التي ترغب في إنشائها.", "icon": "building" },
+        { "group": "process", "title": "المواد", "body": "اختر المراجع التي تنسجم مع تصورك.", "icon": "stone" },
+        { "group": "process", "title": "المقاسات", "body": "اجمع القياسات والمتطلبات المعروفة.", "icon": "ruler" },
+        { "group": "process", "title": "التأكيدات", "body": "اطلب توضيح الخصائص وإمكانية التنفيذ.", "icon": "check" },
+        { "group": "process", "title": "الخطوة المقبلة", "body": "تحدد الخطوة التالية بعد تأكيد المعلومات.", "icon": "craft" }
+      ]
+    }
+  },
+  "about": {
+    "hero": "noir-azilal", "secondary": "hajar-jbal-taza",
+    "fr": {
+      "eyebrow": "L’univers LAAMACH MARBRE", "title": "La matière au cœur du regard.", "body": "Une surface, une nuance, une rencontre avec la lumière : notre univers visuel prend la matière comme point de départ. Cette proposition éditoriale présente l’esprit du site, sans inventer l’histoire ni les références de l’entreprise.", "seo_title": "L’univers LAAMACH MARBRE", "seo_description": "Une approche de la pierre et du marbre centrée sur les nuances, la texture et la place de la matière dans chaque espace.",
+      "sections": [
+        { "group": "story", "title": "Des matières qui donnent du caractère.", "body": "La pierre se découvre dans ses détails : une texture, un contraste, une variation. Le catalogue met les photographies client au premier plan pour vous permettre de regarder, comparer et préparer vos questions.\n\nLes informations de chaque référence seront précisées avant publication définitive. L’histoire, l’atelier et les réalisations de LAAMACH MARBRE pourront ensuite enrichir cette page avec des éléments confirmés.", "icon": "stone", "image": "taza-beige" },
+        { "group": "trust", "title": "Regarder la matière", "body": "Prendre le temps d’observer les nuances et les détails visibles.", "icon": "stone" },
+        { "group": "trust", "title": "Respecter ses variations", "body": "Comprendre qu’une photographie ne remplace pas la vérification d’une matière.", "icon": "leaf" },
+        { "group": "trust", "title": "Préciser chaque besoin", "body": "Distinguer une intention esthétique d’une caractéristique technique confirmée.", "icon": "ruler" },
+        { "group": "trust", "title": "Échanger clairement", "body": "Rassembler les bonnes informations avant de prendre une décision.", "icon": "check" },
+        { "group": "services", "title": "Explorer le catalogue", "body": "Parcourez les vues des références fournies et créez votre sélection.", "icon": "stone", "link": "products", "image": "taza-grey" },
+        { "group": "services", "title": "Imaginer un espace", "body": "Utilisez les exemples d’ambiances comme point de départ à votre réflexion.", "icon": "building", "link": "projects", "image": "noir-bnikhiran" },
+        { "group": "services", "title": "Préparer un échange", "body": "Une matière repérée, des mesures et quelques inspirations donnent une base concrète à la discussion.", "icon": "craft", "link": "contact", "image": "grey-bnikhiran" }
+      ]
+    },
+    "ar": {
+      "eyebrow": "عالم LAAMACH MARBRE", "title": "المادة في قلب الرؤية.", "body": "سطح وتدرج ولقاء مع الضوء: تنطلق الهوية البصرية من المادة نفسها. يقدم هذا النص المقترح روح الموقع دون اختراع تاريخ الشركة أو مراجع أعمالها.", "seo_title": "عالم LAAMACH MARBRE", "seo_description": "رؤية للحجر والرخام تركز على التدرجات والملمس وحضور المادة في كل مساحة.",
+      "sections": [
+        { "group": "story", "title": "مواد تمنح المكان شخصيته.", "body": "يكتشف الحجر من خلال تفاصيله: ملمس وتباين واختلاف في التدرج. يضع الكتالوج صور العميل في الواجهة لتتمكن من التأمل والمقارنة وتحضير أسئلتك.\n\nتستكمل معلومات كل مرجع قبل النشر النهائي. ويمكن لاحقًا إثراء هذه الصفحة بقصة LAAMACH MARBRE وورشتها ومشاريعها بعد تأكيد المعطيات.", "icon": "stone", "image": "taza-beige" },
+        { "group": "trust", "title": "تأمل المادة", "body": "خذ الوقت لملاحظة التدرجات والتفاصيل الظاهرة.", "icon": "stone" },
+        { "group": "trust", "title": "احترام اختلافاتها", "body": "الصورة لا تعوض التحقق من المادة نفسها.", "icon": "leaf" },
+        { "group": "trust", "title": "تحديد الاحتياجات", "body": "نميز بين الرغبة الجمالية والخاصية التقنية المؤكدة.", "icon": "ruler" },
+        { "group": "trust", "title": "تواصل واضح", "body": "اجمع المعلومات المناسبة قبل اتخاذ القرار.", "icon": "check" },
+        { "group": "services", "title": "استكشف الكتالوج", "body": "تصفح صور المراجع المقدمة وكون اختيارك الأولي.", "icon": "stone", "link": "products", "image": "taza-grey" },
+        { "group": "services", "title": "تخيّل مساحة", "body": "اجعل الأمثلة التوضيحية نقطة انطلاق للتفكير في مشروعك.", "icon": "building", "link": "projects", "image": "noir-bnikhiran" },
+        { "group": "services", "title": "حضّر النقاش", "body": "مرجع يعجبك وقياسات وبعض الأفكار تشكل أساسًا واضحًا للنقاش.", "icon": "craft", "link": "contact", "image": "grey-bnikhiran" }
+      ]
+    }
+  },
+  "contact": {
+    "hero": "taza-beige", "secondary": "noir-azilal",
+    "fr": { "eyebrow": "Parlons de votre projet", "title": "Une idée, une matière, une conversation.", "body": "Présentez l’espace, les références qui vous intéressent et les dimensions déjà connues. Les coordonnées réelles de LAAMACH MARBRE seront ajoutées après confirmation ; aucun numéro ni aucune adresse fictive ne sont utilisés dans cet aperçu.", "seo_title": "Contact — LAAMACH MARBRE", "seo_description": "Préparez vos références, inspirations et dimensions pour échanger autour de votre projet avec LAAMACH MARBRE." },
+    "ar": { "eyebrow": "لنتحدث عن مشروعك", "title": "فكرة ومادة ونقاش يبدأ هنا.", "body": "قدم المساحة والمراجع التي تهمك والمقاسات المعروفة. تضاف معلومات الاتصال الحقيقية لـ LAAMACH MARBRE بعد تأكيدها، ولا تستخدم هذه المعاينة أي رقم هاتف أو عنوان وهمي.", "seo_title": "اتصل بنا — LAAMACH MARBRE", "seo_description": "حضّر المراجع والأفكار والمقاسات لمناقشة مشروعك مع LAAMACH MARBRE." }
+  }
+}

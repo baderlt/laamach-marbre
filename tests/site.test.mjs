@@ -8,7 +8,7 @@ test('website text respects configured fallback without adding company facts', (
   assert.equal(siteCopy('fr').contact, 'Contact');
   assert.equal(siteCopy('ar').contact, 'اتصل بنا');
   assert.equal(siteCopy('es').products, siteCopy('fr').products);
-  assert.match(siteCopy('fr').missingMedia, /fournir/);
+  assert.match(siteCopy('fr').missingMedia, /validation/);
 });
 test('contact phone and search URLs are bounded', () => {
   assert.equal(phoneHref('+212 (600) 000-000'), 'tel:+212600000000');

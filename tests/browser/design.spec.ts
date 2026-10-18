@@ -29,6 +29,7 @@ for (const locale of ['fr', 'ar']) {
         await expect(page.locator('video[autoplay]')).toHaveCount(0);
         if (width === 1440 || width === 390) {
           await page.evaluate(async () => {
+            await document.fonts.ready;
             for (let position = 0; position < document.documentElement.scrollHeight; position += innerHeight) {
               window.scrollTo(0, position);
               await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
@@ -69,5 +70,11 @@ for (const locale of ['fr', 'ar']) {
     await expect(page.locator('a[href*="wa.me"], a[href*="whatsapp"], iframe')).toHaveCount(0);
     await page.goto(`/${locale}/products/temporary-product`); await expect(page.locator('[data-reserved-3d]')).toBeVisible();
     await expect(page.locator('canvas, model-viewer')).toHaveCount(0);
+    await page.setViewportSize({ width: 390, height: 844 });
+    const gallery = await page.locator('.product-visual-column').boundingBox();
+    const facts = await page.locator('.product-facts').boundingBox();
+    const support = await page.locator('.product-support-column').boundingBox();
+    expect(facts!.y).toBeGreaterThanOrEqual(gallery!.y + gallery!.height);
+    expect(support!.y).toBeGreaterThanOrEqual(facts!.y + facts!.height);
   });
 }

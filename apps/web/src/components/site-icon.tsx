@@ -1,5 +1,6 @@
 export function SiteIcon({ name = 'stone', className = '' }: { name?: string | null; className?: string }) {
   const paths: Record<string, React.ReactNode> = {
+    brand: <><path d="m2 21 9-18 11 18h-5L11 11l-5 10M8 21l4-8 5 8M12 3l-2 4" /></>,
     stone: <><path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8" /></>,
     building: <><path d="M4 21V6l8-3 8 3v15M2 21h20M8 21v-5h8v5M8 8v3m4-3v3m4-3v3" /></>,
     ruler: <><path d="m3 16 13-13 5 5L8 21zM6 13l3 3m0-6 2 2m1-5 3 3m0-6 2 2" /></>,

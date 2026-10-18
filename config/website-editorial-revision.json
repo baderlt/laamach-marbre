@@ -1,0 +1,646 @@
+{
+  "site": {
+    "fr": {
+      "tagline": "Pierre naturelle & marbre",
+      "footer_text": "Des matières à regarder de près, des choix à préciser ensemble. Découvrez les références photographiées et préparez votre projet avec LAAMACH MARBRE."
+    },
+    "ar": {
+      "tagline": "الحجر الطبيعي والرخام",
+      "footer_text": "مواد تستحق التأمل، واختيارات تتضح بالنقاش. اكتشف المراجع المصورة وحضّر تفاصيل مشروعك مع LAAMACH MARBRE."
+    }
+  },
+  "home": {
+    "hero": "hajar-jbal-taza",
+    "secondary": "taza-beige",
+    "fr": {
+      "eyebrow": "Pierre naturelle · Marbre",
+      "title": "La pierre naturelle,\nle caractère de vos espaces.",
+      "body": "Nuances, textures et lignes architecturales : découvrez notre sélection de matières et préparons les détails de votre projet.",
+      "seo_title": "Pierre naturelle & marbre | LAAMACH MARBRE",
+      "seo_description": "Découvrez les références de pierre naturelle et de marbre LAAMACH MARBRE. Comparez les photographies et préparez une demande adaptée à votre projet.",
+      "cta_title": "Quelle matière pour votre projet ?",
+      "cta_body": "Une référence vous inspire ? Partagez vos plans, vos dimensions et l’usage envisagé pour préparer une demande précise.",
+      "sections": [
+        {
+          "group": "activities",
+          "title": "Fourniture de pierre & marbre",
+          "body": "Une sélection se construit dans les détails. Parcourez les références photographiées, puis faites confirmer les formats et les caractéristiques utiles.\nComparer les références\nPréciser les dimensions et les unités\nVérifier les finitions possibles\nPréparer une demande de devis",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-beige"
+        },
+        {
+          "group": "activities",
+          "title": "Votre projet architectural",
+          "body": "De la première intention au choix de la matière, rassemblez les informations qui permettront d’étudier votre demande.\nPartager plans et inspirations\nDécrire les contraintes d’usage\nFaire confirmer les prestations\nValider les prochaines étapes",
+          "icon": "building",
+          "link": "contact",
+          "image": "hajar-jbal-taza"
+        },
+        {
+          "group": "services",
+          "title": "Façades",
+          "body": "Penser le rythme et les proportions.",
+          "icon": "building",
+          "link": "products",
+          "image": "hajar-jbal-taza"
+        },
+        {
+          "group": "services",
+          "title": "Sols & espaces",
+          "body": "Étudier la matière dans son contexte.",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-beige"
+        },
+        {
+          "group": "services",
+          "title": "Dalles & formats",
+          "body": "Préciser les dimensions du projet.",
+          "icon": "ruler",
+          "link": "products",
+          "image": "taza-grey"
+        },
+        {
+          "group": "services",
+          "title": "Escaliers & détails",
+          "body": "Donner une intention aux lignes.",
+          "icon": "craft",
+          "link": "products",
+          "image": "noir-azilal"
+        },
+        {
+          "group": "services",
+          "title": "Volumes architecturaux",
+          "body": "Relier la matière à l’espace.",
+          "icon": "building",
+          "link": "products",
+          "image": "noir-bnikhiran"
+        },
+        {
+          "group": "services",
+          "title": "Pièces particulières",
+          "body": "Décrire une demande à étudier.",
+          "icon": "spark",
+          "link": "products",
+          "image": "grey-bnikhiran"
+        },
+        {
+          "group": "trust",
+          "title": "La matière avant tout",
+          "body": "Comparez les nuances et les textures sur plusieurs vues, puis confirmez votre choix sur un échantillon.",
+          "icon": "leaf"
+        },
+        {
+          "group": "trust",
+          "title": "Des détails à préciser",
+          "body": "Format, épaisseur et finition se choisissent selon le projet, avec des caractéristiques vérifiées.",
+          "icon": "ruler"
+        },
+        {
+          "group": "trust",
+          "title": "Un échange concret",
+          "body": "Références, plans et mesures donnent une base claire à l’étude de votre demande.",
+          "icon": "craft"
+        },
+        {
+          "group": "trust",
+          "title": "Un choix documenté",
+          "body": "Les propriétés techniques et l’aptitude à l’usage se confirment avant toute décision.",
+          "icon": "check"
+        }
+      ]
+    },
+    "ar": {
+      "eyebrow": "الحجر الطبيعي · الرخام",
+      "title": "جمال الحجر الطبيعي،\nبتفاصيل تصنع الفرق",
+      "body": "تدرجات وملامس وخطوط معمارية: اكتشف مجموعة المواد، ولنُحضّر معًا التفاصيل التي يحتاجها مشروعك.",
+      "seo_title": "الحجر الطبيعي والرخام | LAAMACH MARBRE",
+      "seo_description": "اكتشف مراجع الحجر الطبيعي والرخام من LAAMACH MARBRE. قارن الصور وحضّر طلبًا يناسب تفاصيل مشروعك.",
+      "cta_title": "ما المادة المناسبة لمشروعك؟",
+      "cta_body": "هل ألهمك أحد المراجع؟ شارك مخططاتك وأبعاد مشروعك والاستخدام المقترح لتحضير طلب واضح.",
+      "sections": [
+        {
+          "group": "activities",
+          "title": "توريد الحجر الطبيعي والرخام",
+          "body": "يبدأ الاختيار من التفاصيل. تصفح المراجع المصورة، ثم أكد المقاسات والخصائص التي يحتاجها مشروعك.\nمقارنة المراجع\nتحديد الأبعاد ووحدات القياس\nالتحقق من التشطيبات الممكنة\nتحضير طلب عرض سعر",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-beige"
+        },
+        {
+          "group": "activities",
+          "title": "مشروعك المعماري",
+          "body": "من الفكرة الأولى إلى اختيار المادة، اجمع المعلومات التي تساعد على دراسة طلبك.\nمشاركة المخططات والأفكار\nتوضيح ظروف الاستخدام\nتأكيد الخدمات الممكنة\nتحديد الخطوات المقبلة",
+          "icon": "building",
+          "link": "contact",
+          "image": "hajar-jbal-taza"
+        },
+        {
+          "group": "services",
+          "title": "الواجهات",
+          "body": "التفكير في الإيقاع والنسب.",
+          "icon": "building",
+          "link": "products",
+          "image": "hajar-jbal-taza"
+        },
+        {
+          "group": "services",
+          "title": "الأرضيات والمساحات",
+          "body": "دراسة المادة في سياق استخدامها.",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-beige"
+        },
+        {
+          "group": "services",
+          "title": "الألواح والمقاسات",
+          "body": "تحديد أبعاد المشروع بوضوح.",
+          "icon": "ruler",
+          "link": "products",
+          "image": "taza-grey"
+        },
+        {
+          "group": "services",
+          "title": "السلالم والتفاصيل",
+          "body": "منح الخطوط تصورًا متكاملًا.",
+          "icon": "craft",
+          "link": "products",
+          "image": "noir-azilal"
+        },
+        {
+          "group": "services",
+          "title": "العناصر المعمارية",
+          "body": "ربط المادة بطابع المكان.",
+          "icon": "building",
+          "link": "products",
+          "image": "noir-bnikhiran"
+        },
+        {
+          "group": "services",
+          "title": "قطع خاصة",
+          "body": "وصف طلب يحتاج إلى دراسة.",
+          "icon": "spark",
+          "link": "products",
+          "image": "grey-bnikhiran"
+        },
+        {
+          "group": "trust",
+          "title": "المادة أولًا",
+          "body": "قارن التدرجات والملمس في أكثر من صورة، ثم أكد اختيارك على عينة.",
+          "icon": "leaf"
+        },
+        {
+          "group": "trust",
+          "title": "تفاصيل تُحدد بعناية",
+          "body": "يُختار المقاس والسماكة والتشطيب وفق المشروع وبناءً على خصائص مؤكدة.",
+          "icon": "ruler"
+        },
+        {
+          "group": "trust",
+          "title": "نقاش يبدأ بالوضوح",
+          "body": "المراجع والمخططات والقياسات أساس واضح لدراسة طلبك.",
+          "icon": "craft"
+        },
+        {
+          "group": "trust",
+          "title": "اختيار يستند إلى معلومات",
+          "body": "تُراجع الخصائص التقنية وملاءمة الاستخدام قبل اتخاذ القرار.",
+          "icon": "check"
+        }
+      ]
+    }
+  },
+  "products": {
+    "hero": "taza-grey",
+    "fr": {
+      "eyebrow": "Notre sélection",
+      "title": "Pierres naturelles & marbres",
+      "body": "Regardez la matière de près. Comparez les références et leurs vues de détail, puis faites préciser les caractéristiques de votre sélection.",
+      "seo_title": "Catalogue pierre naturelle & marbre | LAAMACH MARBRE",
+      "seo_description": "Parcourez les photographies produits LAAMACH MARBRE. Identifiez vos références et faites confirmer formats, finitions et usages pour votre projet.",
+      "cta_title": "Des formats à préciser, un projet à étudier ?",
+      "cta_body": "Indiquez les références retenues, les mesures et les quantités envisagées pour préparer votre demande."
+    },
+    "ar": {
+      "eyebrow": "مجموعة المواد",
+      "title": "منتجات الحجر الطبيعي والرخام",
+      "body": "اكتشف المادة عن قرب. قارن المراجع وصورها التفصيلية، ثم أكد الخصائص التي يحتاجها اختيارك.",
+      "seo_title": "كتالوج الحجر الطبيعي والرخام | LAAMACH MARBRE",
+      "seo_description": "تصفح صور منتجات LAAMACH MARBRE وحدد المراجع التي تهمك، ثم أكد المقاسات والتشطيبات والاستخدامات المناسبة لمشروعك.",
+      "cta_title": "مقاسات تحتاج إلى تحديد، ومشروع يحتاج إلى دراسة؟",
+      "cta_body": "وضح المراجع المختارة والقياسات والكميات المتوقعة لتحضير طلبك."
+    }
+  },
+  "projects": {
+    "hero": "noir-bnikhiran",
+    "fr": {
+      "eyebrow": "Pierre & architecture",
+      "title": "La matière prend place.",
+      "body": "Façades, espaces intérieurs et détails architecturaux : explorez des compositions d’ambiance et imaginez les questions à poser pour votre projet.",
+      "seo_title": "Pierre & architecture : inspirations | LAAMACH MARBRE",
+      "seo_description": "Explorez des inspirations architecturales autour de la pierre naturelle. Les exemples illustratifs sont distingués des réalisations client confirmées.",
+      "cta_title": "Une ambiance vous inspire ?",
+      "cta_body": "Présentez votre espace et les matières qui retiennent votre attention. Les solutions et prestations seront étudiées selon votre demande."
+    },
+    "ar": {
+      "eyebrow": "الحجر والعمارة",
+      "title": "حين تمنح المادة المكان طابعه",
+      "body": "واجهات ومساحات داخلية وتفاصيل معمارية: اكتشف تصورات للأجواء، واستلهم الأسئلة المناسبة لتحضير مشروعك.",
+      "seo_title": "الحجر والعمارة: أفكار وإلهام | LAAMACH MARBRE",
+      "seo_description": "اكتشف تصورات معمارية حول الحجر الطبيعي، مع التمييز بين الأمثلة التوضيحية ومشاريع العملاء المؤكدة.",
+      "cta_title": "هل ألهمتك إحدى الأجواء؟",
+      "cta_body": "قدم مساحتك والمواد التي تهمك. تُدرس الحلول والخدمات بحسب تفاصيل طلبك."
+    }
+  },
+  "services": {
+    "hero": "taza-beige",
+    "secondary": "hajar-jbal-taza",
+    "fr": {
+      "eyebrow": "Conseils pour votre projet",
+      "title": "Les bonnes questions,\navant les bons choix.",
+      "body": "Matière, formats, finition et contexte d’usage : préparons les informations nécessaires à une demande claire, sans présumer des caractéristiques ni des prestations.",
+      "seo_title": "Préparer un projet en pierre naturelle | LAAMACH MARBRE",
+      "seo_description": "Choix des matières, dimensions, finitions et documents : les éléments à réunir pour étudier votre projet en pierre naturelle ou marbre.",
+      "cta_title": "Préparons les détails de votre demande.",
+      "cta_body": "Réunissez vos références, vos plans et les contraintes connues. Les possibilités de fourniture et de prestation restent à confirmer.",
+      "sections": [
+        {
+          "group": "services",
+          "title": "Choisir une matière",
+          "body": "Repérez les références qui répondent à votre intention esthétique. Comparez leurs nuances sur photo et sur échantillon.",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-grey"
+        },
+        {
+          "group": "services",
+          "title": "Définir les formats",
+          "body": "Précisez les dimensions, leur unité et les quantités estimées. Les possibilités de préparation restent à confirmer.",
+          "icon": "ruler",
+          "link": "contact",
+          "image": "hajar-jbal-taza"
+        },
+        {
+          "group": "services",
+          "title": "Étudier le contexte",
+          "body": "Intérieur, façade ou élément décoratif : décrivez l’exposition et les contraintes pour faire vérifier la solution envisagée.",
+          "icon": "building",
+          "link": "contact",
+          "image": "noir-azilal"
+        },
+        {
+          "group": "services",
+          "title": "Préciser la finition",
+          "body": "Exprimez l’aspect recherché et les conditions d’usage. Chaque finition doit être confirmée pour la référence retenue.",
+          "icon": "spark",
+          "link": "contact",
+          "image": "taza-beige"
+        },
+        {
+          "group": "services",
+          "title": "Préparer les documents",
+          "body": "Rassemblez plans, croquis, mesures et inspirations pour une demande lisible, sans laisser de place aux suppositions.",
+          "icon": "craft",
+          "link": "contact",
+          "image": "grey-bnikhiran"
+        },
+        {
+          "group": "services",
+          "title": "Demander une étude",
+          "body": "Faites confirmer les caractéristiques, les prestations possibles et les conditions avant de valider la suite.",
+          "icon": "check",
+          "link": "contact",
+          "image": "noir-khnifra"
+        },
+        {
+          "group": "process",
+          "title": "Votre projet",
+          "body": "Présentez l’espace, l’usage et l’effet recherché.",
+          "icon": "building"
+        },
+        {
+          "group": "process",
+          "title": "La sélection",
+          "body": "Repérez les matières à examiner ensemble.",
+          "icon": "stone"
+        },
+        {
+          "group": "process",
+          "title": "Les précisions",
+          "body": "Rassemblez mesures, unités et contraintes.",
+          "icon": "ruler"
+        },
+        {
+          "group": "process",
+          "title": "La vérification",
+          "body": "Faites confirmer propriétés et prestations.",
+          "icon": "check"
+        },
+        {
+          "group": "process",
+          "title": "La décision",
+          "body": "Validez les éléments de la proposition.",
+          "icon": "craft"
+        },
+        {
+          "group": "trust",
+          "title": "La matière avant tout",
+          "body": "Comparez les nuances et les textures sur plusieurs vues, puis confirmez votre choix sur un échantillon.",
+          "icon": "leaf"
+        },
+        {
+          "group": "trust",
+          "title": "Des détails à préciser",
+          "body": "Format, épaisseur et finition se choisissent selon le projet, avec des caractéristiques vérifiées.",
+          "icon": "ruler"
+        },
+        {
+          "group": "trust",
+          "title": "Un échange concret",
+          "body": "Références, plans et mesures donnent une base claire à l’étude de votre demande.",
+          "icon": "craft"
+        },
+        {
+          "group": "trust",
+          "title": "Un choix documenté",
+          "body": "Les propriétés techniques et l’aptitude à l’usage se confirment avant toute décision.",
+          "icon": "check"
+        }
+      ]
+    },
+    "ar": {
+      "eyebrow": "إرشاد لتحضير مشروعك",
+      "title": "الأسئلة المناسبة،\nقبل الاختيارات المناسبة",
+      "body": "المادة والمقاس والتشطيب وظروف الاستخدام: لنُحضّر المعلومات اللازمة لطلب واضح، دون افتراض خصائص أو خدمات غير مؤكدة.",
+      "seo_title": "تحضير مشروع بالحجر الطبيعي | LAAMACH MARBRE",
+      "seo_description": "اختيار المواد والمقاسات والتشطيبات والوثائق: عناصر تساعد على دراسة مشروعك بالحجر الطبيعي أو الرخام.",
+      "cta_title": "لنُحضّر تفاصيل طلبك.",
+      "cta_body": "اجمع المراجع والمخططات والمتطلبات المعروفة. تُؤكد إمكانات التوريد والخدمات قبل اعتمادها.",
+      "sections": [
+        {
+          "group": "services",
+          "title": "اختيار المادة",
+          "body": "حدد المراجع التي تناسب تصورك الجمالي، وقارن تدرجاتها في الصور وعلى عينة.",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-grey"
+        },
+        {
+          "group": "services",
+          "title": "تحديد المقاسات",
+          "body": "وضح الأبعاد ووحدة القياس والكميات التقديرية. تُؤكد إمكانات التحضير حسب الطلب.",
+          "icon": "ruler",
+          "link": "contact",
+          "image": "hajar-jbal-taza"
+        },
+        {
+          "group": "services",
+          "title": "دراسة ظروف الاستخدام",
+          "body": "مساحة داخلية أو واجهة أو عنصر زخرفي: صف التعرض والمتطلبات للتحقق من ملاءمة الحل المقترح.",
+          "icon": "building",
+          "link": "contact",
+          "image": "noir-azilal"
+        },
+        {
+          "group": "services",
+          "title": "توضيح التشطيب",
+          "body": "حدد المظهر المطلوب وظروف الاستخدام. يُؤكد كل تشطيب للمرجع المختار على حدة.",
+          "icon": "spark",
+          "link": "contact",
+          "image": "taza-beige"
+        },
+        {
+          "group": "services",
+          "title": "تحضير الوثائق",
+          "body": "اجمع المخططات والرسومات والقياسات ومصادر الإلهام لتقديم طلب واضح لا يعتمد على التخمين.",
+          "icon": "craft",
+          "link": "contact",
+          "image": "grey-bnikhiran"
+        },
+        {
+          "group": "services",
+          "title": "طلب دراسة للمشروع",
+          "body": "أكد الخصائص والخدمات الممكنة والشروط قبل اعتماد الخطوة التالية.",
+          "icon": "check",
+          "link": "contact",
+          "image": "noir-khnifra"
+        },
+        {
+          "group": "process",
+          "title": "مشروعك",
+          "body": "قدم المساحة والاستخدام والأثر الذي تبحث عنه.",
+          "icon": "building"
+        },
+        {
+          "group": "process",
+          "title": "الاختيار الأولي",
+          "body": "حدد المواد التي ترغب في دراستها.",
+          "icon": "stone"
+        },
+        {
+          "group": "process",
+          "title": "التفاصيل",
+          "body": "اجمع القياسات والوحدات والمتطلبات.",
+          "icon": "ruler"
+        },
+        {
+          "group": "process",
+          "title": "التحقق",
+          "body": "أكد الخصائص والخدمات الممكنة.",
+          "icon": "check"
+        },
+        {
+          "group": "process",
+          "title": "القرار",
+          "body": "راجع عناصر المقترح قبل اعتماده.",
+          "icon": "craft"
+        },
+        {
+          "group": "trust",
+          "title": "المادة أولًا",
+          "body": "قارن التدرجات والملمس في أكثر من صورة، ثم أكد اختيارك على عينة.",
+          "icon": "leaf"
+        },
+        {
+          "group": "trust",
+          "title": "تفاصيل تُحدد بعناية",
+          "body": "يُختار المقاس والسماكة والتشطيب وفق المشروع وبناءً على خصائص مؤكدة.",
+          "icon": "ruler"
+        },
+        {
+          "group": "trust",
+          "title": "نقاش يبدأ بالوضوح",
+          "body": "المراجع والمخططات والقياسات أساس واضح لدراسة طلبك.",
+          "icon": "craft"
+        },
+        {
+          "group": "trust",
+          "title": "اختيار يستند إلى معلومات",
+          "body": "تُراجع الخصائص التقنية وملاءمة الاستخدام قبل اتخاذ القرار.",
+          "icon": "check"
+        }
+      ]
+    }
+  },
+  "about": {
+    "hero": "noir-azilal",
+    "secondary": "hajar-jbal-taza",
+    "fr": {
+      "eyebrow": "L’univers LAAMACH MARBRE",
+      "title": "Le regard de la matière,\nl’esprit du projet.",
+      "body": "Nous aimons ce que la pierre apporte à un espace : une présence, des nuances, un relief. Le catalogue invite à regarder ces détails et à construire un choix éclairé.",
+      "seo_title": "Notre approche de la pierre naturelle | LAAMACH MARBRE",
+      "seo_description": "Découvrez une approche de la pierre naturelle centrée sur la matière, l’esthétique architecturale et la préparation attentive de chaque demande.",
+      "cta_title": "Donnons une direction à votre projet.",
+      "cta_body": "Parlons de vos idées et des points à vérifier pour choisir une matière en connaissance de cause.",
+      "sections": [
+        {
+          "group": "story",
+          "title": "De la matière à l’espace",
+          "body": "Une surface ne se résume pas à sa couleur. Sa texture, ses variations et sa rencontre avec la lumière participent à l’identité d’un lieu.\n\nLAAMACH MARBRE place les photographies de matières au cœur du catalogue. Elles permettent de comparer les références, de formuler une intention et de préparer les questions essentielles : quel format, quelle finition, quel contexte d’utilisation ?\n\nLes échantillons et les caractéristiques confirmées complètent ensuite cette première lecture.",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-beige"
+        },
+        {
+          "group": "trust",
+          "title": "La matière avant tout",
+          "body": "Comparez les nuances et les textures sur plusieurs vues, puis confirmez votre choix sur un échantillon.",
+          "icon": "leaf"
+        },
+        {
+          "group": "trust",
+          "title": "Des détails à préciser",
+          "body": "Format, épaisseur et finition se choisissent selon le projet, avec des caractéristiques vérifiées.",
+          "icon": "ruler"
+        },
+        {
+          "group": "trust",
+          "title": "Un échange concret",
+          "body": "Références, plans et mesures donnent une base claire à l’étude de votre demande.",
+          "icon": "craft"
+        },
+        {
+          "group": "trust",
+          "title": "Un choix documenté",
+          "body": "Les propriétés techniques et l’aptitude à l’usage se confirment avant toute décision.",
+          "icon": "check"
+        },
+        {
+          "group": "services",
+          "title": "Choisir une matière",
+          "body": "Repérez les références qui répondent à votre intention esthétique. Comparez leurs nuances sur photo et sur échantillon.",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-grey"
+        },
+        {
+          "group": "services",
+          "title": "Définir les formats",
+          "body": "Précisez les dimensions, leur unité et les quantités estimées. Les possibilités de préparation restent à confirmer.",
+          "icon": "ruler",
+          "link": "contact",
+          "image": "hajar-jbal-taza"
+        },
+        {
+          "group": "services",
+          "title": "Étudier le contexte",
+          "body": "Intérieur, façade ou élément décoratif : décrivez l’exposition et les contraintes pour faire vérifier la solution envisagée.",
+          "icon": "building",
+          "link": "contact",
+          "image": "noir-azilal"
+        }
+      ]
+    },
+    "ar": {
+      "eyebrow": "عالم LAAMACH MARBRE",
+      "title": "شغف بالمادة،\nورؤية للمكان",
+      "body": "نقدّر ما تضيفه المادة إلى المساحة: حضورًا وتدرجات وملمسًا. يدعوك الكتالوج إلى تأمل هذه التفاصيل وبناء اختيار يستند إلى معلومات واضحة.",
+      "seo_title": "رؤيتنا للحجر الطبيعي | LAAMACH MARBRE",
+      "seo_description": "اكتشف رؤية للحجر الطبيعي تركز على المادة والجمال المعماري والتحضير الدقيق لكل طلب.",
+      "cta_title": "لنمنح مشروعك اتجاهًا واضحًا.",
+      "cta_body": "لنتحدث عن أفكارك والنقاط التي تحتاج إلى تأكيد قبل اختيار المادة المناسبة.",
+      "sections": [
+        {
+          "group": "story",
+          "title": "من المادة إلى المكان",
+          "body": "لا يُختزل السطح في لونه. فالملمس والاختلافات وتفاعل المادة مع الضوء تشارك في صياغة هوية المكان.\n\nتضع LAAMACH MARBRE صور المواد في قلب الكتالوج، لتساعدك على مقارنة المراجع وتوضيح تصورك وتحضير الأسئلة الأساسية: أي مقاس وأي تشطيب وأي ظروف استخدام؟\n\nوتُكمل العينات والخصائص المؤكدة هذه القراءة البصرية الأولى.",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-beige"
+        },
+        {
+          "group": "trust",
+          "title": "المادة أولًا",
+          "body": "قارن التدرجات والملمس في أكثر من صورة، ثم أكد اختيارك على عينة.",
+          "icon": "leaf"
+        },
+        {
+          "group": "trust",
+          "title": "تفاصيل تُحدد بعناية",
+          "body": "يُختار المقاس والسماكة والتشطيب وفق المشروع وبناءً على خصائص مؤكدة.",
+          "icon": "ruler"
+        },
+        {
+          "group": "trust",
+          "title": "نقاش يبدأ بالوضوح",
+          "body": "المراجع والمخططات والقياسات أساس واضح لدراسة طلبك.",
+          "icon": "craft"
+        },
+        {
+          "group": "trust",
+          "title": "اختيار يستند إلى معلومات",
+          "body": "تُراجع الخصائص التقنية وملاءمة الاستخدام قبل اتخاذ القرار.",
+          "icon": "check"
+        },
+        {
+          "group": "services",
+          "title": "اختيار المادة",
+          "body": "حدد المراجع التي تناسب تصورك الجمالي، وقارن تدرجاتها في الصور وعلى عينة.",
+          "icon": "stone",
+          "link": "products",
+          "image": "taza-grey"
+        },
+        {
+          "group": "services",
+          "title": "تحديد المقاسات",
+          "body": "وضح الأبعاد ووحدة القياس والكميات التقديرية. تُؤكد إمكانات التحضير حسب الطلب.",
+          "icon": "ruler",
+          "link": "contact",
+          "image": "hajar-jbal-taza"
+        },
+        {
+          "group": "services",
+          "title": "دراسة ظروف الاستخدام",
+          "body": "مساحة داخلية أو واجهة أو عنصر زخرفي: صف التعرض والمتطلبات للتحقق من ملاءمة الحل المقترح.",
+          "icon": "building",
+          "link": "contact",
+          "image": "noir-azilal"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "hero": "taza-beige",
+    "secondary": "noir-azilal",
+    "fr": {
+      "eyebrow": "Parlons de votre projet",
+      "title": "Une idée à préciser.\nUn échange pour avancer.",
+      "body": "Une référence repérée, un plan ou une question de format : présentez votre besoin pour préparer un échange utile autour de votre projet.",
+      "seo_title": "Contact & demande de devis | LAAMACH MARBRE",
+      "seo_description": "Préparez votre demande auprès de LAAMACH MARBRE : références de pierre, plans, dimensions et contexte du projet.",
+      "cta_title": "Votre prochaine étape commence ici.",
+      "cta_body": "Décrivez votre espace, les matières envisagées et les informations déjà disponibles."
+    },
+    "ar": {
+      "eyebrow": "لنتحدث عن مشروعك",
+      "title": "فكرة تتضح،\nوحوار يدفع المشروع إلى الأمام",
+      "body": "مرجع أعجبك أو مخطط أو سؤال عن المقاس: قدم احتياجك للتحضير لنقاش مفيد حول مشروعك.",
+      "seo_title": "التواصل وطلب عرض سعر | LAAMACH MARBRE",
+      "seo_description": "حضّر طلبك لدى LAAMACH MARBRE: مراجع الحجر والمخططات والأبعاد وظروف المشروع.",
+      "cta_title": "خطوتك المقبلة تبدأ هنا.",
+      "cta_body": "صف المساحة والمواد المقترحة والمعلومات المتوفرة لديك."
+    }
+  }
+}

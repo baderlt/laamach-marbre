@@ -8,6 +8,7 @@ import { ProjectCards } from '@/components/project-cards';
 import { PageHero, SectionHeading } from '@/components/page-design';
 import { ContactBanner } from '@/components/site-footer';
 import type { Metadata } from 'next';
+import { siteCopy } from '@/lib/site';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
   const { locale, slug } = await params; if (!findLocale(locale) || !/^[a-z0-9-]{1,120}$/.test(slug)) return {};
@@ -23,13 +24,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ locale
   if (response.status === 404) notFound();
   if (!response.data) return <main><a href={`/${locale}/projects`}>{copy.projects}</a><p role="status">{copy.unavailable}</p></main>;
   const project = response.data.data;
+  const design = siteCopy(locale);
   return <main id="main" className="catalogue project-detail public-page">
-    <PageHero locale={locale} title={project.title} eyebrow={project.reference} body={project.summary} media={project.cover} large><div className="project-tags">{project.categories.map(category => <a key={category.id} href={`/${locale}/projects?category=${category.slug}`}>{category.name}</a>)}</div></PageHero>
-    <div className="site-width"><dl className="project-metadata">{project.location && <div><dt>{copy.location}</dt><dd>{project.location}</dd></div>}{project.year && <div><dt>{copy.year}</dt><dd>{project.year}</dd></div>}{(project.area_display || project.area) && <div><dt>{copy.area}</dt><dd>{project.area_display || `${project.area} ${project.area_unit}`}</dd></div>}</dl>
+    <PageHero locale={locale} title={project.title} eyebrow={project.reference} body={project.summary} media={project.cover} large aside={<dl className="project-metadata"><div><dt>{copy.location}</dt><dd>{project.location || design.notProvided}</dd></div><div><dt>{copy.year}</dt><dd>{project.year || design.notProvided}</dd></div><div><dt>{copy.area}</dt><dd>{project.area_display || (project.area ? `${project.area} ${project.area_unit}` : design.notProvided)}</dd></div></dl>}><div className="project-tags">{project.categories.map(category => <a key={category.id} href={`/${locale}/projects?category=${category.slug}`}>{category.name}</a>)}</div></PageHero>
+    <div className="site-width">
     {project.description && <p className="preserve-text project-intro">{project.description}</p>}
     <section className="section"><SectionHeading title={copy.gallery} /><ProjectGallery project={project} locale={locale} /></section>
-    {!!project.products.length && <section className="section" data-materials-used><SectionHeading title={copy.materials} /><ProductCards products={project.products} locale={locale} compact /></section>}
-    {!!project.related_projects?.length && <section className="section"><SectionHeading title={copy.projects} /><ProjectCards projects={project.related_projects} locale={locale} /></section>}
-    </div><ContactBanner locale={locale} />
+    <section className="section" data-materials-used><SectionHeading title={copy.materials} body={!project.products.length ? design.materialsPending : undefined} /><ProductCards products={project.products.slice(0, 5)} locale={locale} compact slots={5} /></section>
+    <section className="section related-projects"><SectionHeading title={copy.projects} /><ProjectCards projects={project.related_projects || []} locale={locale} slots={4} /></section>
+    </div><ContactBanner locale={locale} pageKey="projects" />
   </main>;
 }

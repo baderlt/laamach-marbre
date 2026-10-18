@@ -9,6 +9,11 @@ import { SiteIcon } from './site-icon';
 function subscribe(callback: () => void) { const query = window.matchMedia('(max-width: 1023px)'); query.addEventListener('change', callback); return () => query.removeEventListener('change', callback); }
 function mobileSnapshot() { return window.matchMedia('(max-width: 1023px)').matches; }
 
+export function CatalogueSort({ locale, query }: { locale: string; query: string }) {
+  const copy = siteCopy(locale); const filters = new URLSearchParams(query);
+  return <form method="get" className="catalogue-sort">{[...filters].filter(([key]) => key !== 'sort' && key !== 'page').map(([key, value]) => <input type="hidden" key={key} name={key} value={value} />)}<label>{copy.sort}<select name="sort" defaultValue={filters.get('sort') || ''} onChange={event => event.currentTarget.form?.requestSubmit()}><option value="">{copy.defaultSort}</option><option value="name">{copy.alphabetical}</option></select></label><noscript><button type="submit">{catalogueCopy(locale).apply}</button></noscript></form>;
+}
+
 export function CatalogueFilters({ locale, data, query }: { locale: string; data: CategoryPage; query: string }) {
   const mobile = useSyncExternalStore(subscribe, mobileSnapshot, () => false);
   const panel = useRef<HTMLDialogElement>(null);
