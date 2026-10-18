@@ -8,6 +8,7 @@ import { CatalogueImage } from './catalogue-image';
 import { siteCopy, type SiteSettings } from '@/lib/site';
 import { unitLabel } from '@/lib/whatsapp';
 import { SiteIcon } from './site-icon';
+import { ProductViewer } from './product-viewer';
 import { RequestDraft } from './request-draft';
 
 export function ProductOptions({ product, locale, technical, related, pendingSpecification = false, settings, canonical }: { product: Product; locale: string; technical?: React.ReactNode; related?: React.ReactNode; pendingSpecification?: boolean; settings: SiteSettings | null; canonical: string }) {
@@ -20,9 +21,9 @@ export function ProductOptions({ product, locale, technical, related, pendingSpe
   const lightbox = useRef<HTMLDialogElement>(null);
   const moveImage = (step: number) => { const ids = [null, ...product.gallery.map(item => item.id)]; setGalleryId(ids[(ids.indexOf(galleryId) + step + ids.length) % ids.length]); };
   return <section className="product-presentation">
-    <div className="product-visual-column"><div className="product-image" data-product-image><CatalogueImage media={image} placeholder={copy.missingImage} alt={`${product.name} — ${copy.mainImage}`} eager /><span className="photo-note">{design.materialCardNote}</span>{image && <button className="gallery-zoom" type="button" aria-label={design.galleryView} onClick={() => lightbox.current?.showModal()}>↗</button>}{product.gallery.length > 0 && <><button className="gallery-previous" type="button" aria-label={copy.previous} onClick={() => moveImage(-1)}>‹</button><button className="gallery-next" type="button" aria-label={copy.next} onClick={() => moveImage(1)}>›</button></>}</div>
+    <div className="product-visual-column"><ProductViewer configuration={product.viewer_3d} locale={locale} cover={product.cover} sizeId={sizeId} onSize={value => { setSizeId(value); setGalleryId(null); }}><div className="product-image" data-product-image><CatalogueImage media={image} placeholder={copy.missingImage} alt={`${product.name} — ${copy.mainImage}`} eager /><span className="photo-note">{design.materialCardNote}</span>{image && <button className="gallery-zoom" type="button" aria-label={design.galleryView} onClick={() => lightbox.current?.showModal()}>↗</button>}{product.gallery.length > 0 && <><button className="gallery-previous" type="button" aria-label={copy.previous} onClick={() => moveImage(-1)}>‹</button><button className="gallery-next" type="button" aria-label={copy.next} onClick={() => moveImage(1)}>›</button></>}</div>
     {product.gallery.length > 0 && <div className="option-list gallery-thumbnails" aria-label={copy.gallery}><button type="button" aria-label={copy.mainImage} aria-pressed={galleryId === null} onClick={() => setGalleryId(null)}><CatalogueImage media={product.cover} placeholder={copy.missingImage} thumbnail /><span>{copy.mainImage}</span></button>{product.gallery.map((item, index) => <button key={item.id} type="button" aria-label={`${copy.image} ${index + 1}`} aria-pressed={galleryId === item.id} onClick={() => setGalleryId(item.id)}><CatalogueImage media={item} placeholder={copy.missingImage} thumbnail /><span>{copy.image} {index + 1}</span></button>)}</div>}
-    </div>
+    </ProductViewer></div>
     <div className="product-facts"><p className="eyebrow">{product.parent_category.name} / {product.category.name}</p><h1>{product.name}</h1><p className="product-reference">{design.reference}: <bdi>{product.reference}</bdi></p>{product.description && <p className="preserve-text product-description">{product.description}</p>}
     {product.sizes.length > 0 && <fieldset><legend>{copy.sizes}</legend><div className="option-list">{product.sizes.map(size => <button key={size.id} type="button" data-size-id={size.id} aria-pressed={sizeId === size.id} onClick={() => { setSizeId(size.id); setGalleryId(null); }}>{size.label}</button>)}</div><p>{copy.sizeNote}</p></fieldset>}
     {!product.sizes.length && <div className="pending-formats"><h2>{copy.sizes}</h2><div>{[copy.width, copy.length, locale === 'ar' ? 'السماكة' : 'Épaisseur'].map(label => <span key={label}>{label}<b>—</b></span>)}</div><p>{design.noSizes}</p></div>}
@@ -34,7 +35,7 @@ export function ProductOptions({ product, locale, technical, related, pendingSpe
     <div className="specification-note"><SiteIcon name="ruler" /><p>{design.sizeGuidance}<br />{design.finishGuidance}</p></div>
     {related}
     </div>
-    <div className="product-support-column"><div className="reserved-viewer" data-reserved-3d><div className="viewer-caption"><strong>3D</strong><h2>{design.viewerTitle}</h2><p>{design.viewerNote}</p><span>{design.viewerLater}</span></div><div className="stone-study" aria-hidden="true"><i /><i /><i /></div></div>{technical}</div>
+    <div className="product-support-column">{technical}</div>
     <dialog onKeyDown={trapDialogFocus} ref={lightbox} className="image-lightbox" aria-label={design.galleryView}><button type="button" className="icon-button" onClick={() => lightbox.current?.close()} aria-label={design.close}>×</button><CatalogueImage media={image} placeholder={copy.missingImage} alt={product.name} eager /></dialog>
   </section>;
 }

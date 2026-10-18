@@ -2,17 +2,26 @@
   "name": "laamach-marbre",
   "version": "0.1.0",
   "private": true,
-  "workspaces": ["apps/web"],
-  "engines": { "node": ">=24 <25" },
+  "workspaces": [
+    "apps/web"
+  ],
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
     "dev": "npm run dev --workspace @laamach-marbre/web",
-    "build": "npm run build --workspace @laamach-marbre/web",
+    "build": "npm run build:viewer-admin && npm run build --workspace @laamach-marbre/web",
     "start": "npm run start --workspace @laamach-marbre/web",
     "typecheck": "npm run typecheck --workspace @laamach-marbre/web",
     "lint": "npm run lint --workspace @laamach-marbre/web",
     "test": "node --disable-warning=ExperimentalWarning --test tests/*.test.mjs",
     "test:browser": "playwright test",
-    "check:isolation": "node scripts/check-isolation.mjs"
+    "check:isolation": "node scripts/check-isolation.mjs",
+    "build:viewer-admin": "node scripts/build-viewer-admin.mjs",
+    "predev": "npm run build:viewer-admin"
   },
-  "devDependencies": { "@playwright/test": "1.64.0" }
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "esbuild": "0.28.2"
+  }
 }

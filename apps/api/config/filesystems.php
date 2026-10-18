@@ -3,6 +3,11 @@
 return [
     'default' => 'local',
     'disks' => [
+        // Livewire selects this disk for HTTP requests in the isolated testing environment.
+        ...(env('APP_ENV') === 'testing' ? ['tmp-for-tests' => [
+            'driver' => 'local', 'root' => storage_path('framework/testing/'.getmypid().'/livewire'),
+            'serve' => false, 'throw' => true, 'report' => false,
+        ]] : []),
         'local' => [
             'driver' => 'local', 'root' => storage_path('app/private'),
             'serve' => false, 'throw' => true, 'report' => false,

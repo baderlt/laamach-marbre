@@ -112,6 +112,7 @@ class CatalogueWriter
                 'status' => ['required', Rule::in(['draft', 'published'])],
                 'featured' => 'required|boolean', 'sort_order' => 'required|integer|min:0|max:100000',
                 'cover_media_id' => 'nullable|uuid|exists:media_assets,id',
+                'viewer_3d_enabled' => 'sometimes|boolean', 'viewer_3d_config' => 'sometimes|nullable|array',
                 'custom_size_allowed' => 'required|boolean',
                 'custom_measurement_unit' => ['nullable', Rule::in(config('catalogue.measurement_units'))],
                 'min_width' => 'nullable|numeric|between:0.0001,1000000', 'max_width' => 'nullable|numeric|between:0.0001,1000000',
@@ -137,7 +138,7 @@ class CatalogueWriter
             if (! $record->exists) {
                 $record->forceFill(['reference' => 'LM-'.strtoupper(Str::random(12))]);
             }
-            $attributes = collect($data)->except(['translations', 'sizes', 'finishes', 'units', 'gallery'])->all();
+            $attributes = collect($data)->except(['translations', 'sizes', 'finishes', 'units', 'gallery', 'viewer_3d_enabled', 'viewer_3d_config'])->all();
             if ($data['status'] === 'published') {
                 $category = ProductCategory::with('parent')->findOrFail($data['category_id']);
                 if (! $category->parent_id || ! $category->active || ! $category->parent->active) {
@@ -165,6 +166,8 @@ class CatalogueWriter
             DB::table('product_units')->where('product_id', $record->id)->delete();
             DB::table('product_units')->insert(array_map(fn ($unit) => ['product_id' => $record->id, 'unit' => $unit], $data['units']));
             $record->finishes()->sync(collect($data['finishes'])->mapWithKeys(fn ($finish) => [$finish['finish_id'] => collect($finish)->except('finish_id')->all()])->all());
+            $record->unsetRelation('sizes');
+            app(ProductViewer::class)->save($record, $data);
 
             return $record;
         }, 3);
@@ -194,6 +197,9 @@ class CatalogueWriter
     private function remove(CatalogueRecord $record): void
     {
         $record->mediaReferences()->delete();
+        if ($record instanceof Product) {
+            $record->viewerReferences()->delete();
+        }
         $record->delete();
     }
 

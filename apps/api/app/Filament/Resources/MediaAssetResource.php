@@ -50,6 +50,7 @@ class MediaAssetResource extends Resource
             TextColumn::make('active_revision')->label('Publication')->formatStateUsing(fn ($state) => $state ? substr($state, 0, 12) : 'Private')->placeholder('Private'),
             TextColumn::make('references_count')->label('References'),
         ])->headerActions([
+            Action::make('uploadModel')->label('Upload product GLB')->schema(ViewerForms::uploadFields())->action(fn (array $data) => ViewerForms::upload($data)),
             Action::make('uploadVideo')->label('Upload project video')->schema([
                 FileUpload::make('video')->required()->storeFiles(false)->acceptedFileTypes(['video/mp4'])->maxSize((int) (config('video.max_bytes') / 1024)),
                 Checkbox::make('client_supplied')->label('Client supplied (usage approval is separate)')->default(false),

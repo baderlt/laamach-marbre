@@ -57,6 +57,10 @@ class CatalogueForms
             $fields[] = Repeater::make('gallery')->schema([self::image('media_asset_id', 'Approved published gallery image')->required()])->maxItems(12)->defaultItems(0)->helperText('Drag to order. No raw storage keys.');
         }
 
+        if ($kind === 'product') {
+            $fields[] = ViewerForms::section();
+        }
+
         return $fields;
     }
 
@@ -100,6 +104,8 @@ class CatalogueForms
         $data = collect($record->getAttributes())->except(['id', 'reference', 'created_at', 'updated_at', 'published_at'])->all();
         $data['translations'] = $record->translations->mapWithKeys(fn ($row) => [$row->locale => collect($row->attributesToArray())->except(['id', 'locale', 'created_at', 'updated_at', 'product_id', 'product_category_id', 'product_size_id', 'finish_id'])->all()])->all();
         if ($record instanceof Product) {
+            $data['viewer_3d_enabled'] = $record->viewer_3d_enabled;
+            $data['viewer_3d_config'] = $record->viewer_3d_config;
             $data['sizes'] = $record->sizes->map(fn ($size) => ['id' => $size->id, ...self::data($size)])->map(fn ($size) => collect($size)->except('product_id')->all())->all();
             $data['units'] = $record->units->pluck('unit')->all();
             $data['finishes'] = $record->finishes->map(fn ($finish) => ['finish_id' => $finish->id, 'active' => (bool) $finish->pivot->active, 'is_default' => (bool) $finish->pivot->is_default, 'sort_order' => $finish->pivot->sort_order])->all();
@@ -115,6 +121,9 @@ class CatalogueForms
             if (! array_filter(Arr::flatten($copy), fn ($value) => $value !== null && $value !== '')) {
                 unset($data['translations'][$locale]);
             }
+        }
+        if (isset($data['viewer_3d_config']) && ! array_filter($data['viewer_3d_config'])) {
+            $data['viewer_3d_config'] = null;
         }
         if (isset($data['sizes'])) {
             $data['sizes'] = array_map(self::clean(...), $data['sizes']);

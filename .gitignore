@@ -21,3 +21,5 @@ client-assets/
 /produits/
 /prototypes/
 *.log
+
+apps/api/public/js/viewer/

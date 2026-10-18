@@ -43,6 +43,11 @@ class MediaAssetPolicy
         return false; // M2 intake is the audited importer, not an anonymous or raw-key uploader.
     }
 
+    public function uploadModel(User $user): bool
+    {
+        return $this->viewAny($user);
+    }
+
     public function uploadVideo(User $user): bool
     {
         return $this->viewAny($user);

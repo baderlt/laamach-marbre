@@ -127,7 +127,9 @@ class MediaStorage
     public function originalBytes(MediaAsset $asset): string
     {
         MediaPath::assertOriginal($asset->original_key, $asset->id, $asset->checksum);
-        $limit = $asset->type === 'video' ? config('video.max_bytes') : config('media.max_bytes');
+        $limit = match ($asset->type) {
+            'video' => config('video.max_bytes'), 'model' => min(8388608, config('viewer.max_bytes')), default => config('media.max_bytes')
+        };
         if (! in_array($asset->original_disk, ['local', 'r2_private'], true) || $asset->bytes > $limit || Storage::disk($asset->original_disk)->size($asset->original_key) > $limit) {
             throw new RuntimeException('Invalid private original storage.');
         }
@@ -143,7 +145,8 @@ class MediaStorage
     {
         MediaPath::assertVariant($variant->object_key, $variant->media_asset_id, $variant->profile_version, $variant->checksum, $variant->format);
         $expected = $variant->state === 'published' ? ['local_published', 'r2_published'] : ['local', 'r2_private'];
-        if (! in_array($variant->disk, $expected, true) || Storage::disk($variant->disk)->size($variant->object_key) > config('media.max_bytes')) {
+        $limit = $variant->format === 'glb' ? min(8388608, config('viewer.max_bytes')) : config('media.max_bytes');
+        if (! in_array($variant->disk, $expected, true) || Storage::disk($variant->disk)->size($variant->object_key) > $limit) {
             throw new RuntimeException('Invalid variant storage.');
         }
         $bytes = Storage::disk($variant->disk)->get($variant->object_key);

@@ -27,6 +27,7 @@ abstract class CatalogueResource extends Resource
             Action::make('edit')->fillForm(fn (CatalogueRecord $record) => CatalogueForms::data($record))->schema(CatalogueForms::fields($kind))->action(function (CatalogueRecord $record, array $data, CatalogueWriter $writer) use ($kind) {
                 $writer->$kind($record, CatalogueForms::clean($data), auth()->user());
             }),
+            ...($kind === 'product' ? [Action::make('preview3d')->label('Preview 3D')->url(fn (CatalogueRecord $record) => route('viewer.preview', $record))->openUrlInNewTab()->visible(fn (CatalogueRecord $record) => in_array($record->viewer_3d_config['mode'] ?? null, ['uploaded_glb', 'procedural'], true))] : []),
             Action::make('delete')->color('danger')->visible(fn () => auth()->user()->isSuperAdmin())->requiresConfirmation()->action(fn (CatalogueRecord $record, CatalogueWriter $writer) => $writer->delete($record, auth()->user())),
         ])->defaultSort('sort_order')->paginated([10, 25, 50]);
     }

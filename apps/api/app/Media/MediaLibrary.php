@@ -17,6 +17,9 @@ class MediaLibrary
 
     public function ingest(string $path, string $source, bool $clientSupplied = false): MediaAsset
     {
+        if (strtolower(pathinfo($source, PATHINFO_EXTENSION)) === 'glb') {
+            return app(ModelLibrary::class)->ingest($path, $source, $clientSupplied);
+        }
         if (is_file($path) && (new \finfo(FILEINFO_MIME_TYPE))->file($path) === 'video/mp4') {
             return app(VideoLibrary::class)->ingest($path, $source, $clientSupplied);
         }
@@ -47,6 +50,14 @@ class MediaLibrary
 
     public function process(MediaAsset $asset, array $profiles = ['thumb', 'card']): string
     {
+        if ($asset->type === 'model') {
+            try {
+                return app(ModelLibrary::class)->process($asset);
+            } catch (\Throwable $error) {
+                MediaAsset::whereKey($asset->id)->update(['processing_state' => 'failed']);
+                throw $error;
+            }
+        }
         if ($asset->type === 'video') {
             try {
                 return app(VideoLibrary::class)->process($asset);
@@ -116,11 +127,14 @@ class MediaLibrary
                     continue;
                 }
                 $disk = config('media.published_disk');
+                if ($variant->format === 'glb' && ($asset->type !== 'model' || ($variant->metadata['validator_version'] ?? null) !== config('viewer.validator_version') || ($variant->metadata['sha256'] ?? '') !== $variant->checksum || $variant->bytes > min(8388608, config('viewer.max_bytes')))) {
+                    throw ValidationException::withMessages(['media' => 'A current validated GLB revision is required.']);
+                }
                 if ($variant->format === 'mp4') {
                     $this->storage->publishVideo($variant, $disk);
                 } else {
                     $bytes = $this->storage->variantBytes($variant);
-                    $this->storage->putImmutable($disk, $variant->object_key, $bytes, 'image/'.$variant->format);
+                    $this->storage->putImmutable($disk, $variant->object_key, $bytes, $variant->format === 'glb' ? 'model/gltf-binary' : 'image/'.$variant->format);
                 }
                 $variant->forceFill(['disk' => $disk, 'state' => 'published', 'publication_revision' => $revision, 'published_at' => now()])->save();
                 // Private working copies are intentionally retained for retries/recovery.

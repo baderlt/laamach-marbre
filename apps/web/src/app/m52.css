@@ -106,3 +106,18 @@ input:not([type="checkbox"]), select, textarea, .catalogue select { font-size: 1
   .request-material > .button { position: static; width: 100%; box-shadow: none; }
   body:has(.product-detail) { padding-bottom: 0; }
 }
+
+/* M6: activated viewer, same architectural palette; photos remain the default. */
+.product-viewer { min-width: 0; }.product-viewer [hidden] { display: none !important; }
+.viewer-panel button { touch-action: manipulation; }
+.viewer-activation { width: 100%; margin-block: 16px; }
+.viewer-panel { padding: 16px; border: 1px solid var(--control-line); background: var(--ivory); min-width: 0; }
+.viewer-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }.viewer-heading h2 { font-size: 20px; margin: 0; }
+.viewer-stage { position: relative; height: 320px; background: #f1eee7; }.viewer-canvas { width: 100%; height: 100%; }.viewer-canvas canvas { width: 100%; height: 100%; display: block; }
+.viewer-fallback { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; padding: 20px; overflow: auto; background: #f1eee7; }.viewer-fallback img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .2; }.viewer-fallback > :not(img) { position: relative; }
+.viewer-toolbar { display: flex; flex-wrap: wrap; gap: 8px; padding-block: 16px; }.viewer-toolbar button { min-height: 48px; min-width: 48px; padding: 10px; border: 1px solid var(--control-line); background: var(--ivory); }.viewer-toolbar button:disabled { opacity: .55; }.viewer-toolbar span { display: inline-block; }
+.viewer-help, .viewer-disclosure, .viewer-dimensions { font-size: 14px !important; line-height: 1.8; }.viewer-disclosure { border-inline-start: 2px solid var(--bronze); padding-inline-start: 12px; }.viewer-size { display: grid; gap: 8px; margin-block: 16px; }.viewer-size select { width: 100%; }
+.viewer-panel:fullscreen { width: 100%; height: 100%; overflow: auto; padding: 16px max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)); }.viewer-panel:fullscreen .viewer-stage { height: min(65dvh,700px); }
+@media (min-width: 768px) { .viewer-stage { height: 440px; } }
+@media (min-width: 768px) and (pointer: fine) { .viewer-touch-toggle, .viewer-touch-help { display: none; } }
+@media (max-width: 389px) { .viewer-panel { padding: 12px; }.viewer-stage { height: 280px; } }

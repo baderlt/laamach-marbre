@@ -8,7 +8,7 @@ class Product extends CatalogueRecord
 {
     protected function casts(): array
     {
-        return ['featured' => 'boolean', 'custom_size_allowed' => 'boolean', 'published_at' => 'datetime'];
+        return ['viewer_3d_enabled' => 'boolean', 'viewer_3d_config' => 'array', 'featured' => 'boolean', 'custom_size_allowed' => 'boolean', 'published_at' => 'datetime'];
     }
 
     protected static function booted(): void
@@ -21,6 +21,11 @@ class Product extends CatalogueRecord
                 throw ValidationException::withMessages(['slug' => 'Reference and previously published slugs are immutable.']);
             }
         });
+    }
+
+    public function viewerReferences()
+    {
+        return $this->hasMany(MediaReference::class, 'owner_key')->where('owner_type', 'product_viewers');
     }
 
     public function category()

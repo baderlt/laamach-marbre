@@ -68,7 +68,7 @@ class PublicCatalogue
         })->whereDoesntHave('sizes', fn ($size) => $size->where('active', true)->whereHas('mediaReferences', fn ($refs) => $refs->whereDoesntHave('asset', fn ($asset) => $this->eligibleMedia($asset))));
         $relations = ['translations', 'category.translations', 'category.parent.translations', ...$this->imageRelations('cover')];
         if ($detail) {
-            $relations = [...$relations, 'units', ...$this->imageRelations('mediaReferences.asset'), 'sizes' => fn ($sizes) => $sizes->where('active', true)->whereHas('translations', fn ($copy) => $copy->where('locale', $locale)), 'sizes.translations', ...$this->imageRelations('sizes.cover'), 'finishes' => fn ($finishes) => $finishes->whereIn('finishes.id', $this->finishes($locale)->select('id'))->where('product_finishes.active', true), 'finishes.translations', ...$this->imageRelations('finishes.cover')];
+            $relations = [...$relations, 'viewerReferences.asset.variants', 'viewerReferences.asset.translations', 'units', ...$this->imageRelations('mediaReferences.asset'), 'sizes' => fn ($sizes) => $sizes->where('active', true)->whereHas('translations', fn ($copy) => $copy->where('locale', $locale)), 'sizes.translations', ...$this->imageRelations('sizes.cover'), 'finishes' => fn ($finishes) => $finishes->whereIn('finishes.id', $this->finishes($locale)->select('id'))->where('product_finishes.active', true), 'finishes.translations', ...$this->imageRelations('finishes.cover')];
         }
 
         return $query->with($relations)->orderBy('sort_order')->orderBy('id');
@@ -109,6 +109,7 @@ class PublicCatalogue
         }
 
         return [...$base, ...$copy,
+            'viewer_3d' => app(ProductViewer::class)->public($product, $locale),
             'projects' => app(PublicProjects::class)->forProduct($product, $locale),
             'gallery' => $product->mediaReferences->filter(fn ($ref) => str_starts_with($ref->slot, 'gallery:'))->sortBy(fn ($ref) => (int) substr($ref->slot, 8))->map(fn ($ref) => $this->image($ref->asset, $locale))->filter()->values()->all(),
             'sizes' => $product->sizes->map(fn ($size) => ['id' => $size->id, ...$this->copy($size, $locale), 'width' => $size->width, 'length' => $size->length, 'height' => $size->height, 'thickness' => $size->thickness, 'measurement_unit' => $size->measurement_unit, 'cover' => $this->image($size->cover, $locale)])->all(),

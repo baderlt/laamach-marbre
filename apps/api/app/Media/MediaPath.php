@@ -30,8 +30,10 @@ class MediaPath
 
     public static function assertVariant(string $key, string $asset, string $version, string $hash, string $format): void
     {
-        $prefix = $format === 'mp4' ? 'videos' : 'images';
-        if (! Str::isUuid($asset) || ! preg_match('/^[a-z0-9-]{1,80}$/D', $version) || ! in_array($format, ['webp', 'avif', 'mp4'], true) || ! preg_match('/^[a-f0-9]{64}$/D', $hash) || $key !== "$prefix/$asset/$version/$hash.$format") {
+        $prefix = match ($format) {
+            'mp4' => 'videos', 'glb' => 'models', default => 'images'
+        };
+        if (! Str::isUuid($asset) || ! preg_match('/^[a-z0-9-]{1,80}$/D', $version) || ! in_array($format, ['webp', 'avif', 'mp4', 'glb'], true) || ! preg_match('/^[a-f0-9]{64}$/D', $hash) || $key !== "$prefix/$asset/$version/$hash.$format") {
             throw ValidationException::withMessages(['media' => 'Invalid derived image key.']);
         }
     }

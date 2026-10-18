@@ -63,12 +63,12 @@ for (const locale of ['fr', 'ar']) {
     await expect(page.locator(`.language-nav a[lang=${otherLocale}]`)).toHaveAttribute('href', `/${otherLocale}/products?q=no-matching-material`);
   });
 
-  test(`${locale}: editorial SEO, honest contact empty state and visual-only 3D reservation`, async ({ page }) => {
+  test(`${locale}: editorial SEO, honest contact empty state and 3D disabled until explicitly configured`, async ({ page }) => {
     await page.goto(`/${locale}/about`); await expect(page).toHaveTitle('LAAMACH MARBRE — QA about');
     await expect(page.locator('.hero-placeholder')).toBeVisible();
     await page.goto(`/${locale}/contact`); await expect(page.locator('.contact-form button')).toBeDisabled();
     await expect(page.locator('a[href*="wa.me"], a[href*="whatsapp"], iframe')).toHaveCount(0);
-    await page.goto(`/${locale}/products/temporary-product`); await expect(page.locator('[data-reserved-3d]')).toBeVisible();
+    await page.goto(`/${locale}/products/temporary-product`); await expect(page.locator('[data-viewer-activate]')).toHaveCount(0); await expect(page.locator('[data-product-image]')).toBeVisible();
     await expect(page.locator('canvas, model-viewer')).toHaveCount(0);
     await page.setViewportSize({ width: 390, height: 844 });
     const gallery = await page.locator('.product-visual-column').boundingBox();
