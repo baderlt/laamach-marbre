@@ -1,5 +1,7 @@
 'use client';
 
+import { trapDialogFocus } from '@/lib/dialog-focus';
+
 import { useRef, useSyncExternalStore } from 'react';
 import type { CategoryPage } from '@/lib/catalogue';
 import { catalogueCopy } from '@/lib/catalogue';
@@ -21,5 +23,5 @@ export function CatalogueFilters({ locale, data, query }: { locale: string; data
   const parent = data.data.find(item => item.slug === filters.get('parent'));
   const children = parent?.children || data.data.flatMap(item => item.children || []);
   const form = <form className="catalogue-filters" method="get"><h2>{design.filterTitle}</h2><label>{copy.parent}<select name="parent" defaultValue={filters.get('parent') || ''}><option value="">{copy.all}</option>{data.data.map(item => <option key={item.id} value={item.slug}>{item.name}</option>)}</select></label><label>{copy.child}<select name="category" defaultValue={filters.get('category') || ''}><option value="">{copy.all}</option>{children.map(item => <option key={item.id} value={item.slug}>{item.name}</option>)}</select></label><label>{copy.finish}<select name="finish" defaultValue={filters.get('finish') || ''}><option value="">{copy.all}</option>{data.finishes.map(item => <option key={item.id} value={item.slug}>{item.name}</option>)}</select></label><label>{design.search}<input name="q" defaultValue={filters.get('q') || ''} maxLength={120} /></label><label>{design.sort}<select name="sort" defaultValue={filters.get('sort') || ''}><option value="">{design.defaultSort}</option><option value="name">{design.alphabetical}</option></select></label><button className="button bronze" type="submit">{copy.apply}<SiteIcon name="filter" /></button><a className="text-link" href={`/${locale}/products`}>{design.clear}</a></form>;
-  return mobile ? <><button className="button outline mobile-filter-toggle" type="button" onClick={() => panel.current?.showModal()}><SiteIcon name="filter" />{design.filters}</button><dialog ref={panel} className="filter-dialog" aria-label={design.filters}><div className="drawer-heading"><b>{design.filters}</b><button type="button" className="icon-button" aria-label={design.close} onClick={() => panel.current?.close()}><SiteIcon name="close" /></button></div>{form}</dialog></> : <aside className="desktop-filter-panel">{form}</aside>;
+  return mobile ? <><button className="button outline mobile-filter-toggle" type="button" onClick={() => panel.current?.showModal()}><SiteIcon name="filter" />{design.filters}</button><dialog onKeyDown={trapDialogFocus} ref={panel} className="filter-dialog" aria-label={design.filters}><div className="drawer-heading"><b>{design.filters}</b><button type="button" className="icon-button" aria-label={design.close} onClick={() => panel.current?.close()}><SiteIcon name="close" /></button></div>{form}</dialog></> : <aside className="desktop-filter-panel">{form}</aside>;
 }

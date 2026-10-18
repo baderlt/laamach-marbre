@@ -3,11 +3,11 @@ import { mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const routes = ['', '/products', '/products/temporary-product', '/projects', '/projects/synthetic-project', '/services', '/about', '/contact'];
-const widths = [390, 430, 768, 1024, 1440];
+const widths = [320, 360, 375, 390, 430, 768, 1024, 1280, 1440];
 const output = resolve('.tools/m5-screenshots');
 
 for (const locale of ['fr', 'ar']) {
-  test(`${locale}: all eight final pages at five widths, safe media and screenshot comparison`, async ({ page }) => {
+  test(`${locale}: all eight final pages at nine widths, safe media and screenshot comparison`, async ({ page }) => {
     test.setTimeout(180000);
     await mkdir(output, { recursive: true });
     const forbidden: string[] = []; const external: string[] = []; const errors: string[] = [];
