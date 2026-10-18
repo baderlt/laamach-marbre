@@ -1,10 +1,11 @@
 import { localeConfiguration } from './locales.ts';
 import type { Media, ProductCard } from './catalogue.ts';
 import type { ProjectCard } from './projects.ts';
+import type { WhatsAppSettings } from './whatsapp.ts';
 
 export type EditorialSection = { group: 'activities' | 'services' | 'trust' | 'process' | 'story'; title: string; body?: string | null; icon?: string | null; link?: string | null; media: Media | null };
 export type EditorialPage = { title?: string | null; eyebrow?: string | null; body?: string | null; seo_title?: string | null; seo_description?: string | null; cta_title?: string | null; cta_body?: string | null; hero: Media | null; secondary: Media | null; sections: EditorialSection[] };
-export type SiteSettings = { tagline: string | null; address: string | null; footer_text: string | null; phone: string | null; email: string | null; map_url: string | null; social_links: { label: string; url: string }[]; logo: Media | null };
+export type SiteSettings = { whatsapp?: WhatsAppSettings; tagline: string | null; address: string | null; footer_text: string | null; phone: string | null; email: string | null; map_url: string | null; social_links: { label: string; url: string }[]; logo: Media | null };
 export type SiteData = { settings: SiteSettings | null; pages: Record<string, EditorialPage>; featured_products: ProductCard[]; featured_projects: ProjectCard[] };
 
 const messages = {

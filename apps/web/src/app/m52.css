@@ -88,3 +88,21 @@ input:not([type="checkbox"]), select, textarea, .catalogue select { font-size: 1
 @media (min-width: 1280px) { .hero-studies { flex-direction: column; width: 76px; }.hero-studies > a { width: 76px; height: 76px; flex: 0 0 auto; }.hero-studies > .future-study { width: 76px; } }
 .banner-disclosure { font-size: 12px; opacity: 1; color: #423521; background: #faf9f6; padding: 3px 8px; max-width: calc(100% - 24px); }
 .contact-banner { padding-bottom: 44px; }
+
+/* M7 request usability, within the existing visual system. */
+.request-dialog [hidden] { display: none !important; }
+.request-identity a { font-size: 13px; overflow-wrap: anywhere; direction: ltr; unicode-bidi: isolate; }
+.request-review-actions, .request-contact { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 16px; }
+.request-contact a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }
+.request-unavailable { border: 1px solid var(--control-line); padding: 16px; }
+.request-unavailable p { margin-block: 0 8px; }
+.request-dialog .request-form-fields { border: 0; padding: 0; }
+.request-review textarea { line-height: 1.8; resize: vertical; }
+.request-dialog button:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 767px) {
+  .request-dialog { width: 100%; max-width: 100%; max-height: 94dvh; margin: auto 0 0; padding: 20px 16px max(24px,env(safe-area-inset-bottom)); }
+  .request-dialog .drawer-heading { position: sticky; top: -20px; background: var(--ivory); padding-block: 12px; z-index: 1; }
+  .request-review-actions { display: grid; }
+  .request-material > .button { position: static; width: 100%; box-shadow: none; }
+  body:has(.product-detail) { padding-bottom: 0; }
+}

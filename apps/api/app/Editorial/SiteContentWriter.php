@@ -22,15 +22,36 @@ class SiteContentWriter
             Gate::forUser($user)->authorize('publish', $record ?? SiteContent::class);
         }
         $locales = implode(',', array_column(config('localization.locales'), 'code'));
-        $rules = ['input' => 'array:key,published,translations,data', 'input.key' => ['required', Rule::in(SiteContent::KEYS), Rule::unique('site_contents', 'key')->ignore($record?->key, 'key')], 'input.published' => 'required|boolean', 'input.translations' => 'present|array:'.$locales, 'input.translations.*' => 'array:title,eyebrow,body,seo_title,seo_description,tagline,address,footer_text,sections,cta_title,cta_body', 'input.data' => 'present|array:hero_media_id,secondary_media_id,logo_media_id,phone,email,map_url,social_links'];
+        $rules = ['input' => 'array:key,published,translations,data', 'input.key' => ['required', Rule::in(SiteContent::KEYS), Rule::unique('site_contents', 'key')->ignore($record?->key, 'key')], 'input.published' => 'required|boolean', 'input.translations' => 'present|array:'.$locales, 'input.translations.*' => 'array:title,eyebrow,body,seo_title,seo_description,tagline,address,footer_text,sections,cta_title,cta_body', 'input.data' => 'present|array:hero_media_id,secondary_media_id,logo_media_id,phone,email,map_url,social_links,whatsapp'];
         foreach (['title' => 180, 'eyebrow' => 120, 'body' => 10000, 'seo_title' => 160, 'seo_description' => 320, 'tagline' => 200, 'address' => 500, 'footer_text' => 1000, 'cta_title' => 180, 'cta_body' => 500] as $key => $max) {
             $rules['input.translations.*.'.$key] = 'nullable|string|max:'.$max;
         }
         $rules += ['input.translations.*.sections' => 'sometimes|array|max:16', 'input.translations.*.sections.*' => 'array:group,title,body,icon,media_asset_id,link', 'input.translations.*.sections.*.group' => ['required', Rule::in(['activities', 'services', 'trust', 'process', 'story'])], 'input.translations.*.sections.*.title' => 'required|string|max:180', 'input.translations.*.sections.*.body' => 'nullable|string|max:2000', 'input.translations.*.sections.*.icon' => ['nullable', Rule::in(['stone', 'building', 'ruler', 'craft', 'truck', 'check', 'leaf', 'spark'])], 'input.translations.*.sections.*.link' => ['nullable', Rule::in(['products', 'projects', 'services', 'about', 'contact'])], 'input.translations.*.sections.*.media_asset_id' => 'nullable|uuid|exists:media_assets,id', 'input.data.phone' => 'nullable|string|max:40|regex:/^[+0-9 ()-]+$/D', 'input.data.email' => 'nullable|email:rfc|max:254', 'input.data.map_url' => 'nullable|url:https|max:1000', 'input.data.social_links' => 'sometimes|array|max:6', 'input.data.social_links.*' => 'array:label,url', 'input.data.social_links.*.label' => 'required|string|max:40', 'input.data.social_links.*.url' => 'required|url:https|max:500'];
+        $rules += ['input.data.whatsapp' => 'sometimes|array:number,enabled,material,similar,application', 'input.data.whatsapp.number' => ['nullable', 'string', 'max:40', function ($attribute, $value, $fail) {
+            if (WhatsAppSettings::number($value) === null) {
+                $fail('Enter an international WhatsApp number, including its country code.');
+            }
+        }]];
+        foreach (['enabled', 'material', 'similar', 'application'] as $flow) {
+            $rules['input.data.whatsapp.'.$flow] = 'sometimes|boolean';
+        }
         foreach (['hero_media_id', 'secondary_media_id', 'logo_media_id'] as $key) {
             $rules['input.data.'.$key] = 'nullable|uuid|exists:media_assets,id';
         }
         $data = Validator::make(['input' => $input + ['published' => false, 'translations' => [], 'data' => []]], $rules)->validate()['input'];
+        if (array_key_exists('whatsapp', $data['data'])) {
+            if ($data['key'] !== 'site') {
+                throw ValidationException::withMessages(['data.whatsapp' => 'WhatsApp configuration belongs to global site settings.']);
+            }
+            foreach (['enabled', 'material', 'similar', 'application'] as $flow) {
+                if (array_key_exists($flow, $data['data']['whatsapp'])) {
+                    $data['data']['whatsapp'][$flow] = (bool) $data['data']['whatsapp'][$flow];
+                }
+            }
+            if (isset($data['data']['whatsapp']['number'])) {
+                $data['data']['whatsapp']['number'] = WhatsAppSettings::number($data['data']['whatsapp']['number']);
+            }
+        }
         if ($record && $record->key !== $data['key']) {
             throw ValidationException::withMessages(['key' => 'Editorial page keys are immutable.']);
         }
@@ -49,9 +70,14 @@ class SiteContentWriter
             }
         }
 
-        return DB::transaction(function () use ($record, $data) {
+        return DB::transaction(function () use ($record, $data, $user) {
             if ($record) {
                 $record = SiteContent::whereKey($record->key)->lockForUpdate()->firstOrFail();
+            }
+            if (array_key_exists('whatsapp', $data['data']) && ($data['data']['whatsapp'] !== ($record?->data['whatsapp'] ?? []))) {
+                Gate::forUser($user)->authorize('manageWhatsApp', SiteContent::class);
+            } elseif (! array_key_exists('whatsapp', $data['data']) && isset($record?->data['whatsapp'])) {
+                $data['data']['whatsapp'] = $record->data['whatsapp'];
             }
             $roles = [];
             foreach (['hero_media_id', 'secondary_media_id', 'logo_media_id'] as $key) {

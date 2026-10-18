@@ -1,3 +1,5 @@
+import { getSite } from '@/lib/site-server';
+import { serverEnvironment } from '@/lib/environment';
 import { notFound } from 'next/navigation';
 import { findLocale } from '@/lib/locales';
 import { catalogueCopy, type Product, type ProductPage as ProductListing } from '@/lib/catalogue';
@@ -27,6 +29,8 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
   if (!response.data) return <main><a href={`/${locale}/products`}>{copy.catalogue}</a><p role="status">{copy.unavailable}</p></main>;
   const product = response.data.data;
   const design = siteCopy(locale);
+  const site = await getSite(locale);
+  const canonical = `${serverEnvironment(process.env).site}/${locale}/products/${slug}`;
   const listing = await catalogueRequest<ProductListing>('products', locale, new URLSearchParams({ category: product.category.slug }));
   const relatedProducts = listing.data?.data.filter(item => item.slug !== product.slug).slice(0, 5) || [];
   const knownFacts = [...(product.colour ? [{ label: copy.colour, value: product.colour }] : []), ...(product.origin ? [{ label: copy.origin, value: product.origin }] : []), ...(product.technical_information || [])];
@@ -36,7 +40,7 @@ export default async function ProductPage({ params }: { params: Promise<{ locale
     <PageHero locale={locale} title={product.name} eyebrow={`${product.parent_category.name} / ${product.category.name}`} media={product.cover} variant="material" headingTag="p" />
     <div className="breadcrumb-band"><nav className="site-width breadcrumbs" aria-label={copy.catalogue}><a href={`/${locale}/products`}>{copy.catalogue}</a><span>›</span><a href={`/${locale}/products?parent=${product.parent_category.slug}`}>{product.parent_category.name}</a><span>›</span><a href={`/${locale}/products?parent=${product.parent_category.slug}&category=${product.category.slug}`}>{product.category.name}</a><span>›</span><span>{product.name}</span></nav></div>
     <div className="site-width section product-content">
-    <ProductOptions product={product} locale={locale} technical={technical} related={related} pendingSpecification={provisionalPreviewEnabled(process.env) && product.category.slug === 'selection-photo-provisoire'} />
+    <ProductOptions settings={site.settings} canonical={canonical} product={product} locale={locale} technical={technical} related={related} pendingSpecification={provisionalPreviewEnabled(process.env) && product.category.slug === 'selection-photo-provisoire'} />
     <section className="section related-products"><SectionHeading title={design.relatedProducts} /><ProductCards products={relatedProducts} locale={locale} compact slots={5} /></section>
     </div><ContactBanner locale={locale} pageKey="products" />
   </main>;

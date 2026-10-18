@@ -1,6 +1,17 @@
 import type { Product } from './catalogue.ts';
 
-export type DraftFields = { size: string; custom: boolean; width: string; length: string; finish: string; quantity: string; unit: string; city: string; dimensions: string; description: string };
+export const quantityUnits = ['m2', 'm3', 'linear_m', 'piece'] as const;
+export const textLimits = { city: 160, dimensions: 200, description: 4000, projectType: 160, application: 160 };
+export type DraftFields = { size: string; custom: boolean; width: string; length: string; finish: string; quantity: string; unit: string; city: string; dimensions: string; description: string; projectType?: string; application?: string };
+export function positiveDecimal(value: string): boolean {
+  return /^(?:0|[1-9]\d{0,8})(?:\.\d{1,6})?$/.test(value) && Number(value) > 0;
+}
+export function validateDraftText(fields: DraftFields): string[] {
+  return Object.entries(textLimits).filter(([key, max]) => {
+    const value = fields[key as keyof typeof textLimits] || '';
+    return value.length > max || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f\u202a-\u202e\u2066-\u2069]/u.test(value) || (key !== 'description' && /[\r\n\t]/.test(value));
+  }).map(([key]) => key);
+}
 export function validateMaterialDraft(product: Product, fields: DraftFields, pending = false): string[] {
   const errors: string[] = [];
   if (fields.custom) {
@@ -9,16 +20,13 @@ export function validateMaterialDraft(product: Product, fields: DraftFields, pen
     else for (const axis of ['width', 'length'] as const) {
       const value = Number(fields[axis]);
       const min = bounds[`min_${axis}`]; const max = bounds[`max_${axis}`];
-      if (!fields[axis].trim() || !Number.isFinite(value) || value <= 0 || (min != null && value < Number(min)) || (max != null && value > Number(max))) errors.push(axis);
+      if (!positiveDecimal(fields[axis]) || (min != null && value < Number(min)) || (max != null && value > Number(max))) errors.push(axis);
     }
-  } else if (product.sizes.length && !product.sizes.some(size => size.id === fields.size)) errors.push('size');
-  if (product.finishes.length && !product.finishes.some(finish => finish.id === fields.finish)) errors.push('finish');
+  } else if ((product.sizes.length || fields.size) && !product.sizes.some(size => size.id === fields.size)) errors.push('size');
+  if ((product.finishes.length || fields.finish) && !product.finishes.some(finish => finish.id === fields.finish)) errors.push('finish');
   if (!pending) {
-    if (!fields.quantity.trim() || !Number.isFinite(Number(fields.quantity)) || Number(fields.quantity) <= 0) errors.push('quantity');
-    if (!product.quantity_units.includes(fields.unit)) errors.push('unit');
+    if (!positiveDecimal(fields.quantity)) errors.push('quantity');
+    if (!quantityUnits.includes(fields.unit as typeof quantityUnits[number]) || !product.quantity_units.includes(fields.unit)) errors.push('unit');
   }
-  if (fields.description.length > 4000) errors.push('description');
-  if (fields.city.length > 160) errors.push('city');
-  if (fields.dimensions.length > 200) errors.push('dimensions');
-  return errors;
+  return [...errors, ...validateDraftText(fields)];
 }

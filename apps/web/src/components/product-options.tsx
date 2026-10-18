@@ -5,11 +5,12 @@ import { trapDialogFocus } from '@/lib/dialog-focus';
 import { useRef, useState } from 'react';
 import { catalogueCopy, selectedImage, type Product } from '@/lib/catalogue';
 import { CatalogueImage } from './catalogue-image';
-import { siteCopy } from '@/lib/site';
+import { siteCopy, type SiteSettings } from '@/lib/site';
+import { unitLabel } from '@/lib/whatsapp';
 import { SiteIcon } from './site-icon';
 import { RequestDraft } from './request-draft';
 
-export function ProductOptions({ product, locale, technical, related, pendingSpecification = false }: { product: Product; locale: string; technical?: React.ReactNode; related?: React.ReactNode; pendingSpecification?: boolean }) {
+export function ProductOptions({ product, locale, technical, related, pendingSpecification = false, settings, canonical }: { product: Product; locale: string; technical?: React.ReactNode; related?: React.ReactNode; pendingSpecification?: boolean; settings: SiteSettings | null; canonical: string }) {
   const copy = catalogueCopy(locale);
   const [sizeId, setSizeId] = useState<string | null>(null);
   const [finishId, setFinishId] = useState(product.finishes.find(item => item.is_default)?.id || product.finishes[0]?.id || '');
@@ -28,8 +29,8 @@ export function ProductOptions({ product, locale, technical, related, pendingSpe
     {product.custom_size_allowed && <div data-custom-size><p>{copy.custom}</p>{product.custom_size && <p>{copy.bounds}: {copy.width} <bdi>{product.custom_size.min_width}–{product.custom_size.max_width} {product.custom_size.measurement_unit}</bdi>; {copy.length} <bdi>{product.custom_size.min_length}–{product.custom_size.max_length} {product.custom_size.measurement_unit}</bdi></p>}</div>}
     {product.finishes.length > 0 && <label className="field-label">{copy.finish}<select value={finishId} onChange={event => setFinishId(event.target.value)}>{product.finishes.map(finish => <option key={finish.id} value={finish.id}>{finish.name}</option>)}</select></label>}
     {!product.finishes.length && <p className="data-note">{design.noFinishes}</p>}
-    <p className="product-units">{copy.units}: {pendingSpecification ? <span>{design.noUnits}</span> : product.quantity_units.map(unit => <bdi key={unit} className="unit-label">{unit}</bdi>)}</p>
-    <div className="material-request-actions"><RequestDraft locale={locale} kind="material" identity={{ title: product.name, reference: product.reference }} product={product} pending={pendingSpecification} sizeId={sizeId} finishId={finishId} onSize={value => { setSizeId(value); setGalleryId(null); }} onFinish={setFinishId} /><RequestDraft locale={locale} kind="application" identity={{ title: product.name, reference: product.reference }} /></div>
+    <p className="product-units">{copy.units}: {pendingSpecification ? <span>{design.noUnits}</span> : product.quantity_units.map(unit => <bdi key={unit} className="unit-label">{unitLabel(unit, locale)}</bdi>)}</p>
+    <div className="material-request-actions"><RequestDraft settings={settings} canonical={canonical} slug={product.slug} locale={locale} kind="material" identity={{ title: product.name, reference: product.reference }} product={product} pending={pendingSpecification} sizeId={sizeId} finishId={finishId} onSize={value => { setSizeId(value); setGalleryId(null); }} onFinish={setFinishId} /><RequestDraft settings={settings} canonical={canonical} slug={product.slug} locale={locale} kind="application" identity={{ title: product.name, reference: product.reference }} /></div>
     <div className="specification-note"><SiteIcon name="ruler" /><p>{design.sizeGuidance}<br />{design.finishGuidance}</p></div>
     {related}
     </div>

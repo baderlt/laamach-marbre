@@ -18,7 +18,7 @@ class PublicSite
             $copy = $record->translations[$locale] ?? null;
             $assets = $record->mediaReferences->mapWithKeys(fn ($ref) => [$ref->media_asset_id => $catalogue->image($ref->asset, $locale)]);
             if ($record->key === 'site') {
-                $settings = ['tagline' => $copy['tagline'] ?? null, 'address' => $copy['address'] ?? null, 'footer_text' => $copy['footer_text'] ?? null, 'phone' => $record->data['phone'] ?? null, 'email' => $record->data['email'] ?? null, 'map_url' => $record->data['map_url'] ?? null, 'social_links' => $record->data['social_links'] ?? [], 'logo' => $assets->get($record->data['logo_media_id'] ?? '')];
+                $settings = ['whatsapp' => WhatsAppSettings::publicData($record->data['whatsapp'] ?? []), 'tagline' => $copy['tagline'] ?? null, 'address' => $copy['address'] ?? null, 'footer_text' => $copy['footer_text'] ?? null, 'phone' => $record->data['phone'] ?? null, 'email' => $record->data['email'] ?? null, 'map_url' => $record->data['map_url'] ?? null, 'social_links' => $record->data['social_links'] ?? [], 'logo' => $assets->get($record->data['logo_media_id'] ?? '')];
             } elseif ($copy) {
                 $pages[$record->key] = collect($copy)->except(['sections', 'tagline', 'address', 'footer_text'])->all() + ['hero' => $assets->get($record->data['hero_media_id'] ?? ''), 'secondary' => $assets->get($record->data['secondary_media_id'] ?? ''), 'sections' => array_map(fn ($section) => collect($section)->except('media_asset_id')->all() + ['media' => $assets->get($section['media_asset_id'] ?? '')], $copy['sections'] ?? [])];
             }

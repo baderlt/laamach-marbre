@@ -117,7 +117,7 @@ $data = DB::transaction(function () use ($writer, $root, $base) {
     }
     $attributes = ['slug' => 'temporary-product', 'category_id' => $fixture['child']->id, 'status' => 'published', 'translations' => Fixtures::copy('Temporary product'), 'units' => ['m2', 'piece'], 'cover_media_id' => $cover->id, 'gallery' => [$dedicated->id], 'sizes' => [Fixtures::size('Dedicated size', ['cover_media_id' => $dedicated->id]), Fixtures::size('Fallback size', ['sort_order' => 1])], 'custom_size_allowed' => true, 'custom_measurement_unit' => 'cm', 'min_width' => 5, 'max_width' => 40, 'min_length' => 10, 'max_length' => 60, 'finishes' => [['finish_id' => $fixture['finish']->id, 'active' => true, 'is_default' => true, 'sort_order' => 0], ['finish_id' => $second->id, 'active' => true, 'is_default' => false, 'sort_order' => 1]]];
     $product = $writer->product(null, isset($layoutImages) ? array_replace($attributes, ['featured' => true, 'cover_media_id' => $layoutImages[0]->id, 'gallery' => [$layoutImages[1]->id], 'sizes' => [Fixtures::size('Dedicated size', ['cover_media_id' => $layoutImages[1]->id]), Fixtures::size('Fallback size', ['sort_order' => 1])]]) : $attributes, $user);
-    $noImage = $writer->product(null, array_replace($attributes, ['slug' => 'temporary-no-image', 'cover_media_id' => null, 'gallery' => [], 'sizes' => [Fixtures::size('Fallback size')], 'custom_size_allowed' => false, 'custom_measurement_unit' => null, 'min_width' => null, 'max_width' => null, 'min_length' => null, 'max_length' => null]), $user);
+    $noImage = $writer->product(null, array_replace($attributes, ['slug' => 'temporary-no-image', 'finishes' => [], 'cover_media_id' => null, 'gallery' => [], 'sizes' => [Fixtures::size('Fallback size')], 'custom_size_allowed' => false, 'custom_measurement_unit' => null, 'min_width' => null, 'max_width' => null, 'min_length' => null, 'max_length' => null]), $user);
     $draft = $writer->product(null, array_replace($attributes, ['slug' => 'temporary-draft', 'status' => 'draft']), $user);
     $usage = ProjectFixtures::category($user);
     $otherUsage = ProjectFixtures::category($user, 'second-usage');
@@ -138,6 +138,10 @@ $data = DB::transaction(function () use ($writer, $root, $base) {
         app(SiteContentWriter::class)->save(null, ['key' => $key, 'published' => true, 'translations' => $translations, 'data' => []], $user);
         $editorial[] = $key;
     }
+
+    // Fictional destination confined to disposable Chromium fixtures, never real business data.
+    app(SiteContentWriter::class)->save(null, ['key' => 'site', 'published' => true, 'translations' => [], 'data' => ['whatsapp' => ['number' => '12025550123', 'enabled' => true, 'material' => true, 'similar' => true, 'application' => true]]], $user);
+    $editorial[] = 'site';
 
     return ['user' => $user->id, 'products' => [$product->id, $noImage->id, $draft->id], 'finishes' => [$fixture['finish']->id, $second->id], 'categories' => [$fixture['child']->id, $fixture['parent']->id], 'projects' => [$project->id, $noCover->id, $draftProject->id], 'project_categories' => [$usage->id, $otherUsage->id], 'editorial' => $editorial, 'assets' => [['id' => $cover->id], ['id' => $dedicated->id], ['id' => $video->id], ...$extraAssets]];
 });

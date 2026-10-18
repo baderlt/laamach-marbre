@@ -27,6 +27,11 @@ class SiteContentPolicy
         return $this->viewAny($user);
     }
 
+    public function manageWhatsApp(User $user): bool
+    {
+        return $user->isSuperAdmin();
+    }
+
     public function publish(User $user): bool
     {
         return $user->isSuperAdmin();

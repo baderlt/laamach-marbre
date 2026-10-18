@@ -11,6 +11,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -22,7 +23,7 @@ class SiteContentResource extends Resource
 
     private static function fields(): array
     {
-        $fields = [Select::make('key')->options(array_combine(SiteContent::KEYS, SiteContent::KEYS))->required()->helperText('One record per page; site = global contacts/logo/footer. Existing keys cannot change.'), Toggle::make('published')->default(false)->helperText('Super-admin publication only. Product/project featured flags are managed in their existing resources.')];
+        $fields = [Select::make('key')->live()->options(array_combine(SiteContent::KEYS, SiteContent::KEYS))->required()->helperText('One record per page; site = global contacts/logo/footer. Existing keys cannot change.'), Toggle::make('published')->default(false)->helperText('Super-admin publication only. Product/project featured flags are managed in their existing resources.')];
         foreach (config('localization.locales') as $locale) {
             $prefix = 'translations.'.$locale['code'].'.';
             foreach (['title', 'eyebrow', 'tagline', 'seo_title', 'cta_title'] as $key) {
@@ -39,7 +40,11 @@ class SiteContentResource extends Resource
         foreach (['phone', 'email', 'map_url'] as $key) {
             $fields[] = TextInput::make('data.'.$key)->maxLength($key === 'map_url' ? 1000 : 254);
         }
-        $fields[] = Repeater::make('data.social_links')->schema([TextInput::make('label')->required()->maxLength(40), TextInput::make('url')->url()->required()->maxLength(500)])->maxItems(6)->defaultItems(0)->helperText('HTTPS Facebook, Instagram, YouTube or LinkedIn profiles. No quotation integrations.');
+        $fields[] = TextInput::make('data.whatsapp.number')->label('WhatsApp international number')->tel()->telRegex('/^\+?[0-9 ()-]{8,40}$/D')->maxLength(40)->helperText('Include the country code. No example number is configured automatically.')->visible(fn (Get $get) => $get('key') === 'site')->disabled(fn () => ! auth()->user()?->isSuperAdmin())->dehydrated(fn () => auth()->user()?->isSuperAdmin());
+        foreach (['enabled' => 'Enable WhatsApp requests globally', 'material' => 'Material quotations', 'similar' => 'Similar-project enquiries', 'application' => 'Use this material in my project'] as $key => $label) {
+            $fields[] = Toggle::make('data.whatsapp.'.$key)->label($label)->default(false)->visible(fn (Get $get) => $get('key') === 'site')->disabled(fn () => ! auth()->user()?->isSuperAdmin())->dehydrated(fn () => auth()->user()?->isSuperAdmin());
+        }
+        $fields[] = Repeater::make('data.social_links')->schema([TextInput::make('label')->required()->maxLength(40), TextInput::make('url')->url()->required()->maxLength(500)])->maxItems(6)->defaultItems(0)->helperText('HTTPS Facebook, Instagram, YouTube or LinkedIn profiles. WhatsApp is configured separately by a super-admin.');
 
         return $fields;
     }
