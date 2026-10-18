@@ -1,0 +1,66 @@
+/* One authentic client photograph, with section-specific readable surfaces. */
+:root { --stone-paper: rgb(250 248 245 / .96); --stone-line: rgb(229 188 120 / .2); }
+.stone-site { position: relative; isolation: isolate; overflow-x: clip; min-height: 100svh; }
+.stone-background { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; background: #454943; --stone-x: 54vw; --stone-y: 44vh; --stone-tx: 0px; --stone-ty: 0px; }
+.stone-base, .stone-focus { position: absolute; inset: -12px; transform: translate3d(var(--stone-tx),var(--stone-ty),0); }
+.stone-base { background-image: var(--stone-base-mobile); background-size: cover; background-position: center; }
+.stone-focus, .stone-light { display: none; }
+.stone-site .public-page { background: transparent; }
+/* Full-bleed paper behind existing constrained content; no new scrolling container. */
+.stone-site .public-page > .site-width { position: relative; isolation: isolate; }
+.stone-site .public-page > .site-width::before { content: ''; position: absolute; z-index: -1; inset-block: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--stone-paper); pointer-events: none; }
+.stone-site .public-page > :is(.material-values,.benefits-strip,.breadcrumb-band,.usage-section) { background: rgb(242 237 229 / .97); }
+.stone-site .public-page > .usage-section { margin-block: 0; }
+.stone-site .page-hero.stone-surface, .stone-site .contact-banner.stone-surface { background: transparent; color: #fff; }
+.stone-site .page-hero.stone-surface { display: flex; min-height: 300px; }
+.stone-site .stone-surface::after { content: ''; display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(90deg,rgb(19 23 23 / .86),rgb(25 26 24 / .72) 48%,rgb(29 26 21 / .34)),linear-gradient(0deg,rgb(11 12 12 / .28),transparent 60%),linear-gradient(180deg,rgb(19 23 23 / .32),transparent 35%); }
+.stone-site .stone-surface .hero-copy { color: #fff; }
+.stone-site .stone-surface :is(.hero-description,.contact-banner-inner p) { color: #f4f1eb; }
+.stone-site .stone-surface .eyebrow { color: #edc98f; }
+.stone-site .stone-surface .outline { background: rgb(22 26 25 / .35); color: #fff; border-color: #d8d2c6; }
+.stone-site .stone-surface .outline:hover { background: rgb(22 26 25 / .65); }
+.stone-site .stone-surface :focus-visible { outline-color: #f7cc87; }
+.stone-site .homepage .page-hero.brand { min-height: 540px; }
+.stone-site .homepage .brand .hero-inner { padding-block: 56px 64px; }
+.stone-site .homepage .brand h1 { font-weight: 400; font-size: clamp(38px,9vw,52px); line-height: 1.13; }
+.stone-site .homepage .brand .hero-description { max-width: 44ch; }
+.stone-site .contact-banner.stone-surface { padding-block: 48px; border-block: 1px solid var(--stone-line); }
+.stone-site .contact-banner.stone-surface::after { background: linear-gradient(90deg,rgb(19 23 23 / .88),rgb(25 26 24 / .78)); }
+.stone-site .site-footer { background: rgb(23 35 42 / .98); }
+.stone-site .site-header[data-home="true"] { background: #202926; }
+.stone-site .site-header[data-home="true"] .top-strip { background: #1a211f; }
+.stone-site .page-hero.material { background: rgb(239 233 223 / .96); color: var(--ink); }
+.stone-site .page-hero.material::after { display: none; }
+.stone-site .page-hero.material .eyebrow { color: var(--bronze); }
+html[dir="rtl"] .stone-site .stone-surface::after { transform: scaleX(-1); }
+html[lang="ar"] .stone-site .homepage .brand h1 { font-weight: 600; line-height: 1.5; font-size: clamp(34px,8vw,46px); }
+@media (min-width: 768px) {
+  .stone-base { background-image: var(--stone-base-tablet); }
+  .stone-site .homepage .page-hero.brand { min-height: 660px; }
+  .stone-site .homepage .brand .hero-inner { padding-block: 96px; }
+  .stone-site .homepage .brand h1 { font-size: clamp(48px,4.5vw,68px); }
+  .stone-site .page-hero.stone-surface:not(.brand) .hero-inner { padding-block: 64px; }
+  .stone-site .page-hero.stone-surface::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .16; background-image: linear-gradient(90deg,#ffffff38 1px,transparent 1px),linear-gradient(#ffffff38 1px,transparent 1px); background-size: 110px 110px; mask-image: linear-gradient(90deg,#000,transparent 85%); }
+}
+@media (min-width: 1280px) {
+  .stone-site .site-header[data-home="true"] { background: transparent; }
+  .stone-site .site-header[data-home="true"][data-scrolled="true"] { background: #faf8f5fc; }
+  .stone-site .homepage .brand .hero-inner { padding-block: 160px 96px; }
+  .stone-site .homepage .brand h1 { max-width: 16ch; }
+  .stone-site .homepage .brand .hero-studies { top: 270px; }
+  .stone-site .hero-material-note { background: rgb(19 23 23 / .64); padding: 16px; }
+  html[lang="ar"] .stone-site .homepage .brand h1 { font-size: 54px; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .stone-background[data-interactive="true"][data-active="true"] .stone-focus { display: block; background-image: var(--stone-detail-tablet); background-size: cover; background-position: center; opacity: .8; mask-image: radial-gradient(circle 280px at calc(var(--stone-x) + 12px) calc(var(--stone-y) + 12px),#000, #000b 28%,transparent 80%); }
+  .stone-background[data-interactive="true"][data-active="true"] .stone-light { display: block; position: absolute; inset: 0; background: radial-gradient(circle 280px at var(--stone-x) var(--stone-y),rgb(255 231 183 / .13),rgb(250 195 113 / .05) 28%,transparent 74%); }
+}
+@media (min-width: 1200px) {
+  .stone-base { background-image: var(--stone-base-desktop); }
+  .stone-background[data-interactive="true"][data-active="true"] .stone-focus { background-image: var(--stone-detail-desktop); }
+}
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .stone-base { transform: none; }
+  .stone-focus, .stone-light { display: none !important; }
+}
+@media print { .stone-background { display: none; }.stone-site .stone-surface::after { background: #fff; }.stone-site .stone-surface, .stone-site .stone-surface .hero-copy, .stone-site .stone-surface .hero-description { color: #171b20; } }

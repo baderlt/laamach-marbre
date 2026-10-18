@@ -4,6 +4,7 @@ import { findLocale, localeConfiguration } from '@/lib/locales';
 import './globals.css';
 import './m52.css';
 import './stone-direction.css';
+import './stone-background.css';
 import { serverEnvironment } from '@/lib/environment';
 import localFont from 'next/font/local';
 

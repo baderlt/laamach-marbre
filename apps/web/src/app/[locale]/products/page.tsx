@@ -30,7 +30,8 @@ export default async function CataloguePage({ params, searchParams }: { params: 
       <nav className="category-rail" aria-label={design.categories}><a className={!filters.get('parent') ? 'active' : ''} href={`/${locale}/products`}>{copy.all}</a>{categories.data.data.map(category => <a key={category.id} className={filters.get('parent') === category.slug ? 'active' : ''} href={`/${locale}/products?parent=${category.slug}`}>{category.name}</a>)}</nav>
       {products.data.data.length === 0 ? <div className="editorial-empty"><p>{copy.empty}</p></div> : <ProductCards products={products.data.data} locale={locale} slots={filters.size ? 0 : 12} />}
       <nav className="pagination" aria-label="Pagination">{products.data.meta.current_page > 1 && <a className="button outline" href={pageLink(products.data.meta.current_page - 1)}>{copy.previous}</a>}<span>{products.data.meta.current_page} / {products.data.meta.last_page}</span>{products.data.meta.current_page < products.data.meta.last_page && <a className="button outline" href={pageLink(products.data.meta.current_page + 1)}>{copy.next}</a>}</nav>
-      <ContactBanner locale={locale} pageKey="products" /></div>
+      </div>
     </div>}
+    <ContactBanner locale={locale} pageKey="products" />
   </main>;
 }

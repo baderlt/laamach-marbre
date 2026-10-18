@@ -3,16 +3,13 @@ import { siteCopy } from '@/lib/site';
 import type { Media } from '@/lib/catalogue';
 import { CatalogueImage } from './catalogue-image';
 import { SiteIcon } from './site-icon';
-import { provisionalPreviewEnabled, provisionalImageUrl, provisionalImageLabel } from '@/lib/provisional-preview';
 
 export function PageHero({ locale, title, eyebrow, body, media, large = false, children, variant = '', aside, headingTag = 'h1' }: { locale: string; title: string; eyebrow?: string | null; body?: string | null; media?: Media | null; large?: boolean; children?: React.ReactNode; variant?: string; aside?: React.ReactNode; headingTag?: 'h1' | 'p' }) {
   const copy = siteCopy(locale);
-  const provisional = provisionalPreviewEnabled(process.env);
-  const architecture = provisional && !['quarry', 'material'].includes(variant);
+  const stone = variant === 'brand' || variant === 'quarry' || (!media && variant !== 'material');
   const Heading = headingTag;
-  return <section className={`page-hero ${variant}${large ? ' large-hero' : ''}${media || architecture ? ' has-media' : ' neutral-hero'}`}>
-    <div className="hero-media">{architecture ? <img src={provisionalImageUrl} alt={provisionalImageLabel(locale)} width={1920} height={1080} fetchPriority="high" /> : variant === 'quarry' ? <div className="quarry-study" aria-label={copy.missingMedia}><i /><i /><i /><i /><i /><i /></div> : media ? <CatalogueImage media={media} alt={title} placeholder={copy.missingMedia} eager /> : <div className="hero-placeholder" role="img" aria-label={copy.missingMedia}><span>{copy.missingMedia}</span></div>}</div>
-    {architecture && <span className="provisional-image-label">{provisionalImageLabel(locale)}</span>}
+  return <section data-stone-surface={stone ? '' : undefined} className={`page-hero ${variant}${large ? ' large-hero' : ''}${stone ? ' stone-surface' : media ? ' has-media' : ' neutral-hero'}`}>
+    {!stone && <div className="hero-media">{media ? <CatalogueImage media={media} alt={title} placeholder={copy.missingMedia} eager /> : <div className="hero-placeholder" role="img" aria-label={copy.missingMedia}><span>{copy.missingMedia}</span></div>}</div>}
     <div className="site-width hero-inner"><div className="hero-copy"><p className="eyebrow">{eyebrow || 'LAAMACH MARBRE'}</p><Heading className="hero-title">{title}</Heading>{body && <p className="hero-description preserve-text">{body}</p>}{children && <div className="hero-actions">{children}</div>}</div></div>
     {aside}
   </section>;

@@ -2,13 +2,13 @@ import { siteCopy, phoneHref, type SiteSettings } from '@/lib/site';
 import { SiteIcon } from './site-icon';
 import { getSite } from '@/lib/site-server';
 import { CatalogueImage } from './catalogue-image';
-import { provisionalPreviewEnabled, provisionalImageUrl, provisionalImageLabel } from '@/lib/provisional-preview';
+import { provisionalPreviewEnabled } from '@/lib/provisional-preview';
 
 export async function ContactBanner({ locale, pageKey = 'home' }: { locale: string; pageKey?: string }) {
   const copy = siteCopy(locale);
   const site = await getSite(locale); const page = site.pages[pageKey] || site.pages.home;
-  const provisional = provisionalPreviewEnabled(process.env);
-  return <section className={`contact-banner banner-${pageKey}`}><div className="banner-media" aria-hidden="true">{provisional ? <img src={provisionalImageUrl} alt="" loading="lazy" width={1920} height={1080} /> : <CatalogueImage media={page?.secondary || page?.hero || null} placeholder="" />}</div><div className="site-width contact-banner-inner"><div><p className="eyebrow">LAAMACH MARBRE</p><h2>{page?.cta_title || copy.ctaTitle}</h2><p>{page?.cta_body || copy.ctaBody}</p></div><div className="banner-actions"><a className="button bronze" href={`/${locale}/contact`}>{copy.contactAction}<SiteIcon name="arrow" className="directional" /></a><a className="button outline" href={`/${locale}/contact#contact-form`}>{copy.preparation}<SiteIcon name="phone" /></a></div></div>{provisional && <small className="banner-disclosure">{provisionalImageLabel(locale)}</small>}</section>;
+  const media = provisionalPreviewEnabled(process.env) ? null : page?.secondary || page?.hero;
+  return <section data-stone-surface={!media ? '' : undefined} className={`contact-banner banner-${pageKey}${!media ? ' stone-surface' : ''}`}>{media && <div className="banner-media" aria-hidden="true"><CatalogueImage media={media} placeholder="" /></div>}<div className="site-width contact-banner-inner"><div><p className="eyebrow">LAAMACH MARBRE</p><h2>{page?.cta_title || copy.ctaTitle}</h2><p>{page?.cta_body || copy.ctaBody}</p></div><div className="banner-actions"><a className="button bronze" href={`/${locale}/contact`}>{copy.contactAction}<SiteIcon name="arrow" className="directional" /></a><a className="button outline" href={`/${locale}/contact#contact-form`}>{copy.preparation}<SiteIcon name="phone" /></a></div></div></section>;
 }
 
 export function SiteFooter({ locale, settings }: { locale: string; settings: SiteSettings | null }) {

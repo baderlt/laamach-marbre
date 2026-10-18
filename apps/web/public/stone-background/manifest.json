@@ -1,0 +1,43 @@
+{
+  "provenance": "client-supplied; approved for website background",
+  "originalFilename": "bbcheehb.jpeg",
+  "originalSha256": "4f448f7b80fd3f1a2bf2929b98c364840d955d17c6d69e6139c464f918491d24",
+  "processing": "EXIF orientation; centre crop without stretching; resize; fixed soft blur on base only; WebP; metadata stripped. No recolouring or generated content.",
+  "variants": {
+    "mobile": {
+      "url": "/stone-background/mobile-2f2a48f317a1ae1d.webp",
+      "width": 640,
+      "height": 1120,
+      "bytes": 84092,
+      "sha256": "2f2a48f317a1ae1dae923b9f0e20d841f81d1baf9c2d6e766ad5c38987cad698"
+    },
+    "tablet": {
+      "url": "/stone-background/tablet-ac9bb310adc9a7a4.webp",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 64926,
+      "sha256": "ac9bb310adc9a7a41ca78346221de132f830523fd065272efb1029b2f64afa60"
+    },
+    "desktop": {
+      "url": "/stone-background/desktop-8365df240e3ed657.webp",
+      "width": 1600,
+      "height": 1000,
+      "bytes": 76054,
+      "sha256": "8365df240e3ed65798ebcd012cd250a266025dad6e3a9302c66dbc2da34e5b99"
+    },
+    "tabletDetail": {
+      "url": "/stone-background/tabletDetail-a61b1801146fc0d2.webp",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 407250,
+      "sha256": "a61b1801146fc0d2767b32a41b9b8eade34ad8fda484e23b4d1127cd791f8094"
+    },
+    "desktopDetail": {
+      "url": "/stone-background/desktopDetail-c534e9a97a000081.webp",
+      "width": 1600,
+      "height": 1000,
+      "bytes": 559966,
+      "sha256": "c534e9a97a000081fa346ec44072fb8f36050f2938b5d8c178b99d0df4d3face"
+    }
+  }
+}
