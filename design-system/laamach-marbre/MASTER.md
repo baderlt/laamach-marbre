@@ -1,5 +1,9 @@
 # LAAMACH MARBRE — M5.2 design system
 
+## Latest client direction — 2026-10-18
+
+The client subsequently selected the supplied dark architectural reference screenshots as the new visual direction. This supersedes the earlier ivory-only homepage treatment: deep blue charcoal hero (#172b35), warm gold actions (#e5bc78) with dark text, numbered route rail, material swatches, six-item information strip, collection-first discovery, dark editorial stories and a light header after scrolling. Keep LAAMACH identity, existing editorial copy and real product photographs; do not copy the reference logo, media files, company claims, URLs or integration behavior. Arabic remains Cairo RTL; French uses the existing editorial serif. Small screens retain readable stacked compositions and accessible navigation rather than shrinking the desktop rail. Existing M5.2 form, media and security rules remain authoritative.
+
 Authority: approved client prototypes, then the M5.2 brief, then UI UX Pro Max recommendations. All 739 skill lines were read. CLI query `architecture interior luxury --design-system` returned Portfolio Grid, neutral photography-led composition and restrained gold. The first broad query returned industrial orange and was rejected. Typography search returned Classic Elegant and Luxury Serif. Next.js image guidance and UX focus-not-obscured guidance were reviewed. No framework or package replacement is required.
 
 ## Client-specific synthesis
