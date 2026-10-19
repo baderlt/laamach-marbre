@@ -1,0 +1,52 @@
+{
+  "services": {
+    "source": "Limestone Quarry Under a Deep Blue Sky.png",
+    "sourceSha256": "de86019fd1734985b4f768918c0ffaa372e1c0bdadbb1534aecb28121a4955c8",
+    "provenance": "Client supplied and authorized for website banners; responsive WebP conversion, EXIF orientation, metadata removed.",
+    "variants": [
+      {
+        "url": "/editorial/services-640-0c637bec40f6.webp",
+        "width": 640,
+        "height": 853,
+        "format": "webp",
+        "profile": "editorial",
+        "revision": "1",
+        "hash": "0c637bec40f6c578ab815934e27511aba82dab4b920464dceb311356bf9eec53"
+      },
+      {
+        "url": "/editorial/services-1080-a33a8f063e5f.webp",
+        "width": 1080,
+        "height": 1440,
+        "format": "webp",
+        "profile": "editorial",
+        "revision": "1",
+        "hash": "a33a8f063e5f4ba4ca23c4406bdd0915f1b54260fc2477a813edd4590b7af731"
+      }
+    ]
+  },
+  "about": {
+    "source": "Industrial Quarry Wall with Worker and Excavator.png",
+    "sourceSha256": "ba453ab4c2b9d4bf044afb9a83d48d02199defa7bca54e719a9a413d04610a0c",
+    "provenance": "Client supplied and authorized for website banners; responsive WebP conversion, EXIF orientation, metadata removed.",
+    "variants": [
+      {
+        "url": "/editorial/about-640-90a70e25db7f.webp",
+        "width": 640,
+        "height": 853,
+        "format": "webp",
+        "profile": "editorial",
+        "revision": "1",
+        "hash": "90a70e25db7f1f5442d126d3f947c8c8f49b565bc7cceb764050442a80bec377"
+      },
+      {
+        "url": "/editorial/about-1080-c506cf373841.webp",
+        "width": 1080,
+        "height": 1440,
+        "format": "webp",
+        "profile": "editorial",
+        "revision": "1",
+        "hash": "c506cf373841af0c539125e1f31285e0d1ef5f9b798f40898f15ac630fb8f346"
+      }
+    ]
+  }
+}

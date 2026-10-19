@@ -48,6 +48,11 @@ class MediaAssetPolicy
         return $this->viewAny($user);
     }
 
+    public function uploadImage(User $user): bool
+    {
+        return $this->viewAny($user);
+    }
+
     public function uploadVideo(User $user): bool
     {
         return $this->viewAny($user);

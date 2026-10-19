@@ -63,7 +63,12 @@ export function StoneBackground() {
       element.dataset.interactive = String(permitted);
       if (!permitted) reset();
     };
-    const resize = () => { width = innerWidth; height = innerHeight; targetX = x = width * .54; targetY = y = height * .44; reset(); };
+    const resize = () => {
+      width = element.clientWidth; height = element.clientHeight;
+      element.style.setProperty('--stone-width', `${width}px`);
+      element.style.setProperty('--stone-height', `${height}px`);
+      targetX = x = width * .54; targetY = y = height * .44; reset();
+    };
     const visibility = () => { if (document.hidden) reset(); };
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
@@ -73,7 +78,7 @@ export function StoneBackground() {
       if (!visible) reset();
     });
     surfaces.forEach(surface => observer.observe(surface));
-    preferences();
+    resize(); preferences();
     window.addEventListener('pointermove', move, { passive: true });
     window.addEventListener('resize', resize, { passive: true });
     window.addEventListener('blur', reset);
@@ -103,6 +108,6 @@ export function StoneBackground() {
     '--stone-detail-tablet': `url("${variants.tabletDetail.url}")`,
   } as CSSProperties}>
     <div className="stone-base" />
-    <div className="stone-focus" /><div className="stone-light" />
+    <div className="stone-focus"><div className="stone-detail" /></div><div className="stone-light" />
   </div></>;
 }

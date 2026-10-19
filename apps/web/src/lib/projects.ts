@@ -8,8 +8,8 @@ export type Project = ProjectCard & { description: string | null; area_display: 
 export type ProjectsPage = { data: ProjectCard[]; meta: ProductPage['meta'] };
 
 const messages = {
-  fr: { projects: 'Projets', categories: 'Catégories d’usage', empty: 'Aucun projet à afficher.', unavailable: 'Projets temporairement indisponibles.', materials: 'Matériaux utilisés dans ce projet', related: 'Projets utilisant ce matériau', gallery: 'Galerie du projet', cover: 'Vue principale', photo: 'Photo', video: 'Vidéo', missingVideo: 'Vidéo du projet', year: 'Année', location: 'Lieu', area: 'Surface' },
-  ar: { projects: 'المشاريع', categories: 'فئات الاستخدام', empty: 'لا توجد مشاريع للعرض.', unavailable: 'المشاريع غير متاحة مؤقتًا.', materials: 'المواد المستخدمة في هذا المشروع', related: 'مشاريع تستخدم هذه المادة', gallery: 'معرض المشروع', cover: 'الصورة الرئيسية', photo: 'صورة', video: 'فيديو', missingVideo: 'فيديو المشروع', year: 'السنة', location: 'المكان', area: 'المساحة' },
+  fr: { projects: 'Projets', categories: 'Catégories d’usage', empty: 'Aucun projet à afficher.', unavailable: 'Projets temporairement indisponibles.', materials: 'Matières à découvrir pour votre projet', related: 'Des idées pour votre projet', gallery: 'Les réalisations de cette collection', cover: 'Vue principale', photo: 'Photo', video: 'Vidéo', missingVideo: 'Vidéo du projet', year: 'Année', location: 'Lieu', area: 'Surface' },
+  ar: { projects: 'المشاريع', categories: 'فئات الاستخدام', empty: 'لا توجد مشاريع للعرض.', unavailable: 'المشاريع غير متاحة مؤقتًا.', materials: 'مواد مقترحة لمشروعك', related: 'أفكار لمشروعك', gallery: 'أعمال ضمن هذه الفئة', cover: 'الصورة الرئيسية', photo: 'صورة', video: 'فيديو', missingVideo: 'فيديو المشروع', year: 'السنة', location: 'المكان', area: 'المساحة' },
 };
 export function projectsCopy(locale: string) {
   const copy = messages[locale as keyof typeof messages] || messages[localeConfiguration.fallback as keyof typeof messages];
@@ -24,4 +24,11 @@ export function projectFilters(input: Record<string, string | string[] | undefin
   for (const slug of [...new Set(categories)].filter(value => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) && value.length <= 120).slice(0, 8)) filters.append('categories[]', slug);
   if (typeof input.page === 'string' && /^(?:[1-9][0-9]{0,3}|10000)$/.test(input.page)) filters.set('page', input.page);
   return filters;
+}
+
+export function projectCategoryIcon(slug: string): string {
+  if (slug.includes('sol')) return 'paving';
+  if (slug.includes('cascade') || slug.includes('fontaine')) return 'fountain';
+  if (slug.includes('tradition')) return 'masonry';
+  return 'facade';
 }

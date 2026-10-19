@@ -1,12 +1,29 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { parseRequest, prepareRequest, requestAvailable, unitLabel, whatsappUrlBudget } from '../apps/web/src/lib/whatsapp.ts';
+import { directChatUrl, parseRequest, prepareRequest, requestAvailable, unitLabel, whatsappUrlBudget } from '../apps/web/src/lib/whatsapp.ts';
 
 // Fictional destination confined to isolated tests; never used by application configuration.
 const settings = { number: '12025550123', enabled: true, material: true, similar: true, application: true };
 const product = { slug: 'real-stone', name: 'Pierre & حجر', reference: 'LM-P-1', sizes: [{ id: 'size-1', label: '4', measurement_unit: null }], finishes: [{ id: 'finish-1', name: 'Finition confirmée' }], quantity_units: ['m2', 'piece'], custom_size_allowed: true, custom_size: { min_width: '5', max_width: '20', min_length: '10', max_length: '50', measurement_unit: 'mm' } };
 const fields = { size: 'size-1', custom: false, width: '', length: '', finish: 'finish-1', quantity: '2.5', unit: 'm2', city: '', dimensions: '', description: '' };
 const prepare = (changes = {}, options = {}) => prepareRequest(options.kind || 'material', options.locale || 'fr', options.record || product, { ...fields, ...changes }, options.settings === undefined ? settings : options.settings, 'https://laamach.example');
+
+test('direct chat uses current admin settings and contextual identity without requiring specifications', () => {
+  for (const locale of ['fr', 'ar']) for (const kind of ['material', 'similar']) {
+    const url = new URL(directChatUrl(settings, locale, kind, 'Pierre & حجر', 'LM-1', 'https://laamach.example/fr/products/real-stone'));
+    assert.equal(url.hostname, 'wa.me');
+    assert.equal(url.pathname, '/'+settings.number);
+    assert.ok(url.searchParams.get('text').includes('Pierre & حجر'));
+    assert.ok(url.searchParams.get('text').includes('LM-1'));
+    assert.ok(url.searchParams.get('text').includes('https://laamach.example/fr/products/real-stone'));
+  }
+  assert.ok(directChatUrl({ ...settings, number: '12025550124' }, 'fr', 'material', 'Pierre', 'LM-1', 'https://laamach.example').includes('/12025550124?'));
+});
+
+test('direct chat fails closed for disabled flows, bad recipients and unsafe page URLs', () => {
+  for (const config of [null, { ...settings, enabled: false }, { ...settings, material: false }, { ...settings, number: '+212 6' }]) assert.equal(directChatUrl(config, 'fr', 'material', 'Pierre', 'LM-1', 'https://laamach.example'), null);
+  for (const canonical of ['javascript:alert(1)', 'https://user:password@laamach.example', 'invalid']) assert.equal(directChatUrl(settings, 'fr', 'material', 'Pierre', 'LM-1', canonical), null);
+});
 
 test('missing, invalid, global and per-flow configuration fails closed', () => {
   for (const config of [null, {}, { ...settings, number: null }, { ...settings, number: '+212 6' }, { ...settings, number: '0'.repeat(12) }, { ...settings, enabled: false }]) {

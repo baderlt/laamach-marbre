@@ -25,12 +25,12 @@ class ProjectForms
             $fields[] = Toggle::make('active')->default(false);
         } else {
             $fields = [...$fields, Select::make('status')->options(['draft' => 'Draft', 'published' => 'Published (super-admin)'])->default('draft')->required(), Toggle::make('featured')->default(false), Select::make('categories')->multiple()->searchable()->options(fn () => ProjectCategory::orderBy('slug')->get()->mapWithKeys(fn ($item) => [$item->id => $item->slug.($item->active ? '' : ' (inactive; existing assignment only)')]))->maxItems(config('projects.max_categories')), TextInput::make('location')->maxLength(200), TextInput::make('year')->integer()->minValue(1900)->maxValue(2100), TextInput::make('area')->numeric()->minValue(0.01), Select::make('area_unit')->options(array_combine(config('projects.area_units'), config('projects.area_units')))];
-            $fields[] = Repeater::make('products')->label('Confirmed materials used')->schema([Select::make('product_id')->options(fn () => Product::orderBy('slug')->pluck('slug', 'id'))->searchable()->required(), TextInput::make('sort_order')->integer()->default(0)->required()])->maxItems(config('projects.max_products'))->defaultItems(0)->reorderable(false)->helperText('Explicit client-confirmed assignments. Public display uses sort_order.');
+            $fields[] = Repeater::make('products')->label('Associated catalogue products')->schema([Select::make('product_id')->options(fn () => Product::orderBy('slug')->pluck('slug', 'id'))->searchable()->required(), TextInput::make('sort_order')->integer()->default(0)->required()])->maxItems(config('projects.max_products'))->defaultItems(0)->reorderable(false)->helperText('Editorial product suggestions for this project. These links do not claim installation in its photos. Public display uses sort_order.');
             $captions = [];
             foreach (config('localization.locales') as $locale) {
                 $captions[] = Textarea::make('captions.'.$locale['code'])->label($locale['name'].' caption')->maxLength(500);
             }
-            $fields[] = Repeater::make('gallery')->schema([Select::make('type')->label('Photo or video')->options(['image' => 'Photo', 'video' => 'Video (MP4)'])->default('image')->required()->live(), self::media('media_asset_id', 'Approved published gallery media')->required(), self::media('poster_media_id', 'Optional approved video poster', 'image')->visible(fn (Get $get) => $get('type') === 'video'), ...$captions])->maxItems(config('projects.max_gallery'))->defaultItems(0)->helperText('Drag to order. Upload videos in Media Assets, then approve and publish before selecting. No raw object keys.');
+            $fields[] = Repeater::make('gallery')->schema([Select::make('type')->label('Photo or video')->options(['image' => 'Photo', 'video' => 'Video (MP4)'])->default('image')->required()->live(), self::media('media_asset_id', 'Approved published gallery media')->required(), self::media('poster_media_id', 'Optional approved video poster', 'image')->visible(fn (Get $get) => $get('type') === 'video'), ...$captions])->maxItems(config('projects.max_gallery'))->defaultItems(0)->helperText(__('admin.gallery_help'));
         }
         foreach (config('localization.locales') as $locale) {
             $prefix = 'translations.'.$locale['code'].'.';
@@ -49,7 +49,7 @@ class ProjectForms
 
     private static function media(string $key, string $label, ?string $type = null): Select
     {
-        return Select::make($key)->label($label)->searchable()->getSearchResultsUsing(fn (string $search) => app(PublicProjects::class)->assetQuery($type)->where('original_filename', 'like', '%'.addcslashes($search, '%_\\').'%')->limit(50)->get()->mapWithKeys(fn ($asset) => [$asset->id => $asset->type.': '.$asset->original_filename])->all())->getOptionLabelUsing(fn ($value) => MediaAsset::find($value)?->original_filename);
+        return MediaForms::attach(Select::make($key)->label($label)->searchable()->getSearchResultsUsing(fn (string $search) => app(PublicProjects::class)->assetQuery($type)->where('original_filename', 'like', '%'.addcslashes($search, '%_\\').'%')->limit(50)->get()->mapWithKeys(fn ($asset) => [$asset->id => $asset->type.': '.$asset->original_filename])->all())->getOptionLabelUsing(fn ($value) => MediaAsset::find($value)?->original_filename), $type);
     }
 
     public static function data(CatalogueRecord $record): array

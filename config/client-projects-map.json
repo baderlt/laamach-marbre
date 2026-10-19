@@ -1,0 +1,2478 @@
+{
+  "provenance": "Client supplied, authorized in conversation 2026-10-18",
+  "collectionPolicy": "Themed collections of several sites; no single-client, location, dates or dimensions inferred.",
+  "projects": [
+    {
+      "slug": "sols-en-pierre-naturelle",
+      "originalFolder": "ardiya blhajar tabi3i",
+      "title": {
+        "fr": "Sols en pierre naturelle",
+        "ar": "أرضيات بالحجر الطبيعي"
+      },
+      "entries": [
+        {
+          "source": "projects/sols-en-pierre-naturelle/gallery/07.png",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/sols-en-pierre-naturelle/cover.png",
+          "role": "project_cover"
+        },
+        {
+          "source": "projects/sols-en-pierre-naturelle/gallery/01.png",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/sols-en-pierre-naturelle/gallery/02.png",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/sols-en-pierre-naturelle/gallery/03.png",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/sols-en-pierre-naturelle/gallery/04.png",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/sols-en-pierre-naturelle/gallery/05.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/sols-en-pierre-naturelle/gallery/06.jpeg",
+          "role": "project_gallery"
+        }
+      ]
+    },
+    {
+      "slug": "pierre-bni-khiran-pose-traditionnelle",
+      "originalFolder": "hajar bni khiran btari9a t9lidiya",
+      "title": {
+        "fr": "Pierre Bni Khiran : pose traditionnelle",
+        "ar": "حجر بني خيران بالطريقة التقليدية"
+      },
+      "entries": [
+        {
+          "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/01.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/02.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/03.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/04.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/05.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/06.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-bni-khiran-pose-traditionnelle/cover.jpeg",
+          "role": "project_cover"
+        },
+        {
+          "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/07.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/08.jpeg",
+          "role": "project_gallery"
+        }
+      ]
+    },
+    {
+      "slug": "pierre-pose-traditionnelle",
+      "originalFolder": "hajar btari9a ta9lidiya",
+      "title": {
+        "fr": "Pierre : pose traditionnelle",
+        "ar": "الحجر بالطريقة التقليدية"
+      },
+      "entries": [
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/01.webp",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/02.webp",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/03.webp",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/04.webp",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/05.png",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/06.png",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/07.webp",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/08.png",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/09.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/cover.webp",
+          "role": "project_cover"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/10.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/11.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/pierre-pose-traditionnelle/gallery/12.jpeg",
+          "role": "project_gallery"
+        }
+      ]
+    },
+    {
+      "slug": "cascades-et-fontaines",
+      "originalFolder": "الشلالات والنافورات-Cascades et fontaines",
+      "title": {
+        "fr": "Cascades et fontaines",
+        "ar": "الشلالات والنافورات"
+      },
+      "entries": [
+        {
+          "source": "projects/cascades-et-fontaines/gallery/01.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/cover.jpeg",
+          "role": "project_cover"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/gallery/02.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/gallery/03.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/videos/01.mp4",
+          "role": "project_video",
+          "poster": "projects/cascades-et-fontaines/posters/01.jpg"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/gallery/04.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/videos/02.mp4",
+          "role": "project_video",
+          "poster": "projects/cascades-et-fontaines/posters/02.jpg"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/gallery/05.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/gallery/06.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/videos/03.mp4",
+          "role": "project_video",
+          "poster": "projects/cascades-et-fontaines/posters/03.jpg"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/videos/04.mp4",
+          "role": "project_video",
+          "poster": "projects/cascades-et-fontaines/posters/04.jpg"
+        },
+        {
+          "source": "projects/cascades-et-fontaines/videos/05.mp4",
+          "role": "project_video",
+          "poster": "projects/cascades-et-fontaines/posters/05.jpg"
+        }
+      ]
+    },
+    {
+      "slug": "murs-et-facades",
+      "originalFolder": "جدران و الواجهات- Murs et façades",
+      "title": {
+        "fr": "Murs et façades",
+        "ar": "الجدران والواجهات"
+      },
+      "entries": [
+        {
+          "source": "projects/murs-et-facades/gallery/01.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/02.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/03.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/04.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/05.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/06.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/07.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/08.webp",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/09.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/10.webp",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/cover.jpeg",
+          "role": "project_cover"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/11.jpeg",
+          "role": "project_gallery"
+        },
+        {
+          "source": "projects/murs-et-facades/gallery/12.jpeg",
+          "role": "project_gallery"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "source": "projects/sols-en-pierre-naturelle/gallery/07.png",
+      "target_type": "project",
+      "target_key": "sols-en-pierre-naturelle",
+      "role": "project_gallery",
+      "order": 0,
+      "sha256": "4b8bae288a93752a5c85f0c6685af6e5be144f3f5b7377f51bf2331e8de1ce70",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Sols en pierre naturelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "أرضيات بالحجر الطبيعي — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/sols-en-pierre-naturelle/cover.png",
+      "target_type": "project",
+      "target_key": "sols-en-pierre-naturelle",
+      "role": "project_cover",
+      "order": 1,
+      "sha256": "ff24fb533f6b2ec6505776b0251e5335ccc8d55cbb6501b209040185a687a5e3",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Sols en pierre naturelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "أرضيات بالحجر الطبيعي — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/sols-en-pierre-naturelle/gallery/01.png",
+      "target_type": "project",
+      "target_key": "sols-en-pierre-naturelle",
+      "role": "project_gallery",
+      "order": 2,
+      "sha256": "6540fc6fbf69375a172612217a9c07960abc9eb1c2ab800a295fe78e64ae8a77",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Sols en pierre naturelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "أرضيات بالحجر الطبيعي — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/sols-en-pierre-naturelle/gallery/02.png",
+      "target_type": "project",
+      "target_key": "sols-en-pierre-naturelle",
+      "role": "project_gallery",
+      "order": 3,
+      "sha256": "3ddd4f699f9cbfaeac047358edf1f454a082e90ab9dc49ed7e6a48c3791457fb",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Sols en pierre naturelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "أرضيات بالحجر الطبيعي — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/sols-en-pierre-naturelle/gallery/03.png",
+      "target_type": "project",
+      "target_key": "sols-en-pierre-naturelle",
+      "role": "project_gallery",
+      "order": 4,
+      "sha256": "2d80af02075ca6b1c9890ee28441e150a9e5182889cd36b7f1d77e4e4a99813a",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Sols en pierre naturelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "أرضيات بالحجر الطبيعي — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/sols-en-pierre-naturelle/gallery/04.png",
+      "target_type": "project",
+      "target_key": "sols-en-pierre-naturelle",
+      "role": "project_gallery",
+      "order": 5,
+      "sha256": "24dad3ad7c84cf7310abf5e2624086f479eace5994fe014deb4105e31f71b9ed",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Sols en pierre naturelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "أرضيات بالحجر الطبيعي — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/sols-en-pierre-naturelle/gallery/05.jpeg",
+      "target_type": "project",
+      "target_key": "sols-en-pierre-naturelle",
+      "role": "project_gallery",
+      "order": 6,
+      "sha256": "3319669c53c4b5a0d15f17a543f43c1f1e71ad6fca0ec8ad2915c8303ee7391b",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Sols en pierre naturelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "أرضيات بالحجر الطبيعي — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/sols-en-pierre-naturelle/gallery/06.jpeg",
+      "target_type": "project",
+      "target_key": "sols-en-pierre-naturelle",
+      "role": "project_gallery",
+      "order": 7,
+      "sha256": "b8790b19b077ee51fd270f00d941065da1dbbfebf23d43b8f7268c72c41a203f",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Sols en pierre naturelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "أرضيات بالحجر الطبيعي — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/01.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-bni-khiran-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 0,
+      "sha256": "c4945b5d4066af368255e744f2a03aafa93d33f175e3406e4ad72e92b5580550",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre Bni Khiran : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "حجر بني خيران بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/02.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-bni-khiran-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 1,
+      "sha256": "04bc3d499a5013dd3af926b59d6502b0be8e652b0c6c87799f84c92a4682c87f",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre Bni Khiran : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "حجر بني خيران بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/03.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-bni-khiran-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 2,
+      "sha256": "908c7ed96954e764763709c99d7afff67dcacd4cac446cb5813a1e685a68b635",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre Bni Khiran : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "حجر بني خيران بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/04.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-bni-khiran-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 3,
+      "sha256": "a503de1d029c7c86010ce39ebe050474c664b6fb9d9d4c553b5d7d41fae25787",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre Bni Khiran : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "حجر بني خيران بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/05.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-bni-khiran-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 4,
+      "sha256": "750dfdfe471a5840e829cae3cf7beec594a079a85c3afc9ed3575d8b80912fa5",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre Bni Khiran : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "حجر بني خيران بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/06.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-bni-khiran-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 5,
+      "sha256": "7bbfcf86cfd4de6a4d33571c13812ee48a342b13836fff07992cee7e958431a8",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre Bni Khiran : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "حجر بني خيران بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-bni-khiran-pose-traditionnelle/cover.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-bni-khiran-pose-traditionnelle",
+      "role": "project_cover",
+      "order": 6,
+      "sha256": "84ec952ba52823bc67313a35342a098d662b9754c40c2a7c6b7c4ec3db8cc8dd",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre Bni Khiran : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "حجر بني خيران بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/07.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-bni-khiran-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 7,
+      "sha256": "f6f99ad864f2cb4f64fed2f1629c23f465ae20ba687c9a80578a8b75b9fcc088",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre Bni Khiran : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "حجر بني خيران بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/08.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-bni-khiran-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 8,
+      "sha256": "108aff51d28f3dd1227c78ba3179fd0fe6578f6cba9240431c27581b0a2a0b06",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre Bni Khiran : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "حجر بني خيران بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/01.webp",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 0,
+      "sha256": "f9e90c45dc3dc79465a044ab2584f8f24ae9cc952e60f93e2f4f316d802e080d",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/02.webp",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 1,
+      "sha256": "e36c13044184653593c1d823ab50ad41e65f3a259bb0c53affcbb0a2b9b6027e",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/03.webp",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 2,
+      "sha256": "57284f684e897202ff9fcfd8ab378a08c25154cc8cf14740a4cea7f9f1386d4b",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/04.webp",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 3,
+      "sha256": "b7d6d606b54fa8ead65837589fc82b320462b4a35325703772c1b5a38121740c",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/05.png",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 4,
+      "sha256": "4fd907e387b030f980a82af92d89e61a6685c2932748ed791dfd3fa5da8ec2e5",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/06.png",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 5,
+      "sha256": "5c4ccd7e828efd034c93d68a14d7373943d92164420aa3f06b4a74fd72eaf0d8",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/07.webp",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 6,
+      "sha256": "f105abce1fd6da9f713619826847421fc29f454ce7b13ff1285eb3716a530fab",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/08.png",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 7,
+      "sha256": "59423ae9ead72913ad6eca89ac40e3ea74cafa3678fd9d7174d59e6725a3e90e",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/09.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 8,
+      "sha256": "ca1be26c8a589cf473c5f3b76790010b46227cddde6675d12fae53fe5205d990",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/cover.webp",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_cover",
+      "order": 9,
+      "sha256": "424dd7d61661b79a743326421d7587ccf96b26fb68e8af85bba60c801d2a569f",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/10.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 10,
+      "sha256": "1087afddee540f1eb70d6c613818303cdf84217233aad595e9d526156cc8a9f2",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/11.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 11,
+      "sha256": "a9a49d5ba5b0092258fe7ab20fe0ca2a93afa411859858dbfc308882699584b6",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/pierre-pose-traditionnelle/gallery/12.jpeg",
+      "target_type": "project",
+      "target_key": "pierre-pose-traditionnelle",
+      "role": "project_gallery",
+      "order": 12,
+      "sha256": "d06c50095abecdfb7859598be6fe4531f707c1b1950b1161d048601c7683f228",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Pierre : pose traditionnelle — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الحجر بالطريقة التقليدية — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/gallery/01.jpeg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 0,
+      "sha256": "5109f8624888d3cfdaeee95e6d98b55d0cc401336f5d6fcab108561757a7c5c7",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/cover.jpeg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_cover",
+      "order": 1,
+      "sha256": "ac89563196017358acb516f5238eddb0b956b20b2d2d975543a4a1bf7d0dfdff",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/gallery/02.jpeg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 2,
+      "sha256": "9c58001ce0c4219905352aa2f4864a31818b8f01caa730364d41e816f9a51eb0",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/gallery/03.jpeg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 3,
+      "sha256": "1de97480f9e57533243208abb12eb3f9b572f62fada51578b82211bdf4d53af3",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/videos/01.mp4",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_video",
+      "order": 4,
+      "sha256": "b8f79ca6a9980b9c5ed4e2353df6c0a62dc199bf41565411f658aae4890f9006",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vidéo",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — فيديو",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/posters/01.jpg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 101,
+      "sha256": "f88a4f430c1707f214b9af8dc681968fded75bbe8247a4ec58dc722932482960",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — aperçu vidéo"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — معاينة الفيديو"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/gallery/04.jpeg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 5,
+      "sha256": "54abb03ab3ba59508a3f9e7dbf96c2261581eff9cf116ee03ef1cda230a745d6",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/videos/02.mp4",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_video",
+      "order": 6,
+      "sha256": "bfa3510683e74be950466766bb3a10f378ead4e71e2cccd7e8b42a4404f2b08c",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vidéo",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — فيديو",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/posters/02.jpg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 102,
+      "sha256": "adc896182be32ccf20a143487bf226a84ac89c7136b29d77c4a6c23d9297456d",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — aperçu vidéo"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — معاينة الفيديو"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/gallery/05.jpeg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 7,
+      "sha256": "3a10f0f7ebecd7ded04f7a6145e5abfaeefd7504f0cbc51835d4cc02aea3a2d4",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/gallery/06.jpeg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 8,
+      "sha256": "6b79545e95fc5e41929d47a48d6056064c2c44fc4a0aa92c13447ea40fff1d5e",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/videos/03.mp4",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_video",
+      "order": 9,
+      "sha256": "dcaccd89a326e43ad980dda3e2cd0ec915856943839019aa41454fddae9a4eb3",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vidéo",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — فيديو",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/posters/03.jpg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 103,
+      "sha256": "26473dd4c649982b81cccad534e7b5992d5fbcf841f1a8ba66cec41efb344093",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — aperçu vidéo"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — معاينة الفيديو"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/videos/04.mp4",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_video",
+      "order": 10,
+      "sha256": "2088c068ab9b0d1ad7ff14feddd2c3abf3cff543a51373ea5c2f1098b6193ae5",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vidéo",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — فيديو",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/posters/04.jpg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 104,
+      "sha256": "0622a5a5fa0ed74a77c7099e3f306e5bad8765972867362efcfa12dd9bee52a7",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — aperçu vidéo"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — معاينة الفيديو"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/videos/05.mp4",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_video",
+      "order": 11,
+      "sha256": "d6dde4ac7d54110b206c45d5bd32eb2931740a57e4c86e411a6b36c4d0505d63",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — vidéo",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — فيديو",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/cascades-et-fontaines/posters/05.jpg",
+      "target_type": "project",
+      "target_key": "cascades-et-fontaines",
+      "role": "project_gallery",
+      "order": 105,
+      "sha256": "419b20a297674e8effede2291d8e7727f529dd5fa2f4c5e85cc492fee1e686ba",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Cascades et fontaines — aperçu vidéo"
+        },
+        "ar": {
+          "alt": "الشلالات والنافورات — معاينة الفيديو"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/01.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 0,
+      "sha256": "33af96d69d00b66ede995685d6ebe4e3fc02f015ea3ddae33a35bb9197567b23",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/02.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 1,
+      "sha256": "ecc2ede4df42d7ef922276f5d847048b758ee1ae74f096349c1dab78d019c0bf",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/03.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 2,
+      "sha256": "c4c27b7925efff5bde8fb6baa61fab45cdd1f41608a080bcd9cc326534a1655a",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/04.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 3,
+      "sha256": "05b04308e8ef0869df09d706a0a485607777d37b4b93903ecd8d626859381ed6",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/05.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 4,
+      "sha256": "427643c785579a46c8b002edfe1f2eb874b2d306490ed76c0d474c533fca1d89",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/06.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 5,
+      "sha256": "20dcd3147cb9b634e76c830fcf30102be35618847362680efcc149b176887ac3",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/07.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 6,
+      "sha256": "509429430b42a16508ceb6f3b942c0ba1780b84762abc8f140218f57a7680fc6",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/08.webp",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 7,
+      "sha256": "9394f586ba28a9141b39360ed7ffa95c455ec03807fc53004a5f85488641356f",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/09.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 8,
+      "sha256": "1537971acd900ccec0a087313cde5b0ffc315bfa221d92c44f6ca1274b4573c0",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/10.webp",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 9,
+      "sha256": "ec3c006576d9dbc5351d2d4393ce74cdf104a268006b5e9f2f07f03d00968049",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/cover.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_cover",
+      "order": 10,
+      "sha256": "ff6878f51d43d6bcf705107eb3e3cb46762b452bdf7354d04936239b40b48ba1",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/11.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 11,
+      "sha256": "d09289bd22183484bfa64209ab3381bb403c096b25d83f8043c7e07a3afb8094",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    },
+    {
+      "source": "projects/murs-et-facades/gallery/12.jpeg",
+      "target_type": "project",
+      "target_key": "murs-et-facades",
+      "role": "project_gallery",
+      "order": 12,
+      "sha256": "ed592c9b9bb9690c65a539fb9649338fb0c46880d759f11a07b9ec24e3d2a6f4",
+      "client_supplied": true,
+      "translations": {
+        "fr": {
+          "alt": "Murs et façades — vue du chantier",
+          "credit": "LAAMACH MARBRE · fourni par le client"
+        },
+        "ar": {
+          "alt": "الجدران والواجهات — صورة من الأعمال",
+          "credit": "LAAMACH MARBRE · صور مقدمة من العميل"
+        }
+      }
+    }
+  ],
+  "inventory": [
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_1188.PNG",
+      "organized": "projects/sols-en-pierre-naturelle/gallery/07.png",
+      "sha256": "4b8bae288a93752a5c85f0c6685af6e5be144f3f5b7377f51bf2331e8de1ce70",
+      "width": 1034,
+      "height": 1584,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_1209.PNG",
+      "organized": "projects/sols-en-pierre-naturelle/cover.png",
+      "sha256": "ff24fb533f6b2ec6505776b0251e5335ccc8d55cbb6501b209040185a687a5e3",
+      "width": 1178,
+      "height": 1058,
+      "role": "project_cover",
+      "reason": null
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_1248.PNG",
+      "organized": "projects/sols-en-pierre-naturelle/_review/IMG_1248.PNG",
+      "sha256": "e9e4346ee8c20e010925ee09c28055612cda8507c45af0fa01c83f270025300c",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_1249.PNG",
+      "organized": "projects/sols-en-pierre-naturelle/_review/IMG_1249.PNG",
+      "sha256": "f78d7331b2746b50e460f4d3b621132224f973c2f1f9ac5a289885860095be0a",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_2284.PNG",
+      "organized": "projects/sols-en-pierre-naturelle/gallery/01.png",
+      "sha256": "6540fc6fbf69375a172612217a9c07960abc9eb1c2ab800a295fe78e64ae8a77",
+      "width": 1179,
+      "height": 1050,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_3110.PNG",
+      "organized": "projects/sols-en-pierre-naturelle/gallery/02.png",
+      "sha256": "3ddd4f699f9cbfaeac047358edf1f454a082e90ab9dc49ed7e6a48c3791457fb",
+      "width": 1179,
+      "height": 2556,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_3111.PNG",
+      "organized": "projects/sols-en-pierre-naturelle/gallery/03.png",
+      "sha256": "2d80af02075ca6b1c9890ee28441e150a9e5182889cd36b7f1d77e4e4a99813a",
+      "width": 1179,
+      "height": 2556,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_3112.PNG",
+      "organized": "projects/sols-en-pierre-naturelle/gallery/04.png",
+      "sha256": "24dad3ad7c84cf7310abf5e2624086f479eace5994fe014deb4105e31f71b9ed",
+      "width": 1179,
+      "height": 2556,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_3985.JPG.jpeg",
+      "organized": "projects/sols-en-pierre-naturelle/_review/IMG_3985.JPG.jpeg",
+      "sha256": "f0face224ff9c222e05c6ac38667033e8c74fefda7ca3fb1383838cae98ce779",
+      "width": 408,
+      "height": 680,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_4009.JPG.jpeg",
+      "organized": "projects/sols-en-pierre-naturelle/gallery/05.jpeg",
+      "sha256": "3319669c53c4b5a0d15f17a543f43c1f1e71ad6fca0ec8ad2915c8303ee7391b",
+      "width": 960,
+      "height": 1280,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_4016.JPG.jpeg",
+      "organized": "projects/sols-en-pierre-naturelle/_review/IMG_4016.JPG.jpeg",
+      "sha256": "ceb5673383e51bc6463ea3fd591e5bb9d8ba489c8a79b90bf7ed33b02bd0701c",
+      "width": 576,
+      "height": 1280,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_4017.JPG.jpeg",
+      "organized": "projects/sols-en-pierre-naturelle/_review/IMG_4017.JPG.jpeg",
+      "sha256": "f0face224ff9c222e05c6ac38667033e8c74fefda7ca3fb1383838cae98ce779",
+      "width": 408,
+      "height": 680,
+      "role": "review",
+      "reason": "Exact duplicate"
+    },
+    {
+      "original": "projects/ardiya blhajar tabi3i/IMG_4019.JPG.jpeg",
+      "organized": "projects/sols-en-pierre-naturelle/gallery/06.jpeg",
+      "sha256": "b8790b19b077ee51fd270f00d941065da1dbbfebf23d43b8f7268c72c41a203f",
+      "width": 780,
+      "height": 1040,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_0353.JPG.jpeg",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/01.jpeg",
+      "sha256": "c4945b5d4066af368255e744f2a03aafa93d33f175e3406e4ad72e92b5580550",
+      "width": 780,
+      "height": 1040,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_0354.JPG.jpeg",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/02.jpeg",
+      "sha256": "04bc3d499a5013dd3af926b59d6502b0be8e652b0c6c87799f84c92a4682c87f",
+      "width": 780,
+      "height": 1040,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_0790.PNG",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/_review/IMG_0790.PNG",
+      "sha256": "737f01b694cafda5bbf7c889a69ca9e573e39c38e0ac3e4f16bbbb6f158ff893",
+      "width": 1178,
+      "height": 886,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_1639.PNG",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/_review/IMG_1639.PNG",
+      "sha256": "ba93bc186f709ed7681601d73454e712d30ecb3af6c68b3bc42087c168733143",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Unrelated car screenshot"
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_3882.PNG",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/_review/IMG_3882.PNG",
+      "sha256": "6f0adeee9ab4bd02a5e1eecd7cde06c74ea74dba6e9b738619cc3dc4d5b6fba1",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_4027.JPG.jpeg",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/03.jpeg",
+      "sha256": "908c7ed96954e764763709c99d7afff67dcacd4cac446cb5813a1e685a68b635",
+      "width": 1200,
+      "height": 1600,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_4029.JPG.jpeg",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/04.jpeg",
+      "sha256": "a503de1d029c7c86010ce39ebe050474c664b6fb9d9d4c553b5d7d41fae25787",
+      "width": 1200,
+      "height": 1600,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_4030.JPG.jpeg",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/05.jpeg",
+      "sha256": "750dfdfe471a5840e829cae3cf7beec594a079a85c3afc9ed3575d8b80912fa5",
+      "width": 1080,
+      "height": 1440,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_4035.JPG.jpeg",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/06.jpeg",
+      "sha256": "7bbfcf86cfd4de6a4d33571c13812ee48a342b13836fff07992cee7e958431a8",
+      "width": 1080,
+      "height": 1379,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_4037.JPG.jpeg",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/cover.jpeg",
+      "sha256": "84ec952ba52823bc67313a35342a098d662b9754c40c2a7c6b7c4ec3db8cc8dd",
+      "width": 1600,
+      "height": 1200,
+      "role": "project_cover",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_4038.JPG.jpeg",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/07.jpeg",
+      "sha256": "f6f99ad864f2cb4f64fed2f1629c23f465ae20ba687c9a80578a8b75b9fcc088",
+      "width": 720,
+      "height": 540,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar bni khiran btari9a t9lidiya/IMG_4039.JPG.jpeg",
+      "organized": "projects/pierre-bni-khiran-pose-traditionnelle/gallery/08.jpeg",
+      "sha256": "108aff51d28f3dd1227c78ba3179fd0fe6578f6cba9240431c27581b0a2a0b06",
+      "width": 1080,
+      "height": 810,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_0311.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/01.jpeg",
+      "sha256": "7139bf8399097785f971a4516beccf826cc3eb7a05a08ff68bb019c1d5c231c7",
+      "width": 4032,
+      "height": 3024,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_0313.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/02.jpeg",
+      "sha256": "d7cd8e3b3c913be1f9731f3c89e834a198ba1f2790ea56a0b394d046e562b1ec",
+      "width": 4032,
+      "height": 3024,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_0314.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/03.jpeg",
+      "sha256": "d0b22d30663ddd35107fc5d32884ea293a8708bb3283c88b9a748148c5180e03",
+      "width": 4032,
+      "height": 3024,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_0315.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/04.jpeg",
+      "sha256": "60195c193e5487e951360c84d509ac9433a8229586a93d426243309ea73312ee",
+      "width": 4032,
+      "height": 3024,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_0451.PNG",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_0451.PNG",
+      "sha256": "3ce1ecdb8a1083c5230e3f9e386aa60a03fd6e533ae9b9afbe36e55b1b48c771",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1064.PNG",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_1064.PNG",
+      "sha256": "1e7fb90a0767b6daca6c236a12a86c2ad5f808dc637a5c08f4c65fc223384b5e",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1065.PNG",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_1065.PNG",
+      "sha256": "0480701f19b3db95b9ef1a202b874ee9293dc91cf6e12f8f03d2c43ba443065f",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1190.PNG",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/05.png",
+      "sha256": "4fd907e387b030f980a82af92d89e61a6685c2932748ed791dfd3fa5da8ec2e5",
+      "width": 1179,
+      "height": 1575,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1191.PNG",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/06.png",
+      "sha256": "5c4ccd7e828efd034c93d68a14d7373943d92164420aa3f06b4a74fd72eaf0d8",
+      "width": 1179,
+      "height": 870,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1214.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/07.jpeg",
+      "sha256": "97ba527cd03692977b4ed54f4b046b78dad42f495c9f88f4b73e74025511f20e",
+      "width": 3024,
+      "height": 4032,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1220.PNG",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/08.png",
+      "sha256": "59423ae9ead72913ad6eca89ac40e3ea74cafa3678fd9d7174d59e6725a3e90e",
+      "width": 1179,
+      "height": 1436,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1222.PNG",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_1222.PNG",
+      "sha256": "c5c95e9ad7ea9a96fa283ae7aa5f47fa6762f19a5dbe0d6eb9c2f243bfc0719d",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1387.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_1387.JPG.jpeg",
+      "sha256": "a9c3ec3adf8fd12576f9d02185da27cc852ffc0c8dcdfb2ccab7c3473d118372",
+      "width": 4032,
+      "height": 3024,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1406.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_1406.JPG.jpeg",
+      "sha256": "3a70b5cd089355ff8aa3c45bc42e001f6bd4cb14796200197f81ee1a321ab0bc",
+      "width": 4032,
+      "height": 3024,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_1560.PNG",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_1560.PNG",
+      "sha256": "b425191b43f95ce08d0bda07a5678d82fc49365824abbafafdcf59030781fff4",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_2372.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/09.jpeg",
+      "sha256": "ca1be26c8a589cf473c5f3b76790010b46227cddde6675d12fae53fe5205d990",
+      "width": 720,
+      "height": 957,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_2400.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_2400.JPG.jpeg",
+      "sha256": "97316db8218896f5d2cfa489b6e39429facb2bcd2d29fe3595b9c3951e386dea",
+      "width": 4032,
+      "height": 3024,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_2401.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_2401.JPG.jpeg",
+      "sha256": "d4fcb562394892e7fc6a5124ca0d3ba9cce7db0674ed6cea3327ad7be7365635",
+      "width": 4032,
+      "height": 3024,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_2405.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_2405.JPG.jpeg",
+      "sha256": "4365022eb5b16c7000a957f8d552720ab1f03626f4ee80a11250808a8e5540d0",
+      "width": 4032,
+      "height": 3024,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_2407.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_2407.JPG.jpeg",
+      "sha256": "fe3a2b40e1c7616e75f10c337b4d46f39ca653883b5bea5a41e2cb51e6bc9d6b",
+      "width": 4032,
+      "height": 3024,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_2810.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/cover.jpeg",
+      "sha256": "66da5945e804873ac0ed1cb5c3d8d126600ba9031c7b3b1ce00b527c94bae925",
+      "width": 4032,
+      "height": 3024,
+      "role": "project_cover",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_3153.PNG",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_3153.PNG",
+      "sha256": "95d464ba6ed3b3bc4753a0d45c9cb690794365f806037e37a55cc4a5f8cf94dd",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_3994.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/10.jpeg",
+      "sha256": "1087afddee540f1eb70d6c613818303cdf84217233aad595e9d526156cc8a9f2",
+      "width": 1600,
+      "height": 1200,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_4010.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/11.jpeg",
+      "sha256": "a9a49d5ba5b0092258fe7ab20fe0ca2a93afa411859858dbfc308882699584b6",
+      "width": 1600,
+      "height": 1200,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_4011.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_4011.JPG.jpeg",
+      "sha256": "f3331872ba187cb5f8b77b6a25dc9f213f37be63e376c8d1d4df9b24cb2c25a2",
+      "width": 1600,
+      "height": 1200,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_4013.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/gallery/12.jpeg",
+      "sha256": "d06c50095abecdfb7859598be6fe4531f707c1b1950b1161d048601c7683f228",
+      "width": 1280,
+      "height": 720,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_4014.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_4014.JPG.jpeg",
+      "sha256": "ea62c1dc66d7be11c362cb9cad4ed97af216364a5cf6d847acf15d6bb9f4efd3",
+      "width": 900,
+      "height": 1600,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_4021.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_4021.JPG.jpeg",
+      "sha256": "383c49ecefdb43dea976f858eba2e71fda37687f4eb0e5a950511fe8f3b2f6ba",
+      "width": 1280,
+      "height": 720,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_4023.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_4023.JPG.jpeg",
+      "sha256": "f52e0e2a6cf72d2987d90f5835da953e1f6da48df0cfa08f2bb6d05cc5e84fb5",
+      "width": 1600,
+      "height": 747,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/hajar btari9a ta9lidiya/IMG_4026.JPG.jpeg",
+      "organized": "projects/pierre-pose-traditionnelle/_review/IMG_4026.JPG.jpeg",
+      "sha256": "1087afddee540f1eb70d6c613818303cdf84217233aad595e9d526156cc8a9f2",
+      "width": 1600,
+      "height": 1200,
+      "role": "review",
+      "reason": "Exact duplicate"
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4053.JPG.jpeg",
+      "organized": "projects/cascades-et-fontaines/gallery/01.jpeg",
+      "sha256": "5109f8624888d3cfdaeee95e6d98b55d0cc401336f5d6fcab108561757a7c5c7",
+      "width": 1200,
+      "height": 1600,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4054.JPG.jpeg",
+      "organized": "projects/cascades-et-fontaines/cover.jpeg",
+      "sha256": "ac89563196017358acb516f5238eddb0b956b20b2d2d975543a4a1bf7d0dfdff",
+      "width": 1200,
+      "height": 1600,
+      "role": "project_cover",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4055.JPG.jpeg",
+      "organized": "projects/cascades-et-fontaines/gallery/02.jpeg",
+      "sha256": "9c58001ce0c4219905352aa2f4864a31818b8f01caa730364d41e816f9a51eb0",
+      "width": 1040,
+      "height": 780,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4056.JPG.jpeg",
+      "organized": "projects/cascades-et-fontaines/gallery/03.jpeg",
+      "sha256": "1de97480f9e57533243208abb12eb3f9b572f62fada51578b82211bdf4d53af3",
+      "width": 1280,
+      "height": 1280,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4057.MP4",
+      "organized": "projects/cascades-et-fontaines/videos/01.mp4",
+      "sha256": "b8f79ca6a9980b9c5ed4e2353df6c0a62dc199bf41565411f658aae4890f9006",
+      "role": "project_video",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4058.JPG.jpeg",
+      "organized": "projects/cascades-et-fontaines/gallery/04.jpeg",
+      "sha256": "54abb03ab3ba59508a3f9e7dbf96c2261581eff9cf116ee03ef1cda230a745d6",
+      "width": 1200,
+      "height": 1600,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4059.MP4",
+      "organized": "projects/cascades-et-fontaines/videos/02.mp4",
+      "sha256": "bfa3510683e74be950466766bb3a10f378ead4e71e2cccd7e8b42a4404f2b08c",
+      "role": "project_video",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4061.MP4",
+      "organized": "projects/cascades-et-fontaines/_review/IMG_4061.MP4",
+      "sha256": "522a7e3d15794fa5b3d86b0c6bb49b481cb9c022834232360cdd029d91c4e50d",
+      "role": "review",
+      "reason": "TikTok watermark; ownership/usage confirmation required"
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4063.JPG.jpeg",
+      "organized": "projects/cascades-et-fontaines/gallery/05.jpeg",
+      "sha256": "3a10f0f7ebecd7ded04f7a6145e5abfaeefd7504f0cbc51835d4cc02aea3a2d4",
+      "width": 1200,
+      "height": 1600,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4065.JPG.jpeg",
+      "organized": "projects/cascades-et-fontaines/gallery/06.jpeg",
+      "sha256": "6b79545e95fc5e41929d47a48d6056064c2c44fc4a0aa92c13447ea40fff1d5e",
+      "width": 960,
+      "height": 1280,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/IMG_4066.MP4",
+      "organized": "projects/cascades-et-fontaines/videos/03.mp4",
+      "sha256": "dcaccd89a326e43ad980dda3e2cd0ec915856943839019aa41454fddae9a4eb3",
+      "role": "project_video",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/WhatsApp Image 2026-10-18 at 7.49.34 PM.jpeg",
+      "organized": "projects/cascades-et-fontaines/_review/WhatsApp Image 2026-10-18 at 7.49.34 PM.jpeg",
+      "sha256": "e9439a6875a6dbadca5b8da1787a9e6f50d4ec7411676de9c3757db3af00e61d",
+      "width": 3072,
+      "height": 4096,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/WhatsApp Video 2026-10-18 at 7.49.34 PM (1).mp4",
+      "organized": "projects/cascades-et-fontaines/videos/04.mp4",
+      "sha256": "2088c068ab9b0d1ad7ff14feddd2c3abf3cff543a51373ea5c2f1098b6193ae5",
+      "role": "project_video",
+      "reason": null
+    },
+    {
+      "original": "projects/الشلالات والنافورات-Cascades et fontaines/WhatsApp Video 2026-10-18 at 7.49.34 PM.mp4",
+      "organized": "projects/cascades-et-fontaines/videos/05.mp4",
+      "sha256": "d6dde4ac7d54110b206c45d5bd32eb2931740a57e4c86e411a6b36c4d0505d63",
+      "role": "project_video",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_0902.PNG",
+      "organized": "projects/murs-et-facades/_review/IMG_0902.PNG",
+      "sha256": "0083fc27ea42451a500f0a2ec5ca1b2c5213896c00df9e0d6cc4b4a105624183",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_1465.PNG",
+      "organized": "projects/murs-et-facades/_review/IMG_1465.PNG",
+      "sha256": "3104aa91248f6cde0e01c44c2198f077484f480f5e401e4693654315e41ec877",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_1466.PNG",
+      "organized": "projects/murs-et-facades/_review/IMG_1466.PNG",
+      "sha256": "5543dff224a8ef89b8263b73e1e84e2a36ab6449cd1098b63d85e870462e5f3d",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_1467.PNG",
+      "organized": "projects/murs-et-facades/_review/IMG_1467.PNG",
+      "sha256": "8b84d3de2a4e056af1b31bf4d4fc43e77696ce1d53ab8906fd67c866e2f06d8b",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_2295.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_2295.JPG.jpeg",
+      "sha256": "1870357c47e837cea0f3bdf6b07055a0fe9e4b610cf1a8129e3c6b6f549405df",
+      "width": 540,
+      "height": 1200,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_2311.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/01.jpeg",
+      "sha256": "33af96d69d00b66ede995685d6ebe4e3fc02f015ea3ddae33a35bb9197567b23",
+      "width": 1600,
+      "height": 1204,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_2314.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/02.jpeg",
+      "sha256": "ecc2ede4df42d7ef922276f5d847048b758ee1ae74f096349c1dab78d019c0bf",
+      "width": 1600,
+      "height": 1204,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_2320.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_2320.JPG.jpeg",
+      "sha256": "9f888e5950024a840890d4c480e8161994bc89c2ee921cc03f20b7f498d19813",
+      "width": 720,
+      "height": 1600,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_2322.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/03.jpeg",
+      "sha256": "c4c27b7925efff5bde8fb6baa61fab45cdd1f41608a080bcd9cc326534a1655a",
+      "width": 957,
+      "height": 1280,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_2324.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/04.jpeg",
+      "sha256": "05b04308e8ef0869df09d706a0a485607777d37b4b93903ecd8d626859381ed6",
+      "width": 1204,
+      "height": 1600,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3288.PNG",
+      "organized": "projects/murs-et-facades/_review/IMG_3288.PNG",
+      "sha256": "00cbb33468523fdae28f2de3d666b54f2d16774e2cd81a537c926ab4704e6e79",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3289.PNG",
+      "organized": "projects/murs-et-facades/_review/IMG_3289.PNG",
+      "sha256": "39ad92ffe5cf0a37e542e071d5454ab96dbc6b3937043e4ddbf46ee1e16b2cdf",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3292.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3292.JPG.jpeg",
+      "sha256": "ee9538384dfb0f6a7d37809ea05f2d6de6755ca6907459cc7aeff63258afb4f5",
+      "width": 720,
+      "height": 525,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3295.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/05.jpeg",
+      "sha256": "427643c785579a46c8b002edfe1f2eb874b2d306490ed76c0d474c533fca1d89",
+      "width": 720,
+      "height": 722,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3306.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/06.jpeg",
+      "sha256": "20dcd3147cb9b634e76c830fcf30102be35618847362680efcc149b176887ac3",
+      "width": 715,
+      "height": 720,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3307.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/07.jpeg",
+      "sha256": "509429430b42a16508ceb6f3b942c0ba1780b84762abc8f140218f57a7680fc6",
+      "width": 720,
+      "height": 653,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3315.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/08.jpeg",
+      "sha256": "978d7fec418dc873d629186563a36e6046f6e64ce30379ce79732cd9236e9f16",
+      "width": 3072,
+      "height": 4096,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3326.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/09.jpeg",
+      "sha256": "1537971acd900ccec0a087313cde5b0ffc315bfa221d92c44f6ca1274b4573c0",
+      "width": 720,
+      "height": 960,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3327.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3327.JPG.jpeg",
+      "sha256": "24af5dd45d1bedd721abc7c9ab4863e1219eba97cef4603d79616403c9f2e0a2",
+      "width": 719,
+      "height": 540,
+      "role": "review",
+      "reason": "External watermark; ownership/usage confirmation required"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3330.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/10.jpeg",
+      "sha256": "bf03a42462f9b5e99cae632e4e38257bf12c90d6d7b0a01ced81b96a5540392d",
+      "width": 3072,
+      "height": 4096,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3569.PNG",
+      "organized": "projects/murs-et-facades/_review/IMG_3569.PNG",
+      "sha256": "ac1a81bc377314e78d5f7ab541527e2a963a6c7b20f356292fc5b8acbb1f14df",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3789.PNG",
+      "organized": "projects/murs-et-facades/_review/IMG_3789.PNG",
+      "sha256": "ad1ce175164d16b46fc7334d05ce46fba3dac99d5ae84ea90cb81930822db196",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3790.PNG",
+      "organized": "projects/murs-et-facades/_review/IMG_3790.PNG",
+      "sha256": "7adb9e5fc544aead7e4042a28eec4b0b234306cbaeb04b188e78222194eebdf9",
+      "width": 1179,
+      "height": 2556,
+      "role": "review",
+      "reason": "Phone screenshot or secondary view: review before publication"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3888.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3888.JPG.jpeg",
+      "sha256": "a41ae39fff5c154bbc4fd9cd95dde687dfbd521b3e65e0108e1ae400345e066e",
+      "width": 720,
+      "height": 722,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3893.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3893.JPG.jpeg",
+      "sha256": "dda3712a2d6b42cb3ff50b8579447d589aa8d2134168f2eeef52623b12c1c1ab",
+      "width": 960,
+      "height": 1280,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3896.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3896.JPG.jpeg",
+      "sha256": "eeef28458c2c9fe45ab03d5effa5e8543245dc0935f8c9e8b5f71334b3e21088",
+      "width": 576,
+      "height": 960,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3898.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3898.JPG.jpeg",
+      "sha256": "7f3ddcc731e05de31ae7010caa2ef5d1c81fcda4f5c0e243764ac2505bf82ad1",
+      "width": 585,
+      "height": 1040,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3901.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3901.JPG.jpeg",
+      "sha256": "6a4c79ce2c7d1eca3b3d232f41f44d9d38d813e5244cb1ca12334cb48431cccc",
+      "width": 540,
+      "height": 1200,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3902.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3902.JPG.jpeg",
+      "sha256": "7e217b29705e4518a7e7b3d9354374caca714fcab7e0456514dd7f50d722b0f3",
+      "width": 960,
+      "height": 1280,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3903.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3903.JPG.jpeg",
+      "sha256": "a259545a5036af35b0ae0303b91a8200644199bb94ef44f197da8b52ff0e8ee3",
+      "width": 960,
+      "height": 1280,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3906.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3906.JPG.jpeg",
+      "sha256": "d788aa82fb2f1565fa079c22c51517e337cc9011c79b3bad917d20e78617b261",
+      "width": 540,
+      "height": 1170,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3911.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3911.JPG.jpeg",
+      "sha256": "35f764303dd66602b18e3261c96b9c1ab42242d3eb0e117eb6f4947d66defb4b",
+      "width": 720,
+      "height": 1560,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3912.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3912.JPG.jpeg",
+      "sha256": "7d5f19996df4e24b5068f0e11689aba932eb5ed28e62f6d9f1aa15b8cef7ea79",
+      "width": 960,
+      "height": 1280,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3915.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3915.JPG.jpeg",
+      "sha256": "49da746fb79ecbeee53d435949fa751bbc1e7b8a6647ed9ff323b8c56cf24006",
+      "width": 960,
+      "height": 1280,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3927.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3927.JPG.jpeg",
+      "sha256": "802c4d189e60bfa330a6ecea8db2cb8cde3a70cc37bd2feb29b31eca5df828a1",
+      "width": 1072,
+      "height": 1440,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3929.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3929.JPG.jpeg",
+      "sha256": "dccc3a7eb950ed1c1dff70987d0c71b0bf797eed4a6041d4f34d332941e55160",
+      "width": 720,
+      "height": 960,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3936.JPG.jpeg",
+      "organized": "projects/murs-et-facades/cover.jpeg",
+      "sha256": "ff6878f51d43d6bcf705107eb3e3cb46762b452bdf7354d04936239b40b48ba1",
+      "width": 640,
+      "height": 640,
+      "role": "project_cover",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3943.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3943.JPG.jpeg",
+      "sha256": "cbe5f3fde000b16db1ddd98b7a3ceb3a981fa6513fcf0b150c8b31ec5a722f1d",
+      "width": 480,
+      "height": 1040,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3947.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3947.JPG.jpeg",
+      "sha256": "dd3171fcf0738bb0ff7d641c67c4d16ecadfcc909b78c38c9984c83b2607a9a7",
+      "width": 900,
+      "height": 1600,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3953.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/11.jpeg",
+      "sha256": "d09289bd22183484bfa64209ab3381bb403c096b25d83f8043c7e07a3afb8094",
+      "width": 809,
+      "height": 1080,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3954.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3954.JPG.jpeg",
+      "sha256": "21881cb946fef05acf7802050dd40e1181a2fad5f4cace166fdf9ee1ec6ad827",
+      "width": 720,
+      "height": 960,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3957.JPG.jpeg",
+      "organized": "projects/murs-et-facades/gallery/12.jpeg",
+      "sha256": "ed592c9b9bb9690c65a539fb9649338fb0c46880d759f11a07b9ec24e3d2a6f4",
+      "width": 715,
+      "height": 715,
+      "role": "project_gallery",
+      "reason": null
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3963.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3963.JPG.jpeg",
+      "sha256": "2787fba455253b3e2cdc01cef172003bcec812acf0d08e2a3b30618236093f1f",
+      "width": 720,
+      "height": 960,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    },
+    {
+      "original": "projects/جدران و الواجهات- Murs et façades/IMG_3968.JPG.jpeg",
+      "organized": "projects/murs-et-facades/_review/IMG_3968.JPG.jpeg",
+      "sha256": "000c8079c0a66e99918dd2e6128e7deb39b29763a4e455f33bf00f507fb14fb4",
+      "width": 540,
+      "height": 540,
+      "role": "review",
+      "reason": "Reserve/soft or similar image: not selected in bounded first gallery"
+    }
+  ],
+  "preparations": [
+    {
+      "original": "projects/murs-et-facades/gallery/08.jpeg",
+      "originalSha256": "978d7fec418dc873d629186563a36e6046f6e64ce30379ce79732cd9236e9f16",
+      "prepared": "projects/murs-et-facades/gallery/08.webp",
+      "sha256": "9394f586ba28a9141b39360ed7ffa95c455ec03807fc53004a5f85488641356f",
+      "processing": "EXIF orientation; proportional fit within 2560px, never upscale; WebP quality 95; original unchanged"
+    },
+    {
+      "original": "projects/murs-et-facades/gallery/10.jpeg",
+      "originalSha256": "bf03a42462f9b5e99cae632e4e38257bf12c90d6d7b0a01ced81b96a5540392d",
+      "prepared": "projects/murs-et-facades/gallery/10.webp",
+      "sha256": "ec3c006576d9dbc5351d2d4393ce74cdf104a268006b5e9f2f07f03d00968049",
+      "processing": "EXIF orientation; proportional fit within 2560px, never upscale; WebP quality 95; original unchanged"
+    },
+    {
+      "original": "projects/pierre-pose-traditionnelle/cover.jpeg",
+      "originalSha256": "66da5945e804873ac0ed1cb5c3d8d126600ba9031c7b3b1ce00b527c94bae925",
+      "prepared": "projects/pierre-pose-traditionnelle/cover.webp",
+      "sha256": "424dd7d61661b79a743326421d7587ccf96b26fb68e8af85bba60c801d2a569f",
+      "processing": "EXIF orientation; proportional fit within 2560px, never upscale; WebP quality 95; original unchanged"
+    },
+    {
+      "original": "projects/pierre-pose-traditionnelle/gallery/01.jpeg",
+      "originalSha256": "7139bf8399097785f971a4516beccf826cc3eb7a05a08ff68bb019c1d5c231c7",
+      "prepared": "projects/pierre-pose-traditionnelle/gallery/01.webp",
+      "sha256": "f9e90c45dc3dc79465a044ab2584f8f24ae9cc952e60f93e2f4f316d802e080d",
+      "processing": "EXIF orientation; proportional fit within 2560px, never upscale; WebP quality 95; original unchanged"
+    },
+    {
+      "original": "projects/pierre-pose-traditionnelle/gallery/02.jpeg",
+      "originalSha256": "d7cd8e3b3c913be1f9731f3c89e834a198ba1f2790ea56a0b394d046e562b1ec",
+      "prepared": "projects/pierre-pose-traditionnelle/gallery/02.webp",
+      "sha256": "e36c13044184653593c1d823ab50ad41e65f3a259bb0c53affcbb0a2b9b6027e",
+      "processing": "EXIF orientation; proportional fit within 2560px, never upscale; WebP quality 95; original unchanged"
+    },
+    {
+      "original": "projects/pierre-pose-traditionnelle/gallery/03.jpeg",
+      "originalSha256": "d0b22d30663ddd35107fc5d32884ea293a8708bb3283c88b9a748148c5180e03",
+      "prepared": "projects/pierre-pose-traditionnelle/gallery/03.webp",
+      "sha256": "57284f684e897202ff9fcfd8ab378a08c25154cc8cf14740a4cea7f9f1386d4b",
+      "processing": "EXIF orientation; proportional fit within 2560px, never upscale; WebP quality 95; original unchanged"
+    },
+    {
+      "original": "projects/pierre-pose-traditionnelle/gallery/04.jpeg",
+      "originalSha256": "60195c193e5487e951360c84d509ac9433a8229586a93d426243309ea73312ee",
+      "prepared": "projects/pierre-pose-traditionnelle/gallery/04.webp",
+      "sha256": "b7d6d606b54fa8ead65837589fc82b320462b4a35325703772c1b5a38121740c",
+      "processing": "EXIF orientation; proportional fit within 2560px, never upscale; WebP quality 95; original unchanged"
+    },
+    {
+      "original": "projects/pierre-pose-traditionnelle/gallery/07.jpeg",
+      "originalSha256": "97ba527cd03692977b4ed54f4b046b78dad42f495c9f88f4b73e74025511f20e",
+      "prepared": "projects/pierre-pose-traditionnelle/gallery/07.webp",
+      "sha256": "f105abce1fd6da9f713619826847421fc29f454ce7b13ff1285eb3716a530fab",
+      "processing": "EXIF orientation; proportional fit within 2560px, never upscale; WebP quality 95; original unchanged"
+    }
+  ]
+}

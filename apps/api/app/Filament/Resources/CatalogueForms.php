@@ -14,9 +14,11 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Image;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class CatalogueForms
 {
@@ -49,10 +51,10 @@ class CatalogueForms
             }
             $sizeFields = [Hidden::make('id')];
             foreach (['width', 'length', 'height', 'thickness'] as $dimension) {
-                $sizeFields[] = TextInput::make($dimension)->numeric()->minValue(0.0001)->maxValue(1000000)->required(in_array($dimension, ['width', 'length'], true));
+                $sizeFields[] = TextInput::make($dimension)->label(['width' => 'Largeur / العرض', 'length' => 'Longueur / الطول', 'height' => 'Hauteur / الارتفاع', 'thickness' => 'Épaisseur / السماكة'][$dimension])->numeric()->minValue(0.0001)->maxValue(1000000);
             }
             $sizeFields = [...$sizeFields, Select::make('measurement_unit')->options(array_combine(config('catalogue.measurement_units'), config('catalogue.measurement_units')))->required(), Toggle::make('active')->default(true), TextInput::make('sort_order')->integer()->minValue(0)->default(0)->required(), self::image('cover_media_id', 'Optional size cover'), ...self::translations('size')];
-            $fields[] = Repeater::make('sizes')->schema($sizeFields)->maxItems(40)->defaultItems(0)->reorderable(false)->helperText('Explicit measurements. Active means selectable, not guaranteed inventory. Ordering uses sort_order.');
+            $fields[] = Repeater::make('sizes')->label('Dimensions / الأبعاد')->schema($sizeFields)->maxItems(40)->defaultItems(0)->reorderable(false)->helperText('Optional: thickness only, length + width, or both. Leave this list empty for products without dimensions. Labels are generated automatically when empty.');
             $fields[] = Repeater::make('finishes')->schema([Select::make('finish_id')->options(fn () => Finish::orderBy('slug')->pluck('slug', 'id'))->required()->searchable(), Toggle::make('active')->default(true), Toggle::make('is_default')->default(false), TextInput::make('sort_order')->integer()->minValue(0)->default(0)->required()])->maxItems(20)->defaultItems(0)->reorderable(false);
             $fields[] = Repeater::make('gallery')->schema([self::image('media_asset_id', 'Approved published gallery image')->required()])->maxItems(12)->defaultItems(0)->helperText('Drag to order. No raw storage keys.');
         }
@@ -70,7 +72,7 @@ class CatalogueForms
         foreach (config('localization.locales') as $locale) {
             $prefix = 'translations.'.$locale['code'].'.';
             $label = $kind === 'size' ? 'label' : 'name';
-            $fields[] = TextInput::make($prefix.$label)->label($locale['name'].' '.$label)->maxLength(160)->required($locale['code'] === config('localization.fallback'));
+            $fields[] = TextInput::make($prefix.$label)->label($locale['name'].' '.$label)->maxLength(160)->required($kind !== 'size' && $locale['code'] === config('localization.fallback'));
             if ($kind !== 'size') {
                 $fields[] = Textarea::make($prefix.'description')->label($locale['name'].' description')->maxLength(10000);
             }
@@ -91,12 +93,25 @@ class CatalogueForms
 
     public static function image(string $key, string $label): Select
     {
-        return Select::make($key)->label($label)->searchable()->getSearchResultsUsing(function (string $search) {
+        $select = Select::make($key)->label($label)->searchable()->getSearchResultsUsing(function (string $search) {
             $query = MediaAsset::query();
             app(PublicCatalogue::class)->eligibleMedia($query);
 
             return $query->where('original_filename', 'like', '%'.addcslashes($search, '%_\\').'%')->limit(50)->pluck('original_filename', 'id')->all();
         })->getOptionLabelUsing(fn ($value) => MediaAsset::find($value)?->original_filename);
+
+        return MediaForms::attach($select, 'image', str_contains($key, 'hero') || str_contains($key, 'secondary') ? ['thumb', 'banner'] : ['thumb', 'card', 'gallery']);
+    }
+
+    public static function imagePreview(string $key, string $label): Image
+    {
+        return Image::make(function (Get $get) use ($key): string {
+            $id = $get($key);
+
+            return is_string($id) && Str::isUuid($id) ? route('media.preview', ['asset' => $id]) : '';
+        }, $label)->visible(fn (Get $get) => is_string($get($key)) && Str::isUuid($get($key)))
+            ->imageHeight(180)->imageWidth('100%')
+            ->extraAttributes(['data-selected-image-preview' => '', 'loading' => 'lazy', 'style' => 'object-fit:contain;border-radius:8px;background:#f7f6f2']);
     }
 
     public static function data(CatalogueRecord $record): array

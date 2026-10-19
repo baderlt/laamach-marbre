@@ -14,7 +14,7 @@ test.beforeAll(() => fixtures('add'));
 test.afterAll(() => fixtures('record-upload'));
 async function ready(page: import('@playwright/test').Page) { await expect(page.locator('[data-viewer-host]')).toHaveAttribute('data-viewer-ready', 'true', { timeout: 20000 }); await expect(page.locator('[data-viewer-host] canvas')).toBeVisible(); }
 for (const locale of ['fr', 'ar']) {
-  test(`${locale}: runtime/model lazy loading, actual GLB pixels, orbit, zoom, reset and fullscreen`, async ({ page }) => {
+  test(`${locale}: runtime/model lazy loading, actual GLB pixels, orbit, zoom, reset and dimension guides`, async ({ page }) => {
     const copy = viewerCopy(locale), modelRequests: string[] = [], scripts: Promise<string>[] = [];
     page.on('request', request => { if (/\.glb(?:\?|$)/.test(request.url())) modelRequests.push(request.url()); });
     page.on('response', response => { if (response.request().resourceType() === 'script') scripts.push(response.text().catch(() => '')); });
@@ -33,21 +33,21 @@ for (const locale of ['fr', 'ar']) {
     const host = page.locator('[data-viewer-host]'), canvas = host.locator('canvas');
     expect(Number(await host.getAttribute('data-viewer-triangles'))).toBeGreaterThan(2);
     const before = await canvas.screenshot(); const camera = () => host.getAttribute('data-viewer-camera'); const initial = await camera();
-    await page.getByRole('button', { name: copy.rotateLeft, exact: true }).click(); await expect.poll(camera).not.toBe(initial);
+    await canvas.focus(); await canvas.press('ArrowLeft'); await expect.poll(camera).not.toBe(initial);
     const left = JSON.parse((await camera())!); expect(left[0]).toBeLessThan(JSON.parse(initial!)[0]);
     expect(Buffer.compare(before, await canvas.screenshot())).not.toBe(0);
-    await page.getByRole('button', { name: copy.reset, exact: true }).click(); await expect.poll(camera).toBe(initial);
+    await canvas.focus(); await canvas.press('Home'); await expect.poll(camera).toBe(initial);
     await canvas.focus(); await page.keyboard.press('ArrowRight'); await expect.poll(camera).not.toBe(initial);
-    await page.getByRole('button', { name: copy.reset, exact: true }).click(); await expect.poll(camera).toBe(initial);
+    await canvas.focus(); await canvas.press('Home'); await expect.poll(camera).toBe(initial);
     const distance = (values: number[]) => Math.hypot(...values), baseDistance = distance(JSON.parse(initial!));
-    for (let i = 0; i < 12; i++) await page.getByRole('button', { name: copy.zoomIn, exact: true }).click();
+    for (let i = 0; i < 12; i++) { await canvas.focus(); await canvas.press('+'); }
     expect(distance(JSON.parse((await camera())!))).toBeGreaterThanOrEqual(baseDistance * .649);
-    for (let i = 0; i < 18; i++) await page.getByRole('button', { name: copy.zoomOut, exact: true }).click();
+    for (let i = 0; i < 18; i++) { await canvas.focus(); await canvas.press('-'); }
     expect(distance(JSON.parse((await camera())!))).toBeLessThanOrEqual(baseDistance * 3.501);
-    await page.getByRole('button', { name: copy.reset, exact: true }).click();
+    await canvas.focus(); await canvas.press('Home');
     const frames = await host.getAttribute('data-viewer-frames'); await page.waitForTimeout(700); expect(await host.getAttribute('data-viewer-frames')).toBe(frames);
-    await page.getByRole('button', { name: copy.fullscreen, exact: true }).click(); await expect.poll(() => page.evaluate(() => !!document.fullscreenElement)).toBe(true);
-    await page.getByRole('button', { name: copy.exitFullscreen, exact: true }).click(); await expect.poll(() => page.evaluate(() => !!document.fullscreenElement)).toBe(false);
+    await expect(page.locator('.viewer-toolbar, .viewer-help, .viewer-disclosure')).toHaveCount(0);
+    await expect(page.locator('.viewer-dimension-overlay svg')).toBeVisible();
     await page.locator('.viewer-panel').screenshot({ path: resolve(output, `${locale}-glb-desktop.png`) });
     await page.getByRole('button', { name: copy.photos, exact: true }).click(); await expect(trigger).toBeFocused(); await expect(page.locator('[data-product-image]')).toBeVisible(); await expect(canvas).toHaveCount(0);
   });
@@ -59,8 +59,9 @@ for (const locale of ['fr', 'ar']) {
       const host = page.locator('[data-viewer-host]'); expect(JSON.parse((await host.getAttribute('data-viewer-dimensions'))!)).toEqual({ width: .07, length: .2, depth: .02 });
       await page.locator('.viewer-size select').selectOption({ label: 'Mapped size B' }); await expect.poll(async () => JSON.parse((await host.getAttribute('data-viewer-dimensions'))!)).toEqual({ width: .1, length: .3, depth: .015 });
       await expect(page.locator('html')).toHaveAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr'); expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-      if (width < 768) { const canvas = host.locator('canvas'); await expect(canvas).toHaveCSS('touch-action', 'pan-y'); await page.getByRole('button', { name: copy.touch, exact: true }).click(); await expect(canvas).toHaveCSS('touch-action', 'none'); await page.getByRole('button', { name: copy.scroll, exact: true }).click(); await expect(canvas).toHaveCSS('touch-action', 'pan-y'); }
-      for (const button of await page.locator('.viewer-toolbar button').all()) { expect((await button.boundingBox())!.height).toBeGreaterThanOrEqual(44); await expect(button).toHaveAccessibleName(/.+/); }
+      if (width < 768) await expect(host.locator('canvas')).toHaveCSS('touch-action', 'none');
+      await expect(page.locator('.viewer-dimension-overlay svg')).toBeVisible();
+      await expect(page.locator('.viewer-toolbar')).toHaveCount(0);
       await page.locator('.viewer-panel').screenshot({ path: resolve(output, `${locale}-procedural-${width}.png`) });
       await page.getByRole('button', { name: copy.photos, exact: true }).click();
     }
@@ -87,8 +88,7 @@ for (const locale of ['fr', 'ar']) {
         await page.setViewportSize({ width, height: 844 }); await page.goto(`/${locale}/products/synthetic-glb`);
         await page.getByRole('button', { name: copy.open, exact: true }).tap(); await ready(page);
         const canvas = page.locator('[data-viewer-host] canvas'), host = page.locator('[data-viewer-host]');
-        await expect(canvas).toHaveCSS('touch-action', 'pan-y');
-        await page.getByRole('button', { name: copy.touch, exact: true }).tap(); await expect(canvas).toHaveCSS('touch-action', 'none');
+        await expect(canvas).toHaveCSS('touch-action', 'none');
         await canvas.scrollIntoViewIfNeeded(); const box = (await canvas.boundingBox())!, before = await host.getAttribute('data-viewer-camera');
         const session = await context.newCDPSession(page), x = box.x + box.width / 2, y = box.y + box.height / 2;
         await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
@@ -99,7 +99,7 @@ for (const locale of ['fr', 'ar']) {
         await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await session.detach();
         await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
         await expect.poll(() => host.getAttribute('data-viewer-camera')).not.toBe(before);
-        await page.getByRole('button', { name: copy.scroll, exact: true }).tap(); await expect(canvas).toHaveCSS('touch-action', 'pan-y');
+        await expect(page.locator('.viewer-touch-toggle')).toHaveCount(0);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
         await page.locator('.viewer-panel').screenshot({ path: resolve(output, `${locale}-glb-touch-${width}.png`) });
         await page.getByRole('button', { name: copy.photos, exact: true }).tap(); await expect(canvas).toHaveCount(0);

@@ -10,6 +10,7 @@
   },
   "scripts": {
     "dev": "npm run dev --workspace @laamach-marbre/web",
+    "dev:preview": "node scripts/start-client-preview.mjs",
     "build": "npm run build:viewer-admin && npm run build --workspace @laamach-marbre/web",
     "start": "npm run start --workspace @laamach-marbre/web",
     "typecheck": "npm run typecheck --workspace @laamach-marbre/web",
@@ -18,7 +19,8 @@
     "test:browser": "playwright test",
     "check:isolation": "node scripts/check-isolation.mjs",
     "build:viewer-admin": "node scripts/build-viewer-admin.mjs",
-    "predev": "npm run build:viewer-admin"
+    "predev": "npm run build:viewer-admin",
+    "predev:preview": "npm run build:viewer-admin"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

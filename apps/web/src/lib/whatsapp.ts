@@ -19,6 +19,18 @@ export function unitLabel(unit: string, locale: string): string {
 export function requestAvailable(settings: WhatsAppSettings | null | undefined, kind: RequestKind): boolean {
   return settings?.enabled === true && settings[kind] === true && typeof settings.number === 'string' && /^[1-9]\d{7,14}$/.test(settings.number);
 }
+export function directChatUrl(settings: WhatsAppSettings | null | undefined, locale: string, kind: 'material' | 'similar', title: string, reference: string, canonical: string): string | null {
+  if (!requestAvailable(settings, kind) || !findLocale(locale)) return null;
+  try {
+    const page = new URL(canonical);
+    if (!['https:', 'http:'].includes(page.protocol) || page.username || page.password || title.length > 180 || reference.length > 80) return null;
+    const text = locale === 'ar'
+      ? `السلام عليكم، أود الاستفسار عن ${kind === 'material' ? 'هذا المنتج' : 'هذا المشروع'} لدى LAAMACH MARBRE.\n${title}\nالمرجع: ${reference}\n${page.href}\nهل يمكننا مناقشة التفاصيل؟`
+      : `Bonjour LAAMACH MARBRE, je souhaite échanger au sujet de ${kind === 'material' ? 'ce produit' : 'ce projet'}.\n${title}\nRéférence : ${reference}\n${page.href}\nPourrions-nous discuter des détails ?`;
+    const url = `https://wa.me/${settings!.number}?text=${encodeURIComponent(text)}`;
+    return url.length <= whatsappUrlBudget ? url : null;
+  } catch { return null; }
+}
 export function parseRequest(value: unknown): { kind: RequestKind; slug: string; locale: string; fields: DraftFields } | null {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
   const data = value as Record<string, unknown>;

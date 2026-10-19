@@ -4,9 +4,11 @@ import { catalogueCopy, catalogueFilters, type CategoryPage, type ProductPage } 
 import { catalogueRequest } from '@/lib/catalogue-server';
 import { siteCopy } from '@/lib/site';
 import { getSite, pageMetadata } from '@/lib/site-server';
-import { PageHero, BenefitsStrip } from '@/components/page-design';
+import { editorialMedia } from '@/lib/editorial-media';
+import { PageHero } from '@/components/page-design';
 import { ProductCards } from '@/components/product-cards';
-import { CatalogueFilters, CatalogueSort } from '@/components/catalogue-filters';
+import { CatalogueCategories, CatalogueDisplay, CatalogueFilters, CatalogueSort } from '@/components/catalogue-filters';
+import { PortfolioMotion } from '@/components/portfolio-motion';
 import { ContactBanner } from '@/components/site-footer';
 import { SiteIcon } from '@/components/site-icon';
 
@@ -20,16 +22,22 @@ export default async function CataloguePage({ params, searchParams }: { params: 
   const [categories, products] = await Promise.all([catalogueRequest<CategoryPage>('product-categories', locale), catalogueRequest<ProductPage>('products', locale, filters)]);
   const design = siteCopy(locale);
   const page = (await getSite(locale)).pages.products;
+  const ar = locale === 'ar';
   const pageLink = (page: number) => { const query = new URLSearchParams(filters); query.set('page', String(page)); return `/${locale}/products?${query}`; };
-  return <main id="main" className="catalogue public-page">
-    <PageHero locale={locale} title={page?.title || design.products} eyebrow={page?.eyebrow || 'LAAMACH MARBRE'} body={page?.body || design.collectionIntro} media={page?.hero} variant="quarry" />
-    <BenefitsStrip locale={locale} />
-    {!categories.data || !products.data ? <div className="site-width section"><p role="status">{copy.unavailable}</p></div> : <div className="section site-width catalogue-layout">
-      <CatalogueFilters locale={locale} data={categories.data} query={filters.toString()} />
-      <div className="catalogue-results"><div className="results-bar"><CatalogueSort locale={locale} query={filters.toString()} /><form className="catalogue-search" method="get">{[...filters].filter(([key]) => key !== 'q' && key !== 'page').map(([key, value]) => <input type="hidden" key={key} name={key} value={value} />)}<label className="sr-only" htmlFor="search">{design.search}</label><input id="search" name="q" type="search" maxLength={120} defaultValue={filters.get('q') || ''} placeholder={design.search} /><button className="icon-button" type="submit" aria-label={design.search}><SiteIcon name="search" /></button></form><p className="results-count">{products.data.meta.total} {design.results}</p></div>
-      <nav className="category-rail" aria-label={design.categories}><a className={!filters.get('parent') ? 'active' : ''} href={`/${locale}/products`}>{copy.all}</a>{categories.data.data.map(category => <a key={category.id} className={filters.get('parent') === category.slug ? 'active' : ''} href={`/${locale}/products?parent=${category.slug}`}>{category.name}</a>)}</nav>
-      {products.data.data.length === 0 ? <div className="editorial-empty"><p>{copy.empty}</p></div> : <ProductCards products={products.data.data} locale={locale} slots={filters.size ? 0 : 12} />}
-      <nav className="pagination" aria-label="Pagination">{products.data.meta.current_page > 1 && <a className="button outline" href={pageLink(products.data.meta.current_page - 1)}>{copy.previous}</a>}<span>{products.data.meta.current_page} / {products.data.meta.last_page}</span>{products.data.meta.current_page < products.data.meta.last_page && <a className="button outline" href={pageLink(products.data.meta.current_page + 1)}>{copy.next}</a>}</nav>
+  return <main id="main" className="catalogue public-page products-index">
+    <noscript><style>{'.products-index .desktop-filter-panel{display:block;position:static;width:100%}.products-index .catalogue-view-switch{display:none}'}</style></noscript>
+    <PortfolioMotion identity={filters.toString()} />
+    <PageHero locale={locale} title={page?.title || (ar ? 'الحجر الطبيعي والرخام' : 'Pierres naturelles & marbres')} eyebrow={page?.eyebrow || (ar ? 'مجموعة مختارة بعناية' : 'Notre sélection')} body={page?.body || (ar ? 'حجر مغربي بطابعه الأصيل، ولمسات تمنح مشروعك شخصيته. اكتشف المواد، وقارن الملامس، واختر معنا ما يناسب رؤيتك.' : 'Le caractère de la pierre marocaine, pour donner vie à vos espaces. Explorez les nuances, découvrez les textures et trouvons ensemble la matière de votre projet.')} media={editorialMedia('services', locale)} variant="photo-banner catalogue-hero">
+      <ul className="catalogue-hero-benefits">{(ar ? [['stone', 'حجر مغربي 100٪'], ['craft', 'أكثر من 10 سنوات من الخبرة'], ['check', 'مواكبة مشروعك']] : [['stone', 'Pierre 100 % marocaine'], ['craft', 'Plus de 10 ans d’expérience'], ['check', 'Conseils pour votre projet']]).map(([icon, text]) => <li key={icon}><SiteIcon name={icon} /><span>{text}</span></li>)}</ul>
+    </PageHero>
+    {!categories.data || !products.data ? <div className="site-width section"><p role="status">{copy.unavailable}</p></div> : <div className="section site-width catalogue-browse">
+      <CatalogueCategories locale={locale} data={categories.data} query={filters.toString()} />
+      <div className="catalogue-layout">
+      <CatalogueFilters key={filters.toString()} locale={locale} data={categories.data} query={filters.toString()} />
+      <CatalogueDisplay locale={locale} toolbar={<><form className="catalogue-search" method="get">{[...filters].filter(([key]) => key !== 'q' && key !== 'page').map(([key, value]) => <input type="hidden" key={key} name={key} value={value} />)}<label className="sr-only" htmlFor="search">{design.search}</label><input id="search" name="q" type="search" maxLength={120} defaultValue={filters.get('q') || ''} placeholder={ar ? 'ابحث عن حجر أو رخام…' : 'Rechercher une pierre, un marbre…'} /><button className="icon-button" type="submit" aria-label={design.search}><SiteIcon name="search" /></button></form><p className="results-count"><strong>{products.data.meta.total}</strong> {design.results}</p><CatalogueSort locale={locale} query={filters.toString()} /></>}>
+      {products.data.data.length === 0 ? <div className="editorial-empty"><SiteIcon name="search" /><h2>{copy.empty}</h2><a className="button outline" href={`/${locale}/products`}>{design.clear}<SiteIcon name="arrow" className="directional" /></a></div> : <ProductCards products={products.data.data} locale={locale} premium />}
+      {products.data.meta.last_page > 1 && <nav className="pagination selection-pagination" aria-label={ar ? 'صفحات المنتجات' : 'Pages du catalogue'}>{products.data.meta.current_page > 1 && <a className="button outline" href={pageLink(products.data.meta.current_page - 1)}>{copy.previous}</a>}<span aria-current="page">{products.data.meta.current_page} / {products.data.meta.last_page}</span>{products.data.meta.current_page < products.data.meta.last_page && <a className="button outline" href={pageLink(products.data.meta.current_page + 1)}>{copy.next}</a>}</nav>}
+      </CatalogueDisplay>
       </div>
     </div>}
     <ContactBanner locale={locale} pageKey="products" />

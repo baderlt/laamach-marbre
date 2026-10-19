@@ -1,43 +1,43 @@
 {
   "provenance": "client-supplied; approved for website background",
-  "originalFilename": "Mur de pierres en lumière dorée.png",
-  "originalSha256": "353831a61c0f2ee5eacaca53b36de0d9e4a5c271de5211894026959dccffd6fd",
+  "originalFilename": "bg new.jpeg",
+  "originalSha256": "225fe2e63ac8244d41e9060a420bd6236959b4454fb335d24c01dd50e19d7497",
   "processing": "EXIF orientation; centre crop without stretching; resize; fixed soft blur on base only; WebP; metadata stripped. No recolouring or generated content.",
   "variants": {
     "mobile": {
-      "url": "/stone-background/mobile-12d3b23291cf1402.webp",
+      "url": "/stone-background/mobile-ee0d5cbf03a0e155.webp",
       "width": 640,
       "height": 1120,
-      "bytes": 65236,
-      "sha256": "12d3b23291cf14027f5ac74c15c3dd03aee559943b206cc85fc5ca3ebe5d61aa"
+      "bytes": 96272,
+      "sha256": "ee0d5cbf03a0e155f7f5f409033db8f4e8c77a4359d47f9bdf3e9f6fdf3fe234"
     },
     "tablet": {
-      "url": "/stone-background/tablet-e44e56a1e7f5f29c.webp",
+      "url": "/stone-background/tablet-c6a3da269cfb4787.webp",
       "width": 1024,
       "height": 1024,
-      "bytes": 54908,
-      "sha256": "e44e56a1e7f5f29c4afdbea1cb5e122797b94adb05957af2228e282cf7af8c56"
+      "bytes": 75106,
+      "sha256": "c6a3da269cfb47872d61ee28cc5ce604dc022b11961a24e2f6b0d578859cabb6"
     },
     "desktop": {
-      "url": "/stone-background/desktop-8973e1d20a4835c1.webp",
+      "url": "/stone-background/desktop-2941aa4a74900908.webp",
       "width": 1600,
       "height": 1000,
-      "bytes": 61738,
-      "sha256": "8973e1d20a4835c1556d9322267c649a6d6392e71a95206b5c031ef782b86cad"
+      "bytes": 86944,
+      "sha256": "2941aa4a74900908672893f9c8975fd62c990067c79ea9f61f0c78fda5c51d3f"
     },
     "tabletDetail": {
-      "url": "/stone-background/tabletDetail-f7ea97f18f5476d3.webp",
+      "url": "/stone-background/tabletDetail-0f9db4e66f0175a7.webp",
       "width": 1024,
       "height": 1024,
-      "bytes": 272298,
-      "sha256": "f7ea97f18f5476d3efdeaad5189fca257ad823de2ffd184d7709ddcb6b57de25"
+      "bytes": 429006,
+      "sha256": "0f9db4e66f0175a7fd5232742fc372c985ddab33cfafc79169a282f689e034c5"
     },
     "desktopDetail": {
-      "url": "/stone-background/desktopDetail-e05d11430b4d2883.webp",
+      "url": "/stone-background/desktopDetail-d23e718cec284385.webp",
       "width": 1600,
       "height": 1000,
-      "bytes": 414330,
-      "sha256": "e05d11430b4d28839667fd45cc0297a477764689771dfb41406d27eca87da4dd"
+      "bytes": 449602,
+      "sha256": "d23e718cec2843857635f11f346cfb33d40700f6bdc4636de1d55735f41a2d0d"
     }
   }
 }

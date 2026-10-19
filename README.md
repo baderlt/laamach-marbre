@@ -14,6 +14,16 @@ See [M3 catalogue](docs/catalogue.md) for models, admin workflows, APIs and func
 
 ## Start
 
+For the populated client website (the current products, projects and admin edits), start MySQL/WAMP and run this from the repository root:
+
+```powershell
+npm run dev:preview
+```
+
+Open http://127.0.0.1:3105/fr or http://127.0.0.1:3105/ar. Its admin panel is http://127.0.0.1:8101/admin. Keep the terminal open. The command starts both services, reuses healthy services already running, and never seeds, migrates or replaces data. Set `LAAMACH_PHP_BINARY` if your PHP 8.3+ executable is elsewhere.
+
+This existing client dataset is currently in `laamach_marbre_test`; do not run database-refresh tests against it. The ordinary development pair below uses the separate `laamach_marbre` database, so it does not display the client-preview content.
+
 After completing the environment/database setup, use separate terminals:
 
 ```powershell

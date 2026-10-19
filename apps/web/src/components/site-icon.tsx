@@ -2,6 +2,14 @@ export function SiteIcon({ name = 'stone', className = '' }: { name?: string | n
   const paths: Record<string, React.ReactNode> = {
     brand: <><path d="m2 21 9-18 11 18h-5L11 11l-5 10M8 21l4-8 5 8M12 3l-2 4" /></>,
     stone: <><path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8" /></>,
+    collection: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></>,
+    list: <><rect x="3" y="4" width="4" height="4" rx=".5" /><rect x="3" y="15" width="4" height="4" rx=".5" /><path d="M11 5h10M11 8h7M11 16h10M11 19h7" /></>,
+    paving: <path d="m12 3 10 6-10 12L2 9zM2 9h20M7 6l10 9M17 6 7 15M7 9l5 6 5-6" />,
+    masonry: <><rect x="2" y="4" width="20" height="16" rx="1" /><path d="M2 9h20M2 15h20M9 4v5m7 0v6M8 15v5m9-5v5" /></>,
+    facade: <><path d="M4 21V5l8-3 8 3v16M2 21h20M9 21v-6h6v6M8 6v3m4-4v4m4-3v3M4 12h16" /></>,
+    fountain: <><path d="M3 15h18l-3 5H6zM12 15V6m-6 6c0-4 6-6 6-6s6 2 6 6M9 4l3-2 3 2M8 22h8" /></>,
+    whatsapp: <><path d="M21 11.5A9 9 0 0 1 7.4 19.2L2 21l1.8-5.2A9 9 0 1 1 21 11.5Z" /><path d="m8 7 2 2-1 2c1 2 2 3 4 4l2-1 2 2c-1 3-4 2-7 0s-5-6-2-9Z" /></>,
+    expand: <path d="M14 3h7v7m0-7-7 7M10 21H3v-7m0 7 7-7" />,
     building: <><path d="M4 21V6l8-3 8 3v15M2 21h20M8 21v-5h8v5M8 8v3m4-3v3m4-3v3" /></>,
     ruler: <><path d="m3 16 13-13 5 5L8 21zM6 13l3 3m0-6 2 2m1-5 3 3m0-6 2 2" /></>,
     craft: <><path d="m4 20 8-8m1-9a6 6 0 0 0-5 8l-6 6a2 2 0 0 0 3 3l6-6a6 6 0 0 0 8-7l-4 4-3-3 4-4z" /></>,
@@ -16,6 +24,11 @@ export function SiteIcon({ name = 'stone', className = '' }: { name?: string | n
     pin: <><path d="M19 9c0 5-7 12-7 12S5 14 5 9a7 7 0 0 1 14 0Z" /><circle cx="12" cy="9" r="2" /></>,
     filter: <><path d="M3 6h18M3 12h18M3 18h18" /><circle cx="8" cy="6" r="2" /><circle cx="16" cy="12" r="2" /><circle cx="10" cy="18" r="2" /></>,
     menu: <path d="M3 6h18M3 12h18M3 18h18" />,
+    home: <><path d="m3 11 9-8 9 8M5 10v11h14V10M10 21v-7h4v7" /></>,
+    people: <><circle cx="9" cy="7" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v3" /></>,
+    globe: <><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="4" ry="9" /><path d="M3 12h18M5 6h14M5 18h14" /></>,
+    tick: <path d="m5 12 4 4L19 6" />,
+    image: <><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8" cy="8" r="2" /><path d="m3 18 5-5 4 3 4-6 5 7" /></>,
     close: <path d="m5 5 14 14M5 19 19 5" />,
   };
   return <svg className={`site-icon ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name || 'stone'] || paths.stone}</svg>;

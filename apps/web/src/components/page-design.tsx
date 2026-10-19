@@ -1,10 +1,10 @@
 import type { EditorialPage, EditorialSection } from '@/lib/site';
-import { siteCopy } from '@/lib/site';
+import { editorialHref, siteCopy } from '@/lib/site';
 import type { Media } from '@/lib/catalogue';
 import { CatalogueImage } from './catalogue-image';
 import { SiteIcon } from './site-icon';
 
-export function PageHero({ locale, title, eyebrow, body, media, large = false, children, variant = '', aside, headingTag = 'h1' }: { locale: string; title: string; eyebrow?: string | null; body?: string | null; media?: Media | null; large?: boolean; children?: React.ReactNode; variant?: string; aside?: React.ReactNode; headingTag?: 'h1' | 'p' }) {
+export function PageHero({ locale, title, eyebrow, body, media, large = false, children, variant = '', aside, footer, headingTag = 'h1' }: { locale: string; title: string; eyebrow?: string | null; body?: string | null; media?: Media | null; large?: boolean; children?: React.ReactNode; variant?: string; aside?: React.ReactNode; footer?: React.ReactNode; headingTag?: 'h1' | 'p' }) {
   const copy = siteCopy(locale);
   const stone = variant === 'brand' || variant === 'quarry' || (!media && variant !== 'material');
   const Heading = headingTag;
@@ -12,6 +12,7 @@ export function PageHero({ locale, title, eyebrow, body, media, large = false, c
     {!stone && <div className="hero-media">{media ? <CatalogueImage media={media} alt={title} placeholder={copy.missingMedia} eager /> : <div className="hero-placeholder" role="img" aria-label={copy.missingMedia}><span>{copy.missingMedia}</span></div>}</div>}
     <div className="site-width hero-inner"><div className="hero-copy"><p className="eyebrow">{eyebrow || 'LAAMACH MARBRE'}</p><Heading className="hero-title">{title}</Heading>{body && <p className="hero-description preserve-text">{body}</p>}{children && <div className="hero-actions">{children}</div>}</div></div>
     {aside}
+    {footer && <div className="hero-footer">{footer}</div>}
   </section>;
 }
 
@@ -23,7 +24,8 @@ export function EditorialCards({ locale, sections, variant = '' }: { locale: str
   const copy = siteCopy(locale);
   return <div className={`editorial-grid ${variant}`}>{sections.map((section, index) => {
     const [intro, ...points] = variant === 'activities-grid' ? (section.body || '').split('\n') : [section.body || ''];
-    return <article key={index} className="editorial-card">{!['trust-grid', 'process-grid'].includes(variant) && <CatalogueImage media={section.media} alt={section.title} placeholder={copy.missingMedia} />}<div className="editorial-card-copy">{variant === 'process-grid' && <span className="step-position" aria-hidden="true">{index + 1}</span>}<SiteIcon name={section.icon} /><h3>{section.title}</h3>{intro && <p className="preserve-text">{intro}</p>}{section.link && <a className={variant === 'activities-grid' ? 'button bronze' : 'text-link'} href={`/${locale}/${section.link}`}>{section.link === 'contact' ? copy.contactAction : copy.discover}<SiteIcon name="arrow" className="directional" /></a>}{points.length > 0 && <ul className="activity-points">{points.map(point => <li key={point}><SiteIcon name="check" />{point}</li>)}</ul>}</div></article>;
+    const href = editorialHref(locale, section.link);
+    return <article key={index} className="editorial-card">{!['trust-grid', 'process-grid'].includes(variant) && <CatalogueImage media={section.media} alt={section.title} placeholder={copy.missingMedia} />}<div className="editorial-card-copy">{variant === 'process-grid' && <span className="step-position" aria-hidden="true">{index + 1}</span>}<SiteIcon name={section.icon} /><h3>{section.title}</h3>{intro && <p className="preserve-text">{intro}</p>}{href && <a className={variant === 'activities-grid' ? 'button bronze' : 'text-link'} href={href}>{section.link === 'contact' ? copy.contactAction : copy.discover}<SiteIcon name="arrow" className="directional" /></a>}{points.length > 0 && <ul className="activity-points">{points.map(point => <li key={point}><SiteIcon name="check" />{point}</li>)}</ul>}</div></article>;
   })}</div>;
 }
 

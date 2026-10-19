@@ -1,5 +1,4 @@
 import { catalogueRequest } from '@/lib/catalogue-server';
-import { provisionalPreviewEnabled } from '@/lib/provisional-preview';
 import { serverEnvironment } from '@/lib/environment';
 import { parseRequest, prepareRequest } from '@/lib/whatsapp';
 import type { Product } from '@/lib/catalogue';
@@ -32,7 +31,6 @@ export async function POST(request: Request) {
       catalogueRequest<{ data: Product | Project }>(`${data.kind === 'similar' ? 'projects' : 'products'}/${data.slug}`, data.locale),
     ]);
     if (!site.data || !context.data) return reply({ errors: ['unavailable'] }, context.status === 404 ? 404 : 503);
-    if (data.kind === 'material' && provisionalPreviewEnabled(process.env) && (context.data.data as Product).category.slug === 'selection-photo-provisoire') return reply({ errors: ['unavailable'] }, 409);
     const result = prepareRequest(data.kind, data.locale, context.data.data, data.fields, site.data.data.settings?.whatsapp, environment.site);
     return reply(result, result.errors.length ? (result.errors.includes('unavailable') ? 409 : 422) : 200);
   } catch {

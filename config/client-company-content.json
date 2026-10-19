@@ -1,0 +1,123 @@
+{
+  "source": "Informations confirmées par le client le 18 octobre 2026.",
+  "company": {
+    "fr": "LAAMACH MARBRE est une entreprise spécialisée dans la vente de pierre naturelle et la réalisation de projets en marbre et pierre, alliant savoir-faire, qualité et passion du détail.",
+    "ar": "LAAMACH MARBRE شركة متخصصة في بيع الحجر الطبيعي وإنجاز مشاريع الرخام والحجر، تجمع بين الخبرة والجودة والشغف بأدق التفاصيل."
+  },
+  "trust": {
+    "fr": [
+      {
+        "group": "trust",
+        "title": "Plus de 150 clients satisfaits",
+        "body": "Des projets et des échanges qui construisent une relation de confiance.",
+        "icon": "check"
+      },
+      {
+        "group": "trust",
+        "title": "Pierre 100 % marocaine",
+        "body": "La richesse des pierres du Maroc au service de vos espaces.",
+        "icon": "stone"
+      },
+      {
+        "group": "trust",
+        "title": "Plus de 10 ans d’expérience",
+        "body": "Un savoir-faire au service de la pierre naturelle, du marbre et de votre projet.",
+        "icon": "craft"
+      },
+      {
+        "group": "trust",
+        "title": "La passion du détail",
+        "body": "Choisir la matière, soigner les lignes et donner du caractère à chaque espace.",
+        "icon": "spark"
+      }
+    ],
+    "ar": [
+      {
+        "group": "trust",
+        "title": "أكثر من 150 عميلاً راضياً",
+        "body": "مشاريع وتواصل مستمر لبناء علاقة قائمة على الثقة.",
+        "icon": "check"
+      },
+      {
+        "group": "trust",
+        "title": "حجر مغربي 100٪",
+        "body": "غنى الحجر المغربي لإبراز جمال مساحاتكم.",
+        "icon": "stone"
+      },
+      {
+        "group": "trust",
+        "title": "أكثر من 10 سنوات من الخبرة",
+        "body": "خبرة في خدمة الحجر الطبيعي والرخام ومشروعكم.",
+        "icon": "craft"
+      },
+      {
+        "group": "trust",
+        "title": "شغف بأدق التفاصيل",
+        "body": "اختيار المادة والعناية بالخطوط لمنح كل مساحة طابعها الخاص.",
+        "icon": "spark"
+      }
+    ]
+  },
+  "seo": {
+    "home": {
+      "fr": {
+        "seo_title": "Pierre naturelle marocaine & marbre | LAAMACH MARBRE",
+        "seo_description": "Pierre 100 % marocaine, plus de 10 ans d’expérience et plus de 150 clients satisfaits. Découvrez nos matières et réalisations en pierre et marbre."
+      },
+      "ar": {
+        "seo_title": "الحجر المغربي والرخام | LAAMACH MARBRE",
+        "seo_description": "حجر مغربي 100٪، وأكثر من 10 سنوات من الخبرة وأكثر من 150 عميلاً راضياً. اكتشف موادنا وأعمالنا بالحجر والرخام."
+      }
+    },
+    "about": {
+      "fr": {
+        "seo_title": "Notre savoir-faire en pierre & marbre | LAAMACH MARBRE",
+        "seo_description": "LAAMACH MARBRE : vente de pierre naturelle et réalisation de projets en marbre et pierre. Plus de 10 ans d’expérience, qualité et passion du détail."
+      },
+      "ar": {
+        "seo_title": "خبرتنا في الحجر والرخام | LAAMACH MARBRE",
+        "seo_description": "LAAMACH MARBRE متخصصة في بيع الحجر الطبيعي وإنجاز مشاريع الحجر والرخام. أكثر من 10 سنوات من الخبرة والجودة والشغف بالتفاصيل."
+      }
+    },
+    "projects": {
+      "fr": {
+        "seo_title": "Nos réalisations en pierre & marbre | LAAMACH MARBRE",
+        "seo_description": "Explorez nos réalisations : sols, façades, pose traditionnelle, cascades et fontaines. Photos et vidéos fournies par LAAMACH MARBRE."
+      },
+      "ar": {
+        "seo_title": "أعمالنا بالحجر والرخام | LAAMACH MARBRE",
+        "seo_description": "اكتشف أعمالنا: الأرضيات والواجهات والحجر بالطريقة التقليدية والشلالات والنافورات، عبر صور وفيديوهات من LAAMACH MARBRE."
+      }
+    },
+    "products": {
+      "fr": {
+        "seo_title": "Pierre naturelle marocaine : nos matières | LAAMACH MARBRE",
+        "seo_description": "Découvrez notre sélection de pierre naturelle marocaine et de marbre. Comparez les textures et préparez votre projet avec LAAMACH MARBRE."
+      },
+      "ar": {
+        "seo_title": "مواد الحجر الطبيعي المغربي | LAAMACH MARBRE",
+        "seo_description": "اكتشف تشكيلتنا من الحجر الطبيعي المغربي والرخام. قارن الملامس وحضّر مشروعك مع LAAMACH MARBRE."
+      }
+    },
+    "services": {
+      "fr": {
+        "seo_title": "Vente de pierre & réalisation de projets | LAAMACH MARBRE",
+        "seo_description": "Vente de pierre naturelle et réalisation de projets en marbre et pierre. Un savoir-faire de plus de 10 ans au service de vos espaces."
+      },
+      "ar": {
+        "seo_title": "بيع الحجر وإنجاز المشاريع | LAAMACH MARBRE",
+        "seo_description": "بيع الحجر الطبيعي وإنجاز مشاريع الرخام والحجر. خبرة تتجاوز 10 سنوات في خدمة مساحاتكم."
+      }
+    },
+    "contact": {
+      "fr": {
+        "seo_title": "Parlons de votre projet | LAAMACH MARBRE",
+        "seo_description": "Contactez LAAMACH MARBRE pour votre projet en pierre naturelle ou en marbre. Partagez vos plans, vos envies et vos besoins."
+      },
+      "ar": {
+        "seo_title": "لنتحدث عن مشروعكم | LAAMACH MARBRE",
+        "seo_description": "تواصل مع LAAMACH MARBRE بشأن مشروعك بالحجر الطبيعي أو الرخام. شاركنا مخططاتك وأفكارك واحتياجاتك."
+      }
+    }
+  }
+}

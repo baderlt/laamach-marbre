@@ -14,6 +14,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 class ViewerForms
@@ -21,18 +22,26 @@ class ViewerForms
     public static function upload(array $data): string
     {
         Gate::authorize('uploadModel', MediaAsset::class);
+        $flags = Validator::make($data, ['client_supplied' => 'sometimes|boolean', 'approve_and_publish' => 'sometimes|boolean'])->validate();
+        if ($flags['approve_and_publish'] ?? false) {
+            Gate::authorize('approve', new MediaAsset);
+            Gate::authorize('publish', new MediaAsset);
+        }
         $file = $data['model_upload'] ?? null;
         if (! $file instanceof UploadedFile || ! $file->isValid()) {
             throw ValidationException::withMessages(['model_upload' => 'A real temporary GLB upload is required.']);
         }
         $name = mb_strcut(preg_replace('/[^\pL\pN_. -]/u', '-', basename(str_replace('\\', '/', $file->getClientOriginalName()))), 0, 240, 'UTF-8');
 
-        return app(ModelLibrary::class)->ingest($file->getRealPath(), 'products/models/'.($name ?: 'model.glb'), (bool) ($data['client_supplied'] ?? false))->id;
+        $asset = app(ModelLibrary::class)->ingest($file->getRealPath(), 'products/models/'.($name ?: 'model.glb'), (bool) ($flags['client_supplied'] ?? false));
+        MediaForms::publish($asset, (bool) ($flags['approve_and_publish'] ?? false));
+
+        return $asset->id;
     }
 
     public static function uploadFields(): array
     {
-        return [FileUpload::make('model_upload')->label('Self-contained GLB')->required()->storeFiles(false)->acceptedFileTypes(['model/gltf-binary', 'application/octet-stream', '.glb'])->maxSize((int) (min(8388608, config('viewer.max_bytes')) / 1024)), Checkbox::make('client_supplied')->label('Client supplied — approval and publication remain separate')->default(false)];
+        return [FileUpload::make('model_upload')->label('Self-contained GLB')->required()->storeFiles(false)->acceptedFileTypes(['model/gltf-binary', 'application/octet-stream', '.glb'])->maxSize((int) (min(8388608, config('viewer.max_bytes')) / 1024)), Checkbox::make('client_supplied')->label('Client supplied — approval and publication remain separate')->default(false), Checkbox::make('approve_and_publish')->label(__('admin.approve_publish'))->helperText(__('admin.publication_warning'))->default(false)->visible(fn () => auth()->user()?->isSuperAdmin())];
     }
 
     public static function section(): Section
@@ -40,7 +49,7 @@ class ViewerForms
         $p = 'viewer_3d_config.';
         $fields = [Toggle::make('viewer_3d_enabled')->label('Enable 3D Viewer')->default(false)->helperText('Off by default. Disabling retains saved configuration/assets and removes the public action immediately.'),
             Select::make($p.'mode')->label('Visualization mode')->options(['uploaded_glb' => 'Uploaded GLB — original geometry', 'procedural' => 'Procedural — representative block/slab'])->live(),
-            Select::make($p.'model_media_id')->label('Validated model asset')->searchable()->live()->getSearchResultsUsing(fn (string $search) => MediaAsset::where('type', 'model')->where('processing_state', 'ready')->where('original_filename', 'like', '%'.addcslashes($search, '%_\\').'%')->limit(50)->get()->mapWithKeys(fn ($a) => [$a->id => $a->original_filename.' · '.number_format($a->bytes).' bytes · '.$a->approval_state.($a->active_revision ? ' · published' : ' · private')])->all())->getOptionLabelUsing(fn ($value) => MediaAsset::find($value)?->original_filename)->createOptionForm(self::uploadFields())->createOptionUsing(self::upload(...))->helperText('Upload stays private. Review/approve/publish in Media before public activation. Replacements are new immutable assets.'),
+            Select::make($p.'model_media_id')->label('Validated model asset')->searchable()->live()->getSearchResultsUsing(fn (string $search) => MediaAsset::where('type', 'model')->where('processing_state', 'ready')->where('original_filename', 'like', '%'.addcslashes($search, '%_\\').'%')->limit(50)->get()->mapWithKeys(fn ($a) => [$a->id => $a->original_filename.' · '.number_format($a->bytes).' bytes · '.$a->approval_state.($a->active_revision ? ' · published' : ' · private')])->all())->getOptionLabelUsing(fn ($value) => MediaAsset::find($value)?->original_filename)->createOptionForm(self::uploadFields())->createOptionUsing(self::upload(...))->createOptionAction(fn ($action) => $action->label(__('admin.upload'))->button()->modalHeading(__('admin.upload_attach'))->modalSubmitActionLabel(__('admin.upload_attach')))->helperText(__('admin.model_upload_help')),
             Select::make($p.'model_variant_id')->label('Model revision (empty = current active revision publicly)')->options(fn (Get $get) => MediaVariant::where('media_asset_id', $get($p.'model_media_id'))->where('format', 'glb')->get()->mapWithKeys(fn ($v) => [$v->id => substr($v->revision, 0, 12).' · '.$v->state.' · validator '.($v->metadata['validator_version'] ?? '?')])->all())->helperText('Public use requires the selected revision to be current, approved and published.'),
             CatalogueForms::image($p.'poster_media_id', 'Optional approved poster — product cover otherwise'),
             Select::make($p.'geometry')->label('Procedural geometry')->options(['block' => 'Rectangular block (size depth = height)', 'slab' => 'Slab / panel (size depth = thickness)']),

@@ -1,0 +1,540 @@
+{
+  "source": "Editorial copy authorized by the client; Moroccan origin and company proof points supplied by client. No prices, stock, dimensional measurements or performance tests invented.",
+  "whatsapp": "+212706795408",
+  "products": [
+    {
+      "slug": "grey-bnikhiran",
+      "translations": {
+        "fr": {
+          "name": "Grey Bnikhiran",
+          "colour": "Gris",
+          "origin": "Maroc",
+          "description": "Des nuances grises et une présence minérale pour composer des espaces au caractère affirmé.\n\nChez LAAMACH MARBRE, cette référence s’inscrit dans une sélection de pierre 100 % marocaine. Parcourez les vues de la matière et les réalisations associées pour préparer votre choix.\n\nNotre équipe vous accompagne dans la définition des dimensions, des quantités et du rendu souhaité. Plus de 10 ans d’expérience et plus de 150 clients satisfaits : échangez directement avec nous sur WhatsApp pour étudier votre projet.",
+          "technical_information": [
+            {
+              "label": "Matière",
+              "value": "Pierre naturelle"
+            },
+            {
+              "label": "Origine",
+              "value": "Maroc"
+            },
+            {
+              "label": "Formats",
+              "value": "Dimensions à définir avec notre équipe selon votre projet"
+            },
+            {
+              "label": "Finitions",
+              "value": "Choix et rendu à étudier avec notre équipe"
+            },
+            {
+              "label": "Conseil",
+              "value": "Comparer les vues et choisir un échantillon avant commande"
+            },
+            {
+              "label": "Accompagnement",
+              "value": "Vente de pierre et réalisation de projets en pierre et marbre"
+            }
+          ],
+          "seo_title": "Grey Bnikhiran | LAAMACH MARBRE",
+          "seo_description": "Des nuances grises et une présence minérale pour composer des espaces au caractère affirmé. Découvrez cette pierre marocaine et échangez avec LAAMACH MARBRE sur WhatsApp."
+        },
+        "ar": {
+          "name": "رمادي بني خيران",
+          "colour": "رمادي",
+          "origin": "المغرب",
+          "description": "تدرجات رمادية وحضور معدني لإبداع مساحات بطابع مميز.\n\nتندرج هذه المادة ضمن تشكيلة LAAMACH MARBRE من الحجر المغربي 100٪. تصفح صور المادة وأفكار المشاريع المرتبطة بها لتحضير اختيارك.\n\nيساعدك فريقنا على تحديد الأبعاد والكميات والمظهر المطلوب. أكثر من 10 سنوات من الخبرة وأكثر من 150 عميلاً راضياً: تواصل معنا مباشرة عبر واتساب لدراسة مشروعك.",
+          "technical_information": [
+            {
+              "label": "المادة",
+              "value": "حجر طبيعي"
+            },
+            {
+              "label": "المنشأ",
+              "value": "المغرب"
+            },
+            {
+              "label": "المقاسات",
+              "value": "تُحدد الأبعاد مع فريقنا حسب مشروعك"
+            },
+            {
+              "label": "التشطيبات",
+              "value": "يُدرس الاختيار والمظهر مع فريقنا"
+            },
+            {
+              "label": "نصيحة",
+              "value": "قارن الصور واختر عينة قبل الطلب"
+            },
+            {
+              "label": "المواكبة",
+              "value": "بيع الحجر وإنجاز مشاريع الحجر والرخام"
+            }
+          ],
+          "seo_title": "رمادي بني خيران | LAAMACH MARBRE",
+          "seo_description": "تدرجات رمادية وحضور معدني لإبداع مساحات بطابع مميز. اكتشف هذا الحجر المغربي وتواصل مع LAAMACH MARBRE عبر واتساب."
+        }
+      }
+    },
+    {
+      "slug": "hajar-jbal-taza",
+      "translations": {
+        "fr": {
+          "name": "Hajar Jbal Taza",
+          "colour": null,
+          "origin": "Maroc",
+          "description": "Une matière à découvrir dans ses reliefs et ses variations, pour une composition inspirée de la pierre marocaine.\n\nChez LAAMACH MARBRE, cette référence s’inscrit dans une sélection de pierre 100 % marocaine. Parcourez les vues de la matière et les réalisations associées pour préparer votre choix.\n\nNotre équipe vous accompagne dans la définition des dimensions, des quantités et du rendu souhaité. Plus de 10 ans d’expérience et plus de 150 clients satisfaits : échangez directement avec nous sur WhatsApp pour étudier votre projet.",
+          "technical_information": [
+            {
+              "label": "Matière",
+              "value": "Pierre naturelle"
+            },
+            {
+              "label": "Origine",
+              "value": "Maroc"
+            },
+            {
+              "label": "Formats",
+              "value": "Dimensions à définir avec notre équipe selon votre projet"
+            },
+            {
+              "label": "Finitions",
+              "value": "Choix et rendu à étudier avec notre équipe"
+            },
+            {
+              "label": "Conseil",
+              "value": "Comparer les vues et choisir un échantillon avant commande"
+            },
+            {
+              "label": "Accompagnement",
+              "value": "Vente de pierre et réalisation de projets en pierre et marbre"
+            }
+          ],
+          "seo_title": "Hajar Jbal Taza | LAAMACH MARBRE",
+          "seo_description": "Une matière à découvrir dans ses reliefs et ses variations, pour une composition inspirée de la pierre marocaine. Découvrez cette pierre marocaine et échangez avec LAAMACH MARBRE sur WhatsApp."
+        },
+        "ar": {
+          "name": "حجر جبل تازة",
+          "colour": null,
+          "origin": "المغرب",
+          "description": "مادة تُكتشف من خلال تضاريسها وتدرجاتها، لتصميم مستوحى من الحجر المغربي.\n\nتندرج هذه المادة ضمن تشكيلة LAAMACH MARBRE من الحجر المغربي 100٪. تصفح صور المادة وأفكار المشاريع المرتبطة بها لتحضير اختيارك.\n\nيساعدك فريقنا على تحديد الأبعاد والكميات والمظهر المطلوب. أكثر من 10 سنوات من الخبرة وأكثر من 150 عميلاً راضياً: تواصل معنا مباشرة عبر واتساب لدراسة مشروعك.",
+          "technical_information": [
+            {
+              "label": "المادة",
+              "value": "حجر طبيعي"
+            },
+            {
+              "label": "المنشأ",
+              "value": "المغرب"
+            },
+            {
+              "label": "المقاسات",
+              "value": "تُحدد الأبعاد مع فريقنا حسب مشروعك"
+            },
+            {
+              "label": "التشطيبات",
+              "value": "يُدرس الاختيار والمظهر مع فريقنا"
+            },
+            {
+              "label": "نصيحة",
+              "value": "قارن الصور واختر عينة قبل الطلب"
+            },
+            {
+              "label": "المواكبة",
+              "value": "بيع الحجر وإنجاز مشاريع الحجر والرخام"
+            }
+          ],
+          "seo_title": "حجر جبل تازة | LAAMACH MARBRE",
+          "seo_description": "مادة تُكتشف من خلال تضاريسها وتدرجاتها، لتصميم مستوحى من الحجر المغربي. اكتشف هذا الحجر المغربي وتواصل مع LAAMACH MARBRE عبر واتساب."
+        }
+      }
+    },
+    {
+      "slug": "noir-azilal",
+      "translations": {
+        "fr": {
+          "name": "Noir Azilal",
+          "colour": "Noir",
+          "origin": "Maroc",
+          "description": "Une tonalité sombre qui invite à jouer avec les contrastes, les lignes et la lumière.\n\nChez LAAMACH MARBRE, cette référence s’inscrit dans une sélection de pierre 100 % marocaine. Parcourez les vues de la matière et les réalisations associées pour préparer votre choix.\n\nNotre équipe vous accompagne dans la définition des dimensions, des quantités et du rendu souhaité. Plus de 10 ans d’expérience et plus de 150 clients satisfaits : échangez directement avec nous sur WhatsApp pour étudier votre projet.",
+          "technical_information": [
+            {
+              "label": "Matière",
+              "value": "Pierre naturelle"
+            },
+            {
+              "label": "Origine",
+              "value": "Maroc"
+            },
+            {
+              "label": "Formats",
+              "value": "Dimensions à définir avec notre équipe selon votre projet"
+            },
+            {
+              "label": "Finitions",
+              "value": "Choix et rendu à étudier avec notre équipe"
+            },
+            {
+              "label": "Conseil",
+              "value": "Comparer les vues et choisir un échantillon avant commande"
+            },
+            {
+              "label": "Accompagnement",
+              "value": "Vente de pierre et réalisation de projets en pierre et marbre"
+            }
+          ],
+          "seo_title": "Noir Azilal | LAAMACH MARBRE",
+          "seo_description": "Une tonalité sombre qui invite à jouer avec les contrastes, les lignes et la lumière. Découvrez cette pierre marocaine et échangez avec LAAMACH MARBRE sur WhatsApp."
+        },
+        "ar": {
+          "name": "أسود أزيلال",
+          "colour": "أسود",
+          "origin": "المغرب",
+          "description": "درجة داكنة تمنح مجالاً للإبداع بالتباين والخطوط والضوء.\n\nتندرج هذه المادة ضمن تشكيلة LAAMACH MARBRE من الحجر المغربي 100٪. تصفح صور المادة وأفكار المشاريع المرتبطة بها لتحضير اختيارك.\n\nيساعدك فريقنا على تحديد الأبعاد والكميات والمظهر المطلوب. أكثر من 10 سنوات من الخبرة وأكثر من 150 عميلاً راضياً: تواصل معنا مباشرة عبر واتساب لدراسة مشروعك.",
+          "technical_information": [
+            {
+              "label": "المادة",
+              "value": "حجر طبيعي"
+            },
+            {
+              "label": "المنشأ",
+              "value": "المغرب"
+            },
+            {
+              "label": "المقاسات",
+              "value": "تُحدد الأبعاد مع فريقنا حسب مشروعك"
+            },
+            {
+              "label": "التشطيبات",
+              "value": "يُدرس الاختيار والمظهر مع فريقنا"
+            },
+            {
+              "label": "نصيحة",
+              "value": "قارن الصور واختر عينة قبل الطلب"
+            },
+            {
+              "label": "المواكبة",
+              "value": "بيع الحجر وإنجاز مشاريع الحجر والرخام"
+            }
+          ],
+          "seo_title": "أسود أزيلال | LAAMACH MARBRE",
+          "seo_description": "درجة داكنة تمنح مجالاً للإبداع بالتباين والخطوط والضوء. اكتشف هذا الحجر المغربي وتواصل مع LAAMACH MARBRE عبر واتساب."
+        }
+      }
+    },
+    {
+      "slug": "noir-bnikhiran",
+      "translations": {
+        "fr": {
+          "name": "Noir Bnikhiran",
+          "colour": "Noir",
+          "origin": "Maroc",
+          "description": "Une palette sombre pour dessiner des compositions sobres et donner de la profondeur à votre projet.\n\nChez LAAMACH MARBRE, cette référence s’inscrit dans une sélection de pierre 100 % marocaine. Parcourez les vues de la matière et les réalisations associées pour préparer votre choix.\n\nNotre équipe vous accompagne dans la définition des dimensions, des quantités et du rendu souhaité. Plus de 10 ans d’expérience et plus de 150 clients satisfaits : échangez directement avec nous sur WhatsApp pour étudier votre projet.",
+          "technical_information": [
+            {
+              "label": "Matière",
+              "value": "Pierre naturelle"
+            },
+            {
+              "label": "Origine",
+              "value": "Maroc"
+            },
+            {
+              "label": "Formats",
+              "value": "Dimensions à définir avec notre équipe selon votre projet"
+            },
+            {
+              "label": "Finitions",
+              "value": "Choix et rendu à étudier avec notre équipe"
+            },
+            {
+              "label": "Conseil",
+              "value": "Comparer les vues et choisir un échantillon avant commande"
+            },
+            {
+              "label": "Accompagnement",
+              "value": "Vente de pierre et réalisation de projets en pierre et marbre"
+            }
+          ],
+          "seo_title": "Noir Bnikhiran | LAAMACH MARBRE",
+          "seo_description": "Une palette sombre pour dessiner des compositions sobres et donner de la profondeur à votre projet. Découvrez cette pierre marocaine et échangez avec LAAMACH MARBRE sur WhatsApp."
+        },
+        "ar": {
+          "name": "أسود بني خيران",
+          "colour": "أسود",
+          "origin": "المغرب",
+          "description": "لوحة داكنة لتصميم تكوينات هادئة وإضافة عمق إلى مشروعكم.\n\nتندرج هذه المادة ضمن تشكيلة LAAMACH MARBRE من الحجر المغربي 100٪. تصفح صور المادة وأفكار المشاريع المرتبطة بها لتحضير اختيارك.\n\nيساعدك فريقنا على تحديد الأبعاد والكميات والمظهر المطلوب. أكثر من 10 سنوات من الخبرة وأكثر من 150 عميلاً راضياً: تواصل معنا مباشرة عبر واتساب لدراسة مشروعك.",
+          "technical_information": [
+            {
+              "label": "المادة",
+              "value": "حجر طبيعي"
+            },
+            {
+              "label": "المنشأ",
+              "value": "المغرب"
+            },
+            {
+              "label": "المقاسات",
+              "value": "تُحدد الأبعاد مع فريقنا حسب مشروعك"
+            },
+            {
+              "label": "التشطيبات",
+              "value": "يُدرس الاختيار والمظهر مع فريقنا"
+            },
+            {
+              "label": "نصيحة",
+              "value": "قارن الصور واختر عينة قبل الطلب"
+            },
+            {
+              "label": "المواكبة",
+              "value": "بيع الحجر وإنجاز مشاريع الحجر والرخام"
+            }
+          ],
+          "seo_title": "أسود بني خيران | LAAMACH MARBRE",
+          "seo_description": "لوحة داكنة لتصميم تكوينات هادئة وإضافة عمق إلى مشروعكم. اكتشف هذا الحجر المغربي وتواصل مع LAAMACH MARBRE عبر واتساب."
+        }
+      }
+    },
+    {
+      "slug": "noir-khnifra",
+      "translations": {
+        "fr": {
+          "name": "Noir Khnifra",
+          "colour": "Noir",
+          "origin": "Maroc",
+          "description": "Une référence aux nuances sombres, à associer à une palette claire ou à une composition minérale.\n\nChez LAAMACH MARBRE, cette référence s’inscrit dans une sélection de pierre 100 % marocaine. Parcourez les vues de la matière et les réalisations associées pour préparer votre choix.\n\nNotre équipe vous accompagne dans la définition des dimensions, des quantités et du rendu souhaité. Plus de 10 ans d’expérience et plus de 150 clients satisfaits : échangez directement avec nous sur WhatsApp pour étudier votre projet.",
+          "technical_information": [
+            {
+              "label": "Matière",
+              "value": "Pierre naturelle"
+            },
+            {
+              "label": "Origine",
+              "value": "Maroc"
+            },
+            {
+              "label": "Formats",
+              "value": "Dimensions à définir avec notre équipe selon votre projet"
+            },
+            {
+              "label": "Finitions",
+              "value": "Choix et rendu à étudier avec notre équipe"
+            },
+            {
+              "label": "Conseil",
+              "value": "Comparer les vues et choisir un échantillon avant commande"
+            },
+            {
+              "label": "Accompagnement",
+              "value": "Vente de pierre et réalisation de projets en pierre et marbre"
+            }
+          ],
+          "seo_title": "Noir Khnifra | LAAMACH MARBRE",
+          "seo_description": "Une référence aux nuances sombres, à associer à une palette claire ou à une composition minérale. Découvrez cette pierre marocaine et échangez avec LAAMACH MARBRE sur WhatsApp."
+        },
+        "ar": {
+          "name": "أسود خنيفرة",
+          "colour": "أسود",
+          "origin": "المغرب",
+          "description": "مرجع بدرجات داكنة يمكن استلهامه مع لوحة فاتحة أو تكوين من المواد الطبيعية.\n\nتندرج هذه المادة ضمن تشكيلة LAAMACH MARBRE من الحجر المغربي 100٪. تصفح صور المادة وأفكار المشاريع المرتبطة بها لتحضير اختيارك.\n\nيساعدك فريقنا على تحديد الأبعاد والكميات والمظهر المطلوب. أكثر من 10 سنوات من الخبرة وأكثر من 150 عميلاً راضياً: تواصل معنا مباشرة عبر واتساب لدراسة مشروعك.",
+          "technical_information": [
+            {
+              "label": "المادة",
+              "value": "حجر طبيعي"
+            },
+            {
+              "label": "المنشأ",
+              "value": "المغرب"
+            },
+            {
+              "label": "المقاسات",
+              "value": "تُحدد الأبعاد مع فريقنا حسب مشروعك"
+            },
+            {
+              "label": "التشطيبات",
+              "value": "يُدرس الاختيار والمظهر مع فريقنا"
+            },
+            {
+              "label": "نصيحة",
+              "value": "قارن الصور واختر عينة قبل الطلب"
+            },
+            {
+              "label": "المواكبة",
+              "value": "بيع الحجر وإنجاز مشاريع الحجر والرخام"
+            }
+          ],
+          "seo_title": "أسود خنيفرة | LAAMACH MARBRE",
+          "seo_description": "مرجع بدرجات داكنة يمكن استلهامه مع لوحة فاتحة أو تكوين من المواد الطبيعية. اكتشف هذا الحجر المغربي وتواصل مع LAAMACH MARBRE عبر واتساب."
+        }
+      }
+    },
+    {
+      "slug": "taza-beige",
+      "translations": {
+        "fr": {
+          "name": "Taza Beige",
+          "colour": "Beige",
+          "origin": "Maroc",
+          "description": "Des tonalités beiges pour imaginer des espaces chaleureux et une continuité naturelle entre les matières.\n\nChez LAAMACH MARBRE, cette référence s’inscrit dans une sélection de pierre 100 % marocaine. Parcourez les vues de la matière et les réalisations associées pour préparer votre choix.\n\nNotre équipe vous accompagne dans la définition des dimensions, des quantités et du rendu souhaité. Plus de 10 ans d’expérience et plus de 150 clients satisfaits : échangez directement avec nous sur WhatsApp pour étudier votre projet.",
+          "technical_information": [
+            {
+              "label": "Matière",
+              "value": "Pierre naturelle"
+            },
+            {
+              "label": "Origine",
+              "value": "Maroc"
+            },
+            {
+              "label": "Formats",
+              "value": "Dimensions à définir avec notre équipe selon votre projet"
+            },
+            {
+              "label": "Finitions",
+              "value": "Choix et rendu à étudier avec notre équipe"
+            },
+            {
+              "label": "Conseil",
+              "value": "Comparer les vues et choisir un échantillon avant commande"
+            },
+            {
+              "label": "Accompagnement",
+              "value": "Vente de pierre et réalisation de projets en pierre et marbre"
+            }
+          ],
+          "seo_title": "Taza Beige | LAAMACH MARBRE",
+          "seo_description": "Des tonalités beiges pour imaginer des espaces chaleureux et une continuité naturelle entre les matières. Découvrez cette pierre marocaine et échangez avec LAAMACH MARBRE sur WhatsApp."
+        },
+        "ar": {
+          "name": "تازة بيج",
+          "colour": "بيج",
+          "origin": "المغرب",
+          "description": "درجات بيج لاستلهام مساحات دافئة وانسجام طبيعي بين المواد.\n\nتندرج هذه المادة ضمن تشكيلة LAAMACH MARBRE من الحجر المغربي 100٪. تصفح صور المادة وأفكار المشاريع المرتبطة بها لتحضير اختيارك.\n\nيساعدك فريقنا على تحديد الأبعاد والكميات والمظهر المطلوب. أكثر من 10 سنوات من الخبرة وأكثر من 150 عميلاً راضياً: تواصل معنا مباشرة عبر واتساب لدراسة مشروعك.",
+          "technical_information": [
+            {
+              "label": "المادة",
+              "value": "حجر طبيعي"
+            },
+            {
+              "label": "المنشأ",
+              "value": "المغرب"
+            },
+            {
+              "label": "المقاسات",
+              "value": "تُحدد الأبعاد مع فريقنا حسب مشروعك"
+            },
+            {
+              "label": "التشطيبات",
+              "value": "يُدرس الاختيار والمظهر مع فريقنا"
+            },
+            {
+              "label": "نصيحة",
+              "value": "قارن الصور واختر عينة قبل الطلب"
+            },
+            {
+              "label": "المواكبة",
+              "value": "بيع الحجر وإنجاز مشاريع الحجر والرخام"
+            }
+          ],
+          "seo_title": "تازة بيج | LAAMACH MARBRE",
+          "seo_description": "درجات بيج لاستلهام مساحات دافئة وانسجام طبيعي بين المواد. اكتشف هذا الحجر المغربي وتواصل مع LAAMACH MARBRE عبر واتساب."
+        }
+      }
+    },
+    {
+      "slug": "taza-grey",
+      "translations": {
+        "fr": {
+          "name": "Taza Grey",
+          "colour": "Gris",
+          "origin": "Maroc",
+          "description": "Des nuances grises pour une lecture contemporaine de la pierre naturelle et des compositions équilibrées.\n\nChez LAAMACH MARBRE, cette référence s’inscrit dans une sélection de pierre 100 % marocaine. Parcourez les vues de la matière et les réalisations associées pour préparer votre choix.\n\nNotre équipe vous accompagne dans la définition des dimensions, des quantités et du rendu souhaité. Plus de 10 ans d’expérience et plus de 150 clients satisfaits : échangez directement avec nous sur WhatsApp pour étudier votre projet.",
+          "technical_information": [
+            {
+              "label": "Matière",
+              "value": "Pierre naturelle"
+            },
+            {
+              "label": "Origine",
+              "value": "Maroc"
+            },
+            {
+              "label": "Formats",
+              "value": "Dimensions à définir avec notre équipe selon votre projet"
+            },
+            {
+              "label": "Finitions",
+              "value": "Choix et rendu à étudier avec notre équipe"
+            },
+            {
+              "label": "Conseil",
+              "value": "Comparer les vues et choisir un échantillon avant commande"
+            },
+            {
+              "label": "Accompagnement",
+              "value": "Vente de pierre et réalisation de projets en pierre et marbre"
+            }
+          ],
+          "seo_title": "Taza Grey | LAAMACH MARBRE",
+          "seo_description": "Des nuances grises pour une lecture contemporaine de la pierre naturelle et des compositions équilibrées. Découvrez cette pierre marocaine et échangez avec LAAMACH MARBRE sur WhatsApp."
+        },
+        "ar": {
+          "name": "تازة رمادي",
+          "colour": "رمادي",
+          "origin": "المغرب",
+          "description": "تدرجات رمادية لقراءة معاصرة للحجر الطبيعي وتكوينات متوازنة.\n\nتندرج هذه المادة ضمن تشكيلة LAAMACH MARBRE من الحجر المغربي 100٪. تصفح صور المادة وأفكار المشاريع المرتبطة بها لتحضير اختيارك.\n\nيساعدك فريقنا على تحديد الأبعاد والكميات والمظهر المطلوب. أكثر من 10 سنوات من الخبرة وأكثر من 150 عميلاً راضياً: تواصل معنا مباشرة عبر واتساب لدراسة مشروعك.",
+          "technical_information": [
+            {
+              "label": "المادة",
+              "value": "حجر طبيعي"
+            },
+            {
+              "label": "المنشأ",
+              "value": "المغرب"
+            },
+            {
+              "label": "المقاسات",
+              "value": "تُحدد الأبعاد مع فريقنا حسب مشروعك"
+            },
+            {
+              "label": "التشطيبات",
+              "value": "يُدرس الاختيار والمظهر مع فريقنا"
+            },
+            {
+              "label": "نصيحة",
+              "value": "قارن الصور واختر عينة قبل الطلب"
+            },
+            {
+              "label": "المواكبة",
+              "value": "بيع الحجر وإنجاز مشاريع الحجر والرخام"
+            }
+          ],
+          "seo_title": "تازة رمادي | LAAMACH MARBRE",
+          "seo_description": "تدرجات رمادية لقراءة معاصرة للحجر الطبيعي وتكوينات متوازنة. اكتشف هذا الحجر المغربي وتواصل مع LAAMACH MARBRE عبر واتساب."
+        }
+      }
+    }
+  ],
+  "projectProducts": {
+    "sols-en-pierre-naturelle": [
+      "taza-beige",
+      "taza-grey"
+    ],
+    "pierre-bni-khiran-pose-traditionnelle": [
+      "grey-bnikhiran",
+      "noir-bnikhiran"
+    ],
+    "pierre-pose-traditionnelle": [
+      "hajar-jbal-taza",
+      "taza-beige"
+    ],
+    "cascades-et-fontaines": [
+      "noir-azilal",
+      "noir-khnifra"
+    ],
+    "murs-et-facades": [
+      "hajar-jbal-taza",
+      "taza-grey",
+      "grey-bnikhiran"
+    ]
+  }
+}

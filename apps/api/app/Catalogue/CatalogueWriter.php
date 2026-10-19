@@ -120,17 +120,47 @@ class CatalogueWriter
                 'units' => ($published ? 'required|array|min:1' : 'array').'|max:4', 'units.*' => ['required', 'distinct', Rule::in(config('catalogue.quantity_units'))],
                 'sizes' => 'array|max:40', 'sizes.*' => 'array:id,width,length,height,thickness,measurement_unit,active,sort_order,cover_media_id,translations',
                 'sizes.*.id' => 'nullable|uuid|distinct',
-                'sizes.*.width' => 'required|numeric|between:0.0001,1000000', 'sizes.*.length' => 'required|numeric|between:0.0001,1000000',
+                'sizes.*.width' => 'nullable|numeric|between:0.0001,1000000', 'sizes.*.length' => 'nullable|numeric|between:0.0001,1000000',
                 'sizes.*.height' => 'nullable|numeric|between:0.0001,1000000', 'sizes.*.thickness' => 'nullable|numeric|between:0.0001,1000000',
                 'sizes.*.measurement_unit' => ['required', Rule::in(config('catalogue.measurement_units'))],
                 'sizes.*.active' => 'required|boolean', 'sizes.*.sort_order' => 'required|integer|min:0|max:100000', 'sizes.*.cover_media_id' => 'nullable|uuid|exists:media_assets,id',
                 ...$this->translationRules('size', 'sizes.*.'),
+                'sizes.*.translations' => 'sometimes|array:'.implode(',', array_column(config('localization.locales'), 'code')),
+                'sizes.*.translations.*.label' => 'nullable|string|max:160',
+                'sizes.*.translations.'.config('localization.fallback').'.label' => 'nullable|string|max:160',
                 'finishes' => 'array|max:20', 'finishes.*' => 'array:finish_id,active,is_default,sort_order',
                 'finishes.*.finish_id' => 'required|uuid|distinct|exists:finishes,id', 'finishes.*.active' => 'required|boolean', 'finishes.*.is_default' => 'required|boolean', 'finishes.*.sort_order' => 'required|integer|min:0|max:100000',
                 'gallery' => 'array|max:12', 'gallery.*' => 'required|uuid|distinct|exists:media_assets,id',
                 ...$this->translationRules('product'),
             ]);
             $this->customBounds($data);
+            foreach ($data['sizes'] as $index => &$dimensions) {
+                foreach (['width', 'length', 'height', 'thickness'] as $axis) {
+                    $dimensions[$axis] = ($dimensions[$axis] ?? '') === '' ? null : $dimensions[$axis];
+                }
+                if (($dimensions['width'] === null) !== ($dimensions['length'] === null)) {
+                    throw ValidationException::withMessages(['sizes.'.$index.'.width' => 'Enter both length and width, or leave both empty for thickness only.']);
+                }
+                if ($dimensions['width'] === null && $dimensions['thickness'] === null) {
+                    throw ValidationException::withMessages(['sizes.'.$index.'.thickness' => 'Enter thickness or a length and width pair. Remove the entry when no dimensions are specified.']);
+                }
+                foreach (config('localization.locales') as $locale) {
+                    $code = $locale['code'];
+                    if (empty($dimensions['translations'][$code]['label'])) {
+                        $unit = $code === 'ar' ? (['mm' => 'مم', 'cm' => 'سم', 'm' => 'م'][$dimensions['measurement_unit']] ?? $dimensions['measurement_unit']) : $dimensions['measurement_unit'];
+                        $number = static fn ($value) => rtrim(rtrim(number_format((float) $value, 4, '.', ''), '0'), '.');
+                        $parts = [];
+                        if ($dimensions['width'] !== null) {
+                            $parts[] = $number($dimensions['length']).' × '.$number($dimensions['width']).' '.$unit;
+                        }
+                        if ($dimensions['thickness'] !== null) {
+                            $parts[] = ($code === 'ar' ? 'السماكة: ' : 'Épaisseur : ').$number($dimensions['thickness']).' '.$unit;
+                        }
+                        $dimensions['translations'][$code]['label'] = implode(' · ', $parts);
+                    }
+                }
+            }
+            unset($dimensions);
             if (count(array_filter($data['finishes'], fn ($item) => $item['is_default'])) > 1 || count(array_filter($data['finishes'], fn ($item) => $item['is_default'] && ! $item['active']))) {
                 throw ValidationException::withMessages(['finishes' => 'At most one active default finish is permitted.']);
             }

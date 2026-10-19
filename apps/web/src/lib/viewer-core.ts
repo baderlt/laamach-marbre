@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import type { Dimensions, ViewerConfiguration } from './viewer.ts';
+import { type MeasurementAxis, type MeasurementFrame, type ScreenPoint } from './viewer-measurements.ts';
 
 export type ViewerApi = { rotate(horizontal: number, vertical?: number): void; zoom(factor: number): void; reset(): void; setDimensions(dimensions: Dimensions): void; setInteraction(enabled: boolean): void; dispose(): void };
 function disposeObject(object: THREE.Object3D) {
@@ -29,7 +30,7 @@ async function boundedBytes(spec: { url: string; hash: string; bytes?: number },
 }
 
 /** Shared by the activated public viewer and same-origin authenticated admin preview. */
-export async function mountViewer(host: HTMLElement, config: ViewerConfiguration, dimensions: Dimensions | null, signal: AbortSignal, label: string, helpId: string, onFailure: (reason: string) => void): Promise<ViewerApi> {
+export async function mountViewer(host: HTMLElement, config: ViewerConfiguration, dimensions: Dimensions | null, signal: AbortSignal, label: string, helpId: string, onFailure: (reason: string) => void, presentation?: { onFrame(frame: MeasurementFrame): void; onInteraction(): void }): Promise<ViewerApi> {
   if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
   let renderer: THREE.WebGLRenderer;
   try { renderer = new THREE.WebGLRenderer({ alpha: false, antialias: true, powerPreference: 'low-power' }); } catch { throw Error('webgl'); }
@@ -46,9 +47,40 @@ export async function mountViewer(host: HTMLElement, config: ViewerConfiguration
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.ShadowMaterial({ opacity: .12 })); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
   renderer.shadowMap.enabled = !mobile; renderer.shadowMap.type = THREE.PCFSoftShadowMap; key.castShadow = !mobile; key.shadow.mapSize.set(512, 512);
   host.append(canvas);
+  let interacting = false, interacted = false;
+  function firstInteraction() { if (interacted) return; interacted = true; host.dataset.viewerInteracted = 'true'; presentation?.onInteraction(); }
+  function measurements() {
+    if (!presentation || !object) return;
+    const box = new THREE.Box3().setFromObject(root), size = box.getSize(new THREE.Vector3());
+    const width = host.clientWidth, height = host.clientHeight;
+    const project = (point: THREE.Vector3): ScreenPoint => { const p = point.clone().project(camera); return [(p.x + 1) * width / 2, (1 - p.y) * height / 2]; };
+    const center = project(box.getCenter(new THREE.Vector3()));
+    const edges: MeasurementFrame['edges'] = [];
+    const axes: [MeasurementAxis, 'x' | 'y' | 'z'][] = [['width', 'x'], ['length', 'z'], ['depth', 'y']];
+    for (const [axis, coordinate] of axes) {
+      const others = (['x', 'y', 'z'] as const).filter(value => value !== coordinate);
+      let best: MeasurementFrame['edges'][number] | null = null, score = -Infinity;
+      for (const sideA of ['min', 'max'] as const) for (const sideB of ['min', 'max'] as const) {
+        const start = box.min.clone(), end = box.min.clone();
+        start[others[0]] = end[others[0]] = box[sideA][others[0]];
+        start[others[1]] = end[others[1]] = box[sideB][others[1]];
+        end[coordinate] = box.max[coordinate];
+        const a = project(start), b = project(end);
+        if ([...a, ...b].some(value => !Number.isFinite(value)) || [a, b].some(p => p[0] < 0 || p[0] > width || p[1] < 0 || p[1] > height)) continue;
+        const distance = Math.hypot((a[0] + b[0]) / 2 - center[0], (a[1] + b[1]) / 2 - center[1]);
+        if (distance > score && size[coordinate] > 0) { score = distance; best = { axis, start: a, end: b }; }
+      }
+      if (best) edges.push(best);
+    }
+    presentation.onFrame({ width, height, center, edges, dimensions: dimensions || {} });
+  }
+  const startInteraction = () => { interacting = true; };
+  const endInteraction = () => { interacting = false; };
+  const changed = () => { if (interacting) firstInteraction(); invalidate(); };
   function render() {
     frame = 0; if (disposed) return; renderer.render(scene, camera); frames++;
     host.dataset.viewerReady = 'true'; host.dataset.viewerFrames = String(frames); host.dataset.viewerTriangles = String(renderer.info.render.triangles); host.dataset.viewerCamera = JSON.stringify(camera.position.toArray());
+    measurements();
   }
   function invalidate() { if (!disposed && !frame) frame = requestAnimationFrame(render); }
   function frameObject() {
@@ -68,13 +100,14 @@ export async function mountViewer(host: HTMLElement, config: ViewerConfiguration
   function interaction(enabled: boolean) { if (disposed) return; controls.enabled = enabled; canvas.style.touchAction = enabled ? 'none' : 'pan-y'; host.dataset.viewerInteraction = String(enabled); }
   function keyboard(event: KeyboardEvent) {
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '=', '-', 'Home'].includes(event.key)) return;
+    firstInteraction();
     event.preventDefault(); if (event.key === 'ArrowLeft') rotate(-.18); else if (event.key === 'ArrowRight') rotate(.18); else if (event.key === 'ArrowUp') rotate(0, -.12); else if (event.key === 'ArrowDown') rotate(0, .12); else if (event.key === 'Home') frameObject(); else zoom(['+', '='].includes(event.key) ? .85 : 1.15);
   }
   function contextLost(event: Event) { event.preventDefault(); if (!disposed) { onFailure('webgl'); dispose(); } }
   function dispose() {
-    if (disposed) return; disposed = true; clearTimeout(timer); cancelAnimationFrame(frame); observer?.disconnect(); controls.removeEventListener('change', invalidate); controls.dispose(); canvas.removeEventListener('keydown', keyboard); canvas.removeEventListener('webglcontextlost', contextLost); signal.removeEventListener('abort', dispose); disposeObject(scene); target?.dispose(); key.shadow.map?.dispose(); renderer.dispose(); renderer.forceContextLoss(); root.clear(); scene.clear(); object = null; canvas.remove(); delete host.dataset.viewerReady;
+    if (disposed) return; disposed = true; clearTimeout(timer); cancelAnimationFrame(frame); observer?.disconnect(); controls.removeEventListener('change', changed); controls.removeEventListener('start', startInteraction); controls.removeEventListener('end', endInteraction); controls.dispose(); canvas.removeEventListener('keydown', keyboard); canvas.removeEventListener('webglcontextlost', contextLost); signal.removeEventListener('abort', dispose); disposeObject(scene); target?.dispose(); key.shadow.map?.dispose(); renderer.dispose(); renderer.forceContextLoss(); root.clear(); scene.clear(); object = null; canvas.remove(); delete host.dataset.viewerReady; delete host.dataset.viewerInteracted;
   }
-  signal.addEventListener('abort', dispose, { once: true }); canvas.addEventListener('keydown', keyboard); canvas.addEventListener('webglcontextlost', contextLost); controls.addEventListener('change', invalidate); interaction(!mobile);
+  signal.addEventListener('abort', dispose, { once: true }); canvas.addEventListener('keydown', keyboard); canvas.addEventListener('webglcontextlost', contextLost); controls.addEventListener('change', changed); controls.addEventListener('start', startInteraction); controls.addEventListener('end', endInteraction); interaction(!mobile);
   const timer = setTimeout(() => { if (!disposed) { onFailure('asset'); dispose(); } }, 15000);
   try {
     const generator = new THREE.PMREMGenerator(renderer), room = new RoomEnvironment(); target = generator.fromScene(room, .04, .1, 100, { size: 64 }); scene.environment = target.texture; scene.environmentIntensity = .7; room.dispose(); generator.dispose();

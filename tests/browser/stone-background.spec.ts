@@ -69,7 +69,7 @@ test('pointer easing settles, cancels offscreen/hidden, and responds to preferen
   await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: true }); document.dispatchEvent(new Event('visibilitychange')); });
   await expect(background).toHaveAttribute('data-active', 'false');
   await page.evaluate(() => { delete (document as unknown as { hidden?: boolean }).hidden; document.dispatchEvent(new Event('visibilitychange')); });
-  await page.locator('.brand-activities').scrollIntoViewIfNeeded();
+  await page.locator('.collection-grid').evaluate(element => element.scrollIntoView({ block: 'start', behavior: 'instant' }));
   await expect(background).toHaveAttribute('data-active', 'false');
   await page.mouse.move(1000, 350); await expect(background).toHaveAttribute('data-active', 'false');
   await page.evaluate(() => window.scrollTo(0, 0));
@@ -79,10 +79,10 @@ test('pointer easing settles, cancels offscreen/hidden, and responds to preferen
   await expect(page.locator('.stone-focus')).toBeHidden();
 });
 
-for (const mode of ['touch', 'reduced', 'save-data', 'low-memory', 'no-js']) {
+for (const mode of ['touch', 'tablet', 'reduced', 'save-data', 'low-memory', 'no-js']) {
   test(`${mode}: static photograph with no detail-layer download`, async ({ browser }) => {
-    const size = { width: mode === 'touch' ? 390 : 1440, height: 844 };
-    const context = await browser.newContext({ viewport: size, screen: size, hasTouch: mode === 'touch', isMobile: mode === 'touch', reducedMotion: mode === 'reduced' ? 'reduce' : 'no-preference', javaScriptEnabled: mode !== 'no-js' });
+    const size = { width: mode === 'touch' ? 390 : mode === 'tablet' ? 920 : 1440, height: 844 };
+    const context = await browser.newContext({ viewport: size, screen: size, hasTouch: mode === 'touch', isMobile: mode === 'touch', reducedMotion: mode === 'reduced' || mode === 'tablet' ? 'reduce' : 'no-preference', javaScriptEnabled: mode !== 'no-js' });
     if (mode === 'save-data') await context.addInitScript(() => Object.defineProperty(navigator, 'connection', { value: { saveData: true, addEventListener() {}, removeEventListener() {} } }));
     if (mode === 'low-memory') await context.addInitScript(() => Object.defineProperty(navigator, 'deviceMemory', { value: 2 }));
     const page = await context.newPage(), requests: string[] = [];

@@ -27,7 +27,14 @@
     "defaultSize": "Format représenté",
     "preview": "Prévisualisation administrative — configuration enregistrée",
     "disabled": "La 3D publique est désactivée. Cette prévisualisation reste privée.",
-    "back": "Retour aux produits"
+    "back": "Retour aux produits",
+    "studioTitle": "La matière en volume",
+    "gestureHint": "Glissez pour explorer",
+    "interact": "Manipuler le modèle",
+    "pageScroll": "Faire défiler la page",
+    "sampleDimensions": "Exemple de dimensions",
+    "measuredDimensions": "Dimensions représentées",
+    "keyboardHelp": "Flèches : tourner. + et − : zoomer. Origine : réinitialiser. Échap : revenir aux photos."
   },
   "ar": {
     "open": "عرض ثلاثي الأبعاد",
@@ -57,6 +64,13 @@
     "defaultSize": "المقاس المعروض",
     "preview": "معاينة إدارية للإعدادات المحفوظة",
     "disabled": "العرض العام ثلاثي الأبعاد معطل. تبقى هذه المعاينة خاصة.",
-    "back": "العودة إلى المنتجات"
+    "back": "العودة إلى المنتجات",
+    "studioTitle": "اكتشف الحجر عن قرب",
+    "gestureHint": "اسحب لاستكشاف الحجر",
+    "interact": "تحريك النموذج",
+    "pageScroll": "تمرير الصفحة",
+    "sampleDimensions": "مثال على الأبعاد",
+    "measuredDimensions": "الأبعاد المعروضة",
+    "keyboardHelp": "الأسهم للتدوير، + و− للتقريب، Home لإعادة العرض وEscape للعودة إلى الصور."
   }
 }

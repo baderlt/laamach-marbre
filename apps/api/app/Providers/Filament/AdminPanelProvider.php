@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Dashboard;
 use App\Filament\Resources\FinishResource;
 use App\Filament\Resources\MediaAssetResource;
 use App\Filament\Resources\ProductCategoryResource;
@@ -9,16 +10,15 @@ use App\Filament\Resources\ProductResource;
 use App\Filament\Resources\ProjectCategoryResource;
 use App\Filament\Resources\ProjectResource;
 use App\Filament\Resources\SiteContentResource;
+use App\Filament\Widgets\CatalogueOverview;
 use App\Http\Middleware\PreventRequestForgery;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Widgets\AccountWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
@@ -35,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->font('Inter', provider: LocalFontProvider::class)
             ->databaseTransactions()
             ->resources([MediaAssetResource::class, ProductCategoryResource::class, ProductResource::class, FinishResource::class, ProjectCategoryResource::class, ProjectResource::class, SiteContentResource::class])
-            ->pages([Dashboard::class])->widgets([AccountWidget::class])
+            ->pages([Dashboard::class])->widgets([CatalogueOverview::class])
             ->middleware([
                 EncryptCookies::class, AddQueuedCookiesToResponse::class, StartSession::class,
                 AuthenticateSession::class, ShareErrorsFromSession::class, PreventRequestForgery::class,
