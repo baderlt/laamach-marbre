@@ -16,7 +16,7 @@ class MediaController
         abort_unless(app()->environment(['local', 'testing']) && config('media.published_disk') === 'local_published', 404);
         $variant = MediaVariant::where('object_key', $key)->where('disk', 'local_published')->where('state', 'published')->whereNotNull('published_at')->firstOrFail();
         if ($variant->format === 'glb') {
-            return response($storage->variantBytes($variant))->header('Content-Type', 'model/gltf-binary')->header('Cache-Control', MediaStorage::CACHE_CONTROL)->header('ETag', '"'.$variant->checksum.'"')->header('Access-Control-Allow-Origin', '*');
+            return response($storage->variantBytes($variant))->header('Content-Type', 'model/gltf-binary')->header('Cache-Control', MediaStorage::CACHE_CONTROL)->header('ETag', '"'.$variant->checksum.'"');
         }
         if ($variant->format === 'mp4') {
             MediaPath::assertVariant($key, $variant->media_asset_id, $variant->profile_version, $variant->checksum, 'mp4');
@@ -26,7 +26,7 @@ class MediaController
             return response()->file($path, ['Content-Type' => 'video/mp4', 'Cache-Control' => MediaStorage::CACHE_CONTROL, 'ETag' => '"'.$variant->checksum.'"']);
         }
 
-        return response($storage->variantBytes($variant))->header('Content-Type', 'image/'.$variant->format)->header('Cache-Control', MediaStorage::CACHE_CONTROL)->header('ETag', '"'.$variant->checksum.'"')->header('Access-Control-Allow-Origin', '*');
+        return response($storage->variantBytes($variant))->header('Content-Type', 'image/'.$variant->format)->header('Cache-Control', MediaStorage::CACHE_CONTROL)->header('ETag', '"'.$variant->checksum.'"');
     }
 
     public function preview(MediaAsset $asset, MediaStorage $storage)

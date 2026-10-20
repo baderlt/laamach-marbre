@@ -17,9 +17,8 @@ class CatalogueController
     public function categories(Request $request, PublicCatalogue $catalogue)
     {
         $locale = $this->locale($request);
-        $parents = $catalogue->categories($locale)->whereNull('parent_id')->with(['translations', ...$catalogue->imageRelations('cover'), 'children' => fn ($children) => $children->whereIn('id', $catalogue->categories($locale)->select('id'))->orderBy('sort_order')->orderBy('id'), 'children.translations', ...$catalogue->imageRelations('children.cover')])->orderBy('sort_order')->orderBy('id')->get();
 
-        return response()->json(['data' => $parents->map(fn ($parent) => [...$catalogue->categoryDto($parent, $locale, true), 'children' => $parent->children->map(fn ($child) => $catalogue->categoryDto($child, $locale, true))->all()])->all(), 'finishes' => $catalogue->finishes($locale)->with('translations')->orderBy('sort_order')->orderBy('id')->get()->map(fn ($finish) => ['id' => $finish->id, 'slug' => $finish->slug, ...$catalogue->copy($finish, $locale)])->all()]);
+        return response()->json(['data' => $catalogue->categoryTree($locale), 'finishes' => $catalogue->finishes($locale)->with('translations')->orderBy('sort_order')->orderBy('id')->get()->map(fn ($finish) => ['id' => $finish->id, 'slug' => $finish->slug, ...$catalogue->copy($finish, $locale)])->all()]);
     }
 
     public function index(Request $request, PublicCatalogue $catalogue)
@@ -52,6 +51,9 @@ class CatalogueController
         abort_unless(preg_match('/^[a-z0-9-]{1,120}$/D', $slug), 404);
         $locale = $this->locale($request);
 
-        return response()->json(['data' => $catalogue->productDto($catalogue->products($locale, true)->where('slug', $slug)->firstOrFail(), $locale, true)]);
+        $product = $catalogue->products($locale, true)->where('slug', $slug)->firstOrFail();
+        $locales = array_values(array_filter(array_column(config('localization.locales'), 'code'), fn ($code) => $code === $locale || $catalogue->products($code)->where('id', $product->id)->exists()));
+
+        return response()->json(['data' => [...$catalogue->productDto($product, $locale, true), 'available_locales' => $locales]]);
     }
 }

@@ -4,6 +4,7 @@ import { parseRequest, prepareRequest } from '@/lib/whatsapp';
 import type { Product } from '@/lib/catalogue';
 import type { Project } from '@/lib/projects';
 import type { SiteData } from '@/lib/site';
+import { trustedHost, withinRequestBudget } from '@/lib/http-security';
 
 export const runtime = 'nodejs';
 const headers = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
@@ -12,7 +13,8 @@ const reply = (data: unknown, status = 200) => Response.json(data, { status, hea
 // Stateless preparation only: no persistence, redirects, analytics or external messaging.
 export async function POST(request: Request) {
   const environment = serverEnvironment(process.env);
-  if (request.headers.get('origin') !== environment.site || request.headers.get('content-type')?.split(';')[0].trim() !== 'application/json') return reply({ errors: ['unavailable'] }, 403);
+  if (!trustedHost(request, environment.site) || request.headers.get('origin') !== environment.site || request.headers.get('content-type')?.split(';')[0].trim() !== 'application/json') return reply({ errors: ['unavailable'] }, 403);
+  if (!withinRequestBudget('requests', 120)) return reply({ errors: ['unavailable'] }, 429);
   const reader = request.body?.getReader();
   if (!reader) return reply({ errors: ['invalid'] }, 400);
   const chunks: Uint8Array[] = []; let length = 0;

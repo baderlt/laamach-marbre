@@ -111,8 +111,8 @@ test('preparation endpoint rejects forged/unpublished context, origin misuse and
   expect((await post({ ...input, slug: 'temporary-draft' })).status()).toBe(404);
   expect((await post({ kind: 'similar', slug: 'synthetic-draft', locale: 'ar', fields: {} })).status()).toBe(404);
   expect((await post({ ...input, fields: { ...input.fields, description: 'a'.repeat(17000) } })).status()).toBe(413);
-  const trusted = await request.post('/api/requests', { headers: { Origin: base, Host: 'attacker.invalid' }, data: input });
-  expect(trusted.status()).toBe(200); expect((await trusted.json()).prepared.canonical).toBe(`${base}/fr/products/temporary-product`);
+  const untrusted = await request.post('/api/requests', { headers: { Origin: base, Host: 'attacker.invalid' }, data: input });
+  expect(untrusted.status()).toBe(400); expect(await untrusted.text()).not.toContain('prepared');
   const response = await post(input); expect(response.status()).toBe(200); expect(response.headers()['cache-control']).toBe('no-store');
   const data = await response.json(); expect(data.prepared.canonical).toBe(`${base}/fr/products/temporary-product`);
   expect(JSON.stringify(data)).not.toMatch(/original_key|originals\//);

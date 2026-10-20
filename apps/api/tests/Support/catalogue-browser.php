@@ -33,6 +33,26 @@ if (DB::selectOne('SELECT DATABASE() AS name')->name !== TestDatabaseGuard::DATA
 $root = storage_path('framework/testing/m3-browser');
 $manifest = $root.'/fixture-manifest.json';
 $writer = app(CatalogueWriter::class);
+if (in_array($argv[1] ?? '', ['contact-off', 'contact-on'], true)) {
+    $fixture = json_decode(File::get($manifest), true, 32, JSON_THROW_ON_ERROR);
+    $user = User::findOrFail($fixture['user']);
+    $site = SiteContent::findOrFail('site');
+    $backup = $root.'/contact-settings.json';
+    if ($argv[1] === 'contact-off') {
+        if (! File::exists($backup)) {
+            File::put($backup, json_encode($site->data, JSON_THROW_ON_ERROR));
+        }
+        $data = $site->data;
+        $data['whatsapp']['enabled'] = false;
+    } else {
+        $data = json_decode(File::get($backup), true, 32, JSON_THROW_ON_ERROR);
+    }
+    app(SiteContentWriter::class)->save($site, ['key' => 'site', 'published' => true, 'translations' => [], 'data' => $data], $user);
+    if ($argv[1] === 'contact-on') {
+        File::delete($backup);
+    }
+    exit;
+}
 if (($argv[1] ?? 'prepare') === 'cleanup') {
     $data = json_decode(File::get($manifest), true, 32, JSON_THROW_ON_ERROR);
     $user = User::findOrFail($data['user']);

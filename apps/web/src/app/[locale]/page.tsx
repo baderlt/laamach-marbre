@@ -1,11 +1,8 @@
 import { notFound } from 'next/navigation';
-import { backendAvailable } from '@/lib/backend';
 import { findLocale } from '@/lib/locales';
 import { getSite, pageMetadata } from '@/lib/site-server';
 import { editorialHref, siteCopy } from '@/lib/site';
-import { catalogueRequest } from '@/lib/catalogue-server';
-import type { CategoryPage } from '@/lib/catalogue';
-import { projectCategoryIcon, type ProjectCategory } from '@/lib/projects';
+import { projectCategoryIcon } from '@/lib/projects';
 import { PageHero, SectionHeading, PageSections } from '@/components/page-design';
 import { ProductCards } from '@/components/product-cards';
 import { CatalogueImage } from '@/components/catalogue-image';
@@ -19,21 +16,21 @@ export default async function FoundationPage({ params }: { params: Promise<{ loc
   const { locale } = await params;
   if (!findLocale(locale)) notFound();
   const copy = siteCopy(locale);
-  const [site, categories, usages, available] = await Promise.all([getSite(locale), catalogueRequest<CategoryPage>('product-categories', locale), catalogueRequest<{ data: ProjectCategory[] }>('project-categories', locale), backendAvailable()]);
+  const site = await getSite(locale);
   const page = site.pages.home;
   const activityOrder = (link?: string | null) => link?.split('?')[0] === 'products' ? 1 : 0;
   const activities = (page?.sections.filter(section => section.group === 'activities') || []).sort((a, b) => activityOrder(a.link) - activityOrder(b.link));
   const paths = activities.length ? activities : [{ title: locale === 'ar' ? 'إنجاز المشاريع' : 'Réalisation de projets', icon: 'building', link: 'projects', media: site.featured_projects[0]?.cover || null }, { title: copy.products, icon: 'stone', link: 'products', media: site.featured_products[0]?.cover || null }];
-  const collections = categories.data?.data.flatMap(category => category.children?.length ? category.children : [category]) || [];
   const collectionStories = page?.sections.filter(section => section.group === 'services') || [];
-  return <main id="main" className="public-page homepage" data-backend-status={available ? 'ok' : 'unavailable'}>
+  const collections = site.navigation?.products.flatMap(category => category.children?.length ? category.children : [category]) || [];
+  return <main id="main" className="public-page homepage" data-backend-status={site.available ? 'ok' : 'unavailable'}>
     <HomeMotion />
-    <nav className="brand-rail" aria-label={copy.menu}>{[['', copy.home], ['products', copy.products], ['projects', copy.projects], ['services', copy.services], ['about', copy.about]].map(([path, label], index) => <a key={path} href={`/${locale}${path ? `/${path}` : ''}`}><span>{String(index + 1).padStart(2, '0')}</span>{label}</a>)}</nav>
+    <nav className="brand-rail" aria-label={locale === 'ar' ? 'أقسام الموقع' : 'Rubriques du site'}>{[['', copy.home], ['products', copy.products], ['projects', copy.projects], ['services', copy.services], ['about', copy.about]].map(([path, label], index) => <a key={path} href={`/${locale}${path ? `/${path}` : ''}`}><span>{String(index + 1).padStart(2, '0')}</span>{label}</a>)}</nav>
     <PageHero locale={locale} title={page?.title || copy.heroTitle} eyebrow={page?.eyebrow || copy.heroEyebrow} body={page?.body || copy.heroBody} media={page?.hero} large variant="brand" footer={<nav className="site-width hero-paths" aria-label={copy.activities}>{paths.map((section, index) => <a key={index} className="hero-path" href={editorialHref(locale, section.link) || `/${locale}/projects`}>{section.media ? <CatalogueImage media={section.media} alt="" placeholder={copy.missingMedia} thumbnail sizes="104px" /> : <SiteIcon name={section.icon} />}<span><strong>{section.title}</strong><small>{section.link?.split('?')[0] === 'projects' ? locale === 'ar' ? 'شاهد مشاريعنا' : 'Voir nos projets' : section.link === 'contact' ? copy.contactAction : copy.discover}</small></span><SiteIcon name="arrow" className="directional" /></a>)}</nav>}><a className="button bronze" href={`/${locale}/contact`}>{copy.contactAction}<SiteIcon name="arrow" className="directional" /></a><a className="button outline" href={`/${locale}/products`}>{copy.productsAction}<SiteIcon name="stone" /></a></PageHero>
     <section className="section site-width"><SectionHeading title={copy.categories} body={page?.body} action={<a className="button outline" href={`/${locale}/products`}>{copy.allProducts}<SiteIcon name="arrow" className="directional" /></a>} /><div className="collection-grid">{collectionStories.length ? collectionStories.slice(0, 6).map((section, index) => <a className="collection-card" key={index} href={editorialHref(locale, section.link) || `/${locale}/products`}><CatalogueImage media={section.media} alt={section.title} placeholder={copy.missingMedia} /><span>{section.title}<SiteIcon name="arrow" className="directional" /></span><p>{section.body}</p></a>) : <>{collections.slice(0, 6).map(category => <a className="collection-card" key={category.id} href={`/${locale}/products?category=${category.slug}`}><CatalogueImage media={category.cover || null} alt={category.name} placeholder={copy.missingMedia} /><span>{category.name}</span></a>)}{Array.from({ length: Math.max(0, 6 - collections.length) }, (_, index) => <div className="collection-card" key={index}><div className="neutral-material"><SiteIcon name="building" /></div><span>{copy.pendingReference}</span><p>{copy.pendingEditorial}</p></div>)}</>}</div></section>
     <section className="section site-width"><SectionHeading title={copy.featuredProducts} action={<a className="button bronze" href={`/${locale}/products`}>{copy.allProducts}<SiteIcon name="arrow" className="directional" /></a>} /><ProductCards products={site.featured_products.slice(0, 6)} locale={locale} compact slots={6} /></section>
     <section className="section site-width home-projects"><SectionHeading title={copy.featuredProjects} body={locale === 'ar' ? 'اختر الأجواء التي تلهمك، واكتشف الحجر في أعمالنا.' : 'Choisissez un univers et découvrez la pierre à travers nos réalisations.'} />
-      {usages.data?.data.length ? <nav className="home-usage-links" aria-label={copy.usages}>{usages.data.data.map((category, index) => <a key={category.id} href={`/${locale}/projects?category=${category.slug}`}>
+      {site.navigation?.projects.length ? <nav className="home-usage-links" aria-label={copy.usages}>{site.navigation.projects.map((category, index) => <a key={category.id} href={`/${locale}/projects?category=${category.slug}`}>
         <CatalogueImage media={category.cover || site.featured_projects.find(project => project.categories.some(item => item.slug === category.slug))?.cover || null} alt={category.name} placeholder={copy.missingMedia} thumbnail />
         <span className="usage-card-top"><SiteIcon name={projectCategoryIcon(category.slug)} /><small>{String(index + 1).padStart(2, '0')}</small></span><span className="usage-card-title">{category.name}<SiteIcon name="arrow" className="directional" /></span>
       </a>)}</nav> : null}

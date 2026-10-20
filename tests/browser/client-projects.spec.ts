@@ -10,7 +10,8 @@ for (const locale of ['fr', 'ar']) {
     await expect(page.locator('.trust-grid')).toContainText('150');
     await expect(page.locator('.trust-grid')).toContainText('100');
     await expect(page.locator('.trust-grid')).toContainText('10');
-    await expect(page.locator('[data-project-cards] .project-card')).toHaveCount(5);
+    // The requested homepage revision replaces the removed project grid with five usage links.
+    await expect(page.locator('.home-usage-links > a[href*="/projects?category="]')).toHaveCount(5);
     await page.goto(`/${locale}/projects/cascades-et-fontaines`);
     await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.+/);
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /\/media\/images\//);

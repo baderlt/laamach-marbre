@@ -7,5 +7,5 @@ export function CatalogueImage({ media, placeholder, eager = false, thumbnail = 
   const chosen = thumbnail ? unique[0] : unique.find(variant => variant.width >= 800) || unique.at(-1);
   if (!chosen) return <div className="media-placeholder" role="img" aria-label={placeholder}>{placeholder}</div>;
   // M2 already optimizes these immutable variants. Deliver directly from the media origin.
-  return <img data-media-id={media.id} src={chosen.url} srcSet={unique.map(item => `${item.url} ${item.width}w`).join(', ')} sizes={sizes || (thumbnail ? '160px' : '(max-width: 767px) 92vw, 800px')} width={chosen.width} height={chosen.height} alt={alt || media.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />;
+  return <img data-media-id={media.id} src={chosen.url} srcSet={unique.map(item => `${item.url} ${item.width}w`).join(', ')} sizes={sizes || (thumbnail ? '160px' : '(max-width: 767px) 92vw, 800px')} width={chosen.width} height={chosen.height} alt={alt ?? media.alt} loading={eager ? 'eager' : 'lazy'} fetchPriority={eager ? 'high' : undefined} decoding="async" />;
 }

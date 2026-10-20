@@ -10,7 +10,7 @@ import localFont from 'next/font/local';
 
 const cairo = localFont({ src: [{ path: '../fonts/cairo-400.ttf', weight: '400' }, { path: '../fonts/cairo-500.ttf', weight: '500' }, { path: '../fonts/cairo-600.ttf', weight: '600' }, { path: '../fonts/cairo-700.ttf', weight: '700' }], variable: '--font-arabic', display: 'swap', preload: false });
 
-export const metadata: Metadata = { metadataBase: new URL(serverEnvironment(process.env).site), title: 'LAAMACH MARBRE', robots: { index: false, follow: false } };
+export const metadata: Metadata = { metadataBase: new URL(serverEnvironment(process.env).site), title: 'LAAMACH MARBRE', robots: { index: serverEnvironment(process.env).indexing, follow: serverEnvironment(process.env).indexing } };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const code = (await headers()).get('x-laamach-locale') || localeConfiguration.default;

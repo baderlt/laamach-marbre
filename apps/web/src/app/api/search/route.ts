@@ -1,10 +1,14 @@
 import { catalogueRequest } from '@/lib/catalogue-server';
 import { findLocale } from '@/lib/locales';
 import type { ProductPage } from '@/lib/catalogue';
+import { trustedHost, withinRequestBudget } from '@/lib/http-security';
+import { serverEnvironment } from '@/lib/environment';
 
 const headers = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
 
 export async function GET(request: Request) {
+  if (!trustedHost(request, serverEnvironment(process.env).site)) return Response.json({ data: [], total: 0 }, { status: 403, headers });
+  if (!withinRequestBudget('search', 240)) return Response.json({ data: [], total: 0 }, { status: 429, headers });
   const params = new URL(request.url).searchParams;
   const locale = params.get('locale') || '';
   const query = (params.get('q') || '').trim();

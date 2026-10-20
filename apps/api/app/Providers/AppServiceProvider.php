@@ -16,7 +16,11 @@ use App\Policies\MediaAssetPolicy;
 use App\Policies\SiteContentPolicy;
 use App\Policies\UserPolicy;
 use App\Support\FoundationConfiguration;
+use App\Support\SecurityConfiguration;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
         // A first Composer install/key:generate must be possible before a key exists.
         FoundationConfiguration::validate($this->app['config'], requireKey: ! $this->app->runningInConsole());
         MediaConfiguration::validate($this->app['config']);
+        SecurityConfiguration::validate($this->app['config']);
+        RateLimiter::for('public-api', fn (Request $request) => Limit::perMinute(config('security.public_requests_per_minute'))->by($request->ip()));
         $this->app->setLocale(config('localization.default'));
         $this->app->setFallbackLocale(config('localization.fallback'));
         Gate::policy(User::class, UserPolicy::class);

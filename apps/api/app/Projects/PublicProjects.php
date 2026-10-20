@@ -12,6 +12,13 @@ use App\Models\ProjectCategory;
 
 class PublicProjects
 {
+    public function categoryCards(string $locale): array
+    {
+        $catalogue = app(PublicCatalogue::class);
+
+        return $this->categories($locale)->with(['translations', ...$catalogue->imageRelations('cover')])->orderBy('sort_order')->orderBy('id')->get()->map(fn ($category) => ['id' => $category->id, 'slug' => $category->slug, ...$this->copy($category, $locale), 'cover' => $catalogue->image($category->cover, $locale)])->all();
+    }
+
     public function assetQuery(?string $type = null)
     {
         return MediaAsset::whereIn('type', $type ? [$type] : ['image', 'video'])->where('client_supplied', true)->where('approval_state', 'approved')->whereNotNull('active_revision')->whereHas('variants', fn ($variants) => $variants->where('state', 'published')->whereIn('disk', ['local_published', 'r2_published'])->whereColumn('publication_revision', 'media_assets.active_revision'));

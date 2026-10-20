@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+const api = process.env.QA_API_URL || 'http://127.0.0.1:8101';
 import { viewerCopy } from '../../apps/web/src/lib/viewer';
 
 test.use({ launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] } });
@@ -6,13 +7,13 @@ test.setTimeout(90000);
 
 for (const locale of ['fr', 'ar']) {
   test(`${locale}: every published material only shows its configured measurements and unique technical labels`, async ({ page, request }) => {
-    const response = await request.get(`http://127.0.0.1:8101/api/v1/products?locale=${locale}&per_page=24`);
+    const response = await request.get(`${api}/api/v1/products?locale=${locale}&per_page=24`);
     const products = (await response.json()).data;
     expect(products.length).toBeGreaterThanOrEqual(7);
     for (const product of products) {
       await page.goto(`/${locale}/products/${product.slug}`);
       const example = page.locator('.dimension-example');
-      const detail = (await (await request.get(`http://127.0.0.1:8101/api/v1/products/${product.slug}?locale=${locale}`)).json()).data;
+      const detail = (await (await request.get(`${api}/api/v1/products/${product.slug}?locale=${locale}`)).json()).data;
       const size = detail.sizes[0];
       const axes = size ? [size.width, size.length, size.thickness].filter(value => Number(value) > 0).length : 0;
       await expect(example).toHaveCount(axes ? 1 : 0);
@@ -41,7 +42,7 @@ for (const locale of ['fr', 'ar']) {
 
   test(`${locale}: compact 3D studio, dimension tracking, hint dismissal and keyboard recovery`, async ({ page, request }) => {
     const copy = viewerCopy(locale), models: string[] = [], errors: string[] = [];
-    const detail = (await (await request.get(`http://127.0.0.1:8101/api/v1/products/grey-bnikhiran?locale=${locale}`)).json()).data;
+    const detail = (await (await request.get(`${api}/api/v1/products/grey-bnikhiran?locale=${locale}`)).json()).data;
     const axes = [detail.sizes[0].width, detail.sizes[0].length, detail.sizes[0].thickness].filter(value => Number(value) > 0).length;
     page.on('request', request => { if (/\.glb(?:\?|$)/.test(request.url())) models.push(request.url()); });
     page.on('pageerror', error => errors.push(error.message));

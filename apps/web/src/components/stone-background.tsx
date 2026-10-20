@@ -12,6 +12,11 @@ export function StoneBackground() {
   useEffect(() => {
     const element = root.current;
     if (!element) return;
+    const base = element.querySelector<HTMLElement>('.stone-base');
+    const focus = element.querySelector<HTMLElement>('.stone-focus');
+    const detail = element.querySelector<HTMLElement>('.stone-detail');
+    const light = element.querySelector<HTMLElement>('.stone-light');
+    if (!base || !focus || !detail || !light) return;
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
     const pointer = matchMedia('(hover: hover) and (pointer: fine)');
     const data = matchMedia('(prefers-reduced-data: reduce)');
@@ -29,10 +34,7 @@ export function StoneBackground() {
     const reset = () => {
       stop();
       element.dataset.active = 'false';
-      element.style.removeProperty('--stone-x');
-      element.style.removeProperty('--stone-y');
-      element.style.removeProperty('--stone-tx');
-      element.style.removeProperty('--stone-ty');
+      for (const layer of [base, focus, detail, light]) layer.style.removeProperty('transform');
     };
     const tick = (now: number) => {
       frame = 0;
@@ -41,10 +43,13 @@ export function StoneBackground() {
       const ease = 1 - Math.exp(-Math.min(previousTime ? now - previousTime : 16, 48) / 120);
       previousTime = now;
       x += (targetX - x) * ease; y += (targetY - y) * ease;
-      element.style.setProperty('--stone-x', `${x.toFixed(2)}px`);
-      element.style.setProperty('--stone-y', `${y.toFixed(2)}px`);
-      element.style.setProperty('--stone-tx', `${((x / width - .5) * -10).toFixed(2)}px`);
-      element.style.setProperty('--stone-ty', `${((y / height - .5) * -8).toFixed(2)}px`);
+      const tx = (x / width - .5) * -10, ty = (y / height - .5) * -8;
+      // Updating inherited custom properties invalidates the entire background's
+      // paint tree. Transform the cached layers directly; the masks stay static.
+      base.style.transform = `translate3d(${tx.toFixed(2)}px,${ty.toFixed(2)}px,0)`;
+      focus.style.transform = `translate3d(${(x - 224 + tx).toFixed(2)}px,${(y - 224 + ty).toFixed(2)}px,0)`;
+      detail.style.transform = `translate3d(${(224 - x - 12).toFixed(2)}px,${(224 - y - 12).toFixed(2)}px,0)`;
+      light.style.transform = `translate3d(${(x - 208).toFixed(2)}px,${(y - 208).toFixed(2)}px,0)`;
       if (Math.abs(targetX - x) + Math.abs(targetY - y) > .15) frame = requestAnimationFrame(tick);
       else previousTime = 0;
     };
@@ -58,7 +63,7 @@ export function StoneBackground() {
     };
     const preferences = () => {
       const economical = data.matches || connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '') || (memory !== undefined && memory <= 2);
-      permitted = pointer.matches && !motion.matches && !economical;
+      permitted = pointer.matches && !motion.matches && !economical && CSS.supports('mask-image', 'radial-gradient(white, transparent)');
       element.dataset.economical = String(Boolean(economical));
       element.dataset.interactive = String(permitted);
       if (!permitted) reset();

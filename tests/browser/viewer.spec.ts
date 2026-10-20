@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 import { viewerCopy } from '../../apps/web/src/lib/viewer';
 const api = process.env.QA_API_URL || 'http://127.0.0.1:8101';
 const php = process.env.QA_PHP_BINARY || 'php';
+const fixtureRoot = resolve(process.env.LARAVEL_STORAGE_PATH || 'apps/api/storage', 'framework/testing/m3-browser');
 const output = resolve('.tools/m6/screenshots'); mkdirSync(output, { recursive: true });
 // Software WebGL is explicit in this QA project; this is not a physical-device benchmark.
 test.use({ launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] } });
@@ -14,7 +15,12 @@ test.beforeAll(() => fixtures('add'));
 test.afterAll(() => fixtures('record-upload'));
 async function ready(page: import('@playwright/test').Page) { await expect(page.locator('[data-viewer-host]')).toHaveAttribute('data-viewer-ready', 'true', { timeout: 20000 }); await expect(page.locator('[data-viewer-host] canvas')).toBeVisible(); }
 for (const locale of ['fr', 'ar']) {
-  test(`${locale}: runtime/model lazy loading, actual GLB pixels, orbit, zoom, reset and dimension guides`, async ({ page }) => {
+  test(`${locale}: runtime/model lazy loading, actual GLB pixels, orbit, zoom, reset and optional dimension guides`, async ({ page }) => {
+    await page.addInitScript(() => {
+      const state = window as typeof window & { viewerCspViolations: string[] };
+      state.viewerCspViolations = [];
+      document.addEventListener('securitypolicyviolation', event => state.viewerCspViolations.push(`${event.violatedDirective}: ${event.blockedURI}`));
+    });
     const copy = viewerCopy(locale), modelRequests: string[] = [], scripts: Promise<string>[] = [];
     page.on('request', request => { if (/\.glb(?:\?|$)/.test(request.url())) modelRequests.push(request.url()); });
     page.on('response', response => { if (response.request().resourceType() === 'script') scripts.push(response.text().catch(() => '')); });
@@ -29,6 +35,7 @@ for (const locale of ['fr', 'ar']) {
     }
     writeFileSync(`.tools/m6/performance-${locale}.json`, JSON.stringify(metrics, null, 2));
     const trigger = page.getByRole('button', { name: copy.open, exact: true }); await trigger.click(); await ready(page);
+    expect(await page.evaluate(() => (window as typeof window & { viewerCspViolations: string[] }).viewerCspViolations)).toEqual([]);
     expect(modelRequests).toHaveLength(1); expect((await Promise.all(scripts)).some(body => body.includes('THREE.WebGLRenderer'))).toBe(true);
     const host = page.locator('[data-viewer-host]'), canvas = host.locator('canvas');
     expect(Number(await host.getAttribute('data-viewer-triangles'))).toBeGreaterThan(2);
@@ -47,7 +54,9 @@ for (const locale of ['fr', 'ar']) {
     await canvas.focus(); await canvas.press('Home');
     const frames = await host.getAttribute('data-viewer-frames'); await page.waitForTimeout(700); expect(await host.getAttribute('data-viewer-frames')).toBe(frames);
     await expect(page.locator('.viewer-toolbar, .viewer-help, .viewer-disclosure')).toHaveCount(0);
-    await expect(page.locator('.viewer-dimension-overlay svg')).toBeVisible();
+    // This uploaded GLB has no admin-entered product dimensions; its bounding box
+    // must not be presented as verified measurements. Procedural sizes below do.
+    await expect(page.locator('.viewer-dimension-overlay svg')).toHaveCount(0);
     await page.locator('.viewer-panel').screenshot({ path: resolve(output, `${locale}-glb-desktop.png`) });
     await page.getByRole('button', { name: copy.photos, exact: true }).click(); await expect(trigger).toBeFocused(); await expect(page.locator('[data-product-image]')).toBeVisible(); await expect(canvas).toHaveCount(0);
   });
@@ -110,12 +119,12 @@ for (const locale of ['fr', 'ar']) {
 
 test('authenticated private admin preview loads the shared real renderer; upload stays private', async ({ page, request }) => {
   test.setTimeout(300000); page.setDefaultNavigationTimeout(60000);
-  const manifest = JSON.parse(readFileSync('apps/api/storage/framework/testing/m3-browser/fixture-manifest.json', 'utf8'));
+  const manifest = JSON.parse(readFileSync(resolve(fixtureRoot, 'fixture-manifest.json'), 'utf8'));
   expect((await request.get(`${api}/admin/product-viewer/${manifest.viewer_private_product}`, { headers: { Accept: 'application/json' } })).status()).toBe(401);
   await page.goto(`${api}/admin/login`); await page.locator('input[type=email]').fill('viewer-qa@example.invalid'); await page.locator('input[type=password]').fill('SyntheticOnly-M6-Only1!'); await page.locator('button[type=submit]').click(); await expect(page).not.toHaveURL(/login$/, { timeout: 60000 });
   await page.goto(`${api}/admin/product-viewer/${manifest.viewer_private_product}?locale=ar`); await page.getByRole('button', { name: viewerCopy('ar').open, exact: true }).click(); await ready(page); expect(Number(await page.locator('[data-viewer-host]').getAttribute('data-viewer-triangles'))).toBeGreaterThan(2);
   await page.screenshot({ path: resolve(output, 'admin-private-model-ar.png'), fullPage: true });
-  await page.goto(`${api}/admin/media-assets`); await page.getByRole('button', { name: 'Upload product GLB', exact: true }).click(); await page.getByRole('dialog').locator('.filepond--root input[type=file]').setInputFiles(resolve('apps/api/storage/framework/testing/m3-browser/synthetic-admin-upload.glb'));
+  await page.goto(`${api}/admin/media-assets`); await page.getByRole('button', { name: 'Upload product GLB', exact: true }).click(); await page.getByRole('dialog').locator('.filepond--root input[type=file]').setInputFiles(resolve(fixtureRoot, 'synthetic-admin-upload.glb'));
   const dialog = page.getByRole('dialog'); await expect(dialog.locator('.filepond--item')).toBeVisible(); await expect(dialog.locator('.filepond--item')).toHaveAttribute('data-filepond-item-state', 'processing-complete', { timeout: 120000 }); await dialog.locator('button[type=submit]').click(); await expect(dialog).not.toBeVisible({ timeout: 60000 });
   fixtures('verify-upload');
   await page.getByRole('searchbox').fill('synthetic-admin-upload.glb');

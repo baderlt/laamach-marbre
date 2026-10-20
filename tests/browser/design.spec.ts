@@ -1,6 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { execFileSync } from 'node:child_process';
+
+const contactFixture = (mode: string) => execFileSync(process.env.QA_PHP_BINARY || 'php', ['apps/api/tests/Support/catalogue-browser.php', mode, '--env=testing'], { stdio: 'pipe' });
+test.beforeAll(() => contactFixture('contact-off'));
+test.afterAll(() => contactFixture('contact-on'));
 
 const routes = ['', '/products', '/products/temporary-product', '/projects', '/projects/synthetic-project', '/services', '/about', '/contact'];
 const widths = [320, 360, 375, 390, 430, 768, 1024, 1280, 1440];
@@ -35,7 +40,7 @@ for (const locale of ['fr', 'ar']) {
               await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
             }
             window.scrollTo(0, 0);
-            await Promise.all(Array.from(document.images, image => image.decode().catch(() => undefined)));
+            await Promise.all(Array.from(document.images).filter(image => image.complete && image.naturalWidth > 0).map(image => image.decode().catch(() => undefined)));
           });
           await page.screenshot({ path: resolve(output, `${locale}-${route.slice(1).replaceAll('/', '-') || 'home'}-${width}.png`), fullPage: true, animations: 'disabled' });
         }
@@ -60,12 +65,14 @@ for (const locale of ['fr', 'ar']) {
     await page.locator('.catalogue-search button').click();
     await expect(page).toHaveURL(/q=no-matching-material/); await expect(cards).toHaveCount(0);
     const otherLocale = locale === 'ar' ? 'fr' : 'ar';
-    await expect(page.locator(`.language-nav a[lang=${otherLocale}]`)).toHaveAttribute('href', `/${otherLocale}/products?q=no-matching-material`);
+    await expect(page.locator(`.header-language-switch a[lang=${otherLocale}]`)).toHaveAttribute('href', `/${otherLocale}/products?q=no-matching-material`);
   });
 
   test(`${locale}: editorial SEO, honest contact empty state and 3D disabled until explicitly configured`, async ({ page }) => {
     await page.goto(`/${locale}/about`); await expect(page).toHaveTitle('LAAMACH MARBRE — QA about');
-    await expect(page.locator('.hero-placeholder')).toBeVisible();
+    const hero = page.locator('.hero-media img');
+    await expect(hero).toBeVisible();
+    await expect.poll(() => hero.evaluate(node => (node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     await page.goto(`/${locale}/contact`); await expect(page.locator('.contact-form button')).toBeDisabled();
     await expect(page.locator('a[href*="wa.me"], a[href*="whatsapp"], iframe')).toHaveCount(0);
     await page.goto(`/${locale}/products/temporary-product`); await expect(page.locator('[data-viewer-activate]')).toHaveCount(0); await expect(page.locator('[data-product-image]')).toBeVisible();

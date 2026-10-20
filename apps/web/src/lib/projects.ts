@@ -4,7 +4,7 @@ import { localeConfiguration } from './locales.ts';
 export type ProjectCategory = { id: string; slug: string; name: string; description?: string | null; cover?: Media | null };
 export type ProjectCard = { reference: string; slug: string; title: string; summary: string | null; featured: boolean; categories: ProjectCategory[]; cover: Media | null };
 export type GalleryItem = { type: 'image'; media: Media; caption: string | null; poster: null } | { type: 'video'; media: { id: string; duration: string; variants: Variant[] }; caption: string | null; poster: Media | null };
-export type Project = ProjectCard & { description: string | null; area_display: string | null; seo_title: string | null; seo_description: string | null; location: string | null; year: number | null; area: string | null; area_unit: string | null; gallery: GalleryItem[]; products: ProductCard[]; related_projects: ProjectCard[] };
+export type Project = ProjectCard & { available_locales?: string[]; description: string | null; area_display: string | null; seo_title: string | null; seo_description: string | null; location: string | null; year: number | null; area: string | null; area_unit: string | null; gallery: GalleryItem[]; products: ProductCard[]; related_projects: ProjectCard[] };
 export type ProjectsPage = { data: ProjectCard[]; meta: ProductPage['meta'] };
 
 const messages = {

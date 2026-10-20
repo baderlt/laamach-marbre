@@ -11,6 +11,7 @@ import { gsap } from 'gsap';
 
 export function ProjectGallery({ project, locale }: { project: Project; locale: string }) {
   const [selected, setSelected] = useState(-1);
+  const [expanded, setExpanded] = useState(false);
   const stage = useRef<HTMLDivElement>(null);
   const player = useRef<HTMLVideoElement>(null);
   const modalPlayer = useRef<HTMLVideoElement>(null);
@@ -58,7 +59,7 @@ export function ProjectGallery({ project, locale }: { project: Project; locale: 
       <div className="product-image">
         {item?.type === 'video' ? video ? <video ref={player} key={item.media.id} controls playsInline preload="none" poster={poster?.url} aria-label={alt}><source src={video.url} type="video/mp4" />{copy.missingVideo}</video> : <p>{copy.missingVideo}</p> : picture}
       </div>
-      <button type="button" className="gallery-expand button outline" onClick={() => { pause(); dialog.current?.showModal(); }}><SiteIcon name="search" />{arabic ? 'عرض بملء الشاشة' : 'Agrandir la vue'}</button>
+      <button type="button" className="gallery-expand button outline" onClick={() => { pause(); setExpanded(true); dialog.current?.showModal(); }}><SiteIcon name="search" />{arabic ? 'عرض بملء الشاشة' : 'Agrandir la vue'}</button>
     </div>
     {controls}
     {item?.caption && <p className="preserve-text gallery-caption">{item.caption}</p>}
@@ -69,9 +70,9 @@ export function ProjectGallery({ project, locale }: { project: Project; locale: 
         {entry.type === 'video' && <span className="gallery-video-mark" aria-hidden="true">▷</span>}
       </button>)}
     </div>}
-    <dialog ref={dialog} className="project-lightbox" aria-label={copy.gallery} onKeyDown={trapDialogFocus} onClose={pause} onCancel={pause} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
+    <dialog ref={dialog} className="project-lightbox" aria-label={copy.gallery} onKeyDown={trapDialogFocus} onClose={() => { pause(); setExpanded(false); }} onCancel={pause} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>
       <div className="lightbox-heading"><span>{project.title}</span><button type="button" className="icon-button" autoFocus onClick={() => dialog.current?.close()} aria-label={arabic ? 'إغلاق' : 'Fermer'}><SiteIcon name="close" /></button></div>
-      <div className="lightbox-content">{item?.type === 'video' && video ? <video ref={modalPlayer} key={item.media.id} controls playsInline preload="none" poster={poster?.url} aria-label={alt}><source src={video.url} type="video/mp4" /></video> : picture}</div>
+      <div className="lightbox-content">{expanded && (item?.type === 'video' && video ? <video ref={modalPlayer} key={item.media.id} controls playsInline preload="none" poster={poster?.url} aria-label={alt}><source src={video.url} type="video/mp4" /></video> : picture)}</div>
       {controls}
     </dialog>
   </section>;

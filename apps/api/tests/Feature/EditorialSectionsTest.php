@@ -11,6 +11,7 @@ use App\Models\SiteContent;
 use App\Models\User;
 use Filament\Actions\Testing\TestAction;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Livewire\Livewire;
@@ -22,6 +23,23 @@ class EditorialSectionsTest extends TestCase
 {
     // The populated local preview must never be migrated, truncated or reseeded by these tests.
     use DatabaseTransactions;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // The full suite starts from an empty disposable schema. Supply a real
+        // published test image so reference-preservation assertions stay meaningful.
+        if (! SiteContent::find('home')) {
+            $actor = $this->actor();
+            $root = storage_path('framework/testing/'.getmypid().'/editorial-sections');
+            File::ensureDirectoryExists($root);
+            $image = CatalogueFixtures::image($actor, $root, 120);
+            $input = $this->input();
+            $input['translations']['fr']['sections'][0]['media_asset_id'] = $image->id;
+            $input['translations']['ar']['sections'][0]['media_asset_id'] = $image->id;
+            app(SiteContentWriter::class)->save(null, $input, $actor);
+        }
+    }
 
     private function actor(): User
     {
@@ -71,11 +89,12 @@ class EditorialSectionsTest extends TestCase
         $this->assertEquals($input, SectionForm::input($form));
     }
 
-    public function test_real_home_content_and_media_references_survive_an_unchanged_save(): void
+    public function test_existing_home_content_and_media_references_survive_an_unchanged_save(): void
     {
         $record = SiteContent::findOrFail('home');
         $before = $record->translations;
         $refs = $record->mediaReferences()->orderBy('slot')->get(['slot', 'media_asset_id'])->toArray();
+        $this->assertNotEmpty($refs);
         $input = collect($record->attributesToArray())->except(['created_at', 'updated_at'])->all();
         app(SiteContentWriter::class)->save($record, SectionForm::input(SectionForm::fill($input)), $this->actor());
         $this->assertEquals($before, $record->fresh()->translations);

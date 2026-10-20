@@ -125,7 +125,9 @@ class ProductViewerTest extends TestCase
         $this->assertStringNotContainsString('originals/', $response->getContent());
         $this->assertStringNotContainsString('original_key', $response->getContent());
         $this->getJson('/api/v1/products')->assertJsonMissingPath('data.0.viewer_3d')->assertJsonMissingPath('data.0.viewer_3d_config');
-        $this->get('/media/'.$variant->object_key)->assertOk()->assertHeader('Content-Type', 'model/gltf-binary')->assertHeader('Access-Control-Allow-Origin', '*');
+        $this->withHeaders(['Origin' => 'http://127.0.0.1:3105'])->get('/media/'.$variant->object_key)->assertOk()->assertHeader('Content-Type', 'model/gltf-binary')->assertHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:3105');
+        $this->withHeaders(['Origin' => 'https://untrusted.invalid'])->get('/media/'.$variant->object_key)->assertOk()->assertHeaderMissing('Access-Control-Allow-Origin');
+        $this->flushHeaders();
         $this->configure($product, false, $product->viewer_3d_config);
         $this->getJson('/api/v1/products/'.$product->slug)->assertOk()->assertJsonPath('data.viewer_3d', null);
         $this->assertSame($model->id, $product->fresh()->viewer_3d_config['model_media_id']);

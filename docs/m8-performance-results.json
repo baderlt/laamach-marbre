@@ -1,0 +1,1563 @@
+{
+  "scope": "Local M8 simulated mobile; not field INP, real device, FPM or live CDN validation",
+  "baselineCommit": "bdd0c5f",
+  "versions": {
+    "node": "24.19.0",
+    "lighthouse": "13.5.0",
+    "chromeActual": "156.0.8078.4",
+    "emulatedUserAgent": "Android 11 Moto G Power (2022), Chrome/156.0.0.0 Mobile",
+    "next": "16.4.0",
+    "php": "8.3.6",
+    "mysql": "8.3.0"
+  },
+  "environment": {
+    "os": "Windows",
+    "frontend": "Next production, same loopback port 3106; saved pre-M8 and final7 builds",
+    "backend": "PHP development HTTP server; isolated frozen MySQL 3308/storage; saved baseline source on 8103, final source on 8102; identical locked dependencies",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 1
+    },
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1638.4,
+      "cpuSlowdownMultiplier": 4
+    },
+    "content": "Same frozen 7-product / 8-project / 79-client-original snapshot; public eligibility hides drafts; same stone/photo bytes"
+  },
+  "medians": [
+    {
+      "stage": "baseline",
+      "locale": "fr",
+      "score": 92,
+      "lcp": 2980.7861249999996,
+      "cls": 0,
+      "tbt": 177,
+      "fcp": 1258.4288999999999,
+      "speedIndex": 1724.9682439944127,
+      "bytes": 889142,
+      "requests": 27,
+      "images": 14,
+      "imageBytes": 654709,
+      "benchmark": 1450.5,
+      "ranges": {
+        "score": [
+          88,
+          93
+        ],
+        "lcp": [
+          2941.8039999999996,
+          3383.1638
+        ],
+        "cls": [
+          0,
+          0
+        ],
+        "tbt": [
+          136.5,
+          206.5
+        ],
+        "fcp": [
+          1253.1092,
+          1273.4432
+        ],
+        "speedIndex": [
+          1384.947423989706,
+          2441.297606002717
+        ],
+        "bytes": [
+          889142,
+          891352
+        ],
+        "requests": [
+          27,
+          28
+        ],
+        "images": [
+          14,
+          14
+        ],
+        "imageBytes": [
+          654709,
+          654709
+        ],
+        "benchmark": [
+          1222.5,
+          2297
+        ]
+      }
+    },
+    {
+      "stage": "baseline",
+      "locale": "ar",
+      "score": 85,
+      "lcp": 3819.4116249999997,
+      "cls": 0,
+      "tbt": 148.5,
+      "fcp": 2116.38345,
+      "speedIndex": 2116.38345,
+      "bytes": 1061481,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 679274,
+      "benchmark": 1233.5,
+      "ranges": {
+        "score": [
+          85,
+          88
+        ],
+        "lcp": [
+          3385.9223,
+          3825.948875
+        ],
+        "cls": [
+          0,
+          0
+        ],
+        "tbt": [
+          142,
+          153
+        ],
+        "fcp": [
+          2114.93865,
+          2119.09395
+        ],
+        "speedIndex": [
+          2114.93865,
+          2119.09395
+        ],
+        "bytes": [
+          1061481,
+          1061481
+        ],
+        "requests": [
+          31,
+          31
+        ],
+        "images": [
+          15,
+          15
+        ],
+        "imageBytes": [
+          679274,
+          679274
+        ],
+        "benchmark": [
+          1128.5,
+          1503
+        ]
+      }
+    },
+    {
+      "stage": "final",
+      "locale": "fr",
+      "score": 96,
+      "lcp": 2727.9941500000004,
+      "cls": 0,
+      "tbt": 106.49999999999955,
+      "fcp": 1215.6395,
+      "speedIndex": 1247.7810120032307,
+      "bytes": 845851,
+      "requests": 27,
+      "images": 14,
+      "imageBytes": 609829,
+      "benchmark": 2355.5,
+      "ranges": {
+        "score": [
+          95,
+          96
+        ],
+        "lcp": [
+          2706.7707,
+          2865.6394999999998
+        ],
+        "cls": [
+          0,
+          0
+        ],
+        "tbt": [
+          97.50000000000045,
+          106.5
+        ],
+        "fcp": [
+          1206.7707,
+          1249.9961
+        ],
+        "speedIndex": [
+          1206.7707,
+          1249.9961
+        ],
+        "bytes": [
+          845841,
+          848041
+        ],
+        "requests": [
+          27,
+          28
+        ],
+        "images": [
+          14,
+          14
+        ],
+        "imageBytes": [
+          609829,
+          609829
+        ],
+        "benchmark": [
+          2272,
+          2695
+        ]
+      }
+    },
+    {
+      "stage": "final",
+      "locale": "ar",
+      "score": 86,
+      "lcp": 3757.47,
+      "cls": 0.0189923189337616,
+      "tbt": 111.5,
+      "fcp": 2111.205,
+      "speedIndex": 2111.205,
+      "bytes": 1017990,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 634458,
+      "benchmark": 2593.5,
+      "ranges": {
+        "score": [
+          85,
+          86
+        ],
+        "lcp": [
+          3756.9404999999997,
+          3758.4808
+        ],
+        "cls": [
+          0,
+          0.0189923189337616
+        ],
+        "tbt": [
+          100.5,
+          169
+        ],
+        "fcp": [
+          2110.41075,
+          2112.7212
+        ],
+        "speedIndex": [
+          2110.41075,
+          2112.7212
+        ],
+        "bytes": [
+          1017987,
+          1017995
+        ],
+        "requests": [
+          31,
+          31
+        ],
+        "images": [
+          15,
+          15
+        ],
+        "imageBytes": [
+          634458,
+          634458
+        ],
+        "benchmark": [
+          2144.5,
+          2651
+        ]
+      }
+    }
+  ],
+  "rows": [
+    {
+      "stage": "baseline",
+      "locale": "fr",
+      "run": 1,
+      "path": "/fr",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:02:20.875Z",
+      "score": 93,
+      "accessibility": 100,
+      "lcp": 2941.8039999999996,
+      "cls": 0,
+      "tbt": 136.5,
+      "fcp": 1273.4432,
+      "speedIndex": 2441.297606002717,
+      "bytes": 891352,
+      "requests": 28,
+      "images": 14,
+      "imageBytes": 654709,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2297,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "ar",
+      "run": 1,
+      "path": "/ar",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:02:34.056Z",
+      "score": 85,
+      "accessibility": 100,
+      "lcp": 3819.4116249999997,
+      "cls": 0,
+      "tbt": 153,
+      "fcp": 2119.09395,
+      "speedIndex": 2119.09395,
+      "bytes": 1061481,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 679274,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1128.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "fr",
+      "run": 2,
+      "path": "/fr",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:02:46.906Z",
+      "score": 92,
+      "accessibility": 100,
+      "lcp": 2980.7861249999996,
+      "cls": 0,
+      "tbt": 177,
+      "fcp": 1258.4288999999999,
+      "speedIndex": 1724.9682439944127,
+      "bytes": 889142,
+      "requests": 27,
+      "images": 14,
+      "imageBytes": 654709,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1450.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "ar",
+      "run": 2,
+      "path": "/ar",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:02:58.848Z",
+      "score": 88,
+      "accessibility": 100,
+      "lcp": 3385.9223,
+      "cls": 0,
+      "tbt": 148.5,
+      "fcp": 2116.38345,
+      "speedIndex": 2116.38345,
+      "bytes": 1061481,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 679274,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1233.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "fr",
+      "run": 3,
+      "path": "/fr",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:03:10.873Z",
+      "score": 88,
+      "accessibility": 100,
+      "lcp": 3383.1638,
+      "cls": 0,
+      "tbt": 206.5,
+      "fcp": 1253.1092,
+      "speedIndex": 1384.947423989706,
+      "bytes": 889142,
+      "requests": 27,
+      "images": 14,
+      "imageBytes": 654709,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1222.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "ar",
+      "run": 3,
+      "path": "/ar",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:03:22.498Z",
+      "score": 85,
+      "accessibility": 100,
+      "lcp": 3825.948875,
+      "cls": 0,
+      "tbt": 142,
+      "fcp": 2114.93865,
+      "speedIndex": 2114.93865,
+      "bytes": 1061481,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 679274,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1503,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "fr",
+      "run": 1,
+      "path": "/fr/products",
+      "kind": "catalogue",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:03:34.493Z",
+      "score": 85,
+      "accessibility": 100,
+      "lcp": 3780.8444,
+      "cls": 0,
+      "tbt": 225,
+      "fcp": 1260.2296,
+      "speedIndex": 1652.8698199832106,
+      "bytes": 811732,
+      "requests": 25,
+      "images": 11,
+      "imageBytes": 571810,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1259,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "fr",
+      "run": 1,
+      "path": "/fr/products/grey-bnikhiran",
+      "kind": "product",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:03:45.355Z",
+      "score": 89,
+      "accessibility": 100,
+      "lcp": 3428.4748,
+      "cls": 0,
+      "tbt": 166,
+      "fcp": 1251.9832,
+      "speedIndex": 2022.3022480001737,
+      "bytes": 679665,
+      "requests": 22,
+      "images": 8,
+      "imageBytes": 430441,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1336,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "fr",
+      "run": 1,
+      "path": "/fr/projects/pierre-pose-traditionnelle",
+      "kind": "project",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:03:57.294Z",
+      "score": 81,
+      "accessibility": 100,
+      "lcp": 4409.634,
+      "cls": 0,
+      "tbt": 218,
+      "fcp": 1257.8340000000003,
+      "speedIndex": 2417.818430057944,
+      "bytes": 997414,
+      "requests": 33,
+      "images": 19,
+      "imageBytes": 751736,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1446.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "ar",
+      "run": 1,
+      "path": "/ar/products",
+      "kind": "catalogue",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:04:08.941Z",
+      "score": 75,
+      "accessibility": 100,
+      "lcp": 4778.5386,
+      "cls": 0,
+      "tbt": 274,
+      "fcp": 2120.5386,
+      "speedIndex": 2120.5386,
+      "bytes": 959162,
+      "requests": 28,
+      "images": 11,
+      "imageBytes": 571810,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1373.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "ar",
+      "run": 1,
+      "path": "/ar/products/grey-bnikhiran",
+      "kind": "product",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:04:19.663Z",
+      "score": 84,
+      "accessibility": 100,
+      "lcp": 4066.59915,
+      "cls": 0,
+      "tbt": 135.5,
+      "fcp": 1816.59915,
+      "speedIndex": 2592.641248693898,
+      "bytes": 947209,
+      "requests": 26,
+      "images": 9,
+      "imageBytes": 550352,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1508,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "baseline",
+      "locale": "ar",
+      "run": 1,
+      "path": "/ar/projects/pierre-pose-traditionnelle",
+      "kind": "project",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:04:31.128Z",
+      "score": 76,
+      "accessibility": 100,
+      "lcp": 5122.963,
+      "cls": 0,
+      "tbt": 206.00000000000045,
+      "fcp": 2130.429,
+      "speedIndex": 2130.429,
+      "bytes": 1145242,
+      "requests": 36,
+      "images": 19,
+      "imageBytes": 751736,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1657,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "fr",
+      "run": 1,
+      "path": "/fr",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:05:55.880Z",
+      "score": 95,
+      "accessibility": 100,
+      "lcp": 2865.6394999999998,
+      "cls": 0,
+      "tbt": 106.49999999999955,
+      "fcp": 1215.6395,
+      "speedIndex": 1247.7810120032307,
+      "bytes": 848041,
+      "requests": 28,
+      "images": 14,
+      "imageBytes": 609829,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2272,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "ar",
+      "run": 1,
+      "path": "/ar",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:06:05.275Z",
+      "score": 86,
+      "accessibility": 100,
+      "lcp": 3758.4808,
+      "cls": 0,
+      "tbt": 100.5,
+      "fcp": 2112.7212,
+      "speedIndex": 2112.7212,
+      "bytes": 1017987,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 634458,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2144.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "fr",
+      "run": 2,
+      "path": "/fr",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:06:14.025Z",
+      "score": 96,
+      "accessibility": 100,
+      "lcp": 2706.7707,
+      "cls": 0,
+      "tbt": 97.50000000000045,
+      "fcp": 1206.7707,
+      "speedIndex": 1206.7707,
+      "bytes": 845851,
+      "requests": 27,
+      "images": 14,
+      "imageBytes": 609829,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2695,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "ar",
+      "run": 2,
+      "path": "/ar",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:06:22.481Z",
+      "score": 86,
+      "accessibility": 100,
+      "lcp": 3756.9404999999997,
+      "cls": 0.0189923189337616,
+      "tbt": 111.5,
+      "fcp": 2110.41075,
+      "speedIndex": 2110.41075,
+      "bytes": 1017995,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 634458,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2593.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "fr",
+      "run": 3,
+      "path": "/fr",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:06:30.915Z",
+      "score": 96,
+      "accessibility": 100,
+      "lcp": 2727.9941500000004,
+      "cls": 0,
+      "tbt": 106.5,
+      "fcp": 1249.9961,
+      "speedIndex": 1249.9961,
+      "bytes": 845841,
+      "requests": 27,
+      "images": 14,
+      "imageBytes": 609829,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2355.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "ar",
+      "run": 3,
+      "path": "/ar",
+      "kind": "home",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:06:39.375Z",
+      "score": 85,
+      "accessibility": 100,
+      "lcp": 3757.47,
+      "cls": 0.0189923189337616,
+      "tbt": 169,
+      "fcp": 2111.205,
+      "speedIndex": 2111.205,
+      "bytes": 1017990,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 634458,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2651,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "fr",
+      "run": 1,
+      "path": "/fr/products",
+      "kind": "catalogue",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:06:47.911Z",
+      "score": 90,
+      "accessibility": 100,
+      "lcp": 3457.1676,
+      "cls": 0,
+      "tbt": 120.5,
+      "fcp": 1249.1676,
+      "speedIndex": 1249.1676,
+      "bytes": 768534,
+      "requests": 25,
+      "images": 11,
+      "imageBytes": 527262,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2533.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "fr",
+      "run": 1,
+      "path": "/fr/products/grey-bnikhiran",
+      "kind": "product",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:06:56.971Z",
+      "score": 88,
+      "accessibility": 100,
+      "lcp": 3485.09145,
+      "cls": 0,
+      "tbt": 192.5,
+      "fcp": 1255.3943,
+      "speedIndex": 1561.8765060133642,
+      "bytes": 636492,
+      "requests": 22,
+      "images": 8,
+      "imageBytes": 385177,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 1609,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "fr",
+      "run": 1,
+      "path": "/fr/projects/pierre-pose-traditionnelle",
+      "kind": "project",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:07:06.219Z",
+      "score": 90,
+      "accessibility": 100,
+      "lcp": 3521.2371,
+      "cls": 0,
+      "tbt": 106.5,
+      "fcp": 1252.7009,
+      "speedIndex": 1252.7009,
+      "bytes": 953329,
+      "requests": 33,
+      "images": 19,
+      "imageBytes": 707176,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2229,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "ar",
+      "run": 1,
+      "path": "/ar/products",
+      "kind": "catalogue",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:07:14.636Z",
+      "score": 81,
+      "accessibility": 100,
+      "lcp": 4610.439399999999,
+      "cls": 0.02909026154072207,
+      "tbt": 96.5,
+      "fcp": 2113.07955,
+      "speedIndex": 2113.07955,
+      "bytes": 915843,
+      "requests": 28,
+      "images": 11,
+      "imageBytes": 527262,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2388.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "ar",
+      "run": 1,
+      "path": "/ar/products/grey-bnikhiran",
+      "kind": "product",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:07:22.601Z",
+      "score": 81,
+      "accessibility": 100,
+      "lcp": 4609.4056,
+      "cls": 0,
+      "tbt": 114.5,
+      "fcp": 2109.3042,
+      "speedIndex": 2109.3042,
+      "bytes": 904037,
+      "requests": 26,
+      "images": 9,
+      "imageBytes": 505152,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2635.5,
+      "error": null,
+      "warnings": []
+    },
+    {
+      "stage": "final",
+      "locale": "ar",
+      "run": 1,
+      "path": "/ar/projects/pierre-pose-traditionnelle",
+      "kind": "project",
+      "version": "13.5.0",
+      "date": "2026-10-20T00:07:30.897Z",
+      "score": 80,
+      "accessibility": 100,
+      "lcp": 4616.155499999999,
+      "cls": 0,
+      "tbt": 140,
+      "fcp": 2111.4663,
+      "speedIndex": 2111.4663,
+      "bytes": 1101007,
+      "requests": 36,
+      "images": 19,
+      "imageBytes": 707176,
+      "modelRequests": 0,
+      "videoRequests": 0,
+      "detailRequests": 0,
+      "benchmark": 2820.5,
+      "error": null,
+      "warnings": []
+    }
+  ],
+  "diagnostics": [
+    {
+      "stage": "baseline",
+      "locale": "fr",
+      "sample": "home-3",
+      "lcp": {
+        "type": "list",
+        "items": [
+          {
+            "type": "table",
+            "headings": [
+              {
+                "key": "label",
+                "valueType": "text",
+                "label": "Subpart"
+              },
+              {
+                "key": "duration",
+                "valueType": "ms",
+                "label": "Duration"
+              }
+            ],
+            "items": [
+              {
+                "subpart": "timeToFirstByte",
+                "label": "Time to first byte",
+                "duration": 420.59700006103515
+              },
+              {
+                "subpart": "resourceLoadDelay",
+                "label": "Resource load delay",
+                "duration": 22.512999938964843
+              },
+              {
+                "subpart": "resourceLoadDuration",
+                "label": "Resource load duration",
+                "duration": 13.164
+              },
+              {
+                "subpart": "elementRenderDelay",
+                "label": "Element render delay",
+                "duration": 216.754
+              }
+            ]
+          },
+          {
+            "type": "node",
+            "lhId": "page-7-HEADER",
+            "path": "1,HTML,1,BODY,1,DIV,2,HEADER",
+            "selector": "body > div.stone-site > header#top",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 102,
+              "left": 0,
+              "right": 390,
+              "width": 390,
+              "height": 102
+            },
+            "snippet": "<header class=\"site-header\" id=\"top\" data-home=\"true\" data-scrolled=\"false\">",
+            "nodeLabel": "Pierre marocaine · Livraison partout au Maroc\nFR\nالعربية"
+          }
+        ]
+      },
+      "discovery": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "Request is discoverable in initial document",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "LCP resources should not use loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-7-HEADER",
+            "path": "1,HTML,1,BODY,1,DIV,2,HEADER",
+            "selector": "body > div.stone-site > header#top",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 102,
+              "left": 0,
+              "right": 390,
+              "width": 390,
+              "height": 102
+            },
+            "snippet": "<header class=\"site-header\" id=\"top\" data-home=\"true\" data-scrolled=\"false\">",
+            "nodeLabel": "Pierre marocaine · Livraison partout au Maroc\nFR\nالعربية"
+          }
+        ]
+      },
+      "mainThread": [
+        {
+          "group": "scriptEvaluation",
+          "groupLabel": "Script Evaluation",
+          "duration": 692.6800000000001
+        },
+        {
+          "group": "other",
+          "groupLabel": "Other",
+          "duration": 503.3560000000016
+        },
+        {
+          "group": "styleLayout",
+          "groupLabel": "Style & Layout",
+          "duration": 495.94399999999996
+        },
+        {
+          "group": "scriptParseCompile",
+          "groupLabel": "Script Parsing & Compilation",
+          "duration": 141.58400000000003
+        },
+        {
+          "group": "paintCompositeRender",
+          "groupLabel": "Rendering",
+          "duration": 66.412
+        },
+        {
+          "group": "parseHTML",
+          "groupLabel": "Parse HTML & CSS",
+          "duration": 53.052
+        },
+        {
+          "group": "garbageCollection",
+          "groupLabel": "Garbage Collection",
+          "duration": 21.771999999999984
+        }
+      ],
+      "jsTransferBytes": 182734,
+      "scriptRequests": 10
+    },
+    {
+      "stage": "baseline",
+      "locale": "ar",
+      "sample": "home-3",
+      "lcp": {
+        "type": "list",
+        "items": [
+          {
+            "type": "table",
+            "headings": [
+              {
+                "key": "label",
+                "valueType": "text",
+                "label": "Subpart"
+              },
+              {
+                "key": "duration",
+                "valueType": "ms",
+                "label": "Duration"
+              }
+            ],
+            "items": [
+              {
+                "subpart": "timeToFirstByte",
+                "label": "Time to first byte",
+                "duration": 598.317
+              },
+              {
+                "subpart": "resourceLoadDelay",
+                "label": "Resource load delay",
+                "duration": 31.593
+              },
+              {
+                "subpart": "resourceLoadDuration",
+                "label": "Resource load duration",
+                "duration": 10.425
+              },
+              {
+                "subpart": "elementRenderDelay",
+                "label": "Element render delay",
+                "duration": 190.236
+              }
+            ]
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-HEADER",
+            "path": "1,HTML,1,BODY,1,DIV,2,HEADER",
+            "selector": "body > div.stone-site > header#top",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 102,
+              "left": 0,
+              "right": 390,
+              "width": 390,
+              "height": 102
+            },
+            "snippet": "<header class=\"site-header\" id=\"top\" data-home=\"true\" data-scrolled=\"false\">",
+            "nodeLabel": "حجر مغربي · التوصيل إلى جميع أنحاء المغرب\nFR\nالعربية"
+          }
+        ]
+      },
+      "discovery": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "Request is discoverable in initial document",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "LCP resources should not use loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-HEADER",
+            "path": "1,HTML,1,BODY,1,DIV,2,HEADER",
+            "selector": "body > div.stone-site > header#top",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 102,
+              "left": 0,
+              "right": 390,
+              "width": 390,
+              "height": 102
+            },
+            "snippet": "<header class=\"site-header\" id=\"top\" data-home=\"true\" data-scrolled=\"false\">",
+            "nodeLabel": "حجر مغربي · التوصيل إلى جميع أنحاء المغرب\nFR\nالعربية"
+          }
+        ]
+      },
+      "mainThread": [
+        {
+          "group": "styleLayout",
+          "groupLabel": "Style & Layout",
+          "duration": 671.508
+        },
+        {
+          "group": "scriptEvaluation",
+          "groupLabel": "Script Evaluation",
+          "duration": 603.892000000001
+        },
+        {
+          "group": "other",
+          "groupLabel": "Other",
+          "duration": 536.4120000000006
+        },
+        {
+          "group": "paintCompositeRender",
+          "groupLabel": "Rendering",
+          "duration": 83.94800000000015
+        },
+        {
+          "group": "scriptParseCompile",
+          "groupLabel": "Script Parsing & Compilation",
+          "duration": 72.30799999999999
+        },
+        {
+          "group": "parseHTML",
+          "groupLabel": "Parse HTML & CSS",
+          "duration": 35.18000000000001
+        },
+        {
+          "group": "garbageCollection",
+          "groupLabel": "Garbage Collection",
+          "duration": 14.699999999999992
+        }
+      ],
+      "jsTransferBytes": 182734,
+      "scriptRequests": 10
+    },
+    {
+      "stage": "final",
+      "locale": "fr",
+      "sample": "home-3",
+      "lcp": {
+        "type": "list",
+        "items": [
+          {
+            "type": "table",
+            "headings": [
+              {
+                "key": "label",
+                "valueType": "text",
+                "label": "Subpart"
+              },
+              {
+                "key": "duration",
+                "valueType": "ms",
+                "label": "Duration"
+              }
+            ],
+            "items": [
+              {
+                "subpart": "timeToFirstByte",
+                "label": "Time to first byte",
+                "duration": 137.70299993896484
+              },
+              {
+                "subpart": "resourceLoadDelay",
+                "label": "Resource load delay",
+                "duration": 33.197000061035155
+              },
+              {
+                "subpart": "resourceLoadDuration",
+                "label": "Resource load duration",
+                "duration": 2.361
+              },
+              {
+                "subpart": "elementRenderDelay",
+                "label": "Element render delay",
+                "duration": 118.378
+              }
+            ]
+          },
+          {
+            "type": "node",
+            "lhId": "page-11-HEADER",
+            "path": "1,HTML,1,BODY,1,DIV,3,HEADER",
+            "selector": "body > div.stone-site > header#top",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 102,
+              "left": 0,
+              "right": 390,
+              "width": 390,
+              "height": 102
+            },
+            "snippet": "<header class=\"site-header\" id=\"top\" data-home=\"true\" data-scrolled=\"false\">",
+            "nodeLabel": "Pierre marocaine · Livraison partout au Maroc\nFR\nالعربية"
+          }
+        ]
+      },
+      "discovery": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "Request is discoverable in initial document",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "LCP resources should not use loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-11-HEADER",
+            "path": "1,HTML,1,BODY,1,DIV,3,HEADER",
+            "selector": "body > div.stone-site > header#top",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 102,
+              "left": 0,
+              "right": 390,
+              "width": 390,
+              "height": 102
+            },
+            "snippet": "<header class=\"site-header\" id=\"top\" data-home=\"true\" data-scrolled=\"false\">",
+            "nodeLabel": "Pierre marocaine · Livraison partout au Maroc\nFR\nالعربية"
+          }
+        ]
+      },
+      "mainThread": [
+        {
+          "group": "scriptEvaluation",
+          "groupLabel": "Script Evaluation",
+          "duration": 457.0960000000016
+        },
+        {
+          "group": "other",
+          "groupLabel": "Other",
+          "duration": 400.808000000001
+        },
+        {
+          "group": "styleLayout",
+          "groupLabel": "Style & Layout",
+          "duration": 258.04400000000004
+        },
+        {
+          "group": "scriptParseCompile",
+          "groupLabel": "Script Parsing & Compilation",
+          "duration": 63.236
+        },
+        {
+          "group": "paintCompositeRender",
+          "groupLabel": "Rendering",
+          "duration": 39.704000000000015
+        },
+        {
+          "group": "parseHTML",
+          "groupLabel": "Parse HTML & CSS",
+          "duration": 31.148
+        },
+        {
+          "group": "garbageCollection",
+          "groupLabel": "Garbage Collection",
+          "duration": 13.59999999999999
+        }
+      ],
+      "jsTransferBytes": 182623,
+      "scriptRequests": 10
+    },
+    {
+      "stage": "final",
+      "locale": "ar",
+      "sample": "home-3",
+      "lcp": {
+        "type": "list",
+        "items": [
+          {
+            "type": "table",
+            "headings": [
+              {
+                "key": "label",
+                "valueType": "text",
+                "label": "Subpart"
+              },
+              {
+                "key": "duration",
+                "valueType": "ms",
+                "label": "Duration"
+              }
+            ],
+            "items": [
+              {
+                "subpart": "timeToFirstByte",
+                "label": "Time to first byte",
+                "duration": 135.222
+              },
+              {
+                "subpart": "resourceLoadDelay",
+                "label": "Resource load delay",
+                "duration": 15.001
+              },
+              {
+                "subpart": "resourceLoadDuration",
+                "label": "Resource load duration",
+                "duration": 3.653
+              },
+              {
+                "subpart": "elementRenderDelay",
+                "label": "Element render delay",
+                "duration": 180.987
+              }
+            ]
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-HEADER",
+            "path": "1,HTML,1,BODY,1,DIV,3,HEADER",
+            "selector": "body > div.stone-site > header#top",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 102,
+              "left": 0,
+              "right": 390,
+              "width": 390,
+              "height": 102
+            },
+            "snippet": "<header class=\"site-header\" id=\"top\" data-home=\"true\" data-scrolled=\"false\">",
+            "nodeLabel": "حجر مغربي · التوصيل إلى جميع أنحاء المغرب\nFR\nالعربية"
+          }
+        ]
+      },
+      "discovery": {
+        "type": "list",
+        "items": [
+          {
+            "type": "checklist",
+            "items": {
+              "priorityHinted": {
+                "label": "fetchpriority=high applied",
+                "value": true
+              },
+              "requestDiscoverable": {
+                "label": "Request is discoverable in initial document",
+                "value": true
+              },
+              "eagerlyLoaded": {
+                "label": "LCP resources should not use loading=lazy",
+                "value": true
+              }
+            }
+          },
+          {
+            "type": "node",
+            "lhId": "page-0-HEADER",
+            "path": "1,HTML,1,BODY,1,DIV,3,HEADER",
+            "selector": "body > div.stone-site > header#top",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 102,
+              "left": 0,
+              "right": 390,
+              "width": 390,
+              "height": 102
+            },
+            "snippet": "<header class=\"site-header\" id=\"top\" data-home=\"true\" data-scrolled=\"false\">",
+            "nodeLabel": "حجر مغربي · التوصيل إلى جميع أنحاء المغرب\nFR\nالعربية"
+          }
+        ]
+      },
+      "mainThread": [
+        {
+          "group": "scriptEvaluation",
+          "groupLabel": "Script Evaluation",
+          "duration": 609.048000000001
+        },
+        {
+          "group": "styleLayout",
+          "groupLabel": "Style & Layout",
+          "duration": 540.5519999999999
+        },
+        {
+          "group": "other",
+          "groupLabel": "Other",
+          "duration": 369.28400000000056
+        },
+        {
+          "group": "scriptParseCompile",
+          "groupLabel": "Script Parsing & Compilation",
+          "duration": 71.13600000000001
+        },
+        {
+          "group": "paintCompositeRender",
+          "groupLabel": "Rendering",
+          "duration": 53.82799999999993
+        },
+        {
+          "group": "parseHTML",
+          "groupLabel": "Parse HTML & CSS",
+          "duration": 29.364
+        },
+        {
+          "group": "garbageCollection",
+          "groupLabel": "Garbage Collection",
+          "duration": 11.163999999999993
+        }
+      ],
+      "jsTransferBytes": 182623,
+      "scriptRequests": 10
+    }
+  ],
+  "historical": [
+    {
+      "directory": "baseline-initial",
+      "locale": "fr",
+      "score": 71,
+      "lcp": 3633.949,
+      "cls": 0,
+      "tbt": 762.8203999999998,
+      "fcp": 1302.8574,
+      "speedIndex": 3121.421408795366,
+      "bytes": 889142,
+      "requests": 27,
+      "images": 14,
+      "imageBytes": 654709,
+      "benchmark": 514.5
+    },
+    {
+      "directory": "baseline-initial",
+      "locale": "ar",
+      "score": 68,
+      "lcp": 4369.05995,
+      "cls": 0,
+      "tbt": 525.6267000000007,
+      "fcp": 2145.51975,
+      "speedIndex": 3834.4521620051673,
+      "bytes": 1061481,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 679274,
+      "benchmark": 511
+    },
+    {
+      "directory": "diagnostic-final5",
+      "locale": "fr",
+      "score": 72,
+      "lcp": 3507.6451500000003,
+      "cls": 0,
+      "tbt": 828.0000000000002,
+      "fcp": 1466.21505,
+      "speedIndex": 2963.428198050571,
+      "bytes": 845674,
+      "requests": 27,
+      "images": 14,
+      "imageBytes": 609829,
+      "benchmark": 489.5
+    },
+    {
+      "directory": "diagnostic-final5",
+      "locale": "ar",
+      "score": 72,
+      "lcp": 3028.2075999999997,
+      "cls": 0,
+      "tbt": 835.3001999999997,
+      "fcp": 2135.5497,
+      "speedIndex": 2895.787464567226,
+      "bytes": 1017802,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 634458,
+      "benchmark": 481
+    },
+    {
+      "directory": "final-fast-calibration",
+      "locale": "fr",
+      "score": 92,
+      "lcp": 2933.2664499999996,
+      "cls": 0,
+      "tbt": 207.49999999999955,
+      "fcp": 1247.3739,
+      "speedIndex": 1357.1830379994728,
+      "bytes": 845856,
+      "requests": 27,
+      "images": 14,
+      "imageBytes": 609829,
+      "benchmark": 1230
+    },
+    {
+      "directory": "final-fast-calibration",
+      "locale": "ar",
+      "score": 85,
+      "lcp": 3774.3043500000003,
+      "cls": 0,
+      "tbt": 158,
+      "fcp": 2109.5391,
+      "speedIndex": 2109.5391,
+      "bytes": 1017994,
+      "requests": 31,
+      "images": 15,
+      "imageBytes": 634458,
+      "benchmark": 1479
+    }
+  ],
+  "limitations": [
+    "Primary table uses a repeated baseline/final pair after CPU calibration shifted markedly; all initial measurements are retained separately. Do not attribute the initial-to-repeat score change to code.",
+    "Three interleaved homepage samples per locale; one catalogue/product/project sample per locale per stage; local CPU variability remains.",
+    "LCP good threshold remains unmet; TBT is lab blocking, not field INP. Physical devices, production FPM/TLS and live CDN are unverified.",
+    "Even the repeated pair has different median CPU benchmarkIndex: FR 1450.5 -> 2355.5, AR 1233.5 -> 2593.5. Timing/score gains remain confounded; do not present them as controlled causal improvements.",
+    "AR homepage median CLS regressed from 0 to 0.0189923189337616 and the catalogue sample to 0.0291, attributed by Lighthouse to late web-font loading. Both remain below 0.1. Product one-run LCP regressions are included, not discarded."
+  ]
+}

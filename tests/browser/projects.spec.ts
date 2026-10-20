@@ -12,19 +12,22 @@ for (const locale of ['fr', 'ar']) {
     await expect(page.locator('html')).toHaveAttribute('dir', locale === 'ar' ? 'rtl' : 'ltr');
     await expect(page.locator('[data-project-cards] article')).toHaveCount(2);
     await expect(page.locator('video, source')).toHaveCount(0);
-    await page.locator('input[value=synthetic-usage]').check();
-    await page.locator('form button').click();
+    const categories = page.locator('.project-category-options button');
+    await categories.nth(1).click();
+    await expect(categories.nth(1)).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('[data-project-cards] article')).toHaveCount(1);
-    await page.locator('input[value=second-usage]').check();
-    await page.locator('form button').click();
+    await categories.nth(2).click();
+    await expect(categories.nth(2)).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('[data-project-cards] article')).toHaveCount(2);
     expect(new URL(page.url()).searchParams.getAll('categories[]')).toHaveLength(2);
     await page.goto(`/${locale}/projects/synthetic-project`);
     await expect(page.locator('h1')).toContainText('Synthetic project');
     await expect(page.locator('.project-gallery .product-image img')).toBeVisible();
     await expect(page.locator('video')).toHaveCount(0);
-    await expect(page.getByRole('heading', { name: locale === 'fr' ? 'Matériaux utilisés dans ce projet' : 'المواد المستخدمة في هذا المشروع' })).toBeVisible();
-    await expect(page.locator('[data-materials-used] .product-grid article')).toHaveCount(1);
+    await expect(page.getByRole('heading', { name: locale === 'fr' ? 'Matières à découvrir pour votre projet' : 'مواد مقترحة لمشروعك' })).toBeVisible();
+    const materialLinks = page.locator('[data-materials-used] .card-copy h2 a');
+    await expect(materialLinks).toHaveCount(1);
+    await expect(materialLinks).toHaveAttribute('href', `/${locale}/products/temporary-product`);
     await page.getByRole('button', { name: locale === 'fr' ? 'Photo 1' : 'صورة 1', exact: true }).click();
     await expect.poll(() => page.locator('.project-gallery .product-image img').evaluate(node => (node as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     expect(videos).toEqual([]);
@@ -56,8 +59,9 @@ for (const locale of ['fr', 'ar']) {
     expect(await handle!.evaluate(node => (node as HTMLVideoElement).paused)).toBe(true);
     await expect(page.locator('video')).toHaveCount(0);
     await page.goto(`/${locale}/products/temporary-product`);
-    await expect(page.getByRole('heading', { name: locale === 'fr' ? 'Projets utilisant ce matériau' : 'مشاريع تستخدم هذه المادة' })).toBeVisible();
-    await expect(page.locator('[data-project-cards] article')).toHaveCount(1);
+    await expect(page.locator('.product-related-projects').getByRole('heading', { name: locale === 'fr' ? 'Des idées pour votre projet' : 'أفكار لمشروعك' })).toBeVisible();
+    await expect(page.locator('.product-related-projects [data-project-cards] article')).toHaveCount(1);
+    await expect(page.locator('.product-related-projects .project-card-copy h2 a')).toHaveAttribute('href', `/${locale}/projects/synthetic-project`);
   });
 
   test(`${locale}: neutral cover and optional poster, draft exclusion`, async ({ page }) => {

@@ -1,7 +1,7 @@
 import { getSite } from '@/lib/site-server';
 import { serverEnvironment } from '@/lib/environment';
 import { notFound } from 'next/navigation';
-import { findLocale, localeConfiguration } from '@/lib/locales';
+import { findLocale } from '@/lib/locales';
 import { projectsCopy, type Project } from '@/lib/projects';
 import { catalogueRequest } from '@/lib/catalogue-server';
 import { ProjectGallery } from '@/components/project-gallery';
@@ -12,6 +12,8 @@ import { RequestDraft } from '@/components/request-draft';
 import { DirectWhatsApp } from '@/components/direct-whatsapp';
 import { ContactBanner } from '@/components/site-footer';
 import type { Metadata } from 'next';
+import { seoMetadata, breadcrumbs } from '@/lib/seo';
+import { StructuredData } from '@/components/structured-data';
 import { siteCopy } from '@/lib/site';
 import { SiteIcon } from '@/components/site-icon';
 import { PortfolioMotion } from '@/components/portfolio-motion';
@@ -20,10 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale, slug } = await params; if (!findLocale(locale) || !/^[a-z0-9-]{1,120}$/.test(slug)) return {};
   const response = await catalogueRequest<{ data: Project }>(`projects/${slug}`, locale);
   const project = response.data?.data;
-  const image = project?.cover?.variants.find(variant => variant.format === 'webp');
-  const title = project?.seo_title || project?.title;
-  const description = project?.seo_description || undefined;
-  return { title, description, alternates: { canonical: `/${locale}/projects/${slug}`, languages: Object.fromEntries(localeConfiguration.locales.map(item => [item.code, `/${item.code}/projects/${slug}`])) }, openGraph: { title, description, type: 'article', images: image ? [{ url: image.url, width: image.width, height: image.height, alt: project?.title }] : [] }, twitter: { card: 'summary_large_image', title, description, images: image ? [image.url] : [] } };
+  if (!project) return { robots: { index: false, follow: false } };
+  return seoMetadata(locale, `/projects/${slug}`, project.seo_title || project.title, project.seo_description || project.summary || project.description, project.cover, project.available_locales || [locale]);
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
@@ -32,12 +32,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ locale
   const copy = projectsCopy(locale);
   const response = await catalogueRequest<{ data: Project }>(`projects/${encodeURIComponent(slug)}`, locale);
   if (response.status === 404) notFound();
-  if (!response.data) return <main><a href={`/${locale}/projects`}>{copy.projects}</a><p role="status">{copy.unavailable}</p></main>;
+  if (!response.data) return <main id="main"><a href={`/${locale}/projects`}>{copy.projects}</a><p role="status">{copy.unavailable}</p></main>;
   const project = response.data.data;
   const design = siteCopy(locale);
   const site = await getSite(locale);
   const canonical = `${serverEnvironment(process.env).site}/${locale}/projects/${slug}`;
   return <main id="main" className="catalogue project-detail public-page">
+    <StructuredData value={{ '@context': 'https://schema.org', '@type': 'CreativeWork', name: project.title, description: project.summary || project.description || undefined, url: canonical, inLanguage: locale, image: project.cover?.variants.filter(item => item.format === 'webp').map(item => item.url) }} />
+    <StructuredData value={breadcrumbs([{ name: design.home, url: `${serverEnvironment(process.env).site}/${locale}` }, { name: design.projects, url: `${serverEnvironment(process.env).site}/${locale}/projects` }, { name: project.title, url: canonical }])} />
     <PageHero locale={locale} title={project.title} eyebrow={project.reference} body={project.summary} media={project.cover} large aside={project.location || project.year || project.area || project.area_display ? <dl className="project-metadata">{project.location && <div><dt>{copy.location}</dt><dd>{project.location}</dd></div>}{project.year && <div><dt>{copy.year}</dt><dd>{project.year}</dd></div>}{(project.area_display || project.area) && <div><dt>{copy.area}</dt><dd>{project.area_display || `${project.area} ${project.area_unit}`}</dd></div>}</dl> : undefined}><div className="project-tags">{project.categories.map(category => <a key={category.id} href={`/${locale}/projects?category=${category.slug}`}>{category.name}</a>)}</div></PageHero>
     <div className="site-width">
     {project.description && <p className="preserve-text project-intro">{project.description}</p>}

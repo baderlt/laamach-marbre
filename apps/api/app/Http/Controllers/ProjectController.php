@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Catalogue\PublicCatalogue;
 use App\Projects\PublicProjects;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -17,9 +16,8 @@ class ProjectController
     public function categories(Request $request, PublicProjects $projects)
     {
         $locale = $this->locale($request);
-        $catalogue = app(PublicCatalogue::class);
 
-        return response()->json(['data' => $projects->categories($locale)->with(['translations', ...$catalogue->imageRelations('cover')])->orderBy('sort_order')->orderBy('id')->get()->map(fn ($category) => ['id' => $category->id, 'slug' => $category->slug, ...$projects->copy($category, $locale), 'cover' => $catalogue->image($category->cover, $locale)])->all()]);
+        return response()->json(['data' => $projects->categoryCards($locale)]);
     }
 
     public function index(Request $request, PublicProjects $projects)
@@ -43,6 +41,9 @@ class ProjectController
         abort_unless(preg_match('/^[a-z0-9-]{1,120}$/D', $slug), 404);
         $locale = $this->locale($request);
 
-        return response()->json(['data' => $projects->detail($projects->projects($locale, true)->where('slug', $slug)->firstOrFail(), $locale)]);
+        $project = $projects->projects($locale, true)->where('slug', $slug)->firstOrFail();
+        $locales = array_values(array_filter(array_column(config('localization.locales'), 'code'), fn ($code) => $code === $locale || $projects->projects($code)->where('projects.id', $project->id)->exists()));
+
+        return response()->json(['data' => [...$projects->detail($project, $locale), 'available_locales' => $locales]]);
     }
 }

@@ -13,6 +13,13 @@ use Illuminate\Database\Eloquent\Builder;
 
 class PublicCatalogue
 {
+    public function categoryTree(string $locale): array
+    {
+        $parents = $this->categories($locale)->whereNull('parent_id')->with(['translations', ...$this->imageRelations('cover'), 'children' => fn ($children) => $children->whereIn('id', $this->categories($locale)->select('id'))->orderBy('sort_order')->orderBy('id'), 'children.translations', ...$this->imageRelations('children.cover')])->orderBy('sort_order')->orderBy('id')->get();
+
+        return $parents->map(fn ($parent) => [...$this->categoryDto($parent, $locale, true), 'children' => $parent->children->map(fn ($child) => $this->categoryDto($child, $locale, true))->all()])->all();
+    }
+
     public function imageRelations(string $path): array
     {
         return [$path.'.translations', $path.'.variants' => fn ($query) => $query->where('state', 'published')->whereHas('asset', fn ($asset) => $asset->whereColumn('media_assets.active_revision', 'media_variants.publication_revision'))];

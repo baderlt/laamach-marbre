@@ -17,7 +17,7 @@ for (const locale of locales.locales) {
     await expect(page.locator('html')).toHaveAttribute('lang', locale.code);
     await expect(page.locator('html')).toHaveAttribute('dir', locale.direction);
     await expect(page.locator('[data-backend-status]')).toHaveAttribute('data-backend-status', 'ok');
-    await expect(page.locator('.language-nav').getByRole('link')).toHaveCount(locales.locales.length);
+    await expect(page.locator('.header-language-switch').getByRole('link')).toHaveCount(locales.locales.length);
     for (const width of [390, 1280]) {
       await page.setViewportSize({ width, height: 844 });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);

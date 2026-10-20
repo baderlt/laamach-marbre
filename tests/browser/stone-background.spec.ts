@@ -35,9 +35,10 @@ for (const locale of ['fr', 'ar']) {
     await page.goto(product!);
     await page.locator('.gallery-zoom').click(); await expect(page.locator('dialog[open]')).toBeVisible();
     await page.keyboard.press('Escape');
-    const request = page.locator('.request-material > button');
+    // Products without assigned finishes use the supported project-application flow.
+    const request = page.locator('.request-material > button, .request-application > button').first();
     if (await request.count()) {
-      await request.click(); await expect(page.locator('.request-material dialog')).toBeVisible();
+      await request.click(); await expect(page.locator('.request-entry dialog[open]')).toBeVisible();
       await page.keyboard.press('Escape');
     } else {
       await expect(page.locator('.request-material a[href$="/contact"]')).toBeVisible();
@@ -56,14 +57,17 @@ test('pointer easing settles, cancels offscreen/hidden, and responds to preferen
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/fr');
   const background = page.locator('.stone-background');
+  const focus = page.locator('.stone-focus');
   await expect(background).toHaveAttribute('data-interactive', 'true');
+  const rootStyle = await background.getAttribute('style');
   await page.mouse.move(1000, 350);
   await expect(background).toHaveAttribute('data-active', 'true');
-  await expect.poll(() => background.evaluate(e => parseFloat((e as HTMLElement).style.getPropertyValue('--stone-x')))).toBeGreaterThan(990);
+  await expect.poll(() => focus.evaluate(e => new DOMMatrix(getComputedStyle(e).transform).m41)).toBeGreaterThan(760);
+  expect(await background.getAttribute('style')).toBe(rootStyle);
   await page.waitForTimeout(1200);
-  const settled = await background.getAttribute('style');
+  const settled = await focus.getAttribute('style');
   const frameCount = await page.evaluate(() => (window as typeof window & { stoneRafCalls: number }).stoneRafCalls);
-  await page.waitForTimeout(400); expect(await background.getAttribute('style')).toBe(settled);
+  await page.waitForTimeout(400); expect(await focus.getAttribute('style')).toBe(settled);
   expect(await page.evaluate(() => (window as typeof window & { stoneRafCalls: number }).stoneRafCalls)).toBe(frameCount);
   await page.mouse.move(1100, 400);
   await page.evaluate(() => { Object.defineProperty(document, 'hidden', { configurable: true, value: true }); document.dispatchEvent(new Event('visibilitychange')); });
@@ -79,12 +83,13 @@ test('pointer easing settles, cancels offscreen/hidden, and responds to preferen
   await expect(page.locator('.stone-focus')).toBeHidden();
 });
 
-for (const mode of ['touch', 'tablet', 'reduced', 'save-data', 'low-memory', 'no-js']) {
+for (const mode of ['touch', 'tablet', 'reduced', 'save-data', 'low-memory', 'no-js', 'unsupported-effects']) {
   test(`${mode}: static photograph with no detail-layer download`, async ({ browser }) => {
     const size = { width: mode === 'touch' ? 390 : mode === 'tablet' ? 920 : 1440, height: 844 };
     const context = await browser.newContext({ viewport: size, screen: size, hasTouch: mode === 'touch', isMobile: mode === 'touch', reducedMotion: mode === 'reduced' || mode === 'tablet' ? 'reduce' : 'no-preference', javaScriptEnabled: mode !== 'no-js' });
     if (mode === 'save-data') await context.addInitScript(() => Object.defineProperty(navigator, 'connection', { value: { saveData: true, addEventListener() {}, removeEventListener() {} } }));
     if (mode === 'low-memory') await context.addInitScript(() => Object.defineProperty(navigator, 'deviceMemory', { value: 2 }));
+    if (mode === 'unsupported-effects') await context.addInitScript(() => { const supports = CSS.supports.bind(CSS); CSS.supports = ((property: string, value?: string) => property === 'mask-image' ? false : value === undefined ? supports(property) : supports(property, value)) as typeof CSS.supports; });
     const page = await context.newPage(), requests: string[] = [];
     page.on('request', request => { if (request.url().includes('/stone-background/')) requests.push(request.url()); });
     await page.goto('/fr');
