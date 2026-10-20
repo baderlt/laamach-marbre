@@ -1,0 +1,19 @@
+# M8.5 initial admin audit
+
+Baseline: M8 commit `b26a332`. All catalogue/project/editorial resources, shared form factories, media and viewer actions, dashboard, authentication model and four policy classes were inspected before application edits. Existing roles are active super-admin and content-manager; media approval/publication and protected quotation destinations require super-admin. The media library had no standalone image-upload header action; image uploads were available inside selection fields. No account profile page or persisted admin UI-language preference was registered.
+
+The existing forms use long modal schemas with mixed English/French technical field names. Shared bilingual website sections already exist, and French/Arabic content values must keep their existing independent storage paths. The interface itself remains at the application default French, independent of content tabs. Official Filament ships both French and Arabic UI translations; application-owned validation translations were absent (the browser displayed `validation.required` rather than a sentence).
+
+## Reproduced section-cover behavior
+
+Using only the isolated MySQL 3308 snapshot, separate storage, a synthetic super-admin and a synthetic PNG, the real Website Content → home → section → Import workflow was exercised through Filament/Livewire/FilePond. Temporary upload and Livewire responses returned HTTP 200. After waiting for Livewire's `_finishUpload`, the private upload succeeded. With explicit publication left unchecked, its ID became the selected section image. Submitting the page left the editor open without a useful visible explanation.
+
+The cause is a mismatch between the nested create-option workflow and the writer's intentional publication rule: `MediaForms::attach()` returned a newly uploaded private/pending asset as the selected option, while `SiteContentWriter` correctly rejects any section image that is not approved, published, client-supplied M2 media. The writer's `data` validation key does not correspond to that nested visible image field, so it did not explain the rejection there. The previous database cover remains intact because validation precedes the transactional reference replacement. This is not evidence of a transport failure or permission to bypass approval.
+
+An early test click before the upload-finished response also produced a required-file message despite a green temporary-upload preview. The corrected reproduction waits for the actual Livewire completion response; that test-timing issue is not asserted as a separate confirmed application defect. Filament's outer dialog wrapper has zero geometry while its fixed window is visible; browser assertions must target the visible modal window.
+
+Expected: pending uploads remain private and discoverable, with their actual status and the next approval/publication action; a non-eligible replacement must retain the previous selection and cover. Explicit authorized publication may attach eligible derivatives, and saving/reloading must retain the new reference. Any validation/processing error must be visible without clearing the previous working cover. Existing draft-product private-image attachment must remain supported.
+
+## Verification boundaries
+
+Audit screenshots, upload responses and synthetic fixtures are stored privately under ignored `.tools/m85`. During the initial audit and destructive QA, no real database schema, genuine client original, reference-checkout file, production R2 bucket or public deployment was changed. After destructive QA completed, only the additive user-language migration was applied to the verified local preview. Fresh hashes confirmed existing rows across all 28 tables and all 80 current stored originals remained unchanged, apart from the new nullable field and expected migration ledger entry. See the final verification report for measured results and limits.

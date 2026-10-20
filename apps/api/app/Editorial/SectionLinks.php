@@ -16,7 +16,7 @@ class SectionLinks
         $projects = app(PublicProjects::class)->categories($locale)->with('translations')->orderBy('sort_order')->orderBy('slug')->get();
 
         return [
-            'Pages' => array_combine(self::PAGES, $locale === 'ar' ? ['الرئيسية', 'جميع المنتجات', 'جميع المشاريع', 'خدماتنا', 'من نحن', 'اتصل بنا'] : ['Accueil', 'Tous les produits', 'Tous les projets', 'Nos services', 'À propos', 'Contact']),
+            $locale === 'ar' ? 'صفحات الموقع' : 'Pages' => array_combine(self::PAGES, $locale === 'ar' ? ['الرئيسية', 'جميع المنتجات', 'جميع المشاريع', 'خدماتنا', 'من نحن', 'اتصل بنا'] : ['Accueil', 'Tous les produits', 'Tous les projets', 'Nos services', 'À propos', 'Contact']),
             $locale === 'ar' ? 'فئات المنتجات' : 'Catégories de produits' => $products->mapWithKeys(fn ($category) => ['products?'.($category->parent_id ? 'category' : 'parent').'='.$category->slug => $catalogue->copy($category, $locale)['name']])->all(),
             $locale === 'ar' ? 'فئات المشاريع' : 'Catégories de projets' => $projects->mapWithKeys(fn ($category) => ['projects?category='.$category->slug => $catalogue->copy($category, $locale)['name']])->all(),
         ];

@@ -7,6 +7,7 @@ use App\Models\MediaAsset;
 use App\Models\MediaReference;
 use App\Models\SiteContent;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +23,7 @@ class SiteContentWriter
             Gate::forUser($user)->authorize('publish', $record ?? SiteContent::class);
         }
         $locales = implode(',', array_column(config('localization.locales'), 'code'));
-        $rules = ['input' => 'array:key,published,translations,data', 'input.key' => ['required', Rule::in(SiteContent::KEYS), Rule::unique('site_contents', 'key')->ignore($record?->key, 'key')], 'input.published' => 'required|boolean', 'input.translations' => 'present|array:'.$locales, 'input.translations.*' => 'array:title,eyebrow,body,seo_title,seo_description,tagline,address,footer_text,sections,cta_title,cta_body', 'input.data' => 'present|array:hero_media_id,secondary_media_id,logo_media_id,phone,email,map_url,social_links,whatsapp'];
+        $rules = ['input' => 'array:key,published,translations,data', 'input.key' => ['required', Rule::in(SiteContent::KEYS), Rule::unique('site_contents', 'key')->ignore($record?->key, 'key')], 'input.published' => 'required|boolean', 'input.translations' => 'present|array:'.$locales, 'input.translations.*' => 'array:title,eyebrow,body,seo_title,seo_description,tagline,address,footer_text,sections,cta_title,cta_body', 'input.data' => 'present|array:hero_media_id,secondary_media_id,logo_media_id,phone,email,map_url,social_links,whatsapp,additional_contacts'];
         foreach (['title' => 180, 'eyebrow' => 120, 'body' => 10000, 'seo_title' => 160, 'seo_description' => 320, 'tagline' => 200, 'address' => 500, 'footer_text' => 1000, 'cta_title' => 180, 'cta_body' => 500] as $key => $max) {
             $rules['input.translations.*.'.$key] = 'nullable|string|max:'.$max;
         }
@@ -41,10 +42,23 @@ class SiteContentWriter
         foreach (['enabled', 'material', 'similar', 'application'] as $flow) {
             $rules['input.data.whatsapp.'.$flow] = 'sometimes|boolean';
         }
+        $rules += ['input.data.additional_contacts' => 'sometimes|array|max:6', 'input.data.additional_contacts.*' => 'array:label,number', 'input.data.additional_contacts.*.label' => 'required|string|max:40', 'input.data.additional_contacts.*.number' => ['required', 'string', 'max:40', function ($attribute, $value, $fail) {
+            if (WhatsAppSettings::number($value) === null) {
+                $fail(__('admin.invalid_phone'));
+            }
+        }]];
+        $rules['input.data.phone'] = ['nullable', 'string', 'max:40', function ($attribute, $value, $fail) {
+            if (WhatsAppSettings::number($value) === null) {
+                $fail(__('admin.invalid_phone'));
+            }
+        }];
         foreach (['hero_media_id', 'secondary_media_id', 'logo_media_id'] as $key) {
             $rules['input.data.'.$key] = 'nullable|uuid|exists:media_assets,id';
         }
         $data = Validator::make(['input' => $input + ['published' => false, 'translations' => [], 'data' => []]], $rules)->validate()['input'];
+        foreach ($data['data']['additional_contacts'] ?? [] as $index => $contact) {
+            $data['data']['additional_contacts'][$index]['number'] = WhatsAppSettings::number($contact['number']);
+        }
         if (array_key_exists('whatsapp', $data['data'])) {
             if ($data['key'] !== 'site') {
                 throw ValidationException::withMessages(['data.whatsapp' => 'WhatsApp configuration belongs to global site settings.']);
@@ -71,7 +85,7 @@ class SiteContentWriter
         }
         foreach ($data['data']['social_links'] ?? [] as $link) {
             $host = strtolower(parse_url($link['url'], PHP_URL_HOST) ?? '');
-            if (! in_array(preg_replace('/^www\./', '', $host), ['facebook.com', 'instagram.com', 'youtube.com', 'linkedin.com'], true)) {
+            if (! in_array(preg_replace('/^www\./', '', $host), ['facebook.com', 'instagram.com', 'youtube.com', 'linkedin.com', 'tiktok.com'], true)) {
                 throw ValidationException::withMessages(['data.social_links' => 'Use supported public social profiles.']);
             }
         }
@@ -79,6 +93,20 @@ class SiteContentWriter
         return DB::transaction(function () use ($record, $data, $user) {
             if ($record) {
                 $record = SiteContent::whereKey($record->key)->lockForUpdate()->firstOrFail();
+            }
+            $sensitive = ['phone', 'email', 'map_url', 'social_links', 'additional_contacts'];
+            // Other editorial forms do not expose every contact setting. Omission
+            // must preserve it; an explicit null/empty list still clears it.
+            if ($data['key'] === 'site') {
+                foreach ($sensitive as $key) {
+                    if (! array_key_exists($key, $data['data']) && array_key_exists($key, $record?->data ?? [])) {
+                        $data['data'][$key] = $record->data[$key];
+                    }
+                }
+            }
+            $emptyContacts = ['phone' => null, 'email' => null, 'map_url' => null, 'social_links' => [], 'additional_contacts' => []];
+            if ($data['key'] === 'site' && $this->comparableSettings(array_replace($emptyContacts, Arr::only($data['data'], $sensitive))) !== $this->comparableSettings(array_replace($emptyContacts, Arr::only($record?->data ?? [], $sensitive)))) {
+                Gate::forUser($user)->authorize('manageSettings', SiteContent::class);
             }
             if (array_key_exists('whatsapp', $data['data']) && ($data['data']['whatsapp'] !== ($record?->data['whatsapp'] ?? []))) {
                 Gate::forUser($user)->authorize('manageWhatsApp', SiteContent::class);
@@ -114,5 +142,21 @@ class SiteContentWriter
 
             return $record;
         }, 3);
+    }
+
+    private function comparableSettings(array $settings): array
+    {
+        foreach ($settings as $key => $value) {
+            if (is_array($value)) {
+                $settings[$key] = $this->comparableSettings($value);
+            }
+        }
+        // MySQL normalizes JSON object keys. Keep list order significant while
+        // comparing object keys and scalar values without type coercion.
+        if (! array_is_list($settings)) {
+            ksort($settings);
+        }
+
+        return $settings;
     }
 }

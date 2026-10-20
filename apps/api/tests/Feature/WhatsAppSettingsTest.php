@@ -84,7 +84,9 @@ class WhatsAppSettingsTest extends TestCase
         $record = $this->save($this->config());
         $editor = User::factory()->create(['active' => true, 'role' => 'content_manager']);
         $writer = app(SiteContentWriter::class);
-        $input = ['key' => 'site', 'published' => false, 'translations' => [], 'data' => ['email' => 'qa@example.invalid']];
+        // M8.5 protects contact fields too. An ordinary editorial save still
+        // preserves omitted M7 settings, without granting configuration access.
+        $input = ['key' => 'site', 'published' => false, 'translations' => ['fr' => ['footer_text' => 'Editorial draft']], 'data' => []];
         $writer->save($record, $input, $editor);
         $this->assertSame('12025550123', $record->fresh()->data['whatsapp']['number']);
         foreach ([$this->config(['number' => '12025550124']), [], $this->config(['enabled' => false])] as $config) {

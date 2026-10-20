@@ -1,0 +1,32 @@
+.fi-body{background:#f5f6f4;color:#202b29}
+.fi-sidebar{border-inline-end:1px solid #e2e6e1}
+.fi-sidebar-header,.fi-topbar{box-shadow:none;border-bottom:1px solid #e2e6e1}
+.fi-sidebar-header{background:#173c34;color:#fff}
+.fi-sidebar-header .fi-logo{color:#fff;letter-spacing:.04em;font-size:1rem}
+.fi-sidebar-item-button{min-height:44px;border-radius:.65rem}
+.fi-section,.fi-ta{border-radius:1rem}
+.fi-header-heading{letter-spacing:-.025em}
+.fi-sc-tabs{min-width:0}
+.fi-modal-window{max-width:calc(100vw - 24px)}
+.fi-modal-footer{position:sticky;bottom:0;background:var(--color-white,#fff);z-index:2;border-top:1px solid #e2e6e1}
+.fi-ta-content{max-width:100%;overflow-x:auto}
+.fi-ta-cell{max-width:22rem;overflow-wrap:anywhere}
+.admin-language-switch{display:flex;align-items:center;gap:4px;margin-inline:12px;padding:4px;border:1px solid #d8e0db;border-radius:12px;background:#fff}
+.admin-language-switch button{padding:8px 12px;min-height:44px;border-radius:8px;font-size:.8rem;color:#354e45;cursor:pointer}
+.admin-language-switch button[aria-current=true]{background:#173c34;color:#fff}
+.admin-language-switch button:focus-visible{outline:3px solid #b07a31;outline-offset:2px}
+.admin-recent-list{display:grid;gap:0;list-style:none;padding:0;margin:0}
+.admin-recent-list li{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #e2e6e1}
+.admin-recent-list time{color:#53665e;font-size:.85rem;white-space:nowrap}
+html[dir=rtl] .fi-body{font-family:Tahoma,Arial,sans-serif;line-height:1.8}
+@media(max-width:639px){.admin-language-switch{margin-inline:4px}.admin-language-switch button{padding:8px;font-size:.75rem}.fi-modal-footer-actions{flex-wrap:wrap}.admin-recent-list li{flex-wrap:wrap}}
+.dark .fi-body,.dark.fi-body{background:#111a17;color:#e4ece8}.dark .fi-sidebar,.dark .fi-modal-footer,.dark .admin-language-switch{background:#16251e;color:#e4ece8}.dark .admin-language-switch button{color:#e4ece8}
+
+.fi-section-header-description{color:#53665e}
+.fi-select-input-value-remove-btn,.fi-badge-delete-btn{min-width:24px;min-height:24px}
+.fi-modal-window{display:flex;flex-direction:column;max-height:calc(100dvh - 32px);overflow:hidden}
+.fi-modal-header,.fi-modal-footer{flex-shrink:0}
+.fi-modal-content{min-height:0;overflow-y:auto;scroll-padding-block:24px}
+.fi-modal-footer{position:static}
+.dark .fi-section-header-description{color:#bdcec3}
+.fi-sidebar-group-label{color:#53665e}.dark .fi-sidebar-group-label{color:#bdcec3}

@@ -124,8 +124,11 @@ test('authenticated private admin preview loads the shared real renderer; upload
   await page.goto(`${api}/admin/login`); await page.locator('input[type=email]').fill('viewer-qa@example.invalid'); await page.locator('input[type=password]').fill('SyntheticOnly-M6-Only1!'); await page.locator('button[type=submit]').click(); await expect(page).not.toHaveURL(/login$/, { timeout: 60000 });
   await page.goto(`${api}/admin/product-viewer/${manifest.viewer_private_product}?locale=ar`); await page.getByRole('button', { name: viewerCopy('ar').open, exact: true }).click(); await ready(page); expect(Number(await page.locator('[data-viewer-host]').getAttribute('data-viewer-triangles'))).toBeGreaterThan(2);
   await page.screenshot({ path: resolve(output, 'admin-private-model-ar.png'), fullPage: true });
-  await page.goto(`${api}/admin/media-assets`); await page.getByRole('button', { name: 'Upload product GLB', exact: true }).click(); await page.getByRole('dialog').locator('.filepond--root input[type=file]').setInputFiles(resolve(fixtureRoot, 'synthetic-admin-upload.glb'));
-  const dialog = page.getByRole('dialog'); await expect(dialog.locator('.filepond--item')).toBeVisible(); await expect(dialog.locator('.filepond--item')).toHaveAttribute('data-filepond-item-state', 'processing-complete', { timeout: 120000 }); await dialog.locator('button[type=submit]').click(); await expect(dialog).not.toBeVisible({ timeout: 60000 });
+  await page.goto(`${api}/admin/media-assets`); await page.getByRole('button', { name: 'Importer un modèle GLB', exact: true }).click();
+  const dialog = page.locator('.fi-modal-window:visible').last();
+  const uploaded = page.waitForResponse(response => response.url().includes('/update') && !!response.request().postData()?.includes('_finishUpload'));
+  await dialog.locator('.filepond--root input[type=file]').setInputFiles(resolve(fixtureRoot, 'synthetic-admin-upload.glb'));
+  expect((await uploaded).status()).toBe(200); await expect(dialog.locator('.filepond--item')).toBeVisible(); await dialog.locator('button[type=submit]').click(); await expect(dialog).not.toBeVisible({ timeout: 60000 });
   fixtures('verify-upload');
   await page.getByRole('searchbox').fill('synthetic-admin-upload.glb');
   await expect(page.locator('table').getByText('synthetic-admin-upload.glb', { exact: true })).toBeVisible({ timeout: 30000 });

@@ -1,5 +1,7 @@
 node_modules/
 vendor/
+!apps/api/lang/vendor/
+!apps/api/lang/vendor/**
 .tools/
 .next*/
 *.tsbuildinfo

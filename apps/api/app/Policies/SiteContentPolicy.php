@@ -32,6 +32,11 @@ class SiteContentPolicy
         return $user->isSuperAdmin();
     }
 
+    public function manageSettings(User $user): bool
+    {
+        return $user->isSuperAdmin();
+    }
+
     public function publish(User $user): bool
     {
         return $user->isSuperAdmin();

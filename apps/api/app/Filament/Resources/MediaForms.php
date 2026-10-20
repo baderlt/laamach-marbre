@@ -2,12 +2,15 @@
 
 namespace App\Filament\Resources;
 
+use App\Catalogue\PublicCatalogue;
 use App\Media\MediaLibrary;
 use App\Models\MediaAsset;
+use Closure;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Notifications\Notification;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +21,7 @@ class MediaForms
     public static function fields(?string $type = 'image'): array
     {
         $types = $type === 'image' ? ['image/jpeg', 'image/png', 'image/webp'] : ($type === 'video' ? ['video/mp4'] : ['image/jpeg', 'image/png', 'image/webp', 'video/mp4']);
-        $file = FileUpload::make('upload')->label(__('admin.file'))->required()->storeFiles(false)->acceptedFileTypes($types)->maxSize((int) (($type === 'image' ? config('media.max_bytes') : config('video.max_bytes')) / 1024));
+        $file = FileUpload::make('upload')->label(__('admin.file'))->helperText(__($type === 'image' ? 'admin.upload_guidance' : 'admin.video_guidance'))->required()->storeFiles(false)->acceptedFileTypes($types)->maxSize((int) (($type === 'image' ? config('media.max_bytes') : config('video.max_bytes')) / 1024));
         if ($type === 'image') {
             $file->image()->imagePreviewHeight('160');
         }
@@ -29,10 +32,27 @@ class MediaForms
         ];
     }
 
-    public static function attach(Select $select, ?string $type = 'image', array $profiles = ['thumb', 'card', 'gallery']): Select
+    public static function attach(Select $select, ?string $type = 'image', array $profiles = ['thumb', 'card', 'gallery'], bool|Closure $allowPrivate = false): Select
     {
         return $select->createOptionForm(self::fields($type))
-            ->createOptionUsing(fn (array $data) => self::upload($data, $type, $profiles))
+            ->createOptionUsing(function (array $data, Select $component) use ($type, $profiles, $allowPrivate) {
+                $id = self::upload($data, $type, $profiles);
+                $asset = MediaAsset::findOrFail($id);
+                $query = MediaAsset::whereKey($id);
+                app(PublicCatalogue::class)->eligibleMedia($query);
+                if (! $query->exists() && ! $component->evaluate($allowPrivate)) {
+                    Notification::make()->warning()->persistent()->title(__('admin.upload_pending'))
+                        ->body(__('admin.upload_pending_help', ['name' => $asset->original_filename]))
+                        ->actions([Action::make('library')->label(__('admin.open_media_library'))->url(MediaAssetResource::getUrl('index', ['tableSearch' => $asset->original_filename]))->openUrlInNewTab()])->send();
+
+                    // Filament assigns the returned option immediately. Returning null
+                    // would clear the previous working cover, so retain its actual state.
+                    return $component->getState();
+                }
+                Notification::make()->success()->title(__($asset->active_revision ? 'admin.upload_published' : 'admin.upload_private'))->send();
+
+                return $id;
+            })
             ->createOptionAction(fn (Action $action) => $action->label(__('admin.upload'))->icon('heroicon-o-arrow-up-tray')->button()->modalHeading(__('admin.upload_attach'))->modalSubmitActionLabel(__('admin.upload_attach')))
             ->helperText(__('admin.upload_help'));
     }
@@ -65,26 +85,29 @@ class MediaForms
         $library = app(MediaLibrary::class);
         try {
             $asset = $library->ingest($file->getRealPath(), 'admin/uploads/'.$name.'.'.$extension, true);
-            if ($asset->processing_state !== 'ready') {
-                $library->process($asset, $profiles);
+            $revision = $asset->active_revision;
+            $existing = $asset->variants()->where('revision', $revision)->pluck('profile')->all();
+            if ($asset->processing_state !== 'ready' || ($actualType === 'image' && array_diff($profiles, $existing))) {
+                $revision = $library->process($asset, array_values(array_unique([...$profiles, ...array_intersect($existing, array_keys(config('media.profiles')))])));
             }
         } catch (ValidationException $error) {
+            Notification::make()->danger()->title(__('admin.upload_failed'))->body(__('admin.previous_cover_kept'))->send();
             throw ValidationException::withMessages(['upload' => collect($error->errors())->flatten()->all()]);
         }
         $asset->refresh();
-        self::publish($asset, $publish);
+        self::publish($asset, $publish, $revision);
 
         return $asset->id;
     }
 
-    public static function publish(MediaAsset $asset, bool $requested): void
+    public static function publish(MediaAsset $asset, bool $requested, ?string $revision = null): void
     {
-        if ($requested && ! $asset->active_revision) {
+        if ($requested) {
             Gate::authorize('approve', $asset);
             Gate::authorize('publish', $asset);
             $library = app(MediaLibrary::class);
             $library->approve($asset, auth()->user());
-            $revision = $asset->variants()->latest('created_at')->firstOrFail()->revision;
+            $revision ??= $asset->variants()->latest('created_at')->firstOrFail()->revision;
             $library->publish($asset, $revision, auth()->user());
         }
 

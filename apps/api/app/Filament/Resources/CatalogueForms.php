@@ -24,21 +24,22 @@ class CatalogueForms
 {
     public static function fields(string $kind): array
     {
-        $fields = [TextInput::make('slug')->required()->maxLength(120)->helperText('Explicit stable URL slug. Published product slugs are locked.'), TextInput::make('sort_order')->integer()->minValue(0)->maxValue(100000)->default(0)->required()];
+        $fields = [TextInput::make('slug')->required()->maxLength(120)->helperText(__('Explicit stable URL slug. Published product slugs are locked.')), TextInput::make('sort_order')->integer()->minValue(0)->maxValue(100000)->default(0)->required()];
         if ($kind !== 'product') {
             $fields[] = Toggle::make('active')->default(false);
         }
         if ($kind === 'category') {
-            $fields[] = Select::make('parent_id')->label('Parent (empty = root)')->options(fn () => ProductCategory::whereNull('parent_id')->orderBy('slug')->pluck('slug', 'id'))->searchable();
+            $fields[] = Select::make('parent_id')->label(__('Parent (empty = root)'))->options(fn () => ProductCategory::whereNull('parent_id')->orderBy('slug')->pluck('slug', 'id'))->searchable();
         }
         if ($kind === 'product') {
-            $fields = [...$fields, Select::make('category_id')->label('Child category')->options(fn () => ProductCategory::whereNotNull('parent_id')->orderBy('slug')->pluck('slug', 'id'))->required(fn (Get $get) => $get('status') === 'published')->searchable(), Select::make('status')->options(['draft' => 'Draft', 'published' => 'Published (super-admin)'])->default('draft')->required()->live(), Toggle::make('featured')->default(false)];
+            $fields = [...$fields, Select::make('category_id')->label(__('Child category'))->options(fn () => ProductCategory::whereNotNull('parent_id')->orderBy('slug')->pluck('slug', 'id'))->required(fn (Get $get) => $get('status') === 'published')->searchable(), Select::make('status')->options(['draft' => __('Draft'), 'published' => __('Published (super-admin)')])->default('draft')->required()->live(), Toggle::make('featured')->default(false)];
         }
-        $fields[] = self::image('cover_media_id', 'Approved published cover');
+        $fields[] = self::image('cover_media_id', 'Approved published cover', $kind === 'product')->live();
+        $fields[] = self::imagePreview('cover_media_id', __('admin.cover'));
         $fields = [...$fields, ...self::translations($kind)];
         if ($kind === 'product') {
-            $fields[] = Select::make('units')->label('Permitted quotation quantity units')->multiple()->options(array_combine(config('catalogue.quantity_units'), config('catalogue.quantity_units')))->required(fn (Get $get) => $get('status') === 'published');
-            $fields[] = Toggle::make('custom_size_allowed')->label('Custom dimensions on request')->default(false)->live()->afterStateUpdated(function ($state, Set $set) {
+            $fields[] = Select::make('units')->label(__('Permitted quotation quantity units'))->multiple()->options(array_combine(config('catalogue.quantity_units'), config('catalogue.quantity_units')))->required(fn (Get $get) => $get('status') === 'published');
+            $fields[] = Toggle::make('custom_size_allowed')->label(__('Custom dimensions on request'))->default(false)->live()->afterStateUpdated(function ($state, Set $set) {
                 if (! $state) {
                     foreach (['custom_measurement_unit', 'min_width', 'max_width', 'min_length', 'max_length'] as $key) {
                         $set($key, null);
@@ -53,17 +54,17 @@ class CatalogueForms
             foreach (['width', 'length', 'height', 'thickness'] as $dimension) {
                 $sizeFields[] = TextInput::make($dimension)->label(['width' => 'Largeur / العرض', 'length' => 'Longueur / الطول', 'height' => 'Hauteur / الارتفاع', 'thickness' => 'Épaisseur / السماكة'][$dimension])->numeric()->minValue(0.0001)->maxValue(1000000);
             }
-            $sizeFields = [...$sizeFields, Select::make('measurement_unit')->options(array_combine(config('catalogue.measurement_units'), config('catalogue.measurement_units')))->required(), Toggle::make('active')->default(true), TextInput::make('sort_order')->integer()->minValue(0)->default(0)->required(), self::image('cover_media_id', 'Optional size cover'), ...self::translations('size')];
-            $fields[] = Repeater::make('sizes')->label('Dimensions / الأبعاد')->schema($sizeFields)->maxItems(40)->defaultItems(0)->reorderable(false)->helperText('Optional: thickness only, length + width, or both. Leave this list empty for products without dimensions. Labels are generated automatically when empty.');
+            $sizeFields = [...$sizeFields, Select::make('measurement_unit')->options(array_combine(config('catalogue.measurement_units'), config('catalogue.measurement_units')))->required(), Toggle::make('active')->default(true), TextInput::make('sort_order')->integer()->minValue(0)->default(0)->required(), self::image('cover_media_id', 'Optional size cover')->live(), self::imagePreview('cover_media_id', __('admin.cover')), ...self::translations('size')];
+            $fields[] = Repeater::make('sizes')->label(__('Dimensions / الأبعاد'))->schema($sizeFields)->maxItems(40)->defaultItems(0)->reorderable(false)->helperText(__('Optional: thickness only, length + width, or both. Leave this list empty for products without dimensions. Labels are generated automatically when empty.'));
             $fields[] = Repeater::make('finishes')->schema([Select::make('finish_id')->options(fn () => Finish::orderBy('slug')->pluck('slug', 'id'))->required()->searchable(), Toggle::make('active')->default(true), Toggle::make('is_default')->default(false), TextInput::make('sort_order')->integer()->minValue(0)->default(0)->required()])->maxItems(20)->defaultItems(0)->reorderable(false);
-            $fields[] = Repeater::make('gallery')->schema([self::image('media_asset_id', 'Approved published gallery image')->required()])->maxItems(12)->defaultItems(0)->helperText('Drag to order. No raw storage keys.');
+            $fields[] = Repeater::make('gallery')->schema([self::image('media_asset_id', 'Approved published gallery image', true)->required()->live(), self::imagePreview('media_asset_id', __('admin.cover'))])->maxItems(12)->defaultItems(0)->helperText(__('Drag to order. No raw storage keys.'));
         }
 
         if ($kind === 'product') {
             $fields[] = ViewerForms::section();
         }
 
-        return $fields;
+        return AdminFormLayout::group($fields);
     }
 
     private static function translations(string $kind): array
@@ -74,7 +75,7 @@ class CatalogueForms
             $label = $kind === 'size' ? 'label' : 'name';
             $fields[] = TextInput::make($prefix.$label)->label($locale['name'].' '.$label)->maxLength(160)->required($kind !== 'size' && $locale['code'] === config('localization.fallback'));
             if ($kind !== 'size') {
-                $fields[] = Textarea::make($prefix.'description')->label($locale['name'].' description')->maxLength(10000);
+                $fields[] = Textarea::make($prefix.'description')->label($locale['name'].' '.__('admin.field_description'))->maxLength(10000);
             }
             if (in_array($kind, ['product', 'category'], true)) {
                 $fields[] = TextInput::make($prefix.'seo_title')->label($locale['name'].' SEO title')->maxLength(160);
@@ -91,16 +92,20 @@ class CatalogueForms
         return $fields;
     }
 
-    public static function image(string $key, string $label): Select
+    public static function image(string $key, string $label, bool $allowDraftProduct = false): Select
     {
-        $select = Select::make($key)->label($label)->searchable()->getSearchResultsUsing(function (string $search) {
+        $select = Select::make($key)->label(__($label))->searchable()->getSearchResultsUsing(function (string $search) {
             $query = MediaAsset::query();
             app(PublicCatalogue::class)->eligibleMedia($query);
 
-            return $query->where('original_filename', 'like', '%'.addcslashes($search, '%_\\').'%')->limit(50)->pluck('original_filename', 'id')->all();
-        })->getOptionLabelUsing(fn ($value) => MediaAsset::find($value)?->original_filename);
+            return $query->where('original_filename', 'like', '%'.addcslashes($search, '%_\\').'%')->limit(50)->get(['id', 'original_filename', 'width', 'height'])->mapWithKeys(fn ($asset) => [$asset->id => $asset->original_filename.' · '.$asset->width.' × '.$asset->height.' · '.substr($asset->id, 0, 8)])->all();
+        })->getOptionLabelUsing(function ($value) {
+            $asset = MediaAsset::find($value);
 
-        return MediaForms::attach($select, 'image', str_contains($key, 'hero') || str_contains($key, 'secondary') ? ['thumb', 'banner'] : ['thumb', 'card', 'gallery']);
+            return $asset ? $asset->original_filename.' · '.__($asset->active_revision ? 'admin.published' : 'admin.private').' · '.__('admin.'.$asset->approval_state) : null;
+        });
+
+        return MediaForms::attach($select, 'image', str_contains($key, 'hero') || str_contains($key, 'secondary') ? ['thumb', 'banner'] : ['thumb', 'card', 'gallery'], $allowDraftProduct ? fn (Select $component) => data_get($component->getLivewire(), 'mountedActions.0.data.status') === 'draft' : false);
     }
 
     public static function imagePreview(string $key, string $label): Image
