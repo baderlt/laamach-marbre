@@ -8,6 +8,7 @@ export function HomeProductCarousel({ children, locale, count, title }: { childr
   const [position, setPosition] = useState({ index: 0, end: true, overflow: false });
   const drag = useRef<{ x: number; left: number; moved: boolean } | null>(null);
   const settleFrame = useRef<number | null>(null);
+  const lastWheel = useRef(-Infinity);
   const [dragging, setDragging] = useState(false);
   const ar = locale === 'ar';
   const stride = (node: HTMLElement) => {
@@ -33,8 +34,21 @@ export function HomeProductCarousel({ children, locale, count, title }: { childr
     const observer = new ResizeObserver(update);
     observer.observe(node);
     node.addEventListener('scroll', update, { passive: true });
-    return () => { observer.disconnect(); node.removeEventListener('scroll', update); if (settleFrame.current !== null) cancelAnimationFrame(settleFrame.current); };
-  }, []);
+    const onWheel = (event: WheelEvent) => {
+      if (event.ctrlKey || event.shiftKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      const maximum = node.scrollWidth - node.clientWidth;
+      const offset = Math.abs(node.scrollLeft);
+      const direction = Math.sign(event.deltaY);
+      if (maximum <= 2 || (direction > 0 && offset >= maximum - 2) || (direction < 0 && offset <= 2)) return;
+      event.preventDefault();
+      if (performance.now() - lastWheel.current < 420) return;
+      lastWheel.current = performance.now();
+      if (settleFrame.current !== null) cancelAnimationFrame(settleFrame.current);
+      node.scrollBy({ left: direction * (ar ? -1 : 1) * stride(node), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    };
+    node.addEventListener('wheel', onWheel, { passive: false });
+    return () => { observer.disconnect(); node.removeEventListener('scroll', update); node.removeEventListener('wheel', onWheel); if (settleFrame.current !== null) cancelAnimationFrame(settleFrame.current); };
+  }, [ar]);
   const finishDrag = (node: HTMLDivElement, pointerId: number, cancelled = false) => {
     if (!drag.current) return;
     const moved = drag.current.moved;
@@ -49,7 +63,7 @@ export function HomeProductCarousel({ children, locale, count, title }: { childr
   };
 
   return <div className="home-products-carousel" role="region" aria-roledescription={ar ? 'عارض شرائح' : 'carrousel'} aria-label={title} data-count={count}>
-    {count > 1 && <div className="home-carousel-controls"><span className="home-carousel-hint">{ar ? 'مواد تلهم مشروعك' : 'La matière, sous tous ses angles'}</span><div className="home-carousel-navigation">
+    {count > 1 && <div className="home-carousel-controls"><div className="home-carousel-navigation">
       <button type="button" onClick={() => move(-1)} disabled={!position.overflow || position.index === 0} aria-label={ar ? 'المواد السابقة' : 'Matières précédentes'}><SiteIcon name="arrow" className="directional carousel-back" /></button>
       <span className="home-carousel-position" aria-live="polite"><bdi>{String(position.index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}</bdi></span>
       <button type="button" onClick={() => move(1)} disabled={!position.overflow || position.end} aria-label={ar ? 'المواد التالية' : 'Matières suivantes'}><SiteIcon name="arrow" className="directional" /></button>
