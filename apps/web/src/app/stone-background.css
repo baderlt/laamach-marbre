@@ -206,7 +206,7 @@ html { scroll-padding-top: 116px; }
 .stone-site .site-header .desktop-nav a[aria-current='page'] { color: #e5bc78; }
 
 /* Shared stone navigation, catalogue search and direct contact. */
-.stone-site .site-header, .stone-site .site-header[data-home='true'], .stone-site .site-header[data-home='true'][data-scrolled='true'] { background: linear-gradient(90deg,#141f1deb,#19231de0),url('/stone-background/mobile-ee0d5cbf03a0e155.webp') center 44% / cover; }
+.stone-site .site-header, .stone-site .site-header[data-home='true'], .stone-site .site-header[data-home='true'][data-scrolled='true'] { background: linear-gradient(90deg,#141f1deb,#19231de0); }
 .stone-site .site-header .header-search { display: inline-flex; order: 5; flex-shrink: 0; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 10px; border: 1px solid #e5bc7838; border-radius: 50%; background: #ffffff08; }
 .stone-site .header-search:hover { background: #ffffff18; }
 .floating-whatsapp { position: fixed; z-index: 60; inset-inline-end: max(20px,env(safe-area-inset-right)); bottom: max(20px,env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 10px; min-height: 54px; padding: 12px 18px; border: 1px solid #ffffff80; border-radius: 999px; background: #155b3f; color: #fff; box-shadow: 0 6px 24px #091e2030; text-decoration: none; font-size: 13px; }
@@ -338,8 +338,6 @@ html { scroll-padding-top: 116px; }
 .product-detail .image-lightbox { inset: 0; margin: auto; max-height: 94svh; border-radius: 16px; background: #14201e; color: white; }
 .product-detail .image-lightbox::backdrop { background: #08100ef0; }
 .product-detail .image-lightbox .icon-button { color: white; }
-@media (min-width: 768px) { .stone-site .site-header, .stone-site .site-header[data-home='true'], .stone-site .site-header[data-home='true'][data-scrolled='true'] { background-image: linear-gradient(90deg,#141f1deb,#19231de0),url('/stone-background/tablet-c6a3da269cfb4787.webp'); } }
-@media (min-width: 1200px) { .stone-site .site-header, .stone-site .site-header[data-home='true'], .stone-site .site-header[data-home='true'][data-scrolled='true'] { background-image: linear-gradient(90deg,#141f1deb,#19231de0),url('/stone-background/desktop-2941aa4a74900908.webp'); } }
 @media (max-width: 1023px) {
   .product-detail .product-presentation { gap: 36px 24px; }
   .product-detail .product-description { font-size: 14px; }
@@ -785,7 +783,7 @@ html[lang='ar'] .products-index .catalogue-filters h2 { line-height: 1.6; }
 .home-featured-link:hover .site-icon, .home-featured-link:focus-visible .site-icon { transform: translateX(4px); }
 .home-featured-link:focus-visible { outline: 2px solid #6b4e29; outline-offset: 4px; }
 .home-products-carousel { min-width: 0; }
-.home-product-track { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-behavior: smooth; scrollbar-width: none; padding: 4px 4px 14px; margin: -4px -4px 0; border-radius: 12px; cursor: grab; }
+.home-product-track { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; padding: 4px 4px 14px; margin: -4px -4px 0; border-radius: 12px; cursor: grab; }
 .home-product-track[data-dragging='true'] { scroll-snap-type: none; scroll-behavior: auto; cursor: grabbing; user-select: none; }
 .home-product-track::-webkit-scrollbar { display: none; }
 .homepage .home-products-carousel .product-grid.compact-grid { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: calc((100% - 36px)/3); gap: 18px; }
