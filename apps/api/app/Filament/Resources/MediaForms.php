@@ -87,7 +87,7 @@ class MediaForms
             $asset = $library->ingest($file->getRealPath(), 'admin/uploads/'.$name.'.'.$extension, true);
             $revision = $asset->active_revision;
             $existing = $asset->variants()->where('revision', $revision)->pluck('profile')->all();
-            if ($asset->processing_state !== 'ready' || ($actualType === 'image' && array_diff($profiles, $existing))) {
+            if ($asset->processing_state !== 'ready' || $actualType === 'image') {
                 $revision = $library->process($asset, array_values(array_unique([...$profiles, ...array_intersect($existing, array_keys(config('media.profiles')))])));
             }
         } catch (ValidationException $error) {

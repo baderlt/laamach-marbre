@@ -50,6 +50,15 @@ class MediaConfiguration
                     throw new InvalidArgumentException('R2 endpoints/media URL must be clean HTTPS origins.');
                 }
             }
+            foreach (['r2_private', 'r2_published'] as $disk) {
+                $host = parse_url($config->get("filesystems.disks.$disk.endpoint"), PHP_URL_HOST);
+                if (! str_ends_with($host, '.r2.cloudflarestorage.com') || $config->get("filesystems.disks.$disk.endpoint") === $config->get('filesystems.disks.r2_published.url')) {
+                    throw new InvalidArgumentException('Use the account R2 S3 API endpoint, never the public CDN hostname.');
+                }
+            }
+            if ($config->get('filesystems.disks.r2_private.url')) {
+                throw new InvalidArgumentException('Private R2 must not define a public URL.');
+            }
         }
         foreach (['max_bytes' => 20971520, 'max_pixels' => 20000000, 'max_dimension' => 8192, 'memory_budget' => 536870912, 'import_max_files' => 5000, 'manifest_max_bytes' => 1048576] as $key => $ceiling) {
             $value = $config->get("media.$key");

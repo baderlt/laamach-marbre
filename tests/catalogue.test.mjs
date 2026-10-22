@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { selectedImage, catalogueFilters, catalogueCopy } from '../apps/web/src/lib/catalogue.ts';
+import { selectedImage, catalogueFilters, catalogueCopy, appendProductPage } from '../apps/web/src/lib/catalogue.ts';
 
 test('size image selection is deterministic with cover and neutral fallbacks', () => {
   const cover = { id: 'cover', alt: '', variants: [] };
@@ -23,4 +23,15 @@ test('catalogue messages support configured fallback and neutral custom-size cop
   assert.match(catalogueCopy('fr').custom, /faisabilité/);
   assert.match(catalogueCopy('ar').custom, /الشركة/);
   assert.equal(catalogueCopy('es').catalogue, catalogueCopy('fr').catalogue);
+});
+
+test('scrolling pages append without duplicate products or category headings', () => {
+  const first = { data: [{ reference: 'one' }, { reference: 'two' }], groups: [{ category: { id: 'a' }, total: 3 }], meta: { current_page: 1 } };
+  const next = { data: [{ reference: 'two' }, { reference: 'three' }], groups: [{ category: { id: 'a' }, total: 3 }, { category: { id: 'b' }, total: 1 }], meta: { current_page: 2 } };
+  const result = appendProductPage(first, next);
+  assert.deepEqual(result.data.map(product => product.reference), ['one', 'two', 'three']);
+  assert.deepEqual(result.groups.map(group => group.category.id), ['a', 'b']);
+  assert.equal(result.meta.current_page, 2);
+  assert.equal(first.data.length, 2);
+  assert.equal(appendProductPage({ ...first, groups: undefined }, { ...next, groups: undefined }).groups, undefined);
 });

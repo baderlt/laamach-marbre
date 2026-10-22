@@ -9,8 +9,16 @@ export type Finish = { id: string; slug: string; name: string; is_default?: bool
 export type ProductCard = { reference: string; slug: string; name: string; featured: boolean; parent_category: Category; category: Category; cover: Media | null };
 export type Size = { id: string; label: string; width: string | null; length: string | null; height: string | null; thickness: string | null; measurement_unit: string; cover: Media | null };
 export type Product = ProductCard & { available_locales?: string[]; viewer_3d?: ViewerConfiguration | null; projects: ProjectCard[]; description: string | null; colour: string | null; origin: string | null; seo_title: string | null; seo_description: string | null; gallery: Media[]; sizes: Size[]; custom_size_allowed: boolean; custom_size: { measurement_unit: string; min_width: string; max_width: string; min_length: string; max_length: string } | null; quantity_units: string[]; finishes: Finish[]; technical_information: { label: string; value: string }[] | null };
-export type ProductPage = { data: ProductCard[]; meta: { current_page: number; last_page: number; per_page: number; total: number } };
+export type ProductPage = { data: ProductCard[]; groups?: { category: Category; total: number }[]; meta: { current_page: number; last_page: number; per_page: number; total: number } };
 export type CategoryPage = { data: Category[]; finishes: Finish[] };
+
+export function appendProductPage(current: ProductPage, incoming: ProductPage): ProductPage {
+  const products = new Map(current.data.map(product => [product.reference, product]));
+  for (const product of incoming.data) products.set(product.reference, product);
+  const groups = new Map(current.groups?.map(group => [group.category.id, group]));
+  for (const group of incoming.groups ?? []) groups.set(group.category.id, group);
+  return { data: [...products.values()], ...(current.groups ? { groups: [...groups.values()] } : {}), meta: incoming.meta };
+}
 
 const messages = {
   fr: { catalogue: 'Catalogue', home: 'Accueil', parent: 'Famille', child: 'Catégorie', finish: 'Finition', all: 'Toutes', apply: 'Appliquer', previous: 'Précédent', next: 'Suivant', empty: 'Aucun produit à afficher.', missingImage: 'Image non fournie', sizes: 'Dimensions standard', custom: 'Dimensions personnalisées sur demande. La faisabilité est confirmée par l’entreprise.', bounds: 'Limites des dimensions personnalisées', width: 'Largeur', length: 'Longueur', units: 'Unités de quantité autorisées', technical: 'Informations techniques', colour: 'Couleur', origin: 'Origine', image: 'Vue du produit', mainImage: 'Vue principale', gallery: 'Galerie', sizeNote: 'Les options présentées ne constituent pas une garantie de disponibilité commerciale.', unavailable: 'Catalogue temporairement indisponible.' },

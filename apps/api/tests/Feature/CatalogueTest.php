@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Catalogue\CatalogueWriter;
+use App\Catalogue\PublicCatalogue;
 use App\Filament\Resources\CatalogueForms;
 use App\Filament\Resources\CataloguePages\ManageCategories;
 use App\Filament\Resources\CataloguePages\ManageProducts;
@@ -61,6 +62,90 @@ class CatalogueTest extends TestCase
     private function product(array $overrides = []): Product
     {
         return app(CatalogueWriter::class)->product(null, $this->data($overrides), $this->admin);
+    }
+
+    public function test_grouped_catalogue_keeps_categories_separate_and_excludes_private_records(): void
+    {
+        $writer = app(CatalogueWriter::class);
+        $second = $writer->category(null, ['slug' => 'second-child', 'parent_id' => $this->catalogue['parent']->id, 'active' => true, 'sort_order' => 10, 'translations' => Fixtures::copy('Second category')], $this->admin);
+        $first = $this->product();
+        $this->product(['slug' => 'second-product', 'category_id' => $second->id]);
+        $this->product(['slug' => 'private-product', 'status' => 'draft']);
+        $this->product(['slug' => 'missing-arabic', 'translations' => ['fr' => ['name' => 'Français uniquement']]]);
+        foreach (['fr' => 3, 'ar' => 2] as $locale => $total) {
+            $response = $this->getJson('/api/v1/product-groups?locale='.$locale)->assertOk()->assertJsonPath('meta.total', $total)->assertJsonCount(2, 'groups')->assertJsonCount($total, 'data')->assertJsonPath('groups.0.category.slug', 'temporary-child')->assertJsonPath('groups.1.category.slug', 'second-child');
+            $this->assertSame($total - 1, $response->json('groups.0.total'));
+            $this->assertSame($first->reference, $response->json('data.0.reference'));
+        }
+        $second->forceFill(['active' => false])->save();
+        $this->getJson('/api/v1/product-groups?locale=ar')->assertJsonCount(1, 'groups')->assertJsonPath('meta.total', 1);
+        $this->catalogue['parent']->forceFill(['active' => false])->save();
+        $this->getJson('/api/v1/product-groups')->assertJsonCount(0, 'data')->assertJsonCount(0, 'groups');
+        $this->getJson('/api/v1/product-groups?locale=en')->assertUnprocessable();
+        $this->getJson('/api/v1/product-groups?page=0')->assertUnprocessable();
+    }
+
+    public function test_home_carousel_selects_three_public_products_per_parent_not_per_child(): void
+    {
+        $writer = app(CatalogueWriter::class);
+        $otherChild = $writer->category(null, ['slug' => 'other-child', 'parent_id' => $this->catalogue['parent']->id, 'active' => true, 'translations' => Fixtures::copy('Other child')], $this->admin);
+        $parent = $writer->category(null, ['slug' => 'other-parent', 'active' => true, 'sort_order' => 10, 'translations' => Fixtures::copy('Other parent')], $this->admin);
+        $child = $writer->category(null, ['slug' => 'second-family-child', 'parent_id' => $parent->id, 'active' => true, 'translations' => Fixtures::copy('Second family child')], $this->admin);
+        for ($index = 0; $index < 4; $index++) {
+            $this->product(['slug' => 'family-a-'.$index, 'category_id' => $index < 2 ? $this->catalogue['child']->id : $otherChild->id, 'sort_order' => $index, 'featured' => $index === 3]);
+            $this->product(['slug' => 'family-b-'.$index, 'category_id' => $child->id, 'sort_order' => $index]);
+        }
+        $this->product(['slug' => 'private-home-product', 'status' => 'draft', 'featured' => true]);
+        foreach (['fr', 'ar'] as $locale) {
+            $response = $this->getJson('/api/v1/site?include_navigation=1&locale='.$locale)->assertOk()->assertJsonCount(6, 'data.home_products');
+            $this->assertSame(['family-a-3', 'family-a-0', 'family-a-1', 'family-b-0', 'family-b-1', 'family-b-2'], array_column($response->json('data.home_products'), 'slug'));
+            $this->getJson('/api/v1/site?locale='.$locale)->assertJsonMissingPath('data.home_products');
+        }
+        $parent->forceFill(['active' => false])->save();
+        $this->getJson('/api/v1/site?include_navigation=1')->assertJsonCount(3, 'data.home_products');
+    }
+
+    public function test_grouped_catalogue_eager_loads_products_and_media_in_a_bounded_query_count(): void
+    {
+        $this->product();
+        DB::enableQueryLog();
+        app(PublicCatalogue::class)->groupedProducts('fr');
+        $one = count(DB::getQueryLog());
+        DB::disableQueryLog();
+        for ($index = 0; $index < 3; $index++) {
+            $child = app(CatalogueWriter::class)->category(null, ['slug' => 'group-'.$index, 'parent_id' => $this->catalogue['parent']->id, 'active' => true, 'translations' => Fixtures::copy('Group '.$index)], $this->admin);
+            $this->product(['slug' => 'group-product-'.$index, 'category_id' => $child->id]);
+        }
+        DB::flushQueryLog();
+        DB::enableQueryLog();
+        $data = app(PublicCatalogue::class)->groupedProducts('fr');
+        $this->assertCount(4, $data['groups']);
+        $this->assertSame($one, count(DB::getQueryLog()));
+        DB::disableQueryLog();
+    }
+
+    public function test_grouped_scroll_pages_are_bounded_and_complete_across_category_boundaries(): void
+    {
+        config(['catalogue.per_page' => 3]);
+        $second = app(CatalogueWriter::class)->category(null, ['slug' => 'second-child', 'parent_id' => $this->catalogue['parent']->id, 'active' => true, 'sort_order' => 10, 'translations' => Fixtures::copy('Second category')], $this->admin);
+        for ($index = 0; $index < 5; $index++) {
+            $this->product(['slug' => 'first-'.$index, 'sort_order' => $index]);
+        }
+        for ($index = 0; $index < 3; $index++) {
+            $this->product(['slug' => 'second-'.$index, 'category_id' => $second->id, 'sort_order' => $index]);
+        }
+        foreach (['fr', 'ar'] as $locale) {
+            $slugs = [];
+            foreach ([1 => 3, 2 => 3, 3 => 2] as $page => $count) {
+                $response = $this->getJson('/api/v1/product-groups?locale='.$locale.'&page='.$page)->assertOk()->assertJsonCount($count, 'data')->assertJsonPath('meta.total', 8)->assertJsonPath('meta.last_page', 3);
+                $slugs = [...$slugs, ...array_column($response->json('data'), 'slug')];
+                if ($page === 2) {
+                    $response->assertJsonPath('groups.0.total', 5)->assertJsonPath('groups.1.total', 3);
+                }
+            }
+            $this->assertSame(['first-0', 'first-1', 'first-2', 'first-3', 'first-4', 'second-0', 'second-1', 'second-2'], $slugs);
+            $this->getJson('/api/v1/product-groups?locale='.$locale.'&page=4')->assertJsonCount(0, 'data')->assertJsonCount(0, 'groups');
+        }
     }
 
     public function test_parent_child_creation_translation_and_ordering(): void

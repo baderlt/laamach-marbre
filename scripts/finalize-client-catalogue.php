@@ -18,8 +18,9 @@ try {
     $root = dirname(__DIR__);
     require $root.'/apps/api/vendor/autoload.php';
     $app = require $root.'/apps/api/bootstrap/app.php';
+    $app->loadEnvironmentFrom('.env.client-preview');
     $app->make(Kernel::class)->bootstrap();
-    TestDatabaseGuard::assertSafe($app->environment(), config('database'));
+    TestDatabaseGuard::assertPreviewTarget($app->environment(), config('database'));
     $directory = $root.'/.tools/catalogue-final';
     if (! is_dir($directory)) {
         mkdir($directory, 0755, true);

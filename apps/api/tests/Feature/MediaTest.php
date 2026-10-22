@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Filament\Resources\MediaAssetResource\ManageMediaAssets;
+use App\Filament\Resources\MediaForms;
 use App\Media\AssetImporter;
 use App\Media\ImageProcessor;
 use App\Media\MediaConfiguration;
@@ -19,6 +20,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Config\Repository;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
@@ -120,6 +122,86 @@ class MediaTest extends TestCase
             $avif = $asset->variants()->where('revision', $revision)->where('format', 'avif')->firstOrFail();
             $this->assertSame('image/avif', getimagesizefromstring(app(MediaStorage::class)->variantBytes($avif))['mime']);
         }
+    }
+
+    public function test_jpeg_camera_orientations_and_mirrors_survive_metadata_stripping(): void
+    {
+        $image = imagecreatetruecolor(80, 40);
+        foreach ([[0, 0, 255, 0, 0], [40, 0, 0, 255, 0], [0, 20, 0, 0, 255], [40, 20, 255, 255, 0]] as [$x, $y, $r, $g, $b]) {
+            imagefilledrectangle($image, $x, $y, $x + 39, $y + 19, imagecolorallocate($image, $r, $g, $b));
+        }
+        ob_start();
+        imagejpeg($image, null, 100);
+        $jpeg = ob_get_clean();
+        $expected = [1 => [0, 1, 2, 3], 2 => [1, 0, 3, 2], 3 => [3, 2, 1, 0], 4 => [2, 3, 0, 1], 5 => [0, 2, 1, 3], 6 => [2, 0, 3, 1], 7 => [3, 1, 2, 0], 8 => [1, 3, 0, 2]];
+        $processor = app(ImageProcessor::class);
+        foreach ([true, false] as $little) {
+            foreach ($expected as $orientation => $corners) {
+                $short = $little ? 'v' : 'n';
+                $long = $little ? 'V' : 'N';
+                $tiff = ($little ? 'II' : 'MM').pack($short, 42).pack($long, 8).pack($short, 1).pack($short, 0x112).pack($short, 3).pack($long, 1).pack($short, $orientation)."\0\0".pack($long, 0);
+                $exif = "Exif\0\0".$tiff;
+                $bytes = substr($jpeg, 0, 2)."\xff\xe1".pack('n', strlen($exif) + 2).$exif.substr($jpeg, 2);
+                $path = $this->root.'/orientation.jpg';
+                File::put($path, $bytes);
+                $dimensions = $orientation >= 5 ? [40, 80] : [80, 40];
+                $info = $processor->inspect($path);
+                $this->assertSame($dimensions, [$info['width'], $info['height']]);
+                $variant = iterator_to_array($processor->derivatives($bytes, ['thumb']))[0];
+                $this->assertSame($dimensions, [$variant['width'], $variant['height']]);
+                $decoded = imagecreatefromstring($variant['content']);
+                $actual = [];
+                foreach ([[0.25, 0.25], [0.75, 0.25], [0.25, 0.75], [0.75, 0.75]] as [$x, $y]) {
+                    $rgb = imagecolorsforindex($decoded, imagecolorat($decoded, (int) ($x * imagesx($decoded)), (int) ($y * imagesy($decoded))));
+                    $actual[] = $rgb['red'] > 128 ? ($rgb['green'] > 128 ? 3 : 0) : ($rgb['green'] > 128 ? 1 : 2);
+                }
+                $this->assertSame($corners, $actual, "Orientation $orientation");
+                $this->assertStringNotContainsString('Exif', $variant['content']);
+                $this->assertSame(hash('sha256', $bytes), hash_file('sha256', $path));
+            }
+        }
+        // A truncated/untrusted TIFF offset cannot trigger an out-of-bounds read.
+        $badExif = "Exif\0\0II\x2a\0\xff\xff\xff\x7f";
+        $decoded = $processor->decode(substr($jpeg, 0, 2)."\xff\xe1".pack('n', strlen($badExif) + 2).$badExif.substr($jpeg, 2));
+        $this->assertSame([80, 40], [imagesx($decoded), imagesy($decoded)]);
+    }
+
+    public function test_admin_preview_matches_the_published_revision_until_a_new_one_is_published(): void
+    {
+        $asset = $this->asset();
+        $library = app(MediaLibrary::class);
+        $first = $library->process($asset);
+        $admin = $this->admin();
+        $library->approve($asset, $admin);
+        $library->publish($asset, $first, $admin);
+        $originalPreview = $this->actingAs($admin)->get(route('media.preview', $asset))->assertOk()->getContent();
+        config(['media.profiles.thumb.edge' => 20]);
+        $next = $library->process($asset);
+        $this->assertNotSame($first, $next);
+        $this->assertSame($originalPreview, $this->get(route('media.preview', $asset))->assertOk()->getContent());
+        $library->publish($asset, $next, $admin);
+        $this->assertNotSame($originalPreview, $this->get(route('media.preview', $asset))->assertOk()->getContent());
+    }
+
+    public function test_reuploading_existing_bytes_uses_the_current_encoder_without_implicit_publication(): void
+    {
+        config(['media.encoder_version' => 'gd-1']);
+        $asset = $this->asset();
+        $library = app(MediaLibrary::class);
+        $first = $library->process($asset, ['thumb', 'card', 'gallery']);
+        $admin = $this->admin();
+        $library->approve($asset, $admin);
+        $library->publish($asset, $first, $admin);
+        $this->actingAs($admin);
+        config(['media.encoder_version' => 'gd-2-exif']);
+        $input = ['upload' => new UploadedFile($this->root.'/products/sample.png', 'sample.png', test: true), 'client_supplied' => true, 'approve_and_publish' => false];
+        $this->assertSame($asset->id, MediaForms::upload($input));
+        $this->assertSame($first, $asset->fresh()->active_revision);
+        $this->assertSame(2, $asset->variants()->distinct()->count('revision'));
+        $input['approve_and_publish'] = true;
+        $this->assertSame($asset->id, MediaForms::upload($input));
+        $this->assertNotSame($first, $asset->fresh()->active_revision);
+        $this->assertSame($asset->checksum, hash('sha256', app(MediaStorage::class)->originalBytes($asset)));
     }
 
     public function test_publication_requires_approval_and_explicit_provenance(): void
@@ -588,8 +670,16 @@ class MediaTest extends TestCase
     public function test_public_object_writes_set_cache_control_without_public_acl(): void
     {
         $adapter = \Mockery::mock(FilesystemAdapter::class);
-        $adapter->shouldReceive('exists')->once()->with('images/test')->andReturn(false);
-        $adapter->shouldReceive('put')->once()->with('images/test', 'encoded', ['ContentType' => 'image/webp', 'CacheControl' => MediaStorage::CACHE_CONTROL])->andReturn(true);
+        $adapter->shouldReceive('fileExists')->once()->with('images/test')->andReturn(false);
+        $adapter->shouldReceive('put')->once()->with('images/test', 'encoded', \Mockery::on(fn ($options) => $options['ContentType'] === 'image/webp' && $options['CacheControl'] === MediaStorage::CACHE_CONTROL && $options['Metadata']['sha256'] === hash('sha256', 'encoded') && $options['params']['IfNoneMatch'] === '*' && ! isset($options['visibility'], $options['ACL'])))->andReturn(true);
+        $adapter->shouldReceive('size')->once()->with('images/test')->andReturn(7);
+        $adapter->shouldReceive('readStream')->once()->with('images/test')->andReturnUsing(function () {
+            $stream = fopen('php://temp', 'w+b');
+            fwrite($stream, 'encoded');
+            rewind($stream);
+
+            return $stream;
+        });
         Storage::shouldReceive('disk')->with('r2_published')->andReturn($adapter);
         $this->assertTrue(app(MediaStorage::class)->putImmutable('r2_published', 'images/test', 'encoded', 'image/webp'));
     }

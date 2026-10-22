@@ -1,2 +1,19 @@
 * text=auto eol=lf
 *.woff2 binary
+
+# Keep development and audit material in Git without shipping it in release archives.
+/tests/** export-ignore
+/apps/api/tests/** export-ignore
+/docs/** export-ignore
+/deployment/*.md export-ignore
+/playwright.config.ts export-ignore
+/apps/api/phpunit.xml export-ignore
+/scripts/check-isolation.mjs export-ignore
+/scripts/start-client-preview.mjs export-ignore
+/scripts/start-client-preview.ps1 export-ignore
+/scripts/import-*.php export-ignore
+/scripts/prepare-content-preview.php export-ignore
+/scripts/finalize-client-catalogue.php export-ignore
+/scripts/apply-editorial-preview-revision.php export-ignore
+/config/client-*.json export-ignore
+/config/reference-catalogue-2026-10.json export-ignore

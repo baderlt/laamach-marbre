@@ -34,7 +34,8 @@ class MediaController
         Gate::authorize('view', $asset);
         abort_unless($asset->type === 'image', 404); // Videos are never embedded/autoplayed as admin thumbnails.
         // Only decoded, metadata-free derivatives are embedded in admin, never raw originals.
-        $variant = $asset->variants()->orderBy('width')->latest('created_at')->firstOrFail();
+        $revision = $asset->active_revision ?? $asset->variants()->latest('created_at')->value('revision');
+        $variant = $asset->variants()->where('revision', $revision)->orderBy('width')->firstOrFail();
 
         return response($storage->variantBytes($variant))->header('Content-Type', 'image/'.$variant->format)->header('Cache-Control', 'private, no-store');
     }

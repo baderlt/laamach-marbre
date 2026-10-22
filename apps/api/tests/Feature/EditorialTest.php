@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Editorial\SectionForm;
 use App\Editorial\SiteContentWriter;
 use App\Filament\Resources\SiteContentPages\ManageSiteContent;
 use App\Media\MediaLibrary;
@@ -119,5 +120,38 @@ class EditorialTest extends TestCase
             $this->assertSame('Entered title', SiteContent::findOrFail('home')->translations['fr']['title']);
         }
         $this->assertDatabaseCount('site_contents', 1);
+    }
+
+    public function test_section_cover_replacement_and_removal_updates_both_languages(): void
+    {
+        $first = CatalogueFixtures::image($this->admin, $this->root, 40);
+        $replacement = CatalogueFixtures::image($this->admin, $this->root, 70);
+        $translations = $this->data()['translations'];
+        foreach (['fr', 'ar'] as $locale) {
+            $translations[$locale]['sections'] = [['group' => 'services', 'title' => $locale.' section', 'media_asset_id' => $first->id, 'link' => 'products']];
+        }
+        $writer = app(SiteContentWriter::class);
+        $record = $writer->save(null, $this->data(['translations' => $translations]), $this->admin);
+        $form = SectionForm::fill($record->only(['key', 'published', 'translations', 'data']));
+        $this->assertSame($first->id, $form['sections'][0]['media_asset_id']);
+        $form['sections'][0]['media_asset_id'] = $replacement->id;
+        $this->actingAs($this->admin);
+        Livewire::test(ManageSiteContent::class)->callAction(TestAction::make('edit')->table($record), data: $form)->assertHasNoActionErrors();
+        foreach (['fr', 'ar'] as $locale) {
+            $this->getJson('/api/v1/site?locale='.$locale)->assertJsonPath('data.pages.home.sections.0.media.id', $replacement->id)->assertJsonPath('data.pages.home.sections.0.title', $locale.' section');
+        }
+        $form['sections'][0]['media_asset_id'] = null;
+        $writer->save($record, SectionForm::input($form), $this->admin);
+        foreach (['fr', 'ar'] as $locale) {
+            $this->getJson('/api/v1/site?locale='.$locale)->assertJsonPath('data.pages.home.sections.0.media', null);
+        }
+        $this->assertDatabaseMissing('media_references', ['owner_type' => 'site_contents', 'owner_key' => 'home']);
+    }
+
+    public function test_shared_cover_does_not_create_an_untranslated_optional_section(): void
+    {
+        $input = SectionForm::input(['translations' => [], 'sections' => [['group' => 'services', 'media_asset_id' => (string) Str::uuid(), 'translations' => ['fr' => ['title' => 'Français']]]]]);
+        $this->assertCount(1, $input['translations']['fr']['sections']);
+        $this->assertSame([], $input['translations']['ar']['sections']);
     }
 }

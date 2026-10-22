@@ -36,7 +36,7 @@ final class FoundationConfiguration
             }
         }
         if ($environment === 'testing') {
-            TestDatabaseGuard::assertSafe($environment, $config->get('database'));
+            TestDatabaseGuard::assertConfigured($environment, $config->get('database'));
         } elseif ($config->get('database.default') !== 'mysql'
             || $config->get('database.connections.mysql.database') !== 'laamach_marbre'
             || (string) $config->get('database.connections.mysql.url') !== '') {

@@ -10,9 +10,44 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Projects\PublicProjects;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class PublicCatalogue
 {
+    public function homeProducts(string $locale): array
+    {
+        $public = $this->products($locale);
+        $eligible = (clone $public)->select('products.id')->reorder();
+        $ranked = DB::table('products')->join('product_categories as home_categories', 'home_categories.id', '=', 'products.category_id')
+            ->whereIn('products.id', $eligible)->select('products.id')
+            ->selectRaw('ROW_NUMBER() OVER (PARTITION BY home_categories.parent_id ORDER BY products.featured DESC, products.sort_order, products.id) AS home_rank');
+        $ids = DB::query()->fromSub($ranked, 'home_products')->where('home_rank', '<=', 3)->select('id');
+
+        return $public->whereIn('products.id', $ids)->get()
+            ->sortBy(fn ($product) => [$product->category->parent->sort_order, $product->category->parent_id, $product->featured ? 0 : 1, $product->sort_order, $product->id])
+            ->map(fn ($product) => $this->productDto($product, $locale))->values()->all();
+    }
+
+    public function groupedProducts(string $locale, int $page = 1): array
+    {
+        $public = $this->products($locale);
+        $ids = (clone $public)->select('products.id')->reorder();
+        $products = (clone $public)->reorder()
+            ->orderBy(ProductCategory::select('sort_order')->whereColumn('product_categories.id', 'products.category_id'))
+            ->orderBy('category_id')->orderBy('sort_order')->orderBy('id')
+            ->paginate(config('catalogue.per_page'), ['*'], 'page', $page);
+        $categories = $this->categories($locale)->whereNotNull('parent_id')
+            ->whereIn('id', $products->getCollection()->pluck('category_id')->unique())
+            ->withCount(['products as public_total' => fn ($products) => $products->whereIn('products.id', $ids)])
+            ->with('translations')->orderBy('sort_order')->orderBy('id')->get();
+
+        return [
+            'data' => $products->getCollection()->map(fn ($product) => $this->productDto($product, $locale))->all(),
+            'groups' => $categories->map(fn ($category) => ['category' => $this->categoryDto($category, $locale), 'total' => $category->public_total])->all(),
+            'meta' => ['current_page' => $products->currentPage(), 'last_page' => $products->lastPage(), 'per_page' => $products->perPage(), 'total' => $products->total()],
+        ];
+    }
+
     public function categoryTree(string $locale): array
     {
         $parents = $this->categories($locale)->whereNull('parent_id')->with(['translations', ...$this->imageRelations('cover'), 'children' => fn ($children) => $children->whereIn('id', $this->categories($locale)->select('id'))->orderBy('sort_order')->orderBy('id'), 'children.translations', ...$this->imageRelations('children.cover')])->orderBy('sort_order')->orderBy('id')->get();

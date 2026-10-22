@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "npm run dev --workspace @laamach-marbre/web",
-    "dev:preview": "node scripts/start-client-preview.mjs",
+    "dev:preview": "powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/start-client-preview.ps1",
     "build": "npm run build:viewer-admin && npm run build --workspace @laamach-marbre/web",
     "start": "npm run start --workspace @laamach-marbre/web",
     "typecheck": "npm run typecheck --workspace @laamach-marbre/web",

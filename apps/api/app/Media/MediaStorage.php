@@ -15,7 +15,7 @@ class MediaStorage
         if (filesize($path) > config('video.max_bytes') || hash_file('sha256', $path) !== $hash) {
             throw new RuntimeException('Video file changed or exceeds its byte limit.');
         }
-        if (Storage::disk($disk)->exists($key)) {
+        if (Storage::disk($disk)->fileExists($key)) {
             $existing = $this->temporaryCopy($disk, $key, $hash, config('video.max_bytes'));
             unlink($existing);
 
@@ -23,9 +23,12 @@ class MediaStorage
         }
         $stream = fopen($path, 'rb');
         try {
-            $options = ['ContentType' => $mime];
-            if (in_array($disk, ['local_published', 'r2_published'], true)) {
+            $options = ['ContentType' => $mime, 'Metadata' => ['sha256' => $hash], 'CacheControl' => 'private, no-store'];
+            if (in_array($disk, ['local_published', 'r2_published', 'r2_migration_published'], true)) {
                 $options['CacheControl'] = self::CACHE_CONTROL;
+            }
+            if (str_starts_with($disk, 'r2_')) {
+                $options['params'] = ['IfNoneMatch' => '*', ...$options];
             }
             if (! Storage::disk($disk)->put($key, $stream, $options)) {
                 throw new RuntimeException('Video storage failed.');
@@ -33,6 +36,7 @@ class MediaStorage
         } finally {
             fclose($stream);
         }
+        $this->verifyStored($disk, $key, $hash, filesize($path));
 
         return true;
     }
@@ -97,7 +101,7 @@ class MediaStorage
     {
         $store = Storage::disk($disk);
         // Callers serialize writes per asset with a database row lock.
-        if ($store->exists($key)) {
+        if ($store->fileExists($key)) {
             $stream = $store->readStream($key);
             try {
                 $hash = hash_init('sha256');
@@ -113,15 +117,39 @@ class MediaStorage
 
             return false;
         }
-        $options = ['ContentType' => $mime];
-        if (in_array($disk, ['r2_published', 'local_published'], true)) {
+        $options = ['ContentType' => $mime, 'Metadata' => ['sha256' => hash('sha256', $bytes)], 'CacheControl' => 'private, no-store'];
+        if (in_array($disk, ['r2_published', 'local_published', 'r2_migration_published'], true)) {
             $options['CacheControl'] = self::CACHE_CONTROL;
+        }
+        if (str_starts_with($disk, 'r2_')) {
+            $options['params'] = ['IfNoneMatch' => '*', ...$options];
         }
         if (! $store->put($key, $bytes, $options)) {
             throw new RuntimeException('Media write failed.');
         }
+        $this->verifyStored($disk, $key, hash('sha256', $bytes), strlen($bytes));
 
         return true;
+    }
+
+    public function verifyStored(string $disk, string $key, string $hash, int $bytes): void
+    {
+        if ($bytes < 1 || $bytes > max(config('media.max_bytes'), config('video.max_bytes')) || Storage::disk($disk)->size($key) !== $bytes) {
+            throw new RuntimeException('Stored media byte size mismatch.');
+        }
+        $stream = Storage::disk($disk)->readStream($key);
+        if (! is_resource($stream)) {
+            throw new RuntimeException('Stored media stream unavailable.');
+        }
+        try {
+            $context = hash_init('sha256');
+            $count = hash_update_stream($context, $stream, $bytes + 1);
+            if ($count !== $bytes || ! hash_equals($hash, hash_final($context))) {
+                throw new RuntimeException('Stored media checksum mismatch.');
+            }
+        } finally {
+            fclose($stream);
+        }
     }
 
     public function originalBytes(MediaAsset $asset): string

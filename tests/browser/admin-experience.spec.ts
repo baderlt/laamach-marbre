@@ -10,7 +10,7 @@ const output = resolve('.tools/m85/screenshots');
 mkdirSync(output, { recursive: true });
 const state = () => JSON.parse(execFileSync(php, ['apps/api/tests/Support/admin-browser.php', 'state', '--env=testing'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }));
 test.beforeAll(() => {
-  if (process.env.QA_M85_PRESERVE_ACCOUNT !== 'true') execFileSync(php, ['apps/api/tests/Support/admin-browser.php', 'reset-accounts', '--env=testing'], { stdio: 'pipe' });
+  if (process.env.QA_M85_PRESERVE_ACCOUNT !== 'true') execFileSync(php, ['apps/api/tests/Support/admin-browser.php', 'prepare', '--env=testing'], { stdio: 'pipe' });
 });
 const modal = (page: Page) => page.locator('.fi-modal-window:visible').last();
 async function login(page: Page, manager = false, changed = false) {
@@ -60,6 +60,28 @@ async function upload(page: Page, matcher: RegExp, file: number | string, publis
   await expect(modal(page).getByRole('heading', { name: /^(Modifier|تعديل)$/ })).toBeVisible({ timeout: 120000 });
 }
 
+test('Section cover: one saved upload updates French and Arabic and survives reload', async ({ page, request }) => {
+  test.setTimeout(180000); page.setDefaultTimeout(60000);
+  await login(page); await language(page, 'fr');
+  await editor(page, 'site-contents', 'Accueil');
+  await expect(modal(page).getByText('Une seule image pour les versions française et arabe.', { exact: false })).toBeVisible();
+  await upload(page, /createOption.*sections\.[^.]+\.media_asset_id/, 3, true);
+  await save(page);
+  const saved = state();
+  const id = saved.home.translations.fr.sections[0].media_asset_id;
+  expect(saved.home.translations.ar.sections[0].media_asset_id).toBe(id);
+  for (const locale of ['fr', 'ar']) {
+    const site = (await (await request.get(`${api}/api/v1/site?locale=${locale}`)).json()).data;
+    expect(site.pages.home.sections[0].media.id).toBe(id);
+    const image = await request.get(site.pages.home.sections[0].media.variants[0].url);
+    expect(image.status()).toBe(200);
+    expect(image.headers()['content-type']).toBe('image/webp');
+  }
+  await page.reload(); await editor(page, 'site-contents', 'Accueil');
+  await expect(modal(page).locator('[data-selected-image-preview] img, img[data-selected-image-preview]').filter({ visible: true }).first()).toBeVisible();
+  expect(state().home.translations.fr.sections[0].media_asset_id).toBe(id);
+});
+
 test('M8.5: real FR/AR responsive administration and automated accessibility', async ({ page }) => {
   test.setTimeout(900000); page.setDefaultTimeout(60000);
   await login(page);
@@ -104,7 +126,7 @@ test('M8.5: private pending uploads retain section cover, then explicit approval
   const before = state();
   const pendingFile = execFileSync(php, ['apps/api/tests/Support/admin-browser.php', 'fresh-pending', '--env=testing'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
   await editor(page, 'site-contents', 'Accueil');
-  await upload(page, /createOption.*sections\..*\.fr.media_asset_id/, pendingFile, false);
+  await upload(page, /createOption.*sections\.[^.]+\.media_asset_id/, pendingFile, false);
   await expect(page.getByText('Fichier privé : approbation requise', { exact: true })).toBeVisible();
   await save(page);
   const pending = state();
@@ -125,7 +147,7 @@ test('M8.5: private pending uploads retain section cover, then explicit approval
   const slots = [
     { name: 'hero', path: 'site-contents', key: 'Accueil', control: /createOption.*data.hero_media_id/, read: (s: ReturnType<typeof state>) => s.home.data.hero_media_id },
     { name: 'secondary', path: 'site-contents', key: 'Accueil', control: /createOption.*data.secondary_media_id/, read: (s: ReturnType<typeof state>) => s.home.data.secondary_media_id },
-    { name: 'section', path: 'site-contents', key: 'Accueil', control: /createOption.*sections\..*\.fr.media_asset_id/, read: (s: ReturnType<typeof state>) => s.home.translations.fr.sections[0].media_asset_id },
+    { name: 'section', path: 'site-contents', key: 'Accueil', control: /createOption.*sections\.[^.]+\.media_asset_id/, read: (s: ReturnType<typeof state>) => s.home.translations.fr.sections[0].media_asset_id },
     { name: 'product cover', path: 'products', key: 'temporary-product', control: /createOption.*mountedActionSchema0.cover_media_id/, read: (s: ReturnType<typeof state>) => s.product.cover },
     { name: 'product gallery', path: 'products', key: 'temporary-product', control: /createOption.*gallery\..*media_asset_id/, read: (s: ReturnType<typeof state>) => s.product.gallery[0] },
     { name: 'category cover', path: 'product-categories', key: 'temporary-child', control: /createOption.*cover_media_id/, read: (s: ReturnType<typeof state>) => s.category.cover },
@@ -231,7 +253,7 @@ test('M8.5: approved replacements reach both public locales through real derivat
   for (const locale of ['fr', 'ar']) {
     const site = (await (await request.get(`${api}/api/v1/site?locale=${locale}`)).json()).data;
     expect(site.pages.home.hero.id).toBe(id); expect(site.pages.home.secondary.id).toBe(id); expect(site.settings.logo.id).toBe(id);
-    expect(site.pages.home.sections[0].media.id).toBe(locale === 'fr' ? id : saved.home.translations.ar.sections[0].media_asset_id);
+    expect(site.pages.home.sections[0].media.id).toBe(id);
     const product = (await (await request.get(`${api}/api/v1/products/temporary-product?locale=${locale}`)).json()).data;
     expect(product.cover.id).toBe(id); expect(product.gallery[0].id).toBe(id);
     const categories = (await (await request.get(`${api}/api/v1/product-categories?locale=${locale}`)).json()).data;

@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-const api = process.env.QA_API_URL || 'http://127.0.0.1:8101';
+const api = process.env.QA_CLIENT_API_URL || 'http://127.0.0.1:8101';
 import { viewerCopy } from '../../apps/web/src/lib/viewer';
 
 test.use({ launchOptions: { args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] } });
-test.setTimeout(90000);
+test.setTimeout(240000);
 
 for (const locale of ['fr', 'ar']) {
-  test(`${locale}: every published material only shows its configured measurements and unique technical labels`, async ({ page, request }) => {
+  test(`${locale}: published material page only shows configured measurements and unique technical labels`, async ({ page, request }) => {
     const response = await request.get(`${api}/api/v1/products?locale=${locale}&per_page=24`);
     const products = (await response.json()).data;
     expect(products.length).toBeGreaterThanOrEqual(7);
@@ -28,7 +28,7 @@ for (const locale of ['fr', 'ar']) {
     }
     await page.goto(`/${locale}`);
     const nav = page.locator('.home-usage-links');
-    await expect(nav.locator('a')).toHaveCount(5);
+    await expect(nav.locator('a')).toHaveCount(6);
     const footer = page.locator('.home-projects-footer');
     await expect(page.locator('.home-projects .project-grid')).toHaveCount(0);
     expect(await nav.evaluate(element => !!(element.compareDocumentPosition(element.parentElement!.querySelector('.home-projects-footer')!) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);

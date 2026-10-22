@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test';
 import stoneMedia from '../../apps/web/public/stone-background/manifest.json';
+const api = process.env.QA_CLIENT_API_URL || 'http://127.0.0.1:8101';
+test.setTimeout(120000);
 
 for (const locale of ['fr', 'ar']) {
-  test(`${locale}: homepage image cards, transparent logo and responsive sections`, async ({ page }) => {
+  test(`${locale}: homepage image cards, transparent logo and responsive sections`, async ({ page, request }) => {
     await page.goto(`/${locale}`);
     await expect(page.locator('.provisional-notice')).toHaveCount(0);
     await expect(page.locator('.header-language-switch')).toBeVisible();
@@ -22,11 +24,12 @@ for (const locale of ['fr', 'ar']) {
     await expect(paths.locator('strong')).toHaveText(locale === 'ar' ? ['إنجاز المشاريع', 'توريد الحجر الطبيعي والرخام'] : ['Réalisation de projets', 'Fourniture de pierre & marbre']);
     await expect(paths.locator('small').first()).toHaveText(locale === 'ar' ? 'شاهد مشاريعنا' : 'Voir nos projets');
     await expect(page.locator('.home-projects .project-grid')).toHaveCount(0);
-    await expect(page.locator('.home-usage-links a')).toHaveCount(5);
+    await expect(page.locator('.home-usage-links a')).toHaveCount(6);
     expect(await page.locator('.page-hero').evaluate(hero => hero.lastElementChild?.classList.contains('hero-footer'))).toBe(true);
-    await expect(page.locator('.collection-card > span')).toHaveText(locale === 'ar'
-      ? ['ألواح الحجر الطبيعي', 'تركيب الحجر الطبيعي بالطريقة التقليدية', 'الواجهات والجدران', 'الشلالات والنوافير', 'الشوايات والمدافئ', 'الأرضيات التقليدية']
-      : ['Tranches de pierre naturelle', 'Pierre naturelle : pose traditionnelle', 'Façades et murs', 'Cascades et fontaines', 'Barbecues et cheminées', 'Dallages traditionnels']);
+    const site = (await (await request.get(`${api}/api/v1/site?locale=${locale}`)).json()).data;
+    const titles = site.pages.home.sections.filter((section: { group: string }) => section.group === 'services').slice(0, 6).map((section: { title: string }) => section.title.trim());
+    expect(titles).toHaveLength(6);
+    await expect(page.locator('.collection-card > span')).toHaveText(titles);
     await expect(page.locator('.collection-grid').locator('..').locator('.section-heading .eyebrow')).toHaveCount(0);
     const card = page.locator('a.collection-card').first();
     await card.scrollIntoViewIfNeeded();

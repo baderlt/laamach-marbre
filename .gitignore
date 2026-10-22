@@ -2,6 +2,7 @@ node_modules/
 vendor/
 !apps/api/lang/vendor/
 !apps/api/lang/vendor/**
+.agents/
 .tools/
 .next*/
 *.tsbuildinfo
@@ -13,6 +14,9 @@ playwright-report/
 !.env.example
 apps/api/bootstrap/cache/*
 !apps/api/bootstrap/cache/.gitignore
+apps/api/.phpunit.cache/
+apps/api/.phpunit.result.cache
+apps/api/logs/
 apps/api/storage/**
 !apps/api/storage/**/
 !apps/api/storage/**/.gitignore
@@ -21,7 +25,23 @@ apps/api/public/js/filament/
 apps/api/public/fonts/filament/
 client-assets/
 /produits/
+/projects/
+/media-migration/
+*.sql
+*.sql.gz
+*.dump
 /prototypes/
 *.log
 
 apps/api/public/js/viewer/
+
+# Retain local R2 verification reports and one-off client import material without publishing them.
+/docs/r2-integration.md
+/docs/r2-live-*.md
+/docs/r2-next-smoke-scope-*.md
+/docs/r2-pre-migration-verification-*.md
+/docs/r2-readiness-*.md
+/config/client-additions-2026-10.json
+/config/reference-catalogue-2026-10.json
+/scripts/import-client-additions.php
+/scripts/import-reference-catalogue.php

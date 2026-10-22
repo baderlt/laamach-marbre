@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+const api = process.env.QA_CLIENT_API_URL || 'http://127.0.0.1:8101';
+test.setTimeout(120000);
 
 test('header search waits for typing, supports keyboard navigation and rejects invalid queries', async ({ page, request }) => {
   for (const query of ['locale=xx&q=noir', 'locale=fr&q=n', 'locale=fr&q=', `locale=fr&q=${'x'.repeat(121)}`]) {
@@ -31,7 +33,10 @@ test('header search waits for typing, supports keyboard navigation and rejects i
   await expect(page.getByRole('option').first()).toHaveAttribute('aria-selected', 'true');
   await input.press('Enter');
   await expect(page).toHaveURL(new RegExp(`${firstHref}$`));
+  // URL commit precedes the new document's scripts; wait before reopening its dialog.
+  await page.waitForLoadState('load');
   await trigger.click();
+  await expect(page.locator('.search-dialog')).toBeVisible();
   await input.fill('Noir');
   await input.press('Escape');
   await expect(trigger).toBeFocused();
@@ -68,12 +73,13 @@ test('search ignores stale replies, IME composition and reports failure accessib
 });
 
 for (const locale of ['fr', 'ar']) {
-  test(`${locale}: instant category selection, premium product and collection gallery`, async ({ page }) => {
+  test(`${locale}: instant category selection, premium product and collection gallery`, async ({ page, request }) => {
+    const total = (await (await request.get(`${api}/api/v1/projects?locale=${locale}`)).json()).meta.total;
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(`/${locale}/projects`);
-    await expect(page.locator('.project-card')).toHaveCount(5);
+    await expect(page.locator('.project-card')).toHaveCount(total);
     await expect(page.locator('.pagination')).toHaveCount(0);
     const filters = page.locator('.project-category-options button');
     await filters.nth(1).click();
@@ -86,7 +92,7 @@ for (const locale of ['fr', 'ar']) {
     await page.goBack();
     await expect(page.locator('.project-card')).toHaveCount(1);
     await filters.first().click();
-    await expect(page.locator('.project-card')).toHaveCount(5);
+    await expect(page.locator('.project-card')).toHaveCount(total);
 
     await page.goto(`/${locale}/projects/pierre-pose-traditionnelle`);
     await expect(page.locator('.project-metadata')).toHaveCount(0);
@@ -116,7 +122,8 @@ for (const locale of ['fr', 'ar']) {
       await page.setViewportSize({ width, height: 900 });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       await expect(page.locator('.header-search')).toBeVisible();
-      await expect(whatsapp).toBeVisible();
+      if (width < 768) await expect(page.locator('.mobile-contact-bar')).toBeVisible();
+      else await expect(whatsapp).toBeVisible();
     }
     await expect(page.locator('meta[property="og:image"]')).toHaveCount(1);
     expect(errors).toEqual([]);

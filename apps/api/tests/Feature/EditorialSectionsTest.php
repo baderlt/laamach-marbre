@@ -89,6 +89,17 @@ class EditorialSectionsTest extends TestCase
         $this->assertEquals($input, SectionForm::input($form));
     }
 
+    public function test_empty_form_control_defaults_do_not_add_optional_media_to_legacy_sections(): void
+    {
+        $input = $this->input();
+        $form = SectionForm::fill($input);
+        foreach ($form['sections'] as &$section) {
+            $section['media_asset_id'] ??= null;
+        }
+        unset($section);
+        $this->assertEquals($input, SectionForm::input($form));
+    }
+
     public function test_existing_home_content_and_media_references_survive_an_unchanged_save(): void
     {
         $record = SiteContent::findOrFail('home');

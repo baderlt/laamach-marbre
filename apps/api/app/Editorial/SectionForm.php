@@ -18,6 +18,9 @@ class SectionForm
                 $key = $group.':'.$position;
                 $rows[$key] ??= ['group' => $group, 'translations' => []];
                 $rows[$key]['translations'][$locale] = array_diff_key($section, ['group' => true]);
+                if (array_key_exists('media_asset_id', $section)) {
+                    $rows[$key]['media_asset_id'] ??= $section['media_asset_id'];
+                }
             }
             unset($data['translations'][$locale]['sections']);
         }
@@ -39,6 +42,9 @@ class SectionForm
                 // An empty optional translation does not create an empty public card.
                 if (trim($copy['title'] ?? '') === '' && empty($copy['body']) && empty($copy['media_asset_id']) && empty($copy['link']) && empty($copy['icon'])) {
                     continue;
+                }
+                if (array_key_exists('media_asset_id', $section) && ($section['media_asset_id'] !== null || array_key_exists('media_asset_id', $copy))) {
+                    $copy['media_asset_id'] = $section['media_asset_id'];
                 }
                 $data['translations'][$code]['sections'][] = ['group' => $section['group'], ...$copy];
             }

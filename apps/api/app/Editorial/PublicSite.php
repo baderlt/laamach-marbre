@@ -32,6 +32,6 @@ class PublicSite
         }
         $projects = app(PublicProjects::class);
 
-        return ['settings' => $settings, 'pages' => (object) $pages, 'featured_products' => $catalogue->products($locale)->where('featured', true)->limit(6)->get()->map(fn ($product) => $catalogue->productDto($product, $locale))->all(), 'featured_projects' => $projects->projects($locale)->where('featured', true)->limit(6)->get()->map(fn ($project) => $projects->card($project, $locale))->all(), ...($navigation ? ['navigation' => ['products' => empty(array_filter($pages['home']['sections'] ?? [], fn ($section) => ($section['group'] ?? '') === 'services')) ? $catalogue->categoryTree($locale) : [], 'projects' => $projects->categoryCards($locale)]] : [])];
+        return ['settings' => $settings, 'pages' => (object) $pages, 'featured_products' => $catalogue->products($locale)->where('featured', true)->limit(6)->get()->map(fn ($product) => $catalogue->productDto($product, $locale))->all(), 'featured_projects' => $projects->projects($locale)->where('featured', true)->limit(6)->get()->map(fn ($project) => $projects->card($project, $locale))->all(), ...($navigation ? ['home_products' => $catalogue->homeProducts($locale), 'navigation' => ['products' => empty(array_filter($pages['home']['sections'] ?? [], fn ($section) => ($section['group'] ?? '') === 'services')) ? $catalogue->categoryTree($locale) : [], 'projects' => $projects->categoryCards($locale)]] : [])];
     }
 }

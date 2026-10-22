@@ -12,6 +12,7 @@ Route::prefix('v1')->middleware('throttle:public-api')->group(function (): void 
     Route::get('site', SiteController::class);
     Route::get('seo', SeoController::class);
     Route::get('product-categories', [CatalogueController::class, 'categories']);
+    Route::get('product-groups', [CatalogueController::class, 'groups']);
     Route::get('products', [CatalogueController::class, 'index']);
     Route::get('products/{slug}', [CatalogueController::class, 'show']);
     Route::get('project-categories', [ProjectController::class, 'categories']);

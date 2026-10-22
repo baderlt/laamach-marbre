@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'section_shared_cover' => 'Une seule image pour les versions française et arabe. Enregistrez la section pour mettre le site à jour.',
     'upload' => 'Importer',
     'upload_attach' => 'Importer et joindre',
     'file' => 'Choisir un fichier',

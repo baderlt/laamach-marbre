@@ -117,6 +117,27 @@ class ProjectsTest extends TestCase
         $this->assertDatabaseCount('project_category_project', 3);
     }
 
+    public function test_large_client_gallery_retains_all_31_images_in_order_and_rejects_over_40(): void
+    {
+        $gallery = [];
+        for ($index = 0; $index < 31; $index++) {
+            $asset = C::image($this->admin, $this->root, 30 + $index);
+            $gallery[] = ['media_asset_id' => $asset->id, 'type' => 'image', 'captions' => ['fr' => 'Vue '.($index + 1), 'ar' => 'صورة '.($index + 1)]];
+        }
+        $project = $this->project(['gallery' => $gallery]);
+        foreach (['fr', 'ar'] as $locale) {
+            $response = $this->getJson('/api/v1/projects/'.$project->slug.'?locale='.$locale)->assertOk()->assertJsonCount(31, 'data.gallery');
+            $this->assertSame(array_column($gallery, 'media_asset_id'), array_column(array_column($response->json('data.gallery'), 'media'), 'id'));
+        }
+        try {
+            app(ProjectWriter::class)->save($project, $this->data(['gallery' => [...$gallery, ...array_slice($gallery, 0, 10)]]), $this->admin);
+            $this->fail('Over-limit gallery accepted.');
+        } catch (ValidationException $error) {
+            $this->assertArrayHasKey('gallery', $error->errors());
+            $this->assertSame(31, $project->fresh()->gallery()->count());
+        }
+    }
+
     public function test_one_inactive_category_keeps_project_public_all_inactive_hides_it(): void
     {
         $second = F::category($this->admin, 'second');

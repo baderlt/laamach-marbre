@@ -148,12 +148,14 @@ $data = DB::transaction(function () use ($writer, $root, $base) {
     $noCover = $projectWriter->save(null, array_replace($projectData, ['slug' => 'synthetic-no-cover', 'cover_media_id' => null, 'categories' => [$otherUsage->id], 'products' => [], 'location' => null, 'year' => null, 'area' => null, 'area_unit' => null, 'gallery' => [['type' => 'video', 'media_asset_id' => $video->id]]]), $user);
     $draftProject = $projectWriter->save(null, array_replace($projectData, ['slug' => 'synthetic-draft', 'status' => 'draft']), $user);
     $project->forceFill(['featured' => true])->save();
+    DB::table('product_translations')->whereIn('product_id', [$product->id, $noImage->id, $draft->id])->update(['seo_description' => 'Synthetic catalogue browser QA description.']);
+    DB::table('project_translations')->whereIn('project_id', [$project->id, $noCover->id, $draftProject->id])->update(['seo_description' => 'Synthetic project browser QA description.']);
     $editorial = [];
     $headings = ['home' => ['La pierre, naturellement.', 'جمال الحجر، بطبيعته.'], 'products' => ['Pierre & marbre', 'منتجات الحجر والرخام'], 'projects' => ['Nos projets', 'مشاريعنا'], 'services' => ['Les services LAAMACH MARBRE', 'خدمات LAAMACH MARBRE'], 'about' => ['La matière au cœur de chaque espace.', 'المادة في قلب كل مساحة.'], 'contact' => ['Échangeons autour de votre projet.', 'لنتحدث عن مشروعك.']];
     foreach (['home', 'products', 'projects', 'services', 'about', 'contact'] as $key) {
         $translations = [];
         foreach (config('localization.locales') as $locale) {
-            $translations[$locale['code']] = ['title' => $headings[$key][$locale['code'] === 'ar' ? 1 : 0], 'seo_title' => 'LAAMACH MARBRE — QA '.$key];
+            $translations[$locale['code']] = ['title' => $headings[$key][$locale['code'] === 'ar' ? 1 : 0], 'seo_title' => 'LAAMACH MARBRE — QA '.$key, 'seo_description' => 'Synthetic browser QA description: '.$key];
         }
         app(SiteContentWriter::class)->save(null, ['key' => $key, 'published' => true, 'translations' => $translations, 'data' => []], $user);
         $editorial[] = $key;

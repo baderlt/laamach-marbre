@@ -18,6 +18,8 @@ export function SiteIcon({ name = 'stone', className = '' }: { name?: string | n
     leaf: <><path d="M20 3C7 2 2 9 6 16s15 1 14-13ZM5 21 16 9" /></>,
     spark: <><path d="m12 2 3 6 7 1-5 5 1 8-6-4-6 4 1-8-5-5 7-1z" /></>,
     arrow: <path d="M4 12h16m-6-6 6 6-6 6" />,
+    pause: <path d="M9 5v14M15 5v14" />,
+    play: <path d="m8 4 12 8-12 8z" />,
     search: <><circle cx="10" cy="10" r="6" /><path d="m15 15 6 6" /></>,
     phone: <path d="m5 3 4 4-2 3c2 4 3 5 7 7l3-2 4 4-2 3C9 22 2 15 2 5z" />,
     mail: <><rect x="3" y="5" width="18" height="14" rx="1" /><path d="m3 6 9 7 9-7" /></>,

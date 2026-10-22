@@ -50,14 +50,14 @@ class SiteContentResource extends Resource
             $tabs[] = Tab::make($locale['name'])->schema([
                 TextInput::make($prefix.'title')->label($locale['name'].' '.__('admin.field_title'))->required($code === config('localization.fallback'))->maxLength(180),
                 Textarea::make($prefix.'body')->label($locale['name'].' '.__('admin.field_description'))->maxLength(2000),
-                CatalogueForms::image($prefix.'media_asset_id', $locale['name'].' '.__('admin.cover'))->live(),
-                CatalogueForms::imagePreview($prefix.'media_asset_id', $locale['name'].' '.__('admin.cover')),
                 Select::make($prefix.'link')->label($locale['name'].' '.__('admin.field_link'))->options(fn () => $targets($code))->searchable()->helperText(__('Choose a page, a product category or a project category.')),
                 Select::make($prefix.'icon')->label($locale['name'].' '.__('admin.field_icon'))->options(array_combine(['stone', 'building', 'ruler', 'craft', 'truck', 'check', 'leaf', 'spark'], collect(['stone', 'building', 'ruler', 'craft', 'truck', 'check', 'leaf', 'spark'])->map(fn ($icon) => __('admin.icon_'.$icon))->all())),
             ]);
         }
         $fields[] = Repeater::make('sections')->label(__('Sections — Français / العربية'))->schema([
             Select::make('group')->label(__('Section placement'))->options(['services' => __('Homepage collection cards'), 'activities' => __('Activities'), 'trust' => __('Trust / benefits'), 'process' => __('Process'), 'story' => __('Story')])->required(),
+            CatalogueForms::image('media_asset_id', __('admin.cover'))->live()->helperText(__('admin.section_shared_cover')),
+            CatalogueForms::imagePreview('media_asset_id', __('admin.cover')),
             Tabs::make('Section translations')->tabs($tabs),
         ])->itemLabel(fn (array $state): string => ($state['translations'][app()->getLocale()]['title'] ?? '') ?: ($state['translations']['fr']['title'] ?? __('admin.section_new')))->addActionLabel(__('admin.section_add'))->maxItems(16)->defaultItems(0)->collapsible()->helperText(__('Add each section once. Complete Français and العربية in the same card. Drag cards to order. Homepage collection cards display the first six.'));
         foreach (['hero_media_id' => 'Hero', 'secondary_media_id' => 'Secondary image', 'logo_media_id' => 'Logo'] as $key => $label) {

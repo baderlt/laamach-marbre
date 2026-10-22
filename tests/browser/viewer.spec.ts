@@ -92,6 +92,14 @@ for (const locale of ['fr', 'ar']) {
     const copy = viewerCopy(locale);
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2, reducedMotion: 'reduce', baseURL: process.env.QA_BASE_URL || 'http://127.0.0.1:3101' });
     const page = await context.newPage();
+    await page.addInitScript(() => {
+      const state = window as typeof window & { viewerTouchEvents: unknown[] };
+      state.viewerTouchEvents = [];
+      for (const type of ['pointerdown', 'pointerup', 'click']) document.addEventListener(type, event => {
+        const pointer = event as PointerEvent;
+        state.viewerTouchEvents.push({ type, target: (event.target as Element)?.closest('button')?.className || (event.target as Element)?.tagName, x: pointer.clientX, y: pointer.clientY, scrollY });
+      }, true);
+    });
     try {
       for (const width of [390, 768]) {
         await page.setViewportSize({ width, height: 844 }); await page.goto(`/${locale}/products/synthetic-glb`);
@@ -113,7 +121,10 @@ for (const locale of ['fr', 'ar']) {
         await page.locator('.viewer-panel').screenshot({ path: resolve(output, `${locale}-glb-touch-${width}.png`) });
         await page.getByRole('button', { name: copy.photos, exact: true }).tap(); await expect(canvas).toHaveCount(0);
       }
-    } finally { await context.close(); }
+    } finally {
+      if (test.info().status !== test.info().expectedStatus) await test.info().attach('viewer-touch-events', { body: JSON.stringify(await page.evaluate(() => (window as typeof window & { viewerTouchEvents: unknown[] }).viewerTouchEvents)), contentType: 'application/json' });
+      await context.close();
+    }
   });
 }
 

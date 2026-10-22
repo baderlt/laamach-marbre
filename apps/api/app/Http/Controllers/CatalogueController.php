@@ -46,6 +46,14 @@ class CatalogueController
         return response()->json(['data' => $page->getCollection()->map(fn ($product) => $catalogue->productDto($product, $locale))->all(), 'meta' => ['current_page' => $page->currentPage(), 'last_page' => $page->lastPage(), 'per_page' => $page->perPage(), 'total' => $page->total()]]);
     }
 
+    public function groups(Request $request, PublicCatalogue $catalogue)
+    {
+        $locale = $this->locale($request);
+        $input = $request->validate(['page' => 'sometimes|integer|between:1,10000']);
+
+        return response()->json($catalogue->groupedProducts($locale, (int) ($input['page'] ?? 1)));
+    }
+
     public function show(Request $request, string $slug, PublicCatalogue $catalogue)
     {
         abort_unless(preg_match('/^[a-z0-9-]{1,120}$/D', $slug), 404);

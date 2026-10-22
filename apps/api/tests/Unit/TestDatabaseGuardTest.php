@@ -11,12 +11,12 @@ class TestDatabaseGuardTest extends TestCase
 {
     private function database(): array
     {
-        return ['default' => 'mysql', 'connections' => ['mysql' => ['driver' => 'mysql', 'host' => '127.0.0.1', 'database' => 'laamach_marbre_test', 'url' => null, 'unix_socket' => '']]];
+        return ['default' => 'mysql', 'connections' => ['mysql' => ['driver' => 'mysql', 'host' => '127.0.0.1', 'port' => 3308, 'database' => 'laamach_marbre_test', 'url' => null, 'unix_socket' => '']]];
     }
 
-    public function test_accepts_only_the_dedicated_configuration(): void
+    public function test_accepts_a_local_testing_configuration_before_connection(): void
     {
-        TestDatabaseGuard::assertSafe('testing', $this->database());
+        TestDatabaseGuard::assertConfigured('testing', $this->database());
         $this->addToAssertionCount(1);
     }
 
@@ -32,12 +32,12 @@ class TestDatabaseGuardTest extends TestCase
         $database = $this->database();
         $database['connections']['mysql']['database'] = $name;
         $this->expectException(RuntimeException::class);
-        TestDatabaseGuard::assertSafe('testing', $database);
+        TestDatabaseGuard::assertConfigured('testing', $database);
     }
 
     public static function unsafeOverrides(): array
     {
-        return [['url', 'mysql://localhost/laamach_marbre'], ['read', ['database' => 'other']], ['write', ['database' => 'other']], ['host', 'remote.invalid'], ['unix_socket', '/other/mysql.sock'], ['driver', 'sqlite']];
+        return [['url', 'mysql://localhost/laamach_marbre'], ['read', ['database' => 'other']], ['write', ['database' => 'other']], ['host', 'remote.invalid'], ['unix_socket', '/other/mysql.sock'], ['driver', 'sqlite'], ['port', 3307], ['port', null]];
     }
 
     #[DataProvider('unsafeOverrides')]
@@ -46,13 +46,13 @@ class TestDatabaseGuardTest extends TestCase
         $database = $this->database();
         $database['connections']['mysql'][$key] = $value;
         $this->expectException(RuntimeException::class);
-        TestDatabaseGuard::assertSafe('testing', $database);
+        TestDatabaseGuard::assertConfigured('testing', $database);
     }
 
     public function test_refuses_a_non_testing_environment(): void
     {
         $this->expectException(RuntimeException::class);
-        TestDatabaseGuard::assertSafe('local', $this->database());
+        TestDatabaseGuard::assertConfigured('local', $this->database());
     }
 
     public function test_refuses_a_different_default_connection(): void
@@ -60,6 +60,15 @@ class TestDatabaseGuardTest extends TestCase
         $database = $this->database();
         $database['default'] = 'sqlite';
         $this->expectException(RuntimeException::class);
+        TestDatabaseGuard::assertConfigured('testing', $database);
+    }
+
+    public function test_qa_guard_rejects_preview_port_before_opening_a_connection(): void
+    {
+        $database = $this->database();
+        $database['connections']['mysql']['port'] = 3306;
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Disposable QA requires its dedicated MySQL port 3308.');
         TestDatabaseGuard::assertSafe('testing', $database);
     }
 }

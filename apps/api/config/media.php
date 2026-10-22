@@ -3,6 +3,7 @@
 return [
     'private_disk' => env('MEDIA_PRIVATE_DISK', 'local'),
     'published_disk' => env('MEDIA_PUBLISHED_DISK', 'local_published'),
+    'migration_expires_at' => env('R2_MIGRATION_EXPIRES_AT'),
     'max_bytes' => 20 * 1024 * 1024,
     'max_dimension' => 8192,
     'max_pixels' => 20000000,
@@ -11,7 +12,7 @@ return [
     'manifest_max_bytes' => 1024 * 1024,
     'formats' => ['webp'], // AVIF is opt-in after `laamach:media-capabilities` passes on the worker.
     'quality' => ['webp' => 85, 'avif' => 60],
-    'encoder_version' => 'gd-1',
+    'encoder_version' => 'gd-2-exif',
     // Fit inside this longest edge, preserve aspect ratio and never upscale.
     // Roles select a small set; ingest does not generate every profile.
     'profiles' => [

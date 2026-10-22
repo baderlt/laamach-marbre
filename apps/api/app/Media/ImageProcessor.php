@@ -19,9 +19,8 @@ class ImageProcessor
         }
         $this->bounds($info[0], $info[1]);
         $image = $this->decode(file_get_contents($path));
-        unset($image);
 
-        return ['checksum' => hash_file('sha256', $path), 'mime' => $mime, 'bytes' => filesize($path), 'width' => $info[0], 'height' => $info[1]];
+        return ['checksum' => hash_file('sha256', $path), 'mime' => $mime, 'bytes' => filesize($path), 'width' => imagesx($image), 'height' => imagesy($image)];
     }
 
     private function bounds(int $width, int $height): void
@@ -54,7 +53,72 @@ class ImageProcessor
             restore_error_handler();
         }
 
-        return $image;
+        $orientation = $this->orientation($bytes);
+        if (in_array($orientation, [2, 4, 5, 7], true)) {
+            imageflip($image, in_array($orientation, [4, 5], true) ? IMG_FLIP_VERTICAL : IMG_FLIP_HORIZONTAL);
+        }
+        $angle = match ($orientation) {
+            3 => 180, 5, 6, 7 => -90, 8 => 90, default => 0,
+        };
+
+        return $angle ? imagerotate($image, $angle, 0) : $image;
+    }
+
+    private function orientation(string $bytes): int
+    {
+        // Read only the bounded JPEG APP1 / TIFF orientation tag. Do not depend
+        // on an optional EXIF extension or retain private camera metadata.
+        if (! str_starts_with($bytes, "\xff\xd8")) {
+            return 1;
+        }
+        $length = strlen($bytes);
+        for ($offset = 2; $offset + 4 <= $length;) {
+            if (ord($bytes[$offset++]) !== 0xFF) {
+                break;
+            }
+            while ($offset < $length && ord($bytes[$offset]) === 0xFF) {
+                $offset++;
+            }
+            if ($offset + 3 > $length) {
+                break;
+            }
+            $marker = ord($bytes[$offset++]);
+            if (in_array($marker, [0xDA, 0xD9], true)) {
+                break;
+            }
+            $size = unpack('n', substr($bytes, $offset, 2))[1];
+            if ($size < 2 || $offset + $size > $length) {
+                break;
+            }
+            $segment = substr($bytes, $offset + 2, $size - 2);
+            $offset += $size;
+            if ($marker !== 0xE1 || ! str_starts_with($segment, "Exif\0\0")) {
+                continue;
+            }
+            $tiff = substr($segment, 6);
+            $little = str_starts_with($tiff, "II\x2a\0");
+            if (strlen($tiff) < 8 || (! $little && ! str_starts_with($tiff, "MM\0\x2a"))) {
+                return 1;
+            }
+            $short = $little ? 'v' : 'n';
+            $long = $little ? 'V' : 'N';
+            $ifd = unpack($long, substr($tiff, 4, 4))[1];
+            if ($ifd < 8 || $ifd + 2 > strlen($tiff)) {
+                return 1;
+            }
+            $count = unpack($short, substr($tiff, $ifd, 2))[1];
+            for ($entry = $ifd + 2, $index = 0; $index < $count && $entry + 12 <= strlen($tiff); $index++, $entry += 12) {
+                if (unpack($short, substr($tiff, $entry, 2))[1] === 0x112
+                    && unpack($short, substr($tiff, $entry + 2, 2))[1] === 3
+                    && unpack($long, substr($tiff, $entry + 4, 4))[1] === 1) {
+                    $value = unpack($short, substr($tiff, $entry + 8, 2))[1];
+
+                    return $value >= 1 && $value <= 8 ? $value : 1;
+                }
+            }
+        }
+
+        return 1;
     }
 
     public function capabilities(): array

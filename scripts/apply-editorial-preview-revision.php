@@ -16,8 +16,9 @@ try {
     $root = dirname(__DIR__);
     require $root.'/apps/api/vendor/autoload.php';
     $app = require $root.'/apps/api/bootstrap/app.php';
+    $app->loadEnvironmentFrom('.env.client-preview');
     $app->make(Kernel::class)->bootstrap();
-    TestDatabaseGuard::assertSafe($app->environment(), config('database'));
+    TestDatabaseGuard::assertPreviewTarget($app->environment(), config('database'));
     if (DB::selectOne('SELECT DATABASE() AS name')->name !== TestDatabaseGuard::DATABASE || ! is_file($root.'/docs/m5-copy-review.md')) {
         throw new RuntimeException('Requires the isolated preview database and the prepared copy review inventory.');
     }
