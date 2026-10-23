@@ -33,7 +33,7 @@ export default async function FoundationPage({ params }: { params: Promise<{ loc
       const isProject = section.link?.split('?')[0] === 'projects';
       const media = section.media || (isProject ? site.featured_projects[0]?.cover : site.featured_products[0]?.cover) || null;
       return <a key={index} className={`hero-path ${isProject ? 'hero-path--project' : 'hero-path--stone'}`} href={editorialHref(locale, section.link) || `/${locale}/projects`}>
-        {media && <span className="hero-path-media" aria-hidden="true"><CatalogueImage media={media} alt="" placeholder={copy.missingMedia} sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1400px) 48vw, 650px" /></span>}
+        {media && <span className="hero-path-media" aria-hidden="true"><CatalogueImage media={media} alt="" placeholder={copy.missingMedia} mobilePreload={isProject} sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1400px) 48vw, 650px" /></span>}
         <span className="hero-path-content"><span className="hero-path-icon"><SiteIcon name={isProject ? 'building' : 'stone'} /></span><strong>{section.title}</strong><small>{isProject ? locale === 'ar' ? 'اكتشف إنجازاتنا في الرخام والحجر الطبيعي.' : 'Découvrez nos réalisations en marbre et pierre naturelle.' : locale === 'ar' ? 'استكشف مجموعتنا من الأحجار الطبيعية.' : 'Explorez notre sélection de pierres naturelles.'}</small></span>
         <span className="hero-path-arrow" aria-hidden="true"><SiteIcon name="arrow" className="directional" /></span>
       </a>;

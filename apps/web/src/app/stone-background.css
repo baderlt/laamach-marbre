@@ -737,7 +737,7 @@ html[lang='ar'] .products-index .catalogue-filters h2 { line-height: 1.6; }
 .stone-site .homepage .page-hero.brand { flex-direction: column; align-items: stretch; min-height: 580px; }
 .stone-site .homepage .brand .hero-inner { flex: 1; padding-block: 64px 56px; }
 .stone-site .homepage .brand .hero-copy { margin-inline-start: 0; width: min(680px,100%); }
-.homepage .hero-footer { position: relative; z-index: 1; margin-top: auto; background: #14201cf2; border-top: 1px solid #e5bc7840; }
+.homepage .hero-footer { position: relative; z-index: 1; margin-top: auto; background: linear-gradient(180deg,transparent 60%,var(--stone-paper) 100%); }
 .homepage .hero-paths { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; width: 100%; max-width: none; margin: 0; padding: 18px max(24px,calc((100% - 1360px)/2)); direction: ltr; }
 .homepage .hero-path { position: relative; display: flex; align-items: center; min-width: 0; min-height: 248px; padding: 24px; overflow: hidden; isolation: isolate; border: 1px solid #d9b87c80; border-radius: 18px; background: #10291f; box-shadow: 0 12px 30px #07140f30; direction: var(--text-direction); color: #faf7f0; text-decoration: none; }
 .homepage .hero-path--stone { border-color: #dfcda9; background: #eee4d3; color: #1d2722; }
@@ -777,6 +777,10 @@ html[dir="rtl"] .homepage .hero-path:focus-visible .hero-path-arrow { transform:
 }
 @media (max-width: 359px) { .homepage .hero-path { min-height: 280px; }.homepage .hero-path small { font-size: 13px; } }
 @media (prefers-reduced-motion: reduce) { .homepage .hero-path-media > img, .homepage .hero-path-arrow { transition: none; }.homepage .hero-path:hover .hero-path-media > img, .homepage .hero-path:hover .hero-path-arrow, .homepage .hero-path:focus-visible .hero-path-arrow { transform: none; } }
+.homepage > .page-hero.brand + .section > .section-heading.with-action { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.homepage > .page-hero.brand + .section > .section-heading.with-action > div { max-width: 760px; }
+.homepage > .page-hero.brand + .section > .section-heading.with-action h2 { justify-content: center; }
+.homepage > .page-hero.brand + .section > .section-heading.with-action > .button { position: static; align-self: center; }
 
 /* Category sections in the complete catalogue. */
 .products-index .catalogue-category-section + .catalogue-category-section { margin-top: 48px; padding-top: 36px; border-top: 1px solid #d9cfbd; }
