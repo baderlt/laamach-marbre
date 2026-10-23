@@ -20,9 +20,9 @@ export function HomeMotion() {
           observer.unobserve(entry.target);
         }
       }, { threshold: .08 });
-      root.querySelectorAll('.hero-paths, .collection-grid, .activities-grid, .compact-grid, .trust-grid, .home-usage-links').forEach(group => observer.observe(group));
+      root.querySelectorAll('.collection-grid, .activities-grid, .compact-grid, .trust-grid, .home-usage-links').forEach(group => observer.observe(group));
       const cleanups: (() => void)[] = [];
-      root.querySelectorAll<HTMLElement>('.hero-path, .collection-card, .home-usage-links > a, .product-card, .activities-grid .editorial-card, .trust-grid .editorial-card').forEach(card => {
+      root.querySelectorAll<HTMLElement>('.collection-card, .home-usage-links > a, .product-card, .activities-grid .editorial-card, .trust-grid .editorial-card').forEach(card => {
         const image = card.querySelector('img, .site-icon');
         if (!image) return;
         const enter = () => context.add(() => {
