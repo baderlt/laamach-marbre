@@ -102,8 +102,7 @@ export function StoneBackground() {
   }, [pathname]);
 
   const variants = media.variants;
-  return <><link rel="preload" as="image" href={variants.mobile.url} media="(max-width: 767px)" fetchPriority="high" />
-    <link rel="preload" as="image" href={variants.tablet.url} media="(min-width: 768px) and (max-width: 1199px)" fetchPriority="high" />
+  return <><link rel="preload" as="image" href={variants.tablet.url} media="(min-width: 768px) and (max-width: 1199px)" fetchPriority="high" />
     <link rel="preload" as="image" href={variants.desktop.url} media="(min-width: 1200px)" fetchPriority="high" />
     <div ref={root} className="stone-background" aria-hidden="true" style={{
     '--stone-base-mobile': `url("${variants.mobile.url}")`,
