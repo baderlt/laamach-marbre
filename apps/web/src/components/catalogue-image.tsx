@@ -11,5 +11,5 @@ export function CatalogueImage({ media, placeholder, eager = false, mobilePreloa
   const imageSizes = sizes || (thumbnail ? '160px' : '(max-width: 767px) 92vw, 800px');
   if (mobilePreload) preload(chosen.url, { as: 'image', media: '(max-width: 767px)', imageSrcSet, imageSizes, fetchPriority: 'high' });
   // M2 already optimizes these immutable variants. Deliver directly from the media origin.
-  return <img data-media-id={media.id} src={chosen.url} srcSet={imageSrcSet} sizes={imageSizes} width={chosen.width} height={chosen.height} alt={alt ?? media.alt} loading={eager ? 'eager' : 'lazy'} fetchPriority={eager ? 'high' : undefined} decoding="async" />;
+  return <img data-media-id={media.id} src={chosen.url} srcSet={imageSrcSet} sizes={imageSizes} width={chosen.width} height={chosen.height} alt={alt ?? media.alt} loading={eager || mobilePreload ? 'eager' : 'lazy'} fetchPriority={eager || mobilePreload ? 'high' : undefined} decoding="async" />;
 }
